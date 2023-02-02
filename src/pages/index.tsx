@@ -1,6 +1,21 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+/* eslint-disable react/jsx-no-undef */
+import Head from "next/head";
+import styles from "../styles/Home.module.css";
+import {
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  Stack,
+  Heading,
+  Text,
+  Image,
+  Divider,
+  ButtonGroup,
+  Button,
+  Link,
+  Box,
+} from "@chakra-ui/react";
 
 export default function Home() {
   return (
@@ -11,61 +26,77 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.tsx</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h2>Learn &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className={styles.card}
-          >
-            <h2>Examples &rarr;</h2>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.card}
-          >
-            <h2>Deploy &rarr;</h2>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
+      <main style={{display: "flex"}}>
+        <Box maxW="sm" ml="20px">
+        <Link >
+        <Card maxW="sm" variant="outline" mt="10px" rounded="10px" textDecoration="none">
+          <CardBody p="0">
+            <Image
+              src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+              alt="Green double couch with wooden legs"
+              roundedTop="10px"
+              />
+            <Stack mt="5" spacing="5" mx="1">
+              <Heading size="md">Living room Sofa</Heading>
+              <Text>
+                This sofa is perfect for modern tropical spaces, baroque
+                inspired spaces, earthy toned spaces and for people who love a
+                chic design with a sprinkle of vintage design.
+              </Text>
+              <Text color="blue.600" fontSize="2xl">
+                $450
+              </Text>
+            </Stack>
+          </CardBody>
+          <CardFooter>
+            <ButtonGroup spacing="2">
+              <Button variant="solid" colorScheme="blue">
+                Buy now
+              </Button>
+              <Button variant="ghost" colorScheme="blue">
+                Add to cart
+              </Button>
+            </ButtonGroup>
+          </CardFooter>
+        </Card>
+              </Link>
+            </Box>
+            <Box maxW="sm" ml="20px">
+        <Link >
+        <Card maxW="sm" variant="outline" mt="10px" rounded="10px" textDecoration="none">
+          <CardBody p="0">
+            <Image
+              src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+              alt="Green double couch with wooden legs"
+              roundedTop="10px"
+              />
+            <Stack mt="5" spacing="5" mx="1">
+              <Heading size="md">Living room Sofa</Heading>
+              <Text>
+                This sofa is perfect for modern tropical spaces, baroque
+                inspired spaces, earthy toned spaces and for people who love a
+                chic design with a sprinkle of vintage design.
+              </Text>
+              <Text color="blue.600" fontSize="2xl">
+                $450
+              </Text>
+            </Stack>
+          </CardBody>
+          <CardFooter>
+            <ButtonGroup spacing="2">
+              <Button variant="solid" colorScheme="blue">
+                Buy now
+              </Button>
+              <Button variant="ghost" colorScheme="blue">
+                Add to cart
+              </Button>
+            </ButtonGroup>
+          </CardFooter>
+        </Card>
+              </Link>
+            </Box>
+              
       </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer>
     </div>
-  )
+  );
 }
