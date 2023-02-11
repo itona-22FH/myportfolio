@@ -1,26 +1,5 @@
 import React from "react";
-import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  Stack,
-  Heading,
-  Text,
-  Image,
-  Divider,
-  ButtonGroup,
-  Button,
-  Link,
-  Box,
-  Avatar,
-  AvatarBadge,
-  AvatarGroup,
-  WrapItem,
-  Wrap,
-  Badge,
-  Flex,
-} from "@chakra-ui/react";
+import { Text, Image, Link, Box, Avatar, Flex } from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
 
 export const GamePlan = () => {
@@ -36,56 +15,58 @@ export const GamePlan = () => {
   };
 
   return (
-    <Link>
-      <Box
-        maxW="xs"
-        borderWidth="1px"
-        borderRadius="lg"
-        overflow="hidden"
-        ml="10px"
-        mt="10px"
-      >
-        <Image src={property.imageUrl} alt={property.imageAlt} />
+    <Link href="/plan">
+        <Box
+          maxW="xs"
+          borderWidth="1px"
+          borderRadius="lg"
+          borderColor="purple.300"
+          overflow="hidden"
+          ml="10px"
+          mt="10px"
+          mb="10px"
+        >
+          <Image src={property.imageUrl} alt={property.imageAlt} />
 
-        <Box p="6">
-          <Box
-            mt="1"
-            fontWeight="bold"
-            as="h4"
-            lineHeight="tight"
-            noOfLines={1}
-          >
-            {property.title}
-          </Box>
-          <Flex alignItems="center" mt="4" mb="4">
-            <Avatar name="Dan Abrahmov" src="https://bit.ly/dan-abramov" />
-            <Text ml="3" lineHeight="1" verticalAlign="center">
-              momotarou
-            </Text>
-          </Flex>
-
-          <Box display="flex" mt="2" alignItems="center">
-            {Array(5)
-              .fill("")
-              .map((_, i) => (
-                <StarIcon
-                  key={i}
-                  color={i < property.rating ? "teal.500" : "gray.300"}
-                />
-              ))}
-            <Box as="span" ml="2" color="gray.600" fontSize="sm">
-              {property.reviewCount} reviews
+          <Box p="3">
+            <Box
+              mt="1"
+              fontWeight="bold"
+              as="h4"
+              lineHeight="tight"
+              noOfLines={1}
+            >
+              {property.title}
             </Box>
-          </Box>
+            <Flex alignItems="center" mt="4" mb="4">
+              <Avatar name="Dan Abrahmov" src="https://bit.ly/dan-abramov" />
+              <Text ml="3" lineHeight="1" verticalAlign="center">
+                hello user
+              </Text>
+            </Flex>
 
-          <Box>
-            {property.formattedPrice}
-            <Box as="span" color="gray.600" fontSize="sm">
-              円
+            <Box display="flex" mt="2" alignItems="center">
+              {Array(5)
+                .fill("")
+                .map((_, i) => (
+                  <StarIcon
+                    key={i}
+                    color={i < property.rating ? "teal.500" : "gray.300"}
+                  />
+                ))}
+              <Box as="span" ml="2" color="gray.600" fontSize="sm">
+                {property.reviewCount} reviews
+              </Box>
+            </Box>
+
+            <Box mt="3" color="red.400">
+              {property.formattedPrice}
+              <Box as="span" color="gray.600" fontSize="sm">
+                円
+              </Box>
             </Box>
           </Box>
         </Box>
-      </Box>
     </Link>
   );
 };
