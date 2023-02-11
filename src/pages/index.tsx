@@ -32,12 +32,12 @@ export default function Home() {
         mt="3"
       >
         {/* search category */}
-        <GridItem pl="2" area={"nav"} bg="whiteAlpha.800"  borderRadius="10" >
+        <GridItem pl="2" area={"nav"} bg="whiteAlpha.800"  borderRadius="10" ml="10">
           <Category />
         </GridItem>
 
         {/* show plan */}
-        <GridItem pl="2" area={"main"} ml="10">
+        <GridItem pl="2" area={"main"} ml="1">
           <Flex align="center" wrap="wrap" bg="whiteAlpha.800" maxW="1000px"  borderRadius="10">
             <GamePlan />
             <GamePlan />
