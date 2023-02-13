@@ -16,57 +16,57 @@ export const GamePlan = () => {
 
   return (
     <Link href="/plan">
-        <Box
-          maxW="xs"
-          borderWidth="1px"
-          borderRadius="lg"
-          borderColor="purple.300"
-          overflow="hidden"
-          ml="10px"
-          mt="10px"
-          mb="10px"
-        >
-          <Image src={property.imageUrl} alt={property.imageAlt} />
+      <Box
+        maxW="xs"
+        borderWidth="1px"
+        borderRadius="lg"
+        borderColor="purple.300"
+        overflow="hidden"
+        ml="10px"
+        mt="10px"
+        mb="10px"
+      >
+        <Image src={property.imageUrl} alt={property.imageAlt} />
 
-          <Box p="3">
-            <Box
-              mt="1"
-              fontWeight="bold"
-              as="h4"
-              lineHeight="tight"
-              noOfLines={1}
-            >
-              {property.title}
+        <Box p="3">
+          <Box
+            mt="1"
+            fontWeight="bold"
+            as="h4"
+            lineHeight="tight"
+            noOfLines={1}
+          >
+            {property.title}
+          </Box>
+          <Flex alignItems="center" mt="4" mb="4">
+            <Avatar name="Dan Abrahmov" src="https://bit.ly/dan-abramov" />
+            <Text ml="3" lineHeight="1" verticalAlign="center">
+              hello user
+            </Text>
+          </Flex>
+
+          <Box display="flex" mt="2" alignItems="center">
+            {Array(5)
+              .fill("")
+              .map((_, i) => (
+                <StarIcon
+                  key={i}
+                  color={i < property.rating ? "teal.500" : "gray.300"}
+                />
+              ))}
+            <Box as="span" ml="2" color="gray.600" fontSize="sm">
+              {property.reviewCount} reviews
             </Box>
-            <Flex alignItems="center" mt="4" mb="4">
-              <Avatar name="Dan Abrahmov" src="https://bit.ly/dan-abramov" />
-              <Text ml="3" lineHeight="1" verticalAlign="center">
-                hello user
-              </Text>
-            </Flex>
+          </Box>
 
-            <Box display="flex" mt="2" alignItems="center">
-              {Array(5)
-                .fill("")
-                .map((_, i) => (
-                  <StarIcon
-                    key={i}
-                    color={i < property.rating ? "teal.500" : "gray.300"}
-                  />
-                ))}
-              <Box as="span" ml="2" color="gray.600" fontSize="sm">
-                {property.reviewCount} reviews
-              </Box>
-            </Box>
-
-            <Box mt="3" color="red.400">
-              {property.formattedPrice}
-              <Box as="span" color="gray.600" fontSize="sm">
-                円
-              </Box>
+          <Box mt="3" color="red.400">
+            {property.formattedPrice}
+            <Box as="span" color="gray.600" fontSize="sm">
+              円
             </Box>
           </Box>
         </Box>
+      </Box>
     </Link>
   );
 };
