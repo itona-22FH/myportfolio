@@ -11,24 +11,20 @@ import {
   Link,
   StackDivider,
   VStack,
-  Text,
-  Divider,
 } from "@chakra-ui/react";
 import React from "react";
-import { Footer } from "../../components/Footer";
-import { Header } from "../../components/Header";
+import { TextBox } from "../../components/TextBox";
 
 export default function plan() {
   return (
-    <Box bg="purple.100">
-      <Header />
-      <Container maxW="1200px" mt="10">
+    <Box bg="purple.100" pt="10">
+      <Container maxW="1200px">
         <Grid
           templateAreas={`
         "nav main"
-        "nav main"
+        "nav empty"
         `}
-          gridTemplateRows={"100px 1fr 30px"}
+          gridTemplateRows={"300px 1fr 30px"}
           gridTemplateColumns={"1fr 350px"}
           gap="3"
           fontWeight="bold"
@@ -51,112 +47,9 @@ export default function plan() {
               mt="6"
               p="3"
             >
-              <Box>
-                <Heading as="h2" size="lg">
-                  学べる内容
-                </Heading>
-                <Text mt="1">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                  irure dolor in reprehenderit in voluptate velit esse cillum
-                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                  cupidatat non proident, sunt in culpa qui officia deserunt
-                  mollit anim id est laborum.
-                </Text>
-              </Box>
-              <Box>
-                <Heading as="h2" size="lg">
-                  コースの流れ
-                </Heading>
-                <Text mt="1">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                  irure dolor in reprehenderit in voluptate velit esse cillum
-                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                  cupidatat non proident, sunt in culpa qui officia deserunt
-                  mollit anim id est laborum.
-                </Text>
-              </Box>
-              <Box>
-                <Heading as="h2" size="lg">
-                  用意するもの
-                </Heading>
-                <Text mt="1">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                  irure dolor in reprehenderit in voluptate velit esse cillum
-                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                  cupidatat non proident, sunt in culpa qui officia deserunt
-                  mollit anim id est laborum.
-                </Text>
-              </Box>
-              <Box>
-                <Heading as="h2" size="lg">
-                  コーチングまでの流れ
-                </Heading>
-                <Text mt="1">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                  irure dolor in reprehenderit in voluptate velit esse cillum
-                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                  cupidatat non proident, sunt in culpa qui officia deserunt
-                  mollit anim id est laborum.ï
-                </Text>
-              </Box>
-              <Box>
-                <Heading as="h2" size="lg" noOfLines={1}>
-                  指導実績
-                </Heading>
-                <Text mt="1">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                  irure dolor in reprehenderit in voluptate velit esse cillum
-                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                  cupidatat non proident, sunt in culpa qui officia deserunt
-                  mollit anim id est laborum.
-                </Text>
-              </Box>
-              <Box>
-                <Heading as="h2" size="lg" noOfLines={1}>
-                  注意事項
-                </Heading>
-                <Text mt="1">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                  irure dolor in reprehenderit in voluptate velit esse cillum
-                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                  cupidatat non proident, sunt in culpa qui officia deserunt
-                  mollit anim id est laborum.
-                </Text>
-              </Box>
-              <Box>
-                <Heading as="h2" size="lg" noOfLines={1}>
-                  料金
-                </Heading>
-                <Text mt="1">
-                  {" "}
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                  irure dolor in reprehenderit in voluptate velit esse cillum
-                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                  cupidatat non proident, sunt in culpa qui officia deserunt
-                  mollit anim id est laborum.
-                </Text>
-              </Box>
+              <TextBox title="学べる内容" />
+              <TextBox title="プラン内容" />
+              <TextBox title="料金" />
             </VStack>
           </GridItem>
 
@@ -184,10 +77,10 @@ export default function plan() {
               </Link>
             </Flex>
           </GridItem>
+
+          <GridItem></GridItem>
         </Grid>
       </Container>
-
-      <Footer />
     </Box>
   );
 }
