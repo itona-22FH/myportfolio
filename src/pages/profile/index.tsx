@@ -19,7 +19,7 @@ import { TextBox } from "../../components/TextBox";
 
 export default function profile() {
   return (
-    <Box bg="purple.100" fontWeight="bold" pt="5" pb="5">
+    <Box fontWeight="bold" pt="5" pb="5">
       <Container maxW="1100px">
         <Flex alignItems="center" bg="whiteAlpha.800" borderRadius="10" p="5">
           <Avatar

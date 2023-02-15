@@ -5,9 +5,10 @@ export const AccountControlButton = ({
   text,
   colorScheme,
   color,
+  width,
 }: AccountControlBtnProps) => {
   return (
-    <Button colorScheme={colorScheme} variant="solid" color={color}>
+    <Button colorScheme={colorScheme} variant="solid" color={color} w={width}>
       {text}
     </Button>
   );

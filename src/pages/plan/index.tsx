@@ -2,6 +2,7 @@
 import {
   Avatar,
   Box,
+  Button,
   Container,
   Flex,
   Grid,
@@ -13,11 +14,12 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import React from "react";
+import { AccountControlButton } from "../../components/AccountControlButton";
 import { TextBox } from "../../components/TextBox";
 
 export default function plan() {
   return (
-    <Box bg="purple.100" pt="10">
+    <Box  pt="10">
       <Container maxW="1200px">
         <Grid
           templateAreas={`
@@ -48,7 +50,7 @@ export default function plan() {
               p="3"
             >
               <TextBox title="学べる内容" />
-              <TextBox title="プラン内容" />
+              <TextBox title="指導方法" />
               <TextBox title="料金" />
             </VStack>
           </GridItem>
@@ -72,9 +74,19 @@ export default function plan() {
                 name="Segun Adebayo"
                 src="https://bit.ly/dan-abramov"
               />
-              <Link href="/profile" mt="5" fontSize="35" color="purple">
+              <Link href="/profile" mt="5" mb="5" fontSize="35" color="purple">
                 Hello User
               </Link>
+              <Box>
+                <Link href="/contract">
+                <AccountControlButton
+                  text="プラン契約画面に進む"
+                  colorScheme="purple"
+                  color="white"
+                  width="315px"
+                  />
+                  </Link>
+              </Box>
             </Flex>
           </GridItem>
 
