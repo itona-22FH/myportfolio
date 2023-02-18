@@ -1,11 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable react/jsx-no-undef */
-import {
-  Box,
-  FormControl,
-  Heading,
-  Container,
-} from "@chakra-ui/react";
+import { Box, FormControl, Heading, Container, Link } from "@chakra-ui/react";
 import React from "react";
 import { AccountControlButton } from "../../components/AccountControlButton";
 import { FormInput } from "../../components/FormInput";
@@ -20,7 +15,11 @@ const newAccount = () => {
         </Heading>
         <FormControl>
           <FormInput label="ユーザー名" type="text" placeholder="username" />
-          <FormInput label="プロフィール画像" type="file" placeholder="画像を選択してください" />
+          <FormInput
+            label="プロフィール画像"
+            type="file"
+            placeholder="画像を選択してください"
+          />
           <FormInput
             label="メールアドレス"
             type="email"
@@ -30,6 +29,11 @@ const newAccount = () => {
             label="パスワード"
             type="password"
             placeholder="password"
+          />
+          <FormInput
+            label="確認用パスワード"
+            type="password"
+            placeholder="CheckPassword"
           />
           <FormInput
             label="Twitterアカウント"
@@ -51,12 +55,15 @@ const newAccount = () => {
             〇〇大会BEST3"
           />
         </FormControl>
-        <AccountControlButton
+        <Link href="/">
+          <AccountControlButton
             text="新規登録する"
             colorScheme="purple"
             color="white"
             width="100%"
-            />      </Container>
+          />
+        </Link>
+      </Container>
     </Box>
   );
 };
