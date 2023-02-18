@@ -19,7 +19,7 @@ import { TextBox } from "../../components/TextBox";
 
 export default function plan() {
   return (
-    <Box  pt="10">
+    <Box pt="10">
       <Container maxW="1200px">
         <Grid
           templateAreas={`
@@ -79,13 +79,13 @@ export default function plan() {
               </Link>
               <Box>
                 <Link href="/contract">
-                <AccountControlButton
-                  text="プラン契約画面に進む"
-                  colorScheme="purple"
-                  color="white"
-                  width="315px"
+                  <AccountControlButton
+                    text="プラン契約画面に進む"
+                    colorScheme="purple"
+                    color="white"
+                    width="315px"
                   />
-                  </Link>
+                </Link>
               </Box>
             </Flex>
           </GridItem>

@@ -1,7 +1,7 @@
 import { Box, Heading, Text } from "@chakra-ui/react";
 import React from "react";
 
-export const TextBox = ({ title }: TextBoxProps) => {
+export const TextBox = ({ title }: TextBox) => {
   return (
     <Box>
       <Heading as="h2" size="lg" mt="2" mb="2">

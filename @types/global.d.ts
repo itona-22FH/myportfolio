@@ -5,10 +5,21 @@ type AccountControlBtnProps = {
   width: string;
 };
 
-type TextBoxProps = {
+type TextBox = {
   title: string;
 };
 
 type LayoutProps = {
   readonly children: ReactElement;
 };
+
+type FormInputProps = {
+  type: string
+  label: string
+  placeholder: string
+}
+
+type myPageTextBoxProps = {
+  htmlFor: string
+  placeholder:string
+}
