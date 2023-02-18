@@ -3,10 +3,13 @@ type AccountControlBtnProps = {
   colorScheme: string;
   color: string;
   width: string;
+  href:string;
 };
 
 type TextBox = {
   title: string;
+  text: string
+  fontSize: string;
 };
 
 type LayoutProps = {
@@ -22,4 +25,11 @@ type FormInputProps = {
 type myPageTextBoxProps = {
   htmlFor: string
   placeholder:string
+}
+type ContractBtnProps = {
+  text: string;
+  colorScheme: string;
+  color: string;
+  width: string;
+  onClick: () => void;
 }
