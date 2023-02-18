@@ -3,16 +3,11 @@
 import {
   Box,
   FormControl,
-  FormLabel,
-  FormErrorMessage,
-  FormHelperText,
-  Input,
   Heading,
   Container,
-  Textarea,
-  Text,
 } from "@chakra-ui/react";
 import React from "react";
+import { AccountControlButton } from "../../components/AccountControlButton";
 import { FormInput } from "../../components/FormInput";
 import { MyPageTextBox } from "../../components/MyPageTextBox";
 
@@ -56,7 +51,12 @@ const newAccount = () => {
             〇〇大会BEST3"
           />
         </FormControl>
-      </Container>
+        <AccountControlButton
+            text="新規登録する"
+            colorScheme="purple"
+            color="white"
+            width="100%"
+            />      </Container>
     </Box>
   );
 };
