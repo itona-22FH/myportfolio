@@ -8,8 +8,9 @@ export const Category = () => {
       divider={<StackDivider borderColor="purple.300" />}
       spacing={4}
       align="stretch"
+      
     >
-      <Box h="40px" mt="20">
+      <Box h="40px" mt="20" >
         <span style={{ marginLeft: 10 }}>
           <SearchIcon />
           <span>カテゴリ</span>

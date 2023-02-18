@@ -34,18 +34,18 @@ export const Header = () => {
         justifyContent="space-between"
         alignItems="center"
       >
-        <Link href="/">
+        <Link href="/" style={{ textDecoration: 'none' }}>
           <Button
-            colorScheme="whiteAlpha"
+            colorScheme="linkedin"
             variant="outline"
-            ml="10"
+            ml="10px"
             color="purple"
             w="130px"
           >
             トップへ戻る
           </Button>
         </Link>
-        <Stack direction="row" spacing={4} mr="10">
+        <Stack direction="row" spacing={4} mr="10px">
           <Button
             onClick={onOpen}
             color="purple"
@@ -65,20 +65,24 @@ export const Header = () => {
             <ModalContent>
               <ModalHeader>アカウント情報を入力してください</ModalHeader>
               <ModalCloseButton />
-              <ModalBody pb={6}>
+              <ModalBody pb="6px">
                 <FormControl>
                   <FormLabel>メールアドレス</FormLabel>
-                  <Input type="email" ref={initialRef} placeholder="*******@email.com" />
+                  <Input
+                    type="email"
+                    ref={initialRef}
+                    placeholder="*******@email.com"
+                  />
                 </FormControl>
 
-                <FormControl mt={4}>
+                <FormControl mt="4px">
                   <FormLabel>パスワード</FormLabel>
                   <Input type="password" placeholder="password" />
                 </FormControl>
               </ModalBody>
 
               <ModalFooter>
-                <Button colorScheme="blue" mr={3}>
+                <Button colorScheme="blue" mr="10px">
                   Save
                 </Button>
                 <Button onClick={onClose}>Cancel</Button>
@@ -86,30 +90,29 @@ export const Header = () => {
             </ModalContent>
           </Modal>
 
-          <Link href="/">
-            <AccountControlButton
-              text="ログアウト"
-              colorScheme="whiteAlpha"
-              color="purple"
-              width="130px"
-            />
-          </Link>
-          <Link href="/myPage">
-            <AccountControlButton
-              text="マイページ"
-              colorScheme="purple"
-              color="white"
-              width="130px"
-            />
-          </Link>
-          <Link href="newAccount">
+          <AccountControlButton
+            text="ログアウト"
+            colorScheme="whiteAlpha"
+            color="purple"
+            width="130px"
+            href="/"
+          />
+
+          <AccountControlButton
+            text="マイページ"
+            colorScheme="purple"
+            color="white"
+            width="130px"
+            href="/myPage"
+          />
+
           <AccountControlButton
             text="新規登録(無料)"
             colorScheme="purple"
             color="white"
             width="130px"
-            />
-            </Link>
+            href="/newAccount"
+          />
         </Stack>
       </Flex>
     </Box>

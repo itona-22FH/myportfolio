@@ -7,10 +7,13 @@ import { FormInput } from "../../components/FormInput";
 import { MyPageTextBox } from "../../components/MyPageTextBox";
 
 const newAccount = () => {
+  const demoText =
+  " Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua.DConsequat nisl vel pretium lectus quam id. Semper quis lectusnulla at volutpat diam ut venenatis. Dolor morbi non arcu risusquis varius quam quisque. Massa ultricies mi quis hendrerit dolor  magna eget est lorem. Erat imperdiet sed euismod nisi portaLectus vestibulum mattis ullamcorper velit.";
+
   return (
-    <Box p="10">
+    <Box p="10px">
       <Container maxW="800px" bg="whiteAlpha.800" p="5" borderRadius="10px">
-        <Heading as="h2" size="2xl" color="purple" mb="10" pt="5">
+        <Heading as="h2" size="2xl" mb="10" pt="5">
           新規登録
         </Heading>
         <FormControl>
@@ -55,14 +58,13 @@ const newAccount = () => {
             〇〇大会BEST3"
           />
         </FormControl>
-        <Link href="/">
           <AccountControlButton
             text="新規登録する"
             colorScheme="purple"
             color="white"
             width="100%"
+            href="/"
           />
-        </Link>
       </Container>
     </Box>
   );

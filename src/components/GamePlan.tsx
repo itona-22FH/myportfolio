@@ -15,7 +15,7 @@ export const GamePlan = () => {
   };
 
   return (
-    <Link href="/plan">
+    <Link href="/plan" style={{ textDecoration: 'none' }}>
       <Box
         maxW="xs"
         borderWidth="1px"

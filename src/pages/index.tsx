@@ -5,7 +5,7 @@ import { CarouselFade } from "../components/CarouselFade";
 import { Category } from "../components/Category";
 import { Box, Flex, Grid, GridItem } from "@chakra-ui/react";
 
-export default function Home() {
+const Home = () => {
   return (
     <Box>
       <Head>
@@ -29,11 +29,11 @@ export default function Home() {
       >
         {/* search category */}
         <GridItem
-          pl="2"
           area={"nav"}
           bg="whiteAlpha.800"
           borderRadius="10"
           ml="10"
+          p="2"
         >
           <Category />
         </GridItem>
@@ -63,4 +63,5 @@ export default function Home() {
       </Grid>
     </Box>
   );
-}
+};
+export default Home;

@@ -4,7 +4,7 @@ import React from "react";
 export const MyPageTextBox = ({htmlFor, placeholder}: myPageTextBoxProps) => {
   return (
     <Box pb="5">
-      <FormLabel fontWeight="bold"  color="purple" htmlFor={htmlFor}>{htmlFor}</FormLabel>
+      <FormLabel fontWeight="bold"  htmlFor={htmlFor}>{htmlFor}</FormLabel>
       <Textarea
         id={htmlFor}
         placeholder={placeholder}
