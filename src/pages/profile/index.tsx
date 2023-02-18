@@ -12,27 +12,62 @@ import {
   TabPanel,
   VStack,
   StackDivider,
+  Link,
 } from "@chakra-ui/react";
 import React from "react";
+import { AccountControlButton } from "../../components/AccountControlButton";
 import { GamePlan } from "../../components/GamePlan";
+import { PlanControlButton } from "../../components/PlanControlButton";
 import { TextBox } from "../../components/TextBox";
 
-export default function profile() {
+const profile = () => {
+  const demoText =
+  " Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua.DConsequat nisl vel pretium lectus quam id. Semper quis lectusnulla at volutpat diam ut venenatis. Dolor morbi non arcu risusquis varius quam quisque. Massa ultricies mi quis hendrerit dolor  magna eget est lorem. Erat imperdiet sed euismod nisi portaLectus vestibulum mattis ullamcorper velit.";
+
   return (
-    <Box fontWeight="bold" pt="5" pb="5">
+    <Box fontWeight="bold" pt="10px" pb="10px">
       <Container maxW="1100px">
-        <Flex alignItems="center" bg="whiteAlpha.800" borderRadius="10" p="5">
+        <Flex
+          alignItems="center"
+          bg="whiteAlpha.800"
+          borderRadius="10px"
+          p="10px"
+        >
           <Avatar
             size="2xl"
             name="Segun Adebayo"
             src="https://bit.ly/dan-abramov"
           />
-          <Text mt="5" fontSize="35" color="purple" ml="10">
+          <Text mt="10px" fontSize="35" color="purple" ml="10px">
             Hello User
           </Text>
         </Flex>
 
-        <Box h="100%" bg="whiteAlpha.800" mt="5" borderRadius="10" p="5">
+        <Flex
+          justifyContent="space-around"
+          bg="whiteAlpha.800"
+          mt="10px"
+          p="10px"
+          borderRadius="10px"
+        >
+          <Box>
+            <PlanControlButton
+              text="質問をする"
+              colorScheme="purple"
+              color="white"
+              width="400px"
+              href="/"
+            />
+          </Box>
+        </Flex>
+
+        <Box
+          h="100%"
+          bg="whiteAlpha.800"
+          mt="10px"
+          borderRadius="10px"
+          p="10px"
+        >
           <Tabs colorScheme="purple">
             <TabList>
               <Tab>プロフィール</Tab>
@@ -46,11 +81,9 @@ export default function profile() {
                   divider={<StackDivider borderColor="purple" />}
                   spacing={2}
                   align="top"
-                  mt="6"
-                  p="3"
                 >
-                  <TextBox title="自己紹介" />
-                  <TextBox title="経歴・実績" />
+                  <TextBox title="自己紹介" text={demoText} fontSize="20px" />
+                  <TextBox title="経歴・実績" text={demoText} fontSize="20px" />
                 </VStack>
               </TabPanel>
               <TabPanel></TabPanel>
@@ -59,7 +92,7 @@ export default function profile() {
                   align="center"
                   wrap="wrap"
                   maxW="1000px"
-                  borderRadius="10"
+                  borderRadius="10px"
                 >
                   <GamePlan />
                   <GamePlan />
@@ -80,4 +113,6 @@ export default function profile() {
       </Container>
     </Box>
   );
-}
+};
+
+export default profile;
