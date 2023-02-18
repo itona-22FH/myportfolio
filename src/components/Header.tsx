@@ -46,12 +46,6 @@ export const Header = () => {
           </Button>
         </Link>
         <Stack direction="row" spacing={4} mr="10">
-          {/* <AccountControlButton
-            text="ログイン"
-            colorScheme="whiteAlpha"
-            color="purple"
-            width="130px"
-            /> */}
           <Button
             onClick={onOpen}
             color="purple"
@@ -74,12 +68,12 @@ export const Header = () => {
               <ModalBody pb={6}>
                 <FormControl>
                   <FormLabel>メールアドレス</FormLabel>
-                  <Input ref={initialRef} placeholder="*******@email.com" />
+                  <Input type="email" ref={initialRef} placeholder="*******@email.com" />
                 </FormControl>
 
                 <FormControl mt={4}>
                   <FormLabel>パスワード</FormLabel>
-                  <Input placeholder="password" />
+                  <Input type="password" placeholder="password" />
                 </FormControl>
               </ModalBody>
 
