@@ -24,6 +24,7 @@ import {
 import React from "react";
 import { AccountControlButton } from "../../components/AccountControlButton";
 import ContractBtn from "../../components/ContractBtn";
+import { HeadTitle } from "../../components/HeadTitle";
 import { TextBox } from "../../components/TextBox";
 
 export default function plan() {
@@ -44,16 +45,18 @@ export default function plan() {
           gap="10px"
           fontWeight="bold"
         >
-          <GridItem area={"nav"} bg="whiteAlpha.800" borderRadius="10px">
+          <GridItem area={"nav"} bg="whiteAlpha.800" borderRadius="10px" p="5px">
             <Image
               src="https://bit.ly/2Z4KKcF"
               alt="Rear view of modern home with pool"
               p="10px"
               borderRadius="20px"
             />
-            <Heading as="h2" size="2xl" p="10px">
+            {/* <Heading as="h2" size="2xl" p="10px">
               最速でプロの道へ！！現役プロゲーマーが直接指導！本気で強くなりたい人向けプラン！！！
-            </Heading>
+            </Heading> */}
+
+            <HeadTitle title="最速でプロの道へ！！現役プロゲーマーが直接指導！本気で強くなりたい人向けプラン！！！"/>
 
             <VStack
               divider={<StackDivider borderColor="purple" />}
@@ -116,7 +119,7 @@ export default function plan() {
                 >
                   <TextBox
                     title="プラン名"
-                    text="StepUp Game"
+                    text="最速でプロの道へ！！現役プロゲーマーが直接指導！本気で強くなりたい人向けプラン！！！"
                     fontSize="20px"
                   />
                   <TextBox
