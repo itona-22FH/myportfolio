@@ -33,3 +33,11 @@ type ContractBtnProps = {
   width: string;
   onClick: () => void;
 }
+
+type HeadTitleProps = {
+  title: string;
+}
+
+type CategorySearchProps = {
+  category: string;
+}
