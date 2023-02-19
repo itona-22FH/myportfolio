@@ -95,7 +95,7 @@ export default function plan() {
                   colorScheme="pink"
                   color="white"
                   width="100%"
-                  href="/newPlan"
+                  href="/"
                 />
               </Box>
             </Flex>
