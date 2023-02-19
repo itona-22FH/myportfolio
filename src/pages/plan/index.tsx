@@ -21,11 +21,11 @@ import {
   useDisclosure,
   VStack,
   Text,
+  Divider,
 } from "@chakra-ui/react";
 import React from "react";
 import { AccountControlButton } from "../../components/AccountControlButton";
 import ContractBtn from "../../components/ContractBtn";
-import { PlanControlButton } from "../../components/PlanControlButton";
 import { TextBox } from "../../components/TextBox";
 
 export default function plan() {
@@ -35,7 +35,7 @@ export default function plan() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Box pt="10px">
-      <Container maxW="1200px">
+      <Container maxW="1100px">
         <Grid
           templateAreas={`
         "nav main"
@@ -80,7 +80,7 @@ export default function plan() {
                 </Text>
               </Flex>
             </VStack>
-            <Flex justifyContent="space-around">
+            <Flex justifyContent="space-around" flexFlow="column">
               <Box w="100%" p="10px">
                 <ContractBtn
                   text="プラン契約に進む"
@@ -88,6 +88,16 @@ export default function plan() {
                   color="white"
                   width="100%"
                   onClick={onOpen}
+                />
+              </Box>
+              {/* 登録者本人の時表示 */}
+              <Box w="100%" p="10px">
+                <AccountControlButton
+                  text="プランを削除する"
+                  colorScheme="pink"
+                  color="white"
+                  width="100%"
+                  href="/newPlan"
                 />
               </Box>
             </Flex>
@@ -132,7 +142,7 @@ export default function plan() {
                 </VStack>
               </DrawerBody>
               <Box p="10px">
-                <PlanControlButton
+                <AccountControlButton
                   text="プランを契約する"
                   colorScheme="purple"
                   color="white"
@@ -140,6 +150,7 @@ export default function plan() {
                   href="/"
                 />
               </Box>
+              
             </DrawerContent>
           </Drawer>
 
@@ -162,12 +173,12 @@ export default function plan() {
                 name="Segun Adebayo"
                 src="https://bit.ly/dan-abramov"
               />
-              <Link href="/profile" mt="20px" fontSize="35"  >
+              <Link href="/profile" mt="20px" fontSize="35">
                 Hello User
               </Link>
-
-              <Box w="100%" p="10px">
-                <PlanControlButton
+              {/* 本人以外の時表示 */}
+              <Box w="100%" p="5px">
+                <AccountControlButton
                   text="質問をする"
                   colorScheme="purple"
                   color="white"
@@ -175,6 +186,8 @@ export default function plan() {
                   href="/"
                 />
               </Box>
+
+              
             </Flex>
           </GridItem>
 
