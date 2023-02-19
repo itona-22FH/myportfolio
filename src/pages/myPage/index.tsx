@@ -22,10 +22,8 @@ const myPage = () => {
   const demoText =
     " Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua.DConsequat nisl vel pretium lectus quam id. Semper quis lectusnulla at volutpat diam ut venenatis. Dolor morbi non arcu risusquis varius quam quisque. Massa ultricies mi quis hendrerit dolor  magna eget est lorem. Erat imperdiet sed euismod nisi portaLectus vestibulum mattis ullamcorper velit.";
   return (
-    <Box fontWeight="bold" pt="10px" pb="10px">
+    <Box pt="10px" pb="10px">
       <Container maxW="1100px">
-
-      
         <Flex
           alignItems="center"
           bg="whiteAlpha.800"
@@ -37,7 +35,7 @@ const myPage = () => {
             name="Segun Adebayo"
             src="https://bit.ly/dan-abramov"
           />
-          <Text mt="10px" fontSize="35" ml="10px">
+          <Text mt="10px" fontSize="35" ml="10px" fontWeight="bold">
             Hello User
           </Text>
         </Flex>
@@ -48,6 +46,7 @@ const myPage = () => {
           mt="10px"
           p="10px"
           borderRadius="10px"
+          w="100%"
         >
           <Box>
             <AccountControlButton
@@ -60,16 +59,14 @@ const myPage = () => {
           </Box>
           <Box>
             <AccountControlButton
-              text="プランを登録する"
+              text="新規プランを登録する"
               colorScheme="purple"
               color="white"
               width="400px"
-              href="/planRegister"
+              href="/newPlan"
             />
           </Box>
         </Flex>
-
-        
 
         <Box
           h="100%"
@@ -121,8 +118,6 @@ const myPage = () => {
             </TabPanels>
           </Tabs>
         </Box>
-
-        
       </Container>
     </Box>
   );

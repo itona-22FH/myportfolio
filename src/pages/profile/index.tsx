@@ -17,7 +17,6 @@ import {
 import React from "react";
 import { AccountControlButton } from "../../components/AccountControlButton";
 import { GamePlan } from "../../components/GamePlan";
-import { PlanControlButton } from "../../components/PlanControlButton";
 import { TextBox } from "../../components/TextBox";
 
 const profile = () => {
@@ -51,7 +50,7 @@ const profile = () => {
           borderRadius="10px"
         >
           <Box>
-            <PlanControlButton
+            <AccountControlButton
               text="質問をする"
               colorScheme="purple"
               color="white"

@@ -1,23 +1,29 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable react/jsx-no-undef */
-import { Box, FormControl, Heading, Container, Link } from "@chakra-ui/react";
+import {
+  Box,
+  FormControl,
+  Heading,
+  Container,
+  Link,
+  Divider,
+} from "@chakra-ui/react";
 import React from "react";
 import { AccountControlButton } from "../../components/AccountControlButton";
 import { FormInput } from "../../components/FormInput";
+import { HeadTitle }  from "../../components/HeadTitle";
 import { MyPageTextBox } from "../../components/MyPageTextBox";
 
 const newAccount = () => {
   const demoText =
-  " Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua.DConsequat nisl vel pretium lectus quam id. Semper quis lectusnulla at volutpat diam ut venenatis. Dolor morbi non arcu risusquis varius quam quisque. Massa ultricies mi quis hendrerit dolor  magna eget est lorem. Erat imperdiet sed euismod nisi portaLectus vestibulum mattis ullamcorper velit.";
+    " Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua.DConsequat nisl vel pretium lectus quam id. Semper quis lectusnulla at volutpat diam ut venenatis. Dolor morbi non arcu risusquis varius quam quisque. Massa ultricies mi quis hendrerit dolor  magna eget est lorem. Erat imperdiet sed euismod nisi portaLectus vestibulum mattis ullamcorper velit.";
 
   return (
-    <Box p="10px">
-      <Container maxW="800px" bg="whiteAlpha.800" p="5" borderRadius="10px">
-        <Heading as="h2" size="2xl" mb="10" pt="5">
-          新規登録
-        </Heading>
-        <FormControl>
-          <FormInput label="ユーザー名" type="text" placeholder="username" />
+    <Box pt="10px" pb="10px">
+      <Container maxW="1100px" bg="whiteAlpha.800" p="5px" borderRadius="10px">
+        <HeadTitle  title="新規登録"/>
+        <FormControl pt="20px">
+          <FormInput label="ユーザー名" type="text" placeholder="userName" />
           <FormInput
             label="プロフィール画像"
             type="file"
@@ -58,13 +64,13 @@ const newAccount = () => {
             〇〇大会BEST3"
           />
         </FormControl>
-          <AccountControlButton
-            text="新規登録する"
-            colorScheme="purple"
-            color="white"
-            width="100%"
-            href="/"
-          />
+        <AccountControlButton
+          text="新規登録する"
+          colorScheme="purple"
+          color="white"
+          width="100%"
+          href="/"
+        />
       </Container>
     </Box>
   );
