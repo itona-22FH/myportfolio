@@ -51,17 +51,17 @@ export const GamePlan = () => {
               .map((_, i) => (
                 <StarIcon
                   key={i}
-                  color={i < property.rating ? "teal.500" : "gray.300"}
+                  color={i < property.rating ? "orange" : "gray"}
                 />
               ))}
-            <Box as="span" ml="2" color="gray.600" fontSize="sm">
+            <Box as="span" ml="2" color="gray" fontSize="sm">
               {property.reviewCount} reviews
             </Box>
           </Box>
 
-          <Box mt="3" color="red.400">
+          <Box mt="3" color="red">
             {property.formattedPrice}
-            <Box as="span" color="gray.600" fontSize="sm">
+            <Box as="span" color="black" fontSize="sm">
               円
             </Box>
           </Box>
