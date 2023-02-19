@@ -12,7 +12,7 @@ export const FormInput = ({ type, label, placeholder }: FormInputProps) => {
         type={type}
         placeholder={placeholder}
         borderColor="purple.300"
-        p="3px"
+        p="4px"
       />
     </Box>
   );
