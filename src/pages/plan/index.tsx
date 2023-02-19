@@ -52,9 +52,6 @@ export default function plan() {
               p="10px"
               borderRadius="20px"
             />
-            {/* <Heading as="h2" size="2xl" p="10px">
-              最速でプロの道へ！！現役プロゲーマーが直接指導！本気で強くなりたい人向けプラン！！！
-            </Heading> */}
 
             <HeadTitle title="最速でプロの道へ！！現役プロゲーマーが直接指導！本気で強くなりたい人向けプラン！！！"/>
 
