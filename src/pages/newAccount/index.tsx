@@ -1,17 +1,10 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable react/jsx-no-undef */
-import {
-  Box,
-  FormControl,
-  Heading,
-  Container,
-  Link,
-  Divider,
-} from "@chakra-ui/react";
+import { Box, FormControl, Heading, Container } from "@chakra-ui/react";
 import React from "react";
 import { AccountControlButton } from "../../components/AccountControlButton";
 import { FormInput } from "../../components/FormInput";
-import { HeadTitle }  from "../../components/HeadTitle";
+import { HeadTitle } from "../../components/HeadTitle";
 import { MyPageTextBox } from "../../components/MyPageTextBox";
 
 const newAccount = () => {
@@ -21,7 +14,7 @@ const newAccount = () => {
   return (
     <Box pt="10px" pb="10px">
       <Container maxW="1100px" bg="whiteAlpha.800" p="5px" borderRadius="10px">
-        <HeadTitle  title="新規登録"/>
+        <HeadTitle title="新規登録" />
         <FormControl pt="20px">
           <FormInput label="ユーザー名" type="text" placeholder="userName" />
           <FormInput

@@ -34,7 +34,7 @@ export const Header = () => {
         justifyContent="space-between"
         alignItems="center"
       >
-        <Link href="/" style={{ textDecoration: 'none' }}>
+        <Link href="/" style={{ textDecoration: "none" }}>
           <Button
             colorScheme="linkedin"
             variant="outline"

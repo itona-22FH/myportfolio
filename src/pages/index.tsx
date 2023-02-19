@@ -3,7 +3,14 @@ import Head from "next/head";
 import { GamePlan } from "../components/GamePlan";
 import { CarouselFade } from "../components/CarouselFade";
 import { CategorySearch } from "../components/CategorySearch";
-import { Box, Flex, Grid, GridItem, StackDivider, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Grid,
+  GridItem,
+  StackDivider,
+  VStack,
+} from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 
 const Home = () => {
@@ -26,7 +33,7 @@ const Home = () => {
         fontWeight="bold"
         gridTemplateColumns={"300px 1fr"}
         mt="3"
-        >
+      >
         {/* search category */}
         <GridItem
           area={"nav"}
@@ -34,25 +41,24 @@ const Home = () => {
           borderRadius="10"
           ml="10"
           p="2"
-          >
+        >
           <VStack
-      divider={<StackDivider borderColor="purple.300" />}
-      spacing={4}
-      align="stretch"
-      
-    >
-      <Box h="40px" >
-        <span style={{ marginLeft: 10 }}>
-          <SearchIcon />
-          <span>カテゴリ</span>
-        </span>
-      </Box>
-      <CategorySearch category="FPS・TPS" />
-      <CategorySearch category="MOBA" />
-      <CategorySearch category="格闘" />
-      <CategorySearch category="スポーツ" />
-      <CategorySearch category="エーペックスレジェンズ" />
-      </VStack>
+            divider={<StackDivider borderColor="purple.300" />}
+            spacing={4}
+            align="stretch"
+          >
+            <Box h="40px">
+              <span style={{ marginLeft: 10 }}>
+                <SearchIcon />
+                <span>カテゴリ</span>
+              </span>
+            </Box>
+            <CategorySearch category="FPS・TPS" />
+            <CategorySearch category="MOBA" />
+            <CategorySearch category="格闘" />
+            <CategorySearch category="スポーツ" />
+            <CategorySearch category="エーペックスレジェンズ" />
+          </VStack>
         </GridItem>
 
         {/* show plan */}
@@ -63,7 +69,7 @@ const Home = () => {
             bg="whiteAlpha.800"
             maxW="1000px"
             borderRadius="10"
-            >
+          >
             <GamePlan />
             <GamePlan />
             <GamePlan />
@@ -78,7 +84,7 @@ const Home = () => {
           </Flex>
         </GridItem>
       </Grid>
-            </Box>
+    </Box>
   );
 };
 export default Home;

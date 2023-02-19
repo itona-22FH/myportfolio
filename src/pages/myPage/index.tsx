@@ -11,7 +11,6 @@ import {
   TabPanel,
   VStack,
   StackDivider,
-  Link,
 } from "@chakra-ui/react";
 import React from "react";
 import { AccountControlButton } from "../../components/AccountControlButton";

@@ -3,7 +3,6 @@
 import {
   Avatar,
   Box,
-  Button,
   Container,
   Drawer,
   DrawerBody,
@@ -21,7 +20,6 @@ import {
   useDisclosure,
   VStack,
   Text,
-  Divider,
 } from "@chakra-ui/react";
 import React from "react";
 import { AccountControlButton } from "../../components/AccountControlButton";
@@ -150,7 +148,6 @@ export default function plan() {
                   href="/"
                 />
               </Box>
-              
             </DrawerContent>
           </Drawer>
 
@@ -186,8 +183,6 @@ export default function plan() {
                   href="/"
                 />
               </Box>
-
-              
             </Flex>
           </GridItem>
 

@@ -1,16 +1,13 @@
-import {
-  Button,
-  Drawer,
-  DrawerBody,
-  DrawerCloseButton,
-  DrawerContent,
-  DrawerHeader,
-  DrawerOverlay,
-  useDisclosure,
-} from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 import React from "react";
 
-const ContractBtn = ({ text, colorScheme, color, width, onClick }: ContractBtnProps) => {
+const ContractBtn = ({
+  text,
+  colorScheme,
+  color,
+  width,
+  onClick,
+}: ContractBtnProps) => {
   return (
     <>
       <Button
@@ -22,7 +19,6 @@ const ContractBtn = ({ text, colorScheme, color, width, onClick }: ContractBtnPr
       >
         {text}
       </Button>
-      
     </>
   );
 };

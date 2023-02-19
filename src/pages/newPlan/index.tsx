@@ -1,18 +1,4 @@
-import { ChevronDownIcon } from "@chakra-ui/icons";
-import {
-  Box,
-  Button,
-  Container,
-  FormControl,
-  FormHelperText,
-  FormLabel,
-  Input,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
-  Select,
-} from "@chakra-ui/react";
+import { Box, Container, FormControl, Select } from "@chakra-ui/react";
 import React from "react";
 import { AccountControlButton } from "../../components/AccountControlButton";
 import { FormInput } from "../../components/FormInput";
@@ -55,11 +41,7 @@ const newPlan = () => {
             <option value="option3">リーグ・オブ・レジェンド</option>
             <option value="option4">FIFA</option>
           </Select>
-          <FormInput
-            label="プラン料金"
-            type="number"
-            placeholder="planPrice"
-          />
+          <FormInput label="プラン料金" type="number" placeholder="planPrice" />
           <MyPageTextBox
             htmlFor="学べる内容"
             placeholder="勝つために必要なこと全て！！！エイム力UP、敵を圧倒する立ち回り、得意キャラをさらに極める！！私がすべて教えます！！！"
