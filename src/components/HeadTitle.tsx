@@ -4,10 +4,11 @@ import React from "react";
 export const HeadTitle = ({ title }: HeadTitleProps) => {
   return (
     <Box>
-npm eu      <Heading as="h2" size="xl" pt="20px">
+      <Heading as="h2" size="xl" pt="20px">
         {title}
       </Heading>
       <Divider borderColor="purple.300" pt="10px" />
     </Box>
   );
 };
+ï;
