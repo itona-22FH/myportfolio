@@ -100,7 +100,7 @@ export default function plan() {
               </Box>
             </Flex>
           </GridItem>
-          <Drawer onClose={onClose} isOpen={isOpen} size="md">
+          <Drawer onClose={onClose} isOpen={isOpen} size="full">
             <DrawerOverlay />
             <DrawerContent>
               <DrawerCloseButton />
