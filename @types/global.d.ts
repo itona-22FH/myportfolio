@@ -6,6 +6,14 @@ type AccountControlBtnProps = {
   href:string;
 };
 
+type ConfirmationBtnProps = {
+  text: string;
+  colorScheme: string;
+  color: string;
+  width: string;
+  confirmation:string;
+}
+
 type TextBox = {
   title: string;
   text: string

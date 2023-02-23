@@ -20,6 +20,7 @@ import {
 import React from "react";
 
 import { AccountControlButton } from "./AccountControlButton";
+import { ConfirmationBtn } from "./confirmationBtn";
 
 export const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -90,12 +91,12 @@ export const Header = () => {
             </ModalContent>
           </Modal>
 
-          <AccountControlButton
+          <ConfirmationBtn
             text="ログアウト"
             colorScheme="whiteAlpha"
             color="purple"
             width="130px"
-            href="/"
+            confirmation="ログアウト"
           />
 
           <AccountControlButton

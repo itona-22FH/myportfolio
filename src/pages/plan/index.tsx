@@ -23,6 +23,7 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { AccountControlButton } from "../../components/AccountControlButton";
+import { ConfirmationBtn } from "../../components/confirmationBtn";
 import ContractBtn from "../../components/ContractBtn";
 import { HeadTitle } from "../../components/HeadTitle";
 import { TextBox } from "../../components/TextBox";
@@ -90,12 +91,12 @@ export default function plan() {
               </Box>
               {/* 登録者本人の時表示 */}
               <Box w="100%" p="10px">
-                <AccountControlButton
+                <ConfirmationBtn
                   text="プランを削除する"
-                  colorScheme="pink"
+                  colorScheme="red"
                   color="white"
                   width="100%"
-                  href="/"
+                  confirmation="削除"
                 />
               </Box>
             </Flex>
@@ -140,12 +141,12 @@ export default function plan() {
                 </VStack>
               </DrawerBody>
               <Box p="10px">
-                <AccountControlButton
+                <ConfirmationBtn
                   text="プランを契約する"
                   colorScheme="purple"
                   color="white"
                   width="100%"
-                  href="/"
+                  confirmation="契約"
                 />
               </Box>
             </DrawerContent>

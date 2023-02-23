@@ -1,6 +1,7 @@
 import { Box, Container, FormControl, Select } from "@chakra-ui/react";
 import React from "react";
 import { AccountControlButton } from "../../components/AccountControlButton";
+import { ConfirmationBtn } from "../../components/confirmationBtn";
 import { FormInput } from "../../components/FormInput";
 import { HeadTitle } from "../../components/HeadTitle";
 import { MyPageTextBox } from "../../components/MyPageTextBox";
@@ -18,7 +19,7 @@ const newPlan = () => {
             placeholder="画像を選択してください"
           />
           <Select
-            placeholder="カテゴリ１"
+            placeholder="ジャンル"
             w="300px"
             borderColor="purple.300"
             pt="10px"
@@ -29,8 +30,9 @@ const newPlan = () => {
             <option value="option3">格闘</option>
             <option value="option4">スポーツ</option>
           </Select>
+
           <Select
-            placeholder="カテゴリ２"
+            placeholder="タイトル"
             w="300px"
             borderColor="purple.300"
             pt="10px"
