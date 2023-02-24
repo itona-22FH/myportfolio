@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-no-undef */
 import {
   Avatar,
   Box,
@@ -12,19 +11,17 @@ import {
   TabPanel,
   VStack,
   StackDivider,
-  Link,
 } from "@chakra-ui/react";
 import React from "react";
 import { AccountControlButton } from "../../components/AccountControlButton";
 import { GamePlan } from "../../components/GamePlan";
 import { TextBox } from "../../components/TextBox";
 
-const profile = () => {
+const myPage = () => {
   const demoText =
-  " Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua.DConsequat nisl vel pretium lectus quam id. Semper quis lectusnulla at volutpat diam ut venenatis. Dolor morbi non arcu risusquis varius quam quisque. Massa ultricies mi quis hendrerit dolor  magna eget est lorem. Erat imperdiet sed euismod nisi portaLectus vestibulum mattis ullamcorper velit.";
-
+    " Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua.DConsequat nisl vel pretium lectus quam id. Semper quis lectusnulla at volutpat diam ut venenatis. Dolor morbi non arcu risusquis varius quam quisque. Massa ultricies mi quis hendrerit dolor  magna eget est lorem. Erat imperdiet sed euismod nisi portaLectus vestibulum mattis ullamcorper velit.";
   return (
-    <Box fontWeight="bold" pt="10px" pb="10px">
+    <Box pt="10px" pb="10px">
       <Container maxW="1100px">
         <Flex
           alignItems="center"
@@ -37,7 +34,7 @@ const profile = () => {
             name="Segun Adebayo"
             src="https://bit.ly/dan-abramov"
           />
-          <Text mt="10px" fontSize="35" color="purple" ml="10px">
+          <Text mt="10px" fontSize="35" ml="10px" fontWeight="bold">
             Hello User
           </Text>
         </Flex>
@@ -48,14 +45,24 @@ const profile = () => {
           mt="10px"
           p="10px"
           borderRadius="10px"
+          w="100%"
         >
           <Box>
             <AccountControlButton
-              text="質問をする"
+              text="プロフィールを編集する"
               colorScheme="purple"
               color="white"
               width="400px"
-              href="/"
+              href="/editProfile"
+            />
+          </Box>
+          <Box>
+            <AccountControlButton
+              text="新規プランを登録する"
+              colorScheme="purple"
+              color="white"
+              width="400px"
+              href="/newPlan"
             />
           </Box>
         </Flex>
@@ -72,6 +79,7 @@ const profile = () => {
               <Tab>プロフィール</Tab>
               <Tab>レビュー</Tab>
               <Tab>登録プラン</Tab>
+              <Tab>契約中のプラン</Tab>
             </TabList>
 
             <TabPanels>
@@ -114,4 +122,4 @@ const profile = () => {
   );
 };
 
-export default profile;
+export default myPage;
