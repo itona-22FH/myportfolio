@@ -61,6 +61,7 @@ export const Header = () => {
             finalFocusRef={finalRef}
             isOpen={isOpen}
             onClose={onClose}
+            size="3xl"
           >
             <ModalOverlay />
             <ModalContent>
@@ -84,9 +85,9 @@ export const Header = () => {
 
               <ModalFooter>
                 <Button colorScheme="blue" mr="10px">
-                  Save
+                  ログイン
                 </Button>
-                <Button onClick={onClose}>Cancel</Button>
+                <Button onClick={onClose} colorScheme="red">キャンセル</Button>
               </ModalFooter>
             </ModalContent>
           </Modal>
