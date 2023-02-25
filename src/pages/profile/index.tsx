@@ -21,7 +21,7 @@ import { TextBox } from "../../components/TextBox";
 
 const profile = () => {
   const demoText =
-  " Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua.DConsequat nisl vel pretium lectus quam id. Semper quis lectusnulla at volutpat diam ut venenatis. Dolor morbi non arcu risusquis varius quam quisque. Massa ultricies mi quis hendrerit dolor  magna eget est lorem. Erat imperdiet sed euismod nisi portaLectus vestibulum mattis ullamcorper velit.";
+    " Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua.DConsequat nisl vel pretium lectus quam id. Semper quis lectusnulla at volutpat diam ut venenatis. Dolor morbi non arcu risusquis varius quam quisque. Massa ultricies mi quis hendrerit dolor  magna eget est lorem. Erat imperdiet sed euismod nisi portaLectus vestibulum mattis ullamcorper velit.";
 
   return (
     <Box fontWeight="bold" pt="10px" pb="10px">
@@ -49,15 +49,20 @@ const profile = () => {
           p="10px"
           borderRadius="10px"
         >
-          <Box>
-            <AccountControlButton
-              text="質問をする"
-              colorScheme="purple"
-              color="white"
-              width="400px"
-              href="/"
-            />
-          </Box>
+          <AccountControlButton
+            text="質問をする"
+            colorScheme="purple"
+            color="white"
+            width="400px"
+            href="/"
+          />
+          <AccountControlButton
+            text="レビューを投稿する"
+            colorScheme="purple"
+            color="white"
+            width="400px"
+            href="/"
+          />
         </Flex>
 
         <Box

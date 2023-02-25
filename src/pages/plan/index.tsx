@@ -46,7 +46,12 @@ export default function plan() {
           gap="10px"
           fontWeight="bold"
         >
-          <GridItem area={"nav"} bg="whiteAlpha.800" borderRadius="10px" p="5px">
+          <GridItem
+            area={"nav"}
+            bg="whiteAlpha.800"
+            borderRadius="10px"
+            p="5px"
+          >
             <Image
               src="https://bit.ly/2Z4KKcF"
               alt="Rear view of modern home with pool"
@@ -54,7 +59,7 @@ export default function plan() {
               borderRadius="20px"
             />
 
-            <HeadTitle title="最速でプロの道へ！！現役プロゲーマーが直接指導！本気で強くなりたい人向けプラン！！！"/>
+            <HeadTitle title="最速でプロの道へ！！現役プロゲーマーが直接指導！本気で強くなりたい人向けプラン！！！" />
 
             <VStack
               divider={<StackDivider borderColor="purple" />}
@@ -178,6 +183,14 @@ export default function plan() {
               <Box w="100%" p="5px">
                 <AccountControlButton
                   text="質問をする"
+                  colorScheme="purple"
+                  color="white"
+                  width="100%"
+                  href="/"
+                />
+                <Box m="10px"></Box>
+                <AccountControlButton
+                  text="レビューを投稿する"
                   colorScheme="purple"
                   color="white"
                   width="100%"
