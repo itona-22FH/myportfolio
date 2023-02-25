@@ -3,6 +3,7 @@
 import { Box, FormControl, Heading, Container } from "@chakra-ui/react";
 import React from "react";
 import { AccountControlButton } from "../../components/AccountControlButton";
+import { ConfirmationBtn } from "../../components/ConfirmationBtn";
 import { FormInput } from "../../components/FormInput";
 import { HeadTitle } from "../../components/HeadTitle";
 import { MyPageTextBox } from "../../components/MyPageTextBox";
@@ -57,12 +58,12 @@ const newAccount = () => {
             〇〇大会BEST3"
           />
         </FormControl>
-        <AccountControlButton
+        <ConfirmationBtn
           text="新規登録する"
           colorScheme="purple"
           color="white"
           width="100%"
-          href="/"
+          confirmation="新規登録"
         />
       </Container>
     </Box>
