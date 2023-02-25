@@ -20,7 +20,7 @@ import {
 import React from "react";
 
 import { AccountControlButton } from "./AccountControlButton";
-import { ConfirmationBtn } from "./confirmationBtn";
+import { ConfirmationBtn } from "./ConfirmationBtn";
 
 export const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();

@@ -23,7 +23,7 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { AccountControlButton } from "../../components/AccountControlButton";
-import { ConfirmationBtn } from "../../components/confirmationBtn";
+import { ConfirmationBtn } from "../../components/ConfirmationBtn";
 import ContractBtn from "../../components/ContractBtn";
 import { HeadTitle } from "../../components/HeadTitle";
 import { TextBox } from "../../components/TextBox";
