@@ -1,6 +1,7 @@
 import { Box, Container, FormControl, Select } from "@chakra-ui/react";
 import React from "react";
 import { AccountControlButton } from "../../components/AccountControlButton";
+import { ConfirmationBtn } from "../../components/ConfirmationBtn";
 import { FormInput } from "../../components/FormInput";
 import { HeadTitle } from "../../components/HeadTitle";
 import { MyPageTextBox } from "../../components/MyPageTextBox";
@@ -52,12 +53,12 @@ const newPlan = () => {
             placeholder="動画１本１０００円！（１試合15分想定）"
           />
         </FormControl>
-        <AccountControlButton
+        <ConfirmationBtn
           text="新規プラン登録する"
           colorScheme="purple"
           color="white"
           width="100%"
-          href="/"
+          confirmation="プランを登録"
         />
       </Container>
     </Box>

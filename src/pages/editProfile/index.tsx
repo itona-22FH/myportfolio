@@ -1,6 +1,7 @@
 import { Box, Container, FormControl } from "@chakra-ui/react";
 import React from "react";
 import { AccountControlButton } from "../../components/AccountControlButton";
+import { ConfirmationBtn } from "../../components/ConfirmationBtn";
 import { FormInput } from "../../components/FormInput";
 import { HeadTitle } from "../../components/HeadTitle";
 import { MyPageTextBox } from "../../components/MyPageTextBox";
@@ -37,12 +38,12 @@ const editProfile = () => {
             〇〇大会BEST3"
           />
         </FormControl>
-        <AccountControlButton
+        <ConfirmationBtn
           text="更新する"
           colorScheme="purple"
           color="white"
           width="100%"
-          href="/"
+          confirmation="アカウント情報を更新"
         />
       </Container>
     </Box>
