@@ -1,8 +1,12 @@
 import React from "react";
 import { Text, Image, Link, Box, Avatar, Flex } from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
+import { useRecoilValue } from "recoil";
+import { planCollectionAtom } from "../components/atoms/planCollectionAtom";
 
 export const GamePlan = () => {
+  const planCollections = useRecoilValue(planCollectionAtom);
+
   const property = {
     imageUrl: "https://bit.ly/2Z4KKcF",
     imageAlt: "Rear view of modern home with pool",
@@ -13,6 +17,12 @@ export const GamePlan = () => {
     reviewCount: 34,
     rating: 4,
   };
+
+// {
+//   Object.keys(planCollections).forEach(key=> {
+//     console.log(planCollections[key])
+//   })
+// }
 
   return (
     <Link href="/plan" style={{ textDecoration: "none" }}>
