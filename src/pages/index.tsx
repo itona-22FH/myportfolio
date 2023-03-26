@@ -71,16 +71,6 @@ const Home = () => {
             borderRadius="10"
           >
             <GamePlan />
-            {/* <GamePlan />
-            <GamePlan />
-            <GamePlan />
-            <GamePlan />
-            <GamePlan />
-            <GamePlan />
-            <GamePlan />
-            <GamePlan />
-            <GamePlan />
-            <GamePlan /> */}
           </Flex>
         </GridItem>
       </Grid>
