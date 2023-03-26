@@ -3,46 +3,69 @@ import { atom } from "recoil";
 
 export const profileCollectionAtom = atom({
   key: "profileCollectionAtom",
-  default: {
-    uid1: {
-      userName: "helloUser",
-      userImage: "https://bit.ly/dan-abramov",
-      email: "****@email",
-      password: "12345",
-      twitterAccount: "****@twitter.com",
-      youtubeAccount: "****@youtube.com",
-      selfIntroduction: "はじめまして!helloUserです!!!",
-      achievement: "大会優勝",
+  default: [
+    {
+      //ユーザーID（FirebaseID）
+      userID: "userA",
+      //ユーザー名
+      userName: "AAAAAAAAA",
+      //アバター画像
+      userAvatar: "https://bit.ly/dan-abramov",
+      //メールアドレス
+      email: "A@email",
+      //パスワード
+      password: "AAAAA",
+      //Twitterアカウント
+      twitterAccount: "A@twitter.com",
+      //Youtubeアカウント
+      youtubeAccount: "A@youtube.com",
+      //自己紹介文
+      selfIntroduction: "AAAAAAAAAAA",
+      //実績・経歴
+      achievement: "AAAAAAAAAA",
+      //レビュー数
+      reviewCount: 5,
+      //レビュースコア
+      reviewScore: 10,
     },
-    uid2: {
-        userName: "helloUser",
-        userImage: "https://bit.ly/code-beast",
-        email: "****@email",
-        password: "12345",
-        twitterAccount: "****@twitter.com",
-        youtubeAccount: "****@youtube.com",
-        selfIntroduction: "はじめまして!helloUserです!!!",
-        achievement: "大会優勝",
-      },
-    uid3: {
-        userName: "helloUser",
-        userImage: "https://bit.ly/ryan-florence",
-        email: "****@email",
-        password: "12345",
-        twitterAccount: "****@twitter.com",
-        youtubeAccount: "****@youtube.com",
-        selfIntroduction: "はじめまして!helloUserです!!!",
-        achievement: "大会優勝",
-      },
-    uid4: {
-        userName: "helloUser",
-        userImage: "https://bit.ly/kent-c-dodds",
-        email: "****@email",
-        password: "12345",
-        twitterAccount: "****@twitter.com",
-        youtubeAccount: "****@youtube.com",
-        selfIntroduction: "はじめまして!helloUserです!!!",
-        achievement: "大会優勝",
-      },
-  },
+    {
+      userID: "userB",
+      userName: "BBBBBBBBBB",
+      userAvatar: "https://bit.ly/code-beast",
+      email: "B@email",
+      password: "BBBBB",
+      twitterAccount: "B@twitter.com",
+      youtubeAccount: "B@youtube.com",
+      selfIntroduction: "BBBBBBBBBBBB",
+      achievement: "BBBBBBBBBB",
+      reviewCount: 12,
+      reviewScore: 20,
+    },
+    {
+      userID: "userC",
+      userName: "CCCCC",
+      userAvatar: "https://bit.ly/ryan-florence",
+      email: "C@email",
+      password: "CCCCC",
+      twitterAccount: "C@twitter.com",
+      youtubeAccount: "C@youtube.com",
+      selfIntroduction: "CCCCCCCCCCCCC",
+      achievement: "CCCCCCCCCC",
+      reviewCount: 10,
+      reviewScore: 30,
+    },
+    {
+      userID: "userD",
+      userName: "DDDDD",
+      userAvatar: "https://bit.ly/kent-c-dodds",
+      email: "D@email",
+      password: "DDDDD",
+      twitterAccount: "D@twitter.com",
+      youtubeAccount: "D*@youtube.com",
+      selfIntroduction: "DDDDDDDDDDDDD",
+      achievement: "DDDDDDDDDD",
+      reviewCount: 8,
+      reviewScore: 40,
+    },
+  ],
 });
