@@ -18,8 +18,10 @@ import {
   Input,
 } from "@chakra-ui/react";
 import React from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 import { AccountControlButton } from "./AccountControlButton";
+import { profileCollectionAtom } from "./atoms/profileCollectionAtom";
 import { ConfirmationBtn } from "./ConfirmationBtn";
 
 export const Header = () => {
@@ -27,6 +29,7 @@ export const Header = () => {
 
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
+
   return (
     <Box w="100%" h="80px" bg="purple.300">
       <Flex
@@ -74,12 +77,17 @@ export const Header = () => {
                     type="email"
                     ref={initialRef}
                     placeholder="*******@email.com"
+                    name="email"
                   />
                 </FormControl>
 
                 <FormControl mt="4px">
                   <FormLabel>パスワード</FormLabel>
-                  <Input type="password" placeholder="password" />
+                  <Input
+                    type="password"
+                    placeholder="password"
+                    name="password"
+                  />
                 </FormControl>
               </ModalBody>
 
@@ -87,7 +95,9 @@ export const Header = () => {
                 <Button colorScheme="blue" mr="10px">
                   ログイン
                 </Button>
-                <Button onClick={onClose} colorScheme="red">キャンセル</Button>
+                <Button onClick={onClose} colorScheme="red">
+                  キャンセル
+                </Button>
               </ModalFooter>
             </ModalContent>
           </Modal>
