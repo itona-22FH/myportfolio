@@ -12,8 +12,17 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
+import { planCollectionAtom } from "../components/atoms/planCollectionAtom";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { showGamePlanAtom } from "../components/atoms/showGamePlanAtom";
+import React from "react";
+import { Route } from "react-router-dom";
 
 const Home = () => {
+  const setShowGamePlan = useSetRecoilState(showGamePlanAtom);
+  const planCollections = useRecoilValue(planCollectionAtom);
+  setShowGamePlan(planCollections);
+
   return (
     <Box>
       <Head>
@@ -70,7 +79,7 @@ const Home = () => {
             maxW="1000px"
             borderRadius="10"
           >
-            <GamePlan />
+              <GamePlan />
           </Flex>
         </GridItem>
       </Grid>
