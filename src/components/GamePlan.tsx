@@ -3,26 +3,27 @@ import { Text, Image, Link, Box, Avatar, Flex } from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
 import { useRecoilValue } from "recoil";
 import { planCollectionAtom } from "../components/atoms/planCollectionAtom";
+import { showGamePlanAtom } from "./atoms/showGamePlanAtom";
 
 export const GamePlan = () => {
-  const planCollections = useRecoilValue(planCollectionAtom);
-
-  const property = {
-    imageUrl: "https://bit.ly/2Z4KKcF",
-    imageAlt: "Rear view of modern home with pool",
-    beds: 3,
-    baths: 2,
-    title: "Modern home in city center in the heart of historic Los Angeles",
-    formattedPrice: "1,900",
-    reviewCount: 34,
-    rating: 4,
-  };
+  const showGamePlan = useRecoilValue(showGamePlanAtom)
 
   return (
     <>
-      {planCollections.map(
-        ({ userID, planTitle, planImage, userName, Guidance, price, userAvatar, reviewCount, reviewScore}) => (
-          <Link key={userID} href="/plan" style={{ textDecoration: "none" }}>
+      {showGamePlan.map(
+        ({
+          planID,
+          userID,
+          planTitle,
+          planImage,
+          userName,
+          Guidance,
+          price,
+          userAvatar,
+          reviewCount,
+          reviewScore,
+        }) => (
+          <Link key={planID} href={`/plan/${planID}`} style={{ textDecoration: "none" }}>
             <Box
               maxW="xs"
               borderWidth="1px"
@@ -33,7 +34,7 @@ export const GamePlan = () => {
               mt="10px"
               mb="10px"
             >
-              <Image src={planImage} alt={property.imageAlt} />
+              <Image src={planImage} alt="PlanImage" />
 
               <Box p="3">
                 <Box
@@ -58,7 +59,9 @@ export const GamePlan = () => {
                     .map((_, i) => (
                       <StarIcon
                         key={i}
-                        color={i < reviewScore/reviewCount ? "orange" : "gray.200"}
+                        color={
+                          i < reviewScore / reviewCount ? "orange" : "gray.200"
+                        }
                       />
                     ))}
                   <Box as="span" ml="2" color="gray" fontSize="sm">
