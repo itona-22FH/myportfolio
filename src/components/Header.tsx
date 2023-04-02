@@ -22,10 +22,12 @@ import { useRecoilState, useRecoilValue } from "recoil";
 
 import { AccountControlButton } from "./AccountControlButton";
 import { profileCollectionAtom } from "./atoms/profileCollectionAtom";
+import { testLoginUserAtom } from "./atoms/testLoginUserAtom";
 import { ConfirmationBtn } from "./ConfirmationBtn";
 
 export const Header = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const loginStatus = useRecoilValue(testLoginUserAtom);
 
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
@@ -50,81 +52,97 @@ export const Header = () => {
           </Button>
         </Link>
         <Stack direction="row" spacing={4} mr="10px">
-          <Button
-            onClick={onOpen}
-            color="purple"
-            colorScheme="whiteAlpha"
-            w="130px"
-          >
-            ログイン
-          </Button>
+          {loginStatus === "" && (
+            <>
+              <Button
+                onClick={onOpen}
+                color="purple"
+                colorScheme="whiteAlpha"
+                w="130px"
+              >
+                ログイン
+              </Button>
 
-          <Modal
-            initialFocusRef={initialRef}
-            finalFocusRef={finalRef}
-            isOpen={isOpen}
-            onClose={onClose}
-            size="3xl"
-          >
-            <ModalOverlay />
-            <ModalContent>
-              <ModalHeader>アカウント情報を入力してください</ModalHeader>
-              <ModalCloseButton />
-              <ModalBody pb="6px">
-                <FormControl>
-                  <FormLabel>メールアドレス</FormLabel>
-                  <Input
-                    type="email"
-                    ref={initialRef}
-                    placeholder="*******@email.com"
-                    name="email"
-                  />
-                </FormControl>
+              <Modal
+                initialFocusRef={initialRef}
+                finalFocusRef={finalRef}
+                isOpen={isOpen}
+                onClose={onClose}
+                size="3xl"
+              >
+                <ModalOverlay />
+                <ModalContent>
+                  <ModalHeader>アカウント情報を入力してください</ModalHeader>
+                  <ModalCloseButton />
+                  <ModalBody pb="6px">
+                    <FormControl>
+                      <FormLabel>メールアドレス</FormLabel>
+                      <Input
+                        type="email"
+                        ref={initialRef}
+                        placeholder="*******@email.com"
+                        name="email"
+                      />
+                    </FormControl>
 
-                <FormControl mt="4px">
-                  <FormLabel>パスワード</FormLabel>
-                  <Input
-                    type="password"
-                    placeholder="password"
-                    name="password"
-                  />
-                </FormControl>
-              </ModalBody>
+                    <FormControl mt="4px">
+                      <FormLabel>パスワード</FormLabel>
+                      <Input
+                        type="password"
+                        placeholder="password"
+                        name="password"
+                      />
+                    </FormControl>
+                  </ModalBody>
 
-              <ModalFooter>
-                <Button colorScheme="blue" mr="10px">
-                  ログイン
-                </Button>
-                <Button onClick={onClose} colorScheme="red">
-                  キャンセル
-                </Button>
-              </ModalFooter>
-            </ModalContent>
-          </Modal>
+                  <ModalFooter>
+                    <Button colorScheme="blue" mr="10px">
+                      ログイン
+                    </Button>
+                    <Button onClick={onClose} colorScheme="red">
+                      キャンセル
+                    </Button>
+                  </ModalFooter>
+                </ModalContent>
+              </Modal>
+            </>
+          )}
 
-          <ConfirmationBtn
-            text="ログアウト"
-            colorScheme="whiteAlpha"
-            color="purple"
-            width="130px"
-            confirmation="ログアウト"
-          />
+          {loginStatus !== "" && (
+            <>
+              <ConfirmationBtn
+                text="ログアウト"
+                colorScheme="whiteAlpha"
+                color="purple"
+                width="130px"
+                confirmation="ログアウト"
+              />
+            </>
+          )}
 
-          <AccountControlButton
-            text="マイページ"
-            colorScheme="purple"
-            color="white"
-            width="130px"
-            href="/myPage"
-          />
+          {loginStatus !== "" && (
+            <>
+              <AccountControlButton
+                text="マイページ"
+                colorScheme="purple"
+                color="white"
+                width="130px"
+                href="/myPage"
+              />
+            </>
+          )}
 
-          <AccountControlButton
-            text="新規登録(無料)"
-            colorScheme="purple"
-            color="white"
-            width="130px"
-            href="/newAccount"
-          />
+          {loginStatus === "" && (
+            <>
+              <AccountControlButton
+                text="新規登録(無料)"
+                colorScheme="purple"
+                color="white"
+                width="130px"
+                href="/newAccount"
+              />
+            </>
+          )}
         </Stack>
       </Flex>
     </Box>
