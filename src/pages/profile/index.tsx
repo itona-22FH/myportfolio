@@ -20,8 +20,6 @@ import { GamePlan } from "../../components/GamePlan";
 import { TextBox } from "../../components/TextBox";
 
 const profile = () => {
-  const demoText =
-    " Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua.DConsequat nisl vel pretium lectus quam id. Semper quis lectusnulla at volutpat diam ut venenatis. Dolor morbi non arcu risusquis varius quam quisque. Massa ultricies mi quis hendrerit dolor  magna eget est lorem. Erat imperdiet sed euismod nisi portaLectus vestibulum mattis ullamcorper velit.";
 
   return (
     <Box fontWeight="bold" pt="10px" pb="10px">
@@ -37,7 +35,7 @@ const profile = () => {
             name="Segun Adebayo"
             src="https://bit.ly/dan-abramov"
           />
-          <Text mt="10px" fontSize="35" color="purple" ml="10px">
+          <Text mt="10px" fontSize="35" color="black" ml="10px">
             Hello User
           </Text>
         </Flex>
@@ -86,8 +84,8 @@ const profile = () => {
                   spacing={2}
                   align="top"
                 >
-                  <TextBox title="自己紹介" text={demoText} fontSize="20px" />
-                  <TextBox title="経歴・実績" text={demoText} fontSize="20px" />
+                  <TextBox title="自己紹介" text="aaaaa" fontSize="20px" />
+                  <TextBox title="経歴・実績" text="bbbb" fontSize="20px" />
                 </VStack>
               </TabPanel>
               <TabPanel></TabPanel>
