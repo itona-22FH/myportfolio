@@ -1,6 +1,6 @@
 import { atom } from "recoil";
 
-export const planCollectionAtom = atom({
+export const planCollectionAtom = atom<Plan[]>({
   key: "planCollectionAtom",
   default: [
     {
@@ -23,13 +23,13 @@ export const planCollectionAtom = atom({
       //ユーザー名
       userName: "AAAAAAAAA",
       //レビュー数
-      reviewCount: 5,
+      reviewCount: 10,
       //レビュースコア
-      reviewScore: 10,
+      reviewScore: 38,
     },
     {
       planID: "BplanID1",
-      user: "userB",
+      userID: "userB",
       planTitle: "BBBBBBB",
       planImage: "https://bit.ly/2Z4KKcF",
       study: "BBBBBBB",
@@ -37,12 +37,12 @@ export const planCollectionAtom = atom({
       price: "BBBB",
       userAvatar: "https://bit.ly/code-beast",
       userName: "BBBBBBBBB",
-      reviewCount: 12,
-      reviewScore: 20,
+      reviewCount: 120,
+      reviewScore: 400,
     },
     {
       planID: "CplanID1",
-      user: "userC",
+      userID: "userC",
       planTitle: "CCCCCCC",
       planImage: "https://bit.ly/2Z4KKcF",
       study: "CCCCCCC",
@@ -50,12 +50,12 @@ export const planCollectionAtom = atom({
       price: "CCCC",
       userAvatar: "https://bit.ly/ryan-florence",
       userName: "CCCCCCCCC",
-      reviewCount: 10,
-      reviewScore: 30,
+      reviewCount: 400,
+      reviewScore: 1000,
     },
     {
       planID: "DplanID1",
-      user: "userD",
+      userID: "userD",
       planTitle: "DDDDDDD",
       planImage: "https://bit.ly/2Z4KKcF",
       study: "DDDDDDDDDD",
@@ -63,8 +63,8 @@ export const planCollectionAtom = atom({
       price: "DDDD",
       userAvatar: "https://bit.ly/kent-c-dodds",
       userName: "DDDDDDDDD",
-      reviewCount: 8,
-      reviewScore: 40,
+      reviewCount: 150,
+      reviewScore: 800,
     },
   ],
 });
