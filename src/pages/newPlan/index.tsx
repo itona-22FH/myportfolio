@@ -1,6 +1,5 @@
 import { Box, Container, FormControl, Select } from "@chakra-ui/react";
 import React from "react";
-import { AccountControlButton } from "../../components/AccountControlButton";
 import { ConfirmationBtn } from "../../components/ConfirmationBtn";
 import { FormInput } from "../../components/FormInput";
 import { HeadTitle } from "../../components/HeadTitle";

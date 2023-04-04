@@ -18,10 +18,9 @@ import {
   Input,
 } from "@chakra-ui/react";
 import React from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
 
 import { AccountControlButton } from "./AccountControlButton";
-import { profileCollectionAtom } from "./atoms/profileCollectionAtom";
 import { testLoginUserAtom } from "./atoms/testLoginUserAtom";
 import { ConfirmationBtn } from "./ConfirmationBtn";
 

@@ -16,7 +16,6 @@ import { planCollectionAtom } from "../components/atoms/planCollectionAtom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { showGamePlanAtom } from "../components/atoms/showGamePlanAtom";
 import React from "react";
-import { Route } from "react-router-dom";
 
 const Home = () => {
   const setShowGamePlan = useSetRecoilState(showGamePlanAtom);
@@ -79,7 +78,7 @@ const Home = () => {
             maxW="1000px"
             borderRadius="10"
           >
-              <GamePlan />
+            <GamePlan />
           </Flex>
         </GridItem>
       </Grid>
