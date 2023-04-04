@@ -12,7 +12,6 @@ import {
   TabPanel,
   VStack,
   StackDivider,
-  Link,
 } from "@chakra-ui/react";
 import React from "react";
 import { AccountControlButton } from "../../components/AccountControlButton";
@@ -20,7 +19,6 @@ import { GamePlan } from "../../components/GamePlan";
 import { TextBox } from "../../components/TextBox";
 
 const profile = () => {
-
   return (
     <Box fontWeight="bold" pt="10px" pb="10px">
       <Container maxW="1100px">
@@ -73,7 +71,6 @@ const profile = () => {
           <Tabs colorScheme="purple">
             <TabList>
               <Tab>プロフィール</Tab>
-              <Tab>レビュー</Tab>
               <Tab>登録プラン</Tab>
             </TabList>
 
@@ -88,7 +85,6 @@ const profile = () => {
                   <TextBox title="経歴・実績" text="bbbb" fontSize="20px" />
                 </VStack>
               </TabPanel>
-              <TabPanel></TabPanel>
               <TabPanel>
                 <Flex
                   align="center"
@@ -96,16 +92,6 @@ const profile = () => {
                   maxW="1000px"
                   borderRadius="10px"
                 >
-                  <GamePlan />
-                  <GamePlan />
-                  <GamePlan />
-                  <GamePlan />
-                  <GamePlan />
-                  <GamePlan />
-                  <GamePlan />
-                  <GamePlan />
-                  <GamePlan />
-                  <GamePlan />
                   <GamePlan />
                 </Flex>
               </TabPanel>
