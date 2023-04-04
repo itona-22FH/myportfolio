@@ -15,7 +15,7 @@ export const planCollectionAtom = atom<Plan[]>({
       //学べる内容
       study: "AAAAAAA",
       //指導方法
-      Guidance: "AAAAAAAAAA",
+      guidance: "AAAAAAAAAA",
       //料金
       price: "AAAA",
       //アバター画像
@@ -33,7 +33,7 @@ export const planCollectionAtom = atom<Plan[]>({
       planTitle: "BBBBBBB",
       planImage: "https://bit.ly/2Z4KKcF",
       study: "BBBBBBB",
-      Guidance: "BBBBBBBBBB",
+      guidance: "BBBBBBBBBB",
       price: "BBBB",
       userAvatar: "https://bit.ly/code-beast",
       userName: "BBBBBBBBB",
@@ -46,7 +46,7 @@ export const planCollectionAtom = atom<Plan[]>({
       planTitle: "CCCCCCC",
       planImage: "https://bit.ly/2Z4KKcF",
       study: "CCCCCCC",
-      Guidance: "CCCCCCCCCC",
+      guidance: "CCCCCCCCCC",
       price: "CCCC",
       userAvatar: "https://bit.ly/ryan-florence",
       userName: "CCCCCCCCC",
@@ -59,7 +59,7 @@ export const planCollectionAtom = atom<Plan[]>({
       planTitle: "DDDDDDD",
       planImage: "https://bit.ly/2Z4KKcF",
       study: "DDDDDDDDDD",
-      Guidance: "DDDDDDDDDD",
+      guidance: "DDDDDDDDDD",
       price: "DDDD",
       userAvatar: "https://bit.ly/kent-c-dodds",
       userName: "DDDDDDDDD",
