@@ -2,14 +2,14 @@ import React from "react";
 import { Text, Image, Link, Box, Avatar, Flex } from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
 import { useRecoilValue } from "recoil";
-import { planCollectionAtom } from "../components/atoms/planCollectionAtom";
 import { showGamePlanAtom } from "./atoms/showGamePlanAtom";
 
 export const GamePlan = () => {
-  const showGamePlan = useRecoilValue(showGamePlanAtom)
+  const showGamePlan = useRecoilValue(showGamePlanAtom);
 
   return (
     <>
+      {/* showGamePlanAtomにセットされた配列を表示 */}
       {showGamePlan.map(
         ({
           planID,
@@ -17,13 +17,17 @@ export const GamePlan = () => {
           planTitle,
           planImage,
           userName,
-          Guidance,
+          guidance,
           price,
           userAvatar,
           reviewCount,
           reviewScore,
         }) => (
-          <Link key={planID} href={`/plan/${planID}`} style={{ textDecoration: "none" }}>
+          <Link
+            key={planID}
+            href={`/plan/${planID}`}
+            style={{ textDecoration: "none" }}
+          >
             <Box
               maxW="xs"
               borderWidth="1px"
