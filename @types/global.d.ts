@@ -70,7 +70,7 @@ type Plan = {
   planTitle: string;
   planImage: string;
   study: string;
-  Guidance: string;
+  guidance: string;
   price: string;
   userAvatar: string;
   userName: string;
