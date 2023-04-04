@@ -29,6 +29,7 @@ const myPage = () => {
   const setShowGamePlan = useSetRecoilState(showGamePlanAtom);
   const planCollections = useRecoilValue(planCollectionAtom);
 
+  // ログイン中のユーザーIDと一致するプランのみでフィルターをかけ配列を生成
   setShowGamePlan(
     planCollections.filter((plan) => {
       if (testLoginUser === plan.userID) {
