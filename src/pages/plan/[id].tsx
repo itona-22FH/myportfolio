@@ -33,13 +33,20 @@ import { useRecoilValue } from "recoil";
 
 export default function plan() {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const planCollections = useRecoilValue(planCollectionAtom);
 
   const router = useRouter();
   const { id } = router.query;
 
+  const planData = planCollections.find((plan) => {
+  if (id === plan.planID ) {
+    return plan;
+  }
+  });
+
   return (
     <>
-      {id ? (
+      {id && planData ?(
         <Box pt="10px">
           <Container maxW="1100px">
             <Grid
@@ -65,7 +72,7 @@ export default function plan() {
                   borderRadius="20px"
                 />
 
-                <HeadTitle title="最速でプロの道へ！！現役プロゲーマーが直接指導！本気で強くなりたい人向けプラン！！！" />
+                <HeadTitle title={planData.planTitle} />
 
                 <VStack
                   divider={<StackDivider borderColor="purple" />}
@@ -74,8 +81,8 @@ export default function plan() {
                   mt="10px"
                   p="10px"
                 >
-                  <TextBox title="学べる内容" text="aaaaa" fontSize={""} />
-                  <TextBox title="指導方法" text="aaaaa" fontSize={""} />
+                  <TextBox title="学べる内容" text={planData.study} fontSize={""} />
+                  <TextBox title="指導方法" text={planData.guidance} fontSize={""} />
                   <Flex
                     justifyContent="space-between"
                     mt="20px"
@@ -86,7 +93,7 @@ export default function plan() {
                       プラン料金
                     </Heading>
                     <Text ml="30px" fontSize="40px">
-                      <span style={{ color: "red" }}>2,000</span>円
+                      <span style={{ color: "red" }}>{planData.price}</span>円
                     </Text>
                   </Flex>
                 </VStack>
@@ -132,12 +139,12 @@ export default function plan() {
                     >
                       <TextBox
                         title="プラン名"
-                        text="最速でプロの道へ！！現役プロゲーマーが直接指導！本気で強くなりたい人向けプラン！！！"
+                        text={planData.planTitle}
                         fontSize="20px"
                       />
                       <TextBox
                         title="メンター名"
-                        text="Hello User"
+                        text={planData.userName}
                         fontSize="20px"
                       />
                       <Flex
@@ -150,7 +157,7 @@ export default function plan() {
                           プラン料金
                         </Heading>
                         <Text ml="30px" fontSize="40px">
-                          <span style={{ color: "red" }}>2,000</span>円
+                          <span style={{ color: "red" }}>{planData.price}</span>円
                         </Text>
                       </Flex>
                     </VStack>
@@ -184,10 +191,10 @@ export default function plan() {
                   <Avatar
                     size="2xl"
                     name="ああ"
-                    src="https://bit.ly/dan-abramov"
+                    src={planData.userAvatar}
                   />
                   <Link href="/profile" mt="20px" fontSize="35">
-                    Hello User
+                    {planData.userName}
                   </Link>
                   {/* 本人以外の時表示 */}
                   <Box w="100%" p="5px">
