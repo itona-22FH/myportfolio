@@ -66,7 +66,7 @@ export default function plan() {
                 p="5px"
               >
                 <Image
-                  src="https://bit.ly/2Z4KKcF"
+                  src={planData.planImage}
                   alt="Rear view of modern home with pool"
                   p="10px"
                   borderRadius="20px"
@@ -193,7 +193,7 @@ export default function plan() {
                     name="ああ"
                     src={planData.userAvatar}
                   />
-                  <Link href="/profile" mt="20px" fontSize="35">
+                  <Link href={`/profile/${planData.userID}`}mt="20px" fontSize="35">
                     {planData.userName}
                   </Link>
                   {/* 本人以外の時表示 */}
