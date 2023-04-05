@@ -1,6 +1,6 @@
 import { atom } from "recoil";
 
-export const profileCollectionAtom = atom({
+export const profileCollectionAtom = atom<User[]>({
   key: "profileCollectionAtom",
   default: [
     {
