@@ -17,6 +17,7 @@ import {
   FormLabel,
   Input,
 } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import React from "react";
 import { useRecoilValue } from "recoil";
 
@@ -31,6 +32,9 @@ export const Header = () => {
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
 
+  const router = useRouter();
+  const { id } = router.query;
+
   return (
     <Box w="100%" h="80px" bg="purple.300">
       <Flex
@@ -39,17 +43,22 @@ export const Header = () => {
         justifyContent="space-between"
         alignItems="center"
       >
-        <Link href="/" style={{ textDecoration: "none" }}>
-          <Button
-            colorScheme="linkedin"
-            variant="outline"
-            ml="10px"
-            color="purple"
-            w="130px"
-          >
-            トップへ戻る
-          </Button>
-        </Link>
+        {id ? (
+          <Link href="/" style={{ textDecoration: "none" }}>
+            <Button
+              colorScheme="linkedin"
+              variant="outline"
+              ml="10px"
+              color="purple"
+              w="130px"
+            >
+              トップへ戻る
+            </Button>
+          </Link>
+        ) : (
+          <div></div>
+        )}
+
         <Stack direction="row" spacing={4} mr="10px">
           {loginStatus === "" && (
             <>
