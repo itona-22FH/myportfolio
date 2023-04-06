@@ -30,7 +30,7 @@ type FormInputProps = {
   placeholder: string;
 };
 
-type myPageTextBoxProps = {
+type MyPageTextBoxProps = {
   htmlFor: string;
   placeholder: string;
 };
