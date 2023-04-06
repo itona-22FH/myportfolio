@@ -34,6 +34,7 @@ export const Header = () => {
 
   const router = useRouter();
   const { id } = router.query;
+  const { pathname } = router;
 
   return (
     <Box w="100%" h="80px" bg="purple.300">
@@ -43,7 +44,7 @@ export const Header = () => {
         justifyContent="space-between"
         alignItems="center"
       >
-        {id ? (
+        {id || pathname !== "/" ? (
           <Link href="/" style={{ textDecoration: "none" }}>
             <Button
               colorScheme="linkedin"
