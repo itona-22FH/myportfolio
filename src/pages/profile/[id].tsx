@@ -23,6 +23,7 @@ import { GamePlan } from "../../components/GamePlan";
 import { TextBox } from "../../components/TextBox";
 
 const profile = () => {
+  //FIREBASEからすべてのプロフィール情報を取得
   const profileCollections = useRecoilValue(profileCollectionAtom);
 
   const router = useRouter();
