@@ -102,13 +102,7 @@ export default function plan() {
                 </VStack>
                 <Flex justifyContent="space-around" flexFlow="column">
                   <Box w="100%" p="10px">
-                    <ContractBtn
-                      text="プラン契約に進む"
-                      colorScheme="purple"
-                      color="white"
-                      width="100%"
-                      onClick={onOpen}
-                    />
+                    <ConfirmationDrawer plan={planData} />
                   </Box>
                   {/* 登録者本人の時表示 */}
                   <Box w="100%" p="10px">
@@ -122,7 +116,7 @@ export default function plan() {
                   </Box>
                 </Flex>
               </GridItem>
-              <ConfirmationDrawer plan={planData} />
+              
 
               <GridItem
                 pl="2px"
