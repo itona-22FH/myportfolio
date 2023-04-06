@@ -24,8 +24,11 @@ import { GamePlan } from "../../components/GamePlan";
 import { TextBox } from "../../components/TextBox";
 
 const myPage = () => {
+  //FIREBASEからすべてのプロフィール情報を取得
   const profileCollections = useRecoilValue(profileCollectionAtom);
+  //テスト用ログインユーザーID
   const testLoginUser = useRecoilValue(testLoginUserAtom);
+  // 
   const setShowGamePlan = useSetRecoilState(showGamePlanAtom);
   const planCollections = useRecoilValue(planCollectionAtom);
 
