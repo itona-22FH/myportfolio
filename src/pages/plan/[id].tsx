@@ -4,12 +4,6 @@ import {
   Avatar,
   Box,
   Container,
-  Drawer,
-  DrawerBody,
-  DrawerCloseButton,
-  DrawerContent,
-  DrawerHeader,
-  DrawerOverlay,
   Flex,
   Grid,
   GridItem,
@@ -30,23 +24,24 @@ import { TextBox } from "../../components/TextBox";
 import { useRouter } from "next/router";
 import { planCollectionAtom } from "../../components/atoms/planCollectionAtom";
 import { useRecoilValue } from "recoil";
+import { ConfirmationDrawer } from "../../components/ConfirmationDrawer";
 
 export default function plan() {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const { onOpen } = useDisclosure();
   const planCollections = useRecoilValue(planCollectionAtom);
 
   const router = useRouter();
   const { id } = router.query;
 
   const planData = planCollections.find((plan) => {
-  if (id === plan.planID ) {
-    return plan;
-  }
+    if (id === plan.planID) {
+      return plan;
+    }
   });
 
   return (
     <>
-      {id && planData ?(
+      {id && planData ? (
         <Box pt="10px">
           <Container maxW="1100px">
             <Grid
@@ -81,8 +76,16 @@ export default function plan() {
                   mt="10px"
                   p="10px"
                 >
-                  <TextBox title="学べる内容" text={planData.study} fontSize={""} />
-                  <TextBox title="指導方法" text={planData.guidance} fontSize={""} />
+                  <TextBox
+                    title="学べる内容"
+                    text={planData.study}
+                    fontSize={""}
+                  />
+                  <TextBox
+                    title="指導方法"
+                    text={planData.guidance}
+                    fontSize={""}
+                  />
                   <Flex
                     justifyContent="space-between"
                     mt="20px"
@@ -119,60 +122,7 @@ export default function plan() {
                   </Box>
                 </Flex>
               </GridItem>
-              <Drawer onClose={onClose} isOpen={isOpen} size="full">
-                <DrawerOverlay />
-                <DrawerContent>
-                  <DrawerCloseButton />
-                  <DrawerHeader
-                    fontSize="40px"
-                    color="purple"
-                    fontWeight="bold"
-                  >
-                    プラン契約確認画面
-                  </DrawerHeader>
-                  <DrawerBody>
-                    <VStack
-                      divider={<StackDivider borderColor="purple" />}
-                      spacing="4px"
-                      align="stretch"
-                      fontWeight="bold"
-                    >
-                      <TextBox
-                        title="プラン名"
-                        text={planData.planTitle}
-                        fontSize="20px"
-                      />
-                      <TextBox
-                        title="メンター名"
-                        text={planData.userName}
-                        fontSize="20px"
-                      />
-                      <Flex
-                        justifyContent="space-between"
-                        mt="20px"
-                        mb="20px"
-                        alignItems="center"
-                      >
-                        <Heading as="h3" size="lg">
-                          プラン料金
-                        </Heading>
-                        <Text ml="30px" fontSize="40px">
-                          <span style={{ color: "red" }}>{planData.price}</span>円
-                        </Text>
-                      </Flex>
-                    </VStack>
-                  </DrawerBody>
-                  <Box p="10px">
-                    <ConfirmationBtn
-                      text="プランを契約する"
-                      colorScheme="purple"
-                      color="white"
-                      width="100%"
-                      confirmation="契約"
-                    />
-                  </Box>
-                </DrawerContent>
-              </Drawer>
+              <ConfirmationDrawer plan={planData} />
 
               <GridItem
                 pl="2px"
@@ -188,12 +138,12 @@ export default function plan() {
                   h="300px"
                   flexFlow="column"
                 >
-                  <Avatar
-                    size="2xl"
-                    name="ああ"
-                    src={planData.userAvatar}
-                  />
-                  <Link href={`/profile/${planData.userID}`}mt="20px" fontSize="35">
+                  <Avatar size="2xl" name="ああ" src={planData.userAvatar} />
+                  <Link
+                    href={`/profile/${planData.userID}`}
+                    mt="20px"
+                    fontSize="35"
+                  >
                     {planData.userName}
                   </Link>
                   {/* 本人以外の時表示 */}
