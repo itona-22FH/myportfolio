@@ -15,11 +15,20 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { ConfirmationBtn } from "./ConfirmationBtn";
+import ContractBtn from "./ContractBtn";
 import { TextBox } from "./TextBox";
 
 export const ConfirmationDrawer = (plan: Plan) => {
-  const { isOpen, onClose } = useDisclosure();
+  const { isOpen, onOpen ,onClose } = useDisclosure();
   return (
+    <>
+    <ContractBtn
+                      text="プラン契約に進む"
+                      colorScheme="purple"
+                      color="white"
+                      width="100%"
+                      onClick={onOpen}
+                    />
     <Drawer onClose={onClose} isOpen={isOpen} size="full">
       <DrawerOverlay />
       <DrawerContent>
@@ -70,5 +79,7 @@ export const ConfirmationDrawer = (plan: Plan) => {
         </Box>
       </DrawerContent>
     </Drawer>
+    </>
+
   );
 };
