@@ -18,9 +18,14 @@ import { showGamePlanAtom } from "../components/atoms/showGamePlanAtom";
 import React from "react";
 
 const Home = () => {
-  const setShowGamePlan = useSetRecoilState(showGamePlanAtom);
+  //全てのプラン情報を管理するRECOILのSTATEへのSET関数を宣言
+  const setShowGamePlanArray = useSetRecoilState(showGamePlanAtom);
+
+  //FIREBASEからすべてのプラン情報を取得
   const planCollections = useRecoilValue(planCollectionAtom);
-  setShowGamePlan(planCollections);
+
+  //すべてのプラン情報をSTATEにセット
+  setShowGamePlanArray(planCollections);
 
   return (
     <Box>
