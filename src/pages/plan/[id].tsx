@@ -22,12 +22,11 @@ import ContractBtn from "../../components/ContractBtn";
 import { HeadTitle } from "../../components/HeadTitle";
 import { TextBox } from "../../components/TextBox";
 import { useRouter } from "next/router";
-import { planCollectionAtom } from "../../components/atoms/planCollectionAtom";
+import { planCollectionAtom } from "../../lib/recoil/atoms/planCollectionAtom";
 import { useRecoilValue } from "recoil";
 import { ConfirmationDrawer } from "../../components/ConfirmationDrawer";
 
 export default function plan() {
-  const { onOpen } = useDisclosure();
   const planCollections = useRecoilValue(planCollectionAtom);
 
   const router = useRouter();
@@ -41,7 +40,7 @@ export default function plan() {
 
   return (
     <>
-      {id && planData ? (
+      {planData ? (
         <Box pt="10px">
           <Container maxW="1100px">
             <Grid
@@ -102,7 +101,7 @@ export default function plan() {
                 </VStack>
                 <Flex justifyContent="space-around" flexFlow="column">
                   <Box w="100%" p="10px">
-                    <ConfirmationDrawer plan={planData} />
+                    <ConfirmationDrawer planData={planData} />
                   </Box>
                   {/* 登録者本人の時表示 */}
                   <Box w="100%" p="10px">
@@ -116,7 +115,6 @@ export default function plan() {
                   </Box>
                 </Flex>
               </GridItem>
-              
 
               <GridItem
                 pl="2px"
