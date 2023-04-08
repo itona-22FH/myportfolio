@@ -16,15 +16,19 @@ import {
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { AccountControlButton } from "../../components/AccountControlButton";
-import { profileCollectionAtom } from "../../components/atoms/profileCollectionAtom";
+import { planCollectionAtom } from "../../lib/recoil/atoms/planCollectionAtom";
+import { profileCollectionAtom } from "../../lib/recoil/atoms/profileCollectionAtom";
+import { showGamePlanAtom } from "../../lib/recoil/atoms/showGamePlanAtom";
 import { GamePlan } from "../../components/GamePlan";
 import { TextBox } from "../../components/TextBox";
 
 const profile = () => {
   //FIREBASEからすべてのプロフィール情報を取得
   const profileCollections = useRecoilValue(profileCollectionAtom);
+  const setShowGamePlan = useSetRecoilState(showGamePlanAtom);
+  const planCollections = useRecoilValue(planCollectionAtom);
 
   const router = useRouter();
   const { id } = router.query;
@@ -35,9 +39,17 @@ const profile = () => {
     }
   });
 
+  setShowGamePlan(
+    planCollections.filter((plan) => {
+      if (id === plan.userID) {
+        return plan;
+      }
+    })
+  );
+
   return (
     <>
-      {id && profileData ? (
+      {profileData ? (
         <Box fontWeight="bold" pt="10px" pb="10px">
           <Container maxW="1100px">
             <Flex
