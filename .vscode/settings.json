@@ -1,4 +1,13 @@
 {
-  "cSpell.words": ["Abrahmov", "adipiscing", "amet", "chakra", "elit", "MOBA"],
+  "cSpell.words": [
+    "Abrahmov",
+    "adipiscing",
+    "amet",
+    "chakra",
+    "elit",
+    "FIFA",
+    "MOBA",
+    "PROFILEDATA"
+  ],
   "typescript.tsdk": "node_modules/typescript/lib"
 }

@@ -24,6 +24,7 @@ export const Header = () => {
         justifyContent="space-between"
         alignItems="center"
       >
+        {/* トップページ以外のときのみ表示 */}
         {id || pathname !== "/" ? (
           <Link href="/" style={{ textDecoration: "none" }}>
             <Button
@@ -41,6 +42,7 @@ export const Header = () => {
         )}
 
         <Stack direction="row" spacing={4} mr="10px">
+          {/* ログアウト状態の時表示 */}
           {loginStatus === "" && (
             <>
               <LoginModal />
@@ -54,6 +56,7 @@ export const Header = () => {
             </>
           )}
 
+          {/* ログイン状態の時表示 */}
           {loginStatus !== "" && (
             <>
               <ConfirmationBtn

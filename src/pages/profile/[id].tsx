@@ -30,15 +30,18 @@ const profile = () => {
   const setShowGamePlan = useSetRecoilState(showGamePlanAtom);
   const planCollections = useRecoilValue(planCollectionAtom);
 
+  //URLからUSERのIDを取得
   const router = useRouter();
   const { id } = router.query;
 
+  //取得したIDと一致するPROFILEをPROFILEDATAに代入
   const profileData = profileCollections.find((profile) => {
     if (id === profile.userID) {
       return profile;
     }
   });
 
+  //取得したIDと一致するプランのみをSTATEにセット「登録中のプラン」タブに表示
   setShowGamePlan(
     planCollections.filter((plan) => {
       if (id === plan.userID) {

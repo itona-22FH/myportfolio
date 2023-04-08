@@ -49,14 +49,8 @@ const myPage = () => {
           userID,
           userName,
           userAvatar,
-          email,
-          password,
-          twitterAccount,
-          youtubeAccount,
           selfIntroduction,
           achievement,
-          reviewCount,
-          reviewScore,
         }) => (
           <>
             {userID === testLoginUser && (

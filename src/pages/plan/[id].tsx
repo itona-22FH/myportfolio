@@ -11,14 +11,12 @@ import {
   Image,
   Link,
   StackDivider,
-  useDisclosure,
   VStack,
   Text,
 } from "@chakra-ui/react";
 import React from "react";
 import { AccountControlButton } from "../../components/AccountControlButton";
 import { ConfirmationBtn } from "../../components/ConfirmationBtn";
-import ContractBtn from "../../components/ContractBtn";
 import { HeadTitle } from "../../components/HeadTitle";
 import { TextBox } from "../../components/TextBox";
 import { useRouter } from "next/router";
@@ -29,9 +27,11 @@ import { ConfirmationDrawer } from "../../components/ConfirmationDrawer";
 export default function plan() {
   const planCollections = useRecoilValue(planCollectionAtom);
 
+  //URLからPLANのIDを取得
   const router = useRouter();
   const { id } = router.query;
 
+  //取得したIDと一致するプランのみをPLANDATAに代入
   const planData = planCollections.find((plan) => {
     if (id === plan.planID) {
       return plan;

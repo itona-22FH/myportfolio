@@ -1,7 +1,7 @@
 import { Box, FormLabel, Textarea } from "@chakra-ui/react";
 import React from "react";
 
-export const MyPageTextBox = ({ htmlFor, placeholder }: myPageTextBoxProps) => {
+export const MyPageTextBox = ({ htmlFor, placeholder }: MyPageTextBoxProps) => {
   return (
     <Box pb="10px" pt="10px">
       <FormLabel fontWeight="bold" htmlFor={htmlFor}>

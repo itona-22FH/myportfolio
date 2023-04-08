@@ -29,6 +29,7 @@ export const LoginModal = () => {
         ログイン
       </Button>
 
+      {/* ログインボタンが押された時に表示するモーダル */}
       <Modal
         initialFocusRef={initialRef}
         finalFocusRef={finalRef}
