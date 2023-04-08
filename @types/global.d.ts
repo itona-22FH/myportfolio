@@ -77,3 +77,7 @@ type Plan = {
   reviewCount: number;
   reviewScore: number;
 };
+
+type ConfirmationDrawerProps = {
+  planData: Plan;
+}
