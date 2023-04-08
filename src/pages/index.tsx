@@ -12,9 +12,9 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
-import { planCollectionAtom } from "../components/atoms/planCollectionAtom";
+import { planCollectionAtom } from "../lib/recoil/atoms/planCollectionAtom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { showGamePlanAtom } from "../components/atoms/showGamePlanAtom";
+import { showGamePlanAtom } from "../lib/recoil/atoms/showGamePlanAtom";
 import React from "react";
 
 const Home = () => {

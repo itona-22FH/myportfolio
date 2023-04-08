@@ -1,36 +1,16 @@
 /* eslint-disable react/jsx-no-undef */
-import {
-  Box,
-  Button,
-  Flex,
-  Link,
-  Stack,
-  useDisclosure,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  FormControl,
-  FormLabel,
-  Input,
-} from "@chakra-ui/react";
+import { Box, Button, Flex, Link, Stack } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React from "react";
 import { useRecoilValue } from "recoil";
 
 import { AccountControlButton } from "./AccountControlButton";
-import { testLoginUserAtom } from "./atoms/testLoginUserAtom";
+import { testLoginUserAtom } from "../lib/recoil/atoms/testLoginUserAtom";
 import { ConfirmationBtn } from "./ConfirmationBtn";
 import { LoginModal } from "./LoginModal";
 
 export const Header = () => {
- 
   const loginStatus = useRecoilValue(testLoginUserAtom);
-
- 
 
   const router = useRouter();
   const { id } = router.query;
@@ -57,13 +37,20 @@ export const Header = () => {
             </Button>
           </Link>
         ) : (
-          <div></div>
+          <Box />
         )}
 
         <Stack direction="row" spacing={4} mr="10px">
           {loginStatus === "" && (
             <>
               <LoginModal />
+              <AccountControlButton
+                text="新規登録(無料)"
+                colorScheme="purple"
+                color="white"
+                width="130px"
+                href="/newAccount"
+              />
             </>
           )}
 
@@ -76,29 +63,12 @@ export const Header = () => {
                 width="130px"
                 confirmation="ログアウト"
               />
-            </>
-          )}
-
-          {loginStatus !== "" && (
-            <>
               <AccountControlButton
                 text="マイページ"
                 colorScheme="purple"
                 color="white"
                 width="130px"
                 href="/myPage"
-              />
-            </>
-          )}
-
-          {loginStatus === "" && (
-            <>
-              <AccountControlButton
-                text="新規登録(無料)"
-                colorScheme="purple"
-                color="white"
-                width="130px"
-                href="/newAccount"
               />
             </>
           )}

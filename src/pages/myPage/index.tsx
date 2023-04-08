@@ -13,13 +13,14 @@ import {
   VStack,
   StackDivider,
 } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import React from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { AccountControlButton } from "../../components/AccountControlButton";
-import { planCollectionAtom } from "../../components/atoms/planCollectionAtom";
-import { profileCollectionAtom } from "../../components/atoms/profileCollectionAtom";
-import { showGamePlanAtom } from "../../components/atoms/showGamePlanAtom";
-import { testLoginUserAtom } from "../../components/atoms/testLoginUserAtom";
+import { planCollectionAtom } from "../../lib/recoil/atoms/planCollectionAtom";
+import { profileCollectionAtom } from "../../lib/recoil/atoms/profileCollectionAtom";
+import { showGamePlanAtom } from "../../lib/recoil/atoms/showGamePlanAtom";
+import { testLoginUserAtom } from "../../lib/recoil/atoms/testLoginUserAtom";
 import { GamePlan } from "../../components/GamePlan";
 import { TextBox } from "../../components/TextBox";
 
@@ -28,7 +29,7 @@ const myPage = () => {
   const profileCollections = useRecoilValue(profileCollectionAtom);
   //テスト用ログインユーザーID
   const testLoginUser = useRecoilValue(testLoginUserAtom);
-  // 
+
   const setShowGamePlan = useSetRecoilState(showGamePlanAtom);
   const planCollections = useRecoilValue(planCollectionAtom);
 

@@ -2,7 +2,7 @@ import React from "react";
 import { Text, Image, Link, Box, Avatar, Flex } from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
 import { useRecoilValue } from "recoil";
-import { showGamePlanAtom } from "./atoms/showGamePlanAtom";
+import { showGamePlanAtom } from "../lib/recoil/atoms/showGamePlanAtom";
 
 export const GamePlan = () => {
   const showGamePlan = useRecoilValue(showGamePlanAtom);
