@@ -165,7 +165,7 @@ export default function plan() {
         </Box>
       ) : (
         <>
-          <div>プラン情報の取得に失敗しました。</div>
+          <Box>プラン情報の取得に失敗しました。</Box>
         </>
       )}
     </>
