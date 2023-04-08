@@ -13,7 +13,6 @@ import {
   VStack,
   StackDivider,
 } from "@chakra-ui/react";
-import { useRouter } from "next/router";
 import React from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { AccountControlButton } from "../../components/AccountControlButton";
@@ -45,13 +44,7 @@ const myPage = () => {
   return (
     <>
       {profileCollections.map(
-        ({
-          userID,
-          userName,
-          userAvatar,
-          selfIntroduction,
-          achievement,
-        }) => (
+        ({ userID, userName, userAvatar, selfIntroduction, achievement }) => (
           <>
             {userID === testLoginUser && (
               <Box pt="10px" pb="10px">
