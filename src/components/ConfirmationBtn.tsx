@@ -31,7 +31,12 @@ export const ConfirmationBtn = ({
         {text}
       </Button>
 
-      <Modal isOpen={isOpen} onClose={onClose} closeOnOverlayClick={false} size="3xl">
+      <Modal
+        isOpen={isOpen}
+        onClose={onClose}
+        closeOnOverlayClick={false}
+        size="3xl"
+      >
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>本当に{confirmation}してよろしいですか？</ModalHeader>
@@ -39,10 +44,12 @@ export const ConfirmationBtn = ({
           <ModalBody pb={6}></ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} >
+            <Button colorScheme="blue" mr={3}>
               {confirmation}する
             </Button>
-            <Button onClick={onClose} colorScheme="red">{confirmation}しない</Button>
+            <Button onClick={onClose} colorScheme="red">
+              {confirmation}しない
+            </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
