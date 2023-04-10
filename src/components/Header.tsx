@@ -1,32 +1,21 @@
 /* eslint-disable react/jsx-no-undef */
-import {
-  Box,
-  Button,
-  Flex,
-  Link,
-  Stack,
-  useDisclosure,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  FormControl,
-  FormLabel,
-  Input,
-} from "@chakra-ui/react";
+import { Box, Button, Flex, Link, Stack } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import React from "react";
+import { useRecoilValue } from "recoil";
 
 import { AccountControlButton } from "./AccountControlButton";
+import { testLoginUserAtom } from "../lib/recoil/atoms/testLoginUserAtom";
 import { ConfirmationBtn } from "./ConfirmationBtn";
+import { LoginModal } from "./LoginModal";
 
 export const Header = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const loginStatus = useRecoilValue(testLoginUserAtom);
 
-  const initialRef = React.useRef(null);
-  const finalRef = React.useRef(null);
+  const router = useRouter();
+  const { id } = router.query;
+  const { pathname } = router;
+
   return (
     <Box w="100%" h="80px" bg="purple.300">
       <Flex
@@ -35,86 +24,57 @@ export const Header = () => {
         justifyContent="space-between"
         alignItems="center"
       >
-        <Link href="/" style={{ textDecoration: "none" }}>
-          <Button
-            colorScheme="linkedin"
-            variant="outline"
-            ml="10px"
-            color="purple"
-            w="130px"
-          >
-            トップへ戻る
-          </Button>
-        </Link>
+        {/* トップページ以外のときのみ表示 */}
+        {id || pathname !== "/" ? (
+          <Link href="/" style={{ textDecoration: "none" }}>
+            <Button
+              colorScheme="linkedin"
+              variant="outline"
+              ml="10px"
+              color="purple"
+              w="130px"
+            >
+              トップへ戻る
+            </Button>
+          </Link>
+        ) : (
+          <Box />
+        )}
+
         <Stack direction="row" spacing={4} mr="10px">
-          <Button
-            onClick={onOpen}
-            color="purple"
-            colorScheme="whiteAlpha"
-            w="130px"
-          >
-            ログイン
-          </Button>
+          {/* ログアウト状態の時表示 */}
+          {loginStatus === "" && (
+            <>
+              <LoginModal />
+              <AccountControlButton
+                text="新規登録(無料)"
+                colorScheme="purple"
+                color="white"
+                width="130px"
+                href="/newAccount"
+              />
+            </>
+          )}
 
-          <Modal
-            initialFocusRef={initialRef}
-            finalFocusRef={finalRef}
-            isOpen={isOpen}
-            onClose={onClose}
-            size="3xl"
-          >
-            <ModalOverlay />
-            <ModalContent>
-              <ModalHeader>アカウント情報を入力してください</ModalHeader>
-              <ModalCloseButton />
-              <ModalBody pb="6px">
-                <FormControl>
-                  <FormLabel>メールアドレス</FormLabel>
-                  <Input
-                    type="email"
-                    ref={initialRef}
-                    placeholder="*******@email.com"
-                  />
-                </FormControl>
-
-                <FormControl mt="4px">
-                  <FormLabel>パスワード</FormLabel>
-                  <Input type="password" placeholder="password" />
-                </FormControl>
-              </ModalBody>
-
-              <ModalFooter>
-                <Button colorScheme="blue" mr="10px">
-                  ログイン
-                </Button>
-                <Button onClick={onClose} colorScheme="red">キャンセル</Button>
-              </ModalFooter>
-            </ModalContent>
-          </Modal>
-
-          <ConfirmationBtn
-            text="ログアウト"
-            colorScheme="whiteAlpha"
-            color="purple"
-            width="130px"
-            confirmation="ログアウト"
-          />
-
-          <AccountControlButton
-            text="マイページ"
-            colorScheme="purple"
-            color="white"
-            width="130px"
-            href="/myPage"
-          />
-
-          <AccountControlButton
-            text="新規登録(無料)"
-            colorScheme="purple"
-            color="white"
-            width="130px"
-            href="/newAccount"
-          />
+          {/* ログイン状態の時表示 */}
+          {loginStatus !== "" && (
+            <>
+              <ConfirmationBtn
+                text="ログアウト"
+                colorScheme="whiteAlpha"
+                color="purple"
+                width="130px"
+                confirmation="ログアウト"
+              />
+              <AccountControlButton
+                text="マイページ"
+                colorScheme="purple"
+                color="white"
+                width="130px"
+                href="/myPage"
+              />
+            </>
+          )}
         </Stack>
       </Flex>
     </Box>

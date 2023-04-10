@@ -12,8 +12,21 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
+import { planCollectionAtom } from "../lib/recoil/atoms/planCollectionAtom";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { showGamePlanAtom } from "../lib/recoil/atoms/showGamePlanAtom";
+import React from "react";
 
 const Home = () => {
+  //全てのプラン情報を管理するRECOILのSTATEへのSET関数を宣言
+  const setShowGamePlanArray = useSetRecoilState(showGamePlanAtom);
+
+  //FIREBASEからすべてのプラン情報を取得
+  const planCollections = useRecoilValue(planCollectionAtom);
+
+  //すべてのプラン情報をSTATEにセット
+  setShowGamePlanArray(planCollections);
+
   return (
     <Box>
       <Head>
@@ -70,16 +83,6 @@ const Home = () => {
             maxW="1000px"
             borderRadius="10"
           >
-            <GamePlan />
-            <GamePlan />
-            <GamePlan />
-            <GamePlan />
-            <GamePlan />
-            <GamePlan />
-            <GamePlan />
-            <GamePlan />
-            <GamePlan />
-            <GamePlan />
             <GamePlan />
           </Flex>
         </GridItem>

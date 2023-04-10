@@ -11,4 +11,3 @@ export const HeadTitle = ({ title }: HeadTitleProps) => {
     </Box>
   );
 };
-

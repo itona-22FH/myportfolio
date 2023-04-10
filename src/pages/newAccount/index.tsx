@@ -1,17 +1,11 @@
-/* eslint-disable react/no-unescaped-entities */
-/* eslint-disable react/jsx-no-undef */
-import { Box, FormControl, Heading, Container } from "@chakra-ui/react";
+import { Box, FormControl, Container } from "@chakra-ui/react";
 import React from "react";
-import { AccountControlButton } from "../../components/AccountControlButton";
 import { ConfirmationBtn } from "../../components/ConfirmationBtn";
 import { FormInput } from "../../components/FormInput";
 import { HeadTitle } from "../../components/HeadTitle";
 import { MyPageTextBox } from "../../components/MyPageTextBox";
 
 const newAccount = () => {
-  const demoText =
-    " Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doeiusmod tempor incididunt ut labore et dolore magna aliqua.DConsequat nisl vel pretium lectus quam id. Semper quis lectusnulla at volutpat diam ut venenatis. Dolor morbi non arcu risusquis varius quam quisque. Massa ultricies mi quis hendrerit dolor  magna eget est lorem. Erat imperdiet sed euismod nisi portaLectus vestibulum mattis ullamcorper velit.";
-
   return (
     <Box pt="10px" pb="10px">
       <Container maxW="1100px" bg="whiteAlpha.800" p="5px" borderRadius="10px">
