@@ -23,9 +23,9 @@ export const profileCollectionAtom = atom<User[]>({
       //実績・経歴
       achievement: "AAAAAAAAAA",
       //レビュー数
-      reviewCount: 5,
+      reviewCount: 10,
       //レビュースコア
-      reviewScore: 10,
+      reviewScore: 38,
     },
     {
       userID: "userB",
@@ -37,8 +37,8 @@ export const profileCollectionAtom = atom<User[]>({
       youtubeAccount: "B@youtube.com",
       selfIntroduction: "BBBBBBBBBBBB",
       achievement: "BBBBBBBBBB",
-      reviewCount: 12,
-      reviewScore: 20,
+      reviewCount: 120,
+      reviewScore: 400,
     },
     {
       userID: "userC",
@@ -50,8 +50,8 @@ export const profileCollectionAtom = atom<User[]>({
       youtubeAccount: "C@youtube.com",
       selfIntroduction: "CCCCCCCCCCCCC",
       achievement: "CCCCCCCCCC",
-      reviewCount: 10,
-      reviewScore: 30,
+      reviewCount: 400,
+      reviewScore: 1000,
     },
     {
       userID: "userD",
@@ -63,8 +63,8 @@ export const profileCollectionAtom = atom<User[]>({
       youtubeAccount: "D*@youtube.com",
       selfIntroduction: "DDDDDDDDDDDDD",
       achievement: "DDDDDDDDDD",
-      reviewCount: 8,
-      reviewScore: 40,
+      reviewCount: 150,
+      reviewScore: 800,
     },
   ],
 });
