@@ -22,6 +22,7 @@ import { showGamePlanAtom } from "../../lib/recoil/atoms/showGamePlanAtom";
 import { testLoginUserAtom } from "../../lib/recoil/atoms/testLoginUserAtom";
 import { GamePlan } from "../../components/GamePlan";
 import { TextBox } from "../../components/TextBox";
+import { StarIcon } from "@chakra-ui/icons";
 
 const myPage = () => {
   //FIREBASEからすべてのプロフィール情報を取得
@@ -44,7 +45,15 @@ const myPage = () => {
   return (
     <>
       {profileCollections.map(
-        ({ userID, userName, userAvatar, selfIntroduction, achievement }) => (
+        ({
+          userID,
+          userName,
+          userAvatar,
+          selfIntroduction,
+          achievement,
+          reviewCount,
+          reviewScore,
+        }) => (
           <>
             {userID === testLoginUser && (
               <Box pt="10px" pb="10px">
@@ -54,11 +63,29 @@ const myPage = () => {
                     bg="whiteAlpha.800"
                     borderRadius="10px"
                     p="10px"
+                    direction="column"
                   >
                     <Avatar size="2xl" name="Segun Adebayo" src={userAvatar} />
                     <Text mt="10px" fontSize="35" ml="10px" fontWeight="bold">
                       {userName}
                     </Text>
+                    <Box display="flex" mt="2" alignItems="center">
+                      {Array(5)
+                        .fill("")
+                        .map((_, i) => (
+                          <StarIcon
+                            key={i}
+                            color={
+                              i < reviewScore / reviewCount
+                                ? "orange"
+                                : "gray.200"
+                            }
+                          />
+                        ))}
+                      <Box as="span" ml="2" color="gray" fontSize="sm">
+                        {reviewCount} reviews
+                      </Box>
+                    </Box>
                   </Flex>
 
                   <Flex
@@ -103,7 +130,7 @@ const myPage = () => {
                         <Tab>契約プラン履歴</Tab>
                       </TabList>
 
-                      <TabPanels>
+                      <TabPanels fontWeight="bold">
                         <TabPanel>
                           <VStack
                             divider={<StackDivider borderColor="purple" />}

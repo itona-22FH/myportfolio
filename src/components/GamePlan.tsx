@@ -3,9 +3,13 @@ import { Text, Image, Link, Box, Avatar, Flex } from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
 import { useRecoilValue } from "recoil";
 import { showGamePlanAtom } from "../lib/recoil/atoms/showGamePlanAtom";
+import { useRouter } from "next/router";
 
 export const GamePlan = () => {
   const showGamePlan = useRecoilValue(showGamePlanAtom);
+
+  const router = useRouter();
+  const { pathname } = router;
 
   return (
     <>
@@ -50,28 +54,34 @@ export const GamePlan = () => {
                 >
                   {planTitle}
                 </Box>
+                {pathname === "/" && (
+                  <>
                 <Flex alignItems="center" mt="4" mb="4">
                   <Avatar name="Dan Abrahmov" src={userAvatar} />
                   <Text ml="3" lineHeight="1" verticalAlign="center">
                     {userName}
                   </Text>
                 </Flex>
-
-                <Box display="flex" mt="2" alignItems="center">
-                  {Array(5)
-                    .fill("")
-                    .map((_, i) => (
-                      <StarIcon
+                
+                  <Box display="flex" mt="2" alignItems="center">
+                    {Array(5)
+                      .fill("")
+                      .map((_, i) => (
+                        <StarIcon
                         key={i}
                         color={
-                          i < reviewScore / reviewCount ? "orange" : "gray.200"
+                          i < reviewScore / reviewCount
+                          ? "orange"
+                          : "gray.200"
                         }
-                      />
-                    ))}
-                  <Box as="span" ml="2" color="gray" fontSize="sm">
-                    {reviewCount} reviews
+                        />
+                        ))}
+                    <Box as="span" ml="2" color="gray" fontSize="sm">
+                      {reviewCount} reviews
+                    </Box>
                   </Box>
-                </Box>
+                        </>
+                )}
 
                 <Box mt="3" color="red">
                   {price}

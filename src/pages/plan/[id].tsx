@@ -23,9 +23,12 @@ import { useRouter } from "next/router";
 import { planCollectionAtom } from "../../lib/recoil/atoms/planCollectionAtom";
 import { useRecoilValue } from "recoil";
 import { ConfirmationDrawer } from "../../components/ConfirmationDrawer";
+import { StarIcon } from "@chakra-ui/icons";
+import { testLoginUserAtom } from "../../lib/recoil/atoms/testLoginUserAtom";
 
 export default function plan() {
   const planCollections = useRecoilValue(planCollectionAtom);
+  const testUserId = useRecoilValue(testLoginUserAtom);
 
   //URLからPLANのIDを取得
   const router = useRouter();
@@ -48,7 +51,7 @@ export default function plan() {
                       "nav main"
                       "nav empty"
                     `}
-              gridTemplateRows={"300px 1fr 1px"}
+              gridTemplateRows={"350px 1fr 1px"}
               gridTemplateColumns={"1fr 350px"}
               gap="10px"
               fontWeight="bold"
@@ -101,17 +104,22 @@ export default function plan() {
                 </VStack>
                 <Flex justifyContent="space-around" flexFlow="column">
                   <Box w="100%" p="10px">
-                    <ConfirmationDrawer planData={planData} />
+                    { testUserId !== planData.userID && (
+                      <ConfirmationDrawer planData={planData} />
+                      )
+                    }
                   </Box>
                   {/* 登録者本人の時表示 */}
                   <Box w="100%" p="10px">
-                    <ConfirmationBtn
-                      text="プランを削除する"
-                      colorScheme="red"
-                      color="white"
-                      width="100%"
-                      confirmation="削除"
-                    />
+                    {testUserId === planData.userID && (
+                      <ConfirmationBtn
+                        text="プランを削除する"
+                        colorScheme="red"
+                        color="white"
+                        width="100%"
+                        confirmation="削除"
+                      />
+                    )}
                   </Box>
                 </Flex>
               </GridItem>
@@ -127,34 +135,71 @@ export default function plan() {
                   justifyContent="center"
                   alignItems="center"
                   wrap="wrap"
-                  h="300px"
+                  h="350px"
                   flexFlow="column"
                 >
-                  <Avatar size="2xl" name="ああ" src={planData.userAvatar} />
                   <Link
-                    href={`/profile/${planData.userID}`}
-                    mt="20px"
-                    fontSize="35"
+                    href={testUserId === planData.userID ?  `/myPage` : `/profile/${planData.userID}`}
+                    borderRadius="100px"
+                  >
+                    <Avatar
+                      size="2xl"
+                      name={planData.userName}
+                      src={planData.userAvatar}
+                    />
+                  </Link>
+
+                  <Link
+                    href={testUserId === planData.userID ?  `/myPage` : `/profile/${planData.userID}`}
+                    mt="5px"
+                    fontSize="35px"
                   >
                     {planData.userName}
                   </Link>
+                  <Box
+                    display="flex"
+                    mt="2px"
+                    mb="10px"
+                    alignItems="center"
+                    fontSize="sm"
+                  >
+                    {Array(5)
+                      .fill("")
+                      .map((_, i) => (
+                        <StarIcon
+                          key={i}
+                          color={
+                            i < planData.reviewScore / planData.reviewCount
+                              ? "orange"
+                              : "gray.200"
+                          }
+                        />
+                      ))}
+                    <Box as="span" ml="2" color="gray" fontSize="sm">
+                      {planData.reviewCount} reviews
+                    </Box>
+                  </Box>
                   {/* 本人以外の時表示 */}
                   <Box w="100%" p="5px">
-                    <AccountControlButton
-                      text="質問をする"
-                      colorScheme="purple"
-                      color="white"
-                      width="100%"
-                      href="/"
-                    />
+                    {testUserId !== planData.userID && (
+                      <>
+                      <AccountControlButton
+                        text="質問をする"
+                        colorScheme="purple"
+                        color="white"
+                        width="100%"
+                        href="/"
+                        />
                     <Box m="10px"></Box>
                     <AccountControlButton
-                      text="レビューを投稿する"
-                      colorScheme="purple"
-                      color="white"
-                      width="100%"
-                      href="/"
+                    text="レビューを投稿する"
+                    colorScheme="purple"
+                    color="white"
+                    width="100%"
+                    href="/"
                     />
+                    </>
+                    )}
                   </Box>
                 </Flex>
               </GridItem>

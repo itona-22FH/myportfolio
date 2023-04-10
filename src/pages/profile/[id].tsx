@@ -23,6 +23,7 @@ import { profileCollectionAtom } from "../../lib/recoil/atoms/profileCollectionA
 import { showGamePlanAtom } from "../../lib/recoil/atoms/showGamePlanAtom";
 import { GamePlan } from "../../components/GamePlan";
 import { TextBox } from "../../components/TextBox";
+import { StarIcon } from "@chakra-ui/icons";
 
 const profile = () => {
   //FIREBASEからすべてのプロフィール情報を取得
@@ -60,15 +61,34 @@ const profile = () => {
               bg="whiteAlpha.800"
               borderRadius="10px"
               p="10px"
+              direction="column"
             >
               <Avatar
                 size="2xl"
                 name={profileData.userName}
                 src={profileData.userAvatar}
               />
-              <Text mt="10px" fontSize="35" color="black" ml="10px">
+              <Text mt="10px" fontSize="35" color="black" ml="10px"
+              >
                 {profileData.userName}
               </Text>
+              <Box display="flex" mt="2" alignItems="center" >
+                {Array(5)
+                  .fill("")
+                  .map((_, i) => (
+                    <StarIcon
+                      key={i}
+                      color={
+                        i < profileData.reviewScore / profileData.reviewCount
+                          ? "orange"
+                          : "gray.200"
+                      }
+                    />
+                  ))}
+                <Box as="span" ml="2" color="gray" fontSize="sm">
+                  {profileData.reviewCount} reviews
+                </Box>
+              </Box>
             </Flex>
 
             <Flex

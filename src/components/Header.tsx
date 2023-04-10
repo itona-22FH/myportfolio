@@ -15,6 +15,7 @@ export const Header = () => {
   const router = useRouter();
   const { id } = router.query;
   const { pathname } = router;
+  console.log(pathname)
 
   return (
     <Box w="100%" h="80px" bg="purple.300">
@@ -66,13 +67,15 @@ export const Header = () => {
                 width="130px"
                 confirmation="ログアウト"
               />
-              <AccountControlButton
+              {pathname !== "/myPage" && (
+                <AccountControlButton
                 text="マイページ"
                 colorScheme="purple"
                 color="white"
                 width="130px"
                 href="/myPage"
-              />
+                />
+                )}
             </>
           )}
         </Stack>
