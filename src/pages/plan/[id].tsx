@@ -105,9 +105,7 @@ const plan = () => {
                     {testUserId !== planData.userID && (
                       <ConfirmationDrawer planData={planData} />
                     )}
-                  </Box>
-                  {/* 登録者本人の時表示 */}
-                  <Box w="100%" p="10px">
+                    {/* 登録者本人の時表示 */}
                     {testUserId === planData.userID && (
                       <ConfirmationBtn
                         text="プランを削除する"
