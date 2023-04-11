@@ -30,7 +30,7 @@ type FormInputProps = {
   placeholder: string;
 };
 
-type MyPageTextBoxProps = {
+type NewRegisterTextBox = {
   htmlFor: string;
   placeholder: string;
 };
@@ -80,4 +80,9 @@ type Plan = {
 
 type ConfirmationDrawerProps = {
   planData: Plan;
-}
+};
+
+type ReviewStatusProps = {
+  reviewScore: number;
+  reviewCount: number;
+};
