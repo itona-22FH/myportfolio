@@ -22,7 +22,6 @@ import { planCollectionAtom } from "../../lib/recoil/atoms/planCollectionAtom";
 import { useRecoilValue } from "recoil";
 import { ConfirmationDrawer } from "../../components/ConfirmationDrawer";
 import { testLoginUserAtom } from "../../lib/recoil/atoms/testLoginUserAtom";
-import { ReviewStatus } from "../../components/ReviewStatus";
 import { UserInformation } from "../../components/UserInformation";
 
 const plan = () => {
@@ -141,8 +140,6 @@ const plan = () => {
                     testUserId={testUserId}
                     userName={planData.userName}
                     userAvatar={planData.userAvatar}
-                  />
-                  <ReviewStatus
                     reviewCount={planData.reviewCount}
                     reviewScore={planData.reviewScore}
                   />

@@ -20,7 +20,6 @@ import { showGamePlanAtom } from "../../lib/recoil/atoms/showGamePlanAtom";
 import { testLoginUserAtom } from "../../lib/recoil/atoms/testLoginUserAtom";
 import { GamePlan } from "../../components/GamePlan";
 import { TextBox } from "../../components/TextBox";
-import { ReviewStatus } from "../../components/ReviewStatus";
 import { useRouter } from "next/router";
 import { UserInformation } from "../../components/UserInformation";
 
@@ -68,8 +67,6 @@ const myPage = () => {
                 testUserId={"_"}
                 userName={myProfileData.userName}
                 userAvatar={myProfileData.userAvatar}
-              />
-              <ReviewStatus
                 reviewCount={myProfileData.reviewCount}
                 reviewScore={myProfileData.reviewScore}
               />

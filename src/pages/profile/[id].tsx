@@ -21,7 +21,6 @@ import { profileCollectionAtom } from "../../lib/recoil/atoms/profileCollectionA
 import { showGamePlanAtom } from "../../lib/recoil/atoms/showGamePlanAtom";
 import { GamePlan } from "../../components/GamePlan";
 import { TextBox } from "../../components/TextBox";
-import { ReviewStatus } from "../../components/ReviewStatus";
 import { UserInformation } from "../../components/UserInformation";
 
 const profile = () => {
@@ -67,8 +66,6 @@ const profile = () => {
                 testUserId={"_"}
                 userName={profileData.userName}
                 userAvatar={profileData.userAvatar}
-              />
-              <ReviewStatus
                 reviewCount={profileData.reviewCount}
                 reviewScore={profileData.reviewScore}
               />

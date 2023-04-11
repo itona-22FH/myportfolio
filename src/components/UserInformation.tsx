@@ -1,12 +1,15 @@
 import { Avatar, Link, Text } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React from "react";
+import { ReviewStatus } from "./ReviewStatus";
 
 export const UserInformation = ({
   userID,
   testUserId,
   userName,
   userAvatar,
+  reviewCount,
+  reviewScore,
 }: any) => {
   const router = useRouter();
   const { id } = router.query;
@@ -50,6 +53,7 @@ export const UserInformation = ({
           </Text>
         </>
       )}
+      <ReviewStatus reviewCount={reviewCount} reviewScore={reviewScore} />
     </>
   );
 };
