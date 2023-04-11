@@ -4,6 +4,7 @@ import { StarIcon } from "@chakra-ui/icons";
 import { useRecoilValue } from "recoil";
 import { showGamePlanAtom } from "../lib/recoil/atoms/showGamePlanAtom";
 import { useRouter } from "next/router";
+import { ReviewStatus } from "./ReviewStatus";
 
 export const GamePlan = () => {
   const showGamePlan = useRecoilValue(showGamePlanAtom);
@@ -17,11 +18,9 @@ export const GamePlan = () => {
       {showGamePlan.map(
         ({
           planID,
-          userID,
           planTitle,
           planImage,
           userName,
-          guidance,
           price,
           userAvatar,
           reviewCount,
@@ -62,24 +61,10 @@ export const GamePlan = () => {
                     {userName}
                   </Text>
                 </Flex>
-                
-                  <Box display="flex" mt="2" alignItems="center">
-                    {Array(5)
-                      .fill("")
-                      .map((_, i) => (
-                        <StarIcon
-                        key={i}
-                        color={
-                          i < reviewScore / reviewCount
-                          ? "orange"
-                          : "gray.200"
-                        }
-                        />
-                        ))}
-                    <Box as="span" ml="2" color="gray" fontSize="sm">
-                      {reviewCount} reviews
-                    </Box>
-                  </Box>
+                <ReviewStatus
+                      reviewCount={reviewCount}
+                      reviewScore={reviewScore}
+                    />
                         </>
                 )}
 

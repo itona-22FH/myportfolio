@@ -25,8 +25,9 @@ import { useRecoilValue } from "recoil";
 import { ConfirmationDrawer } from "../../components/ConfirmationDrawer";
 import { StarIcon } from "@chakra-ui/icons";
 import { testLoginUserAtom } from "../../lib/recoil/atoms/testLoginUserAtom";
+import { ReviewStatus } from "../../components/ReviewStatus";
 
-export default function plan() {
+const plan = () => {
   const planCollections = useRecoilValue(planCollectionAtom);
   const testUserId = useRecoilValue(testLoginUserAtom);
 
@@ -104,10 +105,9 @@ export default function plan() {
                 </VStack>
                 <Flex justifyContent="space-around" flexFlow="column">
                   <Box w="100%" p="10px">
-                    { testUserId !== planData.userID && (
+                    {testUserId !== planData.userID && (
                       <ConfirmationDrawer planData={planData} />
-                      )
-                    }
+                    )}
                   </Box>
                   {/* 登録者本人の時表示 */}
                   <Box w="100%" p="10px">
@@ -139,7 +139,11 @@ export default function plan() {
                   flexFlow="column"
                 >
                   <Link
-                    href={testUserId === planData.userID ?  `/myPage` : `/profile/${planData.userID}`}
+                    href={
+                      testUserId === planData.userID
+                        ? `/myPage/${testUserId}`
+                        : `/profile/${planData.userID}`
+                    }
                     borderRadius="100px"
                   >
                     <Avatar
@@ -150,55 +154,40 @@ export default function plan() {
                   </Link>
 
                   <Link
-                    href={testUserId === planData.userID ?  `/myPage` : `/profile/${planData.userID}`}
+                    href={
+                      testUserId === planData.userID
+                        ? `/myPage/${testUserId}`
+                        : `/profile/${planData.userID}`
+                    }
                     mt="5px"
                     fontSize="35px"
                   >
                     {planData.userName}
                   </Link>
-                  <Box
-                    display="flex"
-                    mt="2px"
-                    mb="10px"
-                    alignItems="center"
-                    fontSize="sm"
-                  >
-                    {Array(5)
-                      .fill("")
-                      .map((_, i) => (
-                        <StarIcon
-                          key={i}
-                          color={
-                            i < planData.reviewScore / planData.reviewCount
-                              ? "orange"
-                              : "gray.200"
-                          }
-                        />
-                      ))}
-                    <Box as="span" ml="2" color="gray" fontSize="sm">
-                      {planData.reviewCount} reviews
-                    </Box>
-                  </Box>
+                  <ReviewStatus
+                    reviewCount={planData.reviewCount}
+                    reviewScore={planData.reviewScore}
+                  />
                   {/* 本人以外の時表示 */}
                   <Box w="100%" p="5px">
                     {testUserId !== planData.userID && (
                       <>
-                      <AccountControlButton
-                        text="質問をする"
-                        colorScheme="purple"
-                        color="white"
-                        width="100%"
-                        href="/"
+                        <AccountControlButton
+                          text="質問をする"
+                          colorScheme="purple"
+                          color="white"
+                          width="100%"
+                          href="/"
                         />
-                    <Box m="10px"></Box>
-                    <AccountControlButton
-                    text="レビューを投稿する"
-                    colorScheme="purple"
-                    color="white"
-                    width="100%"
-                    href="/"
-                    />
-                    </>
+                        <Box m="10px"></Box>
+                        <AccountControlButton
+                          text="レビューを投稿する"
+                          colorScheme="purple"
+                          color="white"
+                          width="100%"
+                          href="/"
+                        />
+                      </>
                     )}
                   </Box>
                 </Flex>
@@ -215,4 +204,6 @@ export default function plan() {
       )}
     </>
   );
-}
+};
+
+export default plan;
