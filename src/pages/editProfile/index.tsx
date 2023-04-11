@@ -3,7 +3,7 @@ import React from "react";
 import { ConfirmationBtn } from "../../components/ConfirmationBtn";
 import { FormInput } from "../../components/FormInput";
 import { HeadTitle } from "../../components/HeadTitle";
-import { MyPageTextBox } from "../../components/MyPageTextBox";
+import { NewRegisterTextBox } from "../../components/NewRegisterTextBox";
 
 const editProfile = () => {
   return (
@@ -27,11 +27,11 @@ const editProfile = () => {
             type="url"
             placeholder="https://www.youtube.com.channel/..."
           />
-          <MyPageTextBox
+          <NewRegisterTextBox
             htmlFor="自己紹介"
             placeholder="こんにちは、〇〇クラン所属のHelloUserです！！"
           />
-          <MyPageTextBox
+          <NewRegisterTextBox
             htmlFor="経歴・実績"
             placeholder="〇〇大会優勝
             〇〇大会BEST3"
