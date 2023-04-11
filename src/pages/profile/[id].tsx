@@ -23,7 +23,6 @@ import { profileCollectionAtom } from "../../lib/recoil/atoms/profileCollectionA
 import { showGamePlanAtom } from "../../lib/recoil/atoms/showGamePlanAtom";
 import { GamePlan } from "../../components/GamePlan";
 import { TextBox } from "../../components/TextBox";
-import { StarIcon } from "@chakra-ui/icons";
 import { ReviewStatus } from "../../components/ReviewStatus";
 
 const profile = () => {

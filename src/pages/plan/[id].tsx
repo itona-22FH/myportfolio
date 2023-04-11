@@ -23,7 +23,6 @@ import { useRouter } from "next/router";
 import { planCollectionAtom } from "../../lib/recoil/atoms/planCollectionAtom";
 import { useRecoilValue } from "recoil";
 import { ConfirmationDrawer } from "../../components/ConfirmationDrawer";
-import { StarIcon } from "@chakra-ui/icons";
 import { testLoginUserAtom } from "../../lib/recoil/atoms/testLoginUserAtom";
 import { ReviewStatus } from "../../components/ReviewStatus";
 

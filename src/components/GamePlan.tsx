@@ -1,6 +1,5 @@
 import React from "react";
 import { Text, Image, Link, Box, Avatar, Flex } from "@chakra-ui/react";
-import { StarIcon } from "@chakra-ui/icons";
 import { useRecoilValue } from "recoil";
 import { showGamePlanAtom } from "../lib/recoil/atoms/showGamePlanAtom";
 import { useRouter } from "next/router";
@@ -55,17 +54,17 @@ export const GamePlan = () => {
                 </Box>
                 {pathname === "/" && (
                   <>
-                <Flex alignItems="center" mt="4" mb="4">
-                  <Avatar name="Dan Abrahmov" src={userAvatar} />
-                  <Text ml="3" lineHeight="1" verticalAlign="center">
-                    {userName}
-                  </Text>
-                </Flex>
-                <ReviewStatus
+                    <Flex alignItems="center" mt="4" mb="4">
+                      <Avatar name="Dan Abrahmov" src={userAvatar} />
+                      <Text ml="3" lineHeight="1" verticalAlign="center">
+                        {userName}
+                      </Text>
+                    </Flex>
+                    <ReviewStatus
                       reviewCount={reviewCount}
                       reviewScore={reviewScore}
                     />
-                        </>
+                  </>
                 )}
 
                 <Box mt="3" color="red">

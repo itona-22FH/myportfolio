@@ -22,7 +22,6 @@ import { showGamePlanAtom } from "../../lib/recoil/atoms/showGamePlanAtom";
 import { testLoginUserAtom } from "../../lib/recoil/atoms/testLoginUserAtom";
 import { GamePlan } from "../../components/GamePlan";
 import { TextBox } from "../../components/TextBox";
-import { StarIcon } from "@chakra-ui/icons";
 import { ReviewStatus } from "../../components/ReviewStatus";
 import { useRouter } from "next/router";
 

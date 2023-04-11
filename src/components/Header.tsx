@@ -3,7 +3,6 @@ import { Box, Button, Flex, Link, Stack } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React from "react";
 import { useRecoilValue } from "recoil";
-
 import { AccountControlButton } from "./AccountControlButton";
 import { testLoginUserAtom } from "../lib/recoil/atoms/testLoginUserAtom";
 import { ConfirmationBtn } from "./ConfirmationBtn";
@@ -15,7 +14,6 @@ export const Header = () => {
   const router = useRouter();
   const { id } = router.query;
   const { pathname } = router;
-  console.log(pathname)
 
   return (
     <Box w="100%" h="80px" bg="purple.300">
