@@ -10,11 +10,9 @@ export const UserInformation = ({
   userAvatar,
   reviewCount,
   reviewScore,
-}: any) => {
+}: UserInformationProps) => {
   const router = useRouter();
-  const { id } = router.query;
   const { pathname } = router;
-  console.log(id, pathname);
 
   return (
     <>

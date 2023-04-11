@@ -86,3 +86,12 @@ type ReviewStatusProps = {
   reviewScore: number;
   reviewCount: number;
 };
+
+type UserInformationProps = {
+  userID: string;
+  testUserId: string;
+  userName: string;
+  userAvatar: string;
+  reviewCount: number;
+  reviewScore: number;
+};
