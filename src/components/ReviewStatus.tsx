@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-no-undef */
 import { StarIcon } from "@chakra-ui/icons";
 import { Box } from "@chakra-ui/react";
 import React from "react";
@@ -8,7 +7,7 @@ export const ReviewStatus = ({
   reviewCount,
 }: ReviewStatusProps) => {
   return (
-    <Box display="flex" mt="2" alignItems="center">
+    <Box display="flex" mt="2px" mb="2px" alignItems="center">
       {Array(5)
         .fill("")
         .map((_, i) => (
