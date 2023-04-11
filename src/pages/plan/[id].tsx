@@ -1,7 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react/jsx-no-undef */
 import {
-  Avatar,
   Box,
   Container,
   Flex,
@@ -9,7 +8,6 @@ import {
   GridItem,
   Heading,
   Image,
-  Link,
   StackDivider,
   VStack,
   Text,
@@ -25,6 +23,7 @@ import { useRecoilValue } from "recoil";
 import { ConfirmationDrawer } from "../../components/ConfirmationDrawer";
 import { testLoginUserAtom } from "../../lib/recoil/atoms/testLoginUserAtom";
 import { ReviewStatus } from "../../components/ReviewStatus";
+import { UserInformation } from "../../components/UserInformation";
 
 const plan = () => {
   const planCollections = useRecoilValue(planCollectionAtom);
@@ -137,32 +136,12 @@ const plan = () => {
                   h="350px"
                   flexFlow="column"
                 >
-                  <Link
-                    href={
-                      testUserId === planData.userID
-                        ? `/myPage/${testUserId}`
-                        : `/profile/${planData.userID}`
-                    }
-                    borderRadius="100px"
-                  >
-                    <Avatar
-                      size="2xl"
-                      name={planData.userName}
-                      src={planData.userAvatar}
-                    />
-                  </Link>
-
-                  <Link
-                    href={
-                      testUserId === planData.userID
-                        ? `/myPage/${testUserId}`
-                        : `/profile/${planData.userID}`
-                    }
-                    mt="5px"
-                    fontSize="35px"
-                  >
-                    {planData.userName}
-                  </Link>
+                  <UserInformation
+                    userID={planData.userID}
+                    testUserId={testUserId}
+                    userName={planData.userName}
+                    userAvatar={planData.userAvatar}
+                  />
                   <ReviewStatus
                     reviewCount={planData.reviewCount}
                     reviewScore={planData.reviewScore}

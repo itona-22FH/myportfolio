@@ -1,11 +1,9 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react/jsx-no-undef */
 import {
-  Avatar,
   Box,
   Container,
   Flex,
-  Text,
   Tabs,
   TabList,
   TabPanels,
@@ -24,6 +22,7 @@ import { showGamePlanAtom } from "../../lib/recoil/atoms/showGamePlanAtom";
 import { GamePlan } from "../../components/GamePlan";
 import { TextBox } from "../../components/TextBox";
 import { ReviewStatus } from "../../components/ReviewStatus";
+import { UserInformation } from "../../components/UserInformation";
 
 const profile = () => {
   //FIREBASEからすべてのプロフィール情報を取得
@@ -63,14 +62,12 @@ const profile = () => {
               p="10px"
               direction="column"
             >
-              <Avatar
-                size="2xl"
-                name={profileData.userName}
-                src={profileData.userAvatar}
+              <UserInformation
+                userID={"_"}
+                testUserId={"_"}
+                userName={profileData.userName}
+                userAvatar={profileData.userAvatar}
               />
-              <Text mt="10px" fontSize="35" color="black" ml="10px">
-                {profileData.userName}
-              </Text>
               <ReviewStatus
                 reviewCount={profileData.reviewCount}
                 reviewScore={profileData.reviewScore}

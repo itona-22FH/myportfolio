@@ -1,10 +1,8 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import {
-  Avatar,
   Box,
   Container,
   Flex,
-  Text,
   Tabs,
   TabList,
   TabPanels,
@@ -24,6 +22,7 @@ import { GamePlan } from "../../components/GamePlan";
 import { TextBox } from "../../components/TextBox";
 import { ReviewStatus } from "../../components/ReviewStatus";
 import { useRouter } from "next/router";
+import { UserInformation } from "../../components/UserInformation";
 
 const myPage = () => {
   //FIREBASEからすべてのプロフィール情報を取得
@@ -55,7 +54,7 @@ const myPage = () => {
   return (
     <>
       {myProfileData ? (
-        <Box pt="10px" pb="10px">
+        <Box fontWeight="bold" pt="10px" pb="10px">
           <Container maxW="1100px">
             <Flex
               alignItems="center"
@@ -64,14 +63,12 @@ const myPage = () => {
               p="10px"
               direction="column"
             >
-              <Avatar
-                size="2xl"
-                name="Segun Adebayo"
-                src={myProfileData.userAvatar}
+              <UserInformation
+                userID={"_"}
+                testUserId={"_"}
+                userName={myProfileData.userName}
+                userAvatar={myProfileData.userAvatar}
               />
-              <Text mt="10px" fontSize="35" ml="10px" fontWeight="bold">
-                {myProfileData.userName}
-              </Text>
               <ReviewStatus
                 reviewCount={myProfileData.reviewCount}
                 reviewScore={myProfileData.reviewScore}
@@ -84,7 +81,6 @@ const myPage = () => {
               mt="10px"
               p="10px"
               borderRadius="10px"
-              w="100%"
             >
               <Box>
                 <AccountControlButton
@@ -149,7 +145,9 @@ const myPage = () => {
                       <GamePlan />
                     </Flex>
                   </TabPanel>
-                  <TabPanel></TabPanel>
+                  <TabPanel>
+                    <GamePlan />
+                  </TabPanel>
                 </TabPanels>
               </Tabs>
             </Box>
@@ -160,7 +158,6 @@ const myPage = () => {
           <Box> ユーザー情報を取得できませんでした。</Box>
         </>
       )}
-      ;
     </>
   );
 };
