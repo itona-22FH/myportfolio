@@ -1,4 +1,29 @@
 import { atom } from "recoil";
+import { recoilPersist } from "recoil-persist";
+
+// const { persistAtom } = recoilPersist();
+
+// const { persistAtom } = recoilPersist({
+//   key: 'recoil-persist',
+//   storage: localStorage,
+// })
+
+const { persistAtom } = recoilPersist({
+  key: 'recoil-persist',
+  storage: typeof window === 'undefined' ? undefined : window.localStorage,
+})
+
+// const { persistAtom } = recoilPersist({
+//   key: 'recoil-persist',
+//   storage: sessionStorage,
+// })
+
+// const { persistAtom } = recoilPersist({
+//   key: 'recoil-persist',
+//   storage: typeof window === 'undefined' ? undefined : window.sessionStorage,
+// })
+
+
 
 export const planCollectionAtom = atom<Plan[]>({
   key: "planCollectionAtom",
@@ -67,4 +92,5 @@ export const planCollectionAtom = atom<Plan[]>({
       reviewScore: 800,
     },
   ],
+  effects_UNSTABLE: [persistAtom],
 });
