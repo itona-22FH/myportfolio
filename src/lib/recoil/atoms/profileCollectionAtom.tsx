@@ -1,4 +1,7 @@
 import { atom } from "recoil";
+import { recoilPersist } from "recoil-persist";
+
+const { persistAtom } = recoilPersist();
 
 export const profileCollectionAtom = atom<User[]>({
   key: "profileCollectionAtom",
@@ -67,4 +70,5 @@ export const profileCollectionAtom = atom<User[]>({
       reviewScore: 800,
     },
   ],
+  effects_UNSTABLE: [persistAtom],
 });

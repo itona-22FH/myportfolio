@@ -1,6 +1,9 @@
 import { atom } from "recoil";
+import { recoilPersist } from "recoil-persist";
 
-export const planManagementCollectionAtom = atom({
+const { persistAtom } = recoilPersist();
+
+export const planManagementCollectionAtom = atom<PlanM[]>({
   key: "planManagementCollectionAtom",
   default: [
     {
@@ -37,4 +40,5 @@ export const planManagementCollectionAtom = atom({
       plan4: "DplanID4",
     },
   ],
+  effects_UNSTABLE: [persistAtom],
 });
