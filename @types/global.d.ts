@@ -78,6 +78,14 @@ type Plan = {
   reviewScore: number;
 };
 
+type PlanM = {
+  userID: string;
+  plan1: string;
+  plan2: string;
+  plan3: string;
+  plan4: string;
+};
+
 type ConfirmationDrawerProps = {
   planData: Plan;
 };
