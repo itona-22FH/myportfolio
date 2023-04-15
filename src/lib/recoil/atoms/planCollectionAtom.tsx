@@ -1,4 +1,7 @@
 import { atom } from "recoil";
+import { recoilPersist } from "recoil-persist";
+
+const { persistAtom } = recoilPersist();
 
 export const planCollectionAtom = atom<Plan[]>({
   key: "planCollectionAtom",
@@ -67,4 +70,5 @@ export const planCollectionAtom = atom<Plan[]>({
       reviewScore: 800,
     },
   ],
+  effects_UNSTABLE: [persistAtom],
 });
