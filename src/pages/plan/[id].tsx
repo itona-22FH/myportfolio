@@ -11,6 +11,7 @@ import {
   StackDivider,
   VStack,
   Text,
+  Link,
 } from "@chakra-ui/react";
 import React from "react";
 import { AccountControlButton } from "../../components/AccountControlButton";
@@ -19,13 +20,14 @@ import { HeadTitle } from "../../components/HeadTitle";
 import { TextBox } from "../../components/TextBox";
 import { useRouter } from "next/router";
 import { planCollectionAtom } from "../../lib/recoil/atoms/planCollectionAtom";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { ConfirmationDrawer } from "../../components/ConfirmationDrawer";
 import { testLoginUserAtom } from "../../lib/recoil/atoms/testLoginUserAtom";
 import { UserInformation } from "../../components/UserInformation";
 
 const plan = () => {
-  const planCollections = useRecoilValue(planCollectionAtom);
+  const [planCollections, setPlanCollections] =
+    useRecoilState(planCollectionAtom);
   const testUserId = useRecoilValue(testLoginUserAtom);
 
   //URLからPLANのIDを取得
@@ -33,15 +35,25 @@ const plan = () => {
   const { id } = router.query;
 
   //取得したIDと一致するプランのみをPLANDATAに代入
-  const planData = planCollections.find((plan) => {
-    if (id === plan.planID) {
-      return plan;
-    }
-  });
+    const planData = planCollections.find((plan) => {
+      if (id === plan.planID) {
+        return plan;
+      }
+    });
+
+    //プラン削除
+  const deleteConfirmation = (id: string | string[]) => {
+    const filterPlanCollections = planCollections.filter((plan) => {
+      if (id !== plan.planID) {
+        return plan;
+      }
+    });
+    setPlanCollections(filterPlanCollections);
+  };
 
   return (
     <>
-      {planData ? (
+      {planData && id ? (
         <Box pt="10px">
           <Container maxW="1100px">
             <Grid
@@ -113,6 +125,7 @@ const plan = () => {
                         color="white"
                         width="100%"
                         confirmation="削除"
+                        handleConfirmation={() => deleteConfirmation(id)}
                       />
                     )}
                   </Box>
@@ -173,6 +186,7 @@ const plan = () => {
       ) : (
         <>
           <Box>プラン情報の取得に失敗しました。</Box>
+          <Link href="/">トップへもどる</Link>
         </>
       )}
     </>
