@@ -11,6 +11,7 @@ import {
   TabPanel,
   VStack,
   StackDivider,
+  Link,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React from "react";
@@ -142,7 +143,10 @@ const profile = () => {
           </Container>
         </Box>
       ) : (
-        <Box>プロフィール情報を取得できませんでした。</Box>
+        <>
+          <Box>プロフィール情報を取得できませんでした。</Box>
+          <Link href="/">トップへもどる</Link>
+        </>
       )}
     </>
   );
