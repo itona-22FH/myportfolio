@@ -12,6 +12,7 @@ type ConfirmationBtnProps = {
   color: string;
   width: string;
   confirmation: string;
+  handleConfirmation: any;
 };
 
 type TextBox = {
