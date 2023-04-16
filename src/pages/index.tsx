@@ -14,43 +14,19 @@ import {
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 import { planCollectionAtom } from "../lib/recoil/atoms/planCollectionAtom";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { showGamePlanAtom } from "../lib/recoil/atoms/showGamePlanAtom";
 import React, { useEffect } from "react";
-// import { planManagementCollectionAtom } from "../lib/recoil/atoms/planManagementCollectionAtom";
-// import { profileCollectionAtom } from "../lib/recoil/atoms/profileCollectionAtom";
 
 const Home = () => {
   //全てのプラン情報を管理するRECOILのSTATEへのSET関数を宣言
   const setShowGamePlanArray = useSetRecoilState(showGamePlanAtom);
 
   //FIREBASEからすべてのプラン情報を取得
-  const [planCollections, setPlanCollections] =
-    useRecoilState(planCollectionAtom);
-  // const [profileCollections, setProfileCollections] = useRecoilState(profileCollectionAtom);
-  // const [planPlanManagementCollections, setPlanManagementCollections] = useRecoilState(planManagementCollectionAtom);
+  const planCollections = useRecoilValue(planCollectionAtom);
 
   //すべてのプラン情報をSTATEにセット
   setShowGamePlanArray(planCollections);
-
-  // setPlanCollections((prev) => prev);
-  // setProfileCollections((prev) => prev);
-  // setPlanManagementCollections((prev) => prev);
-
-  //ローカルストレージから値の取得
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const recoilPersistData = localStorage.getItem("recoil-persist");
-      const {
-        planCollectionAtom,
-        planManagementCollectionAtom,
-        profileCollectionAtom,
-      } = recoilPersistData !== null ? JSON.parse(recoilPersistData) : "";
-      console.log(planCollectionAtom);
-      console.log(planManagementCollectionAtom);
-      console.log(profileCollectionAtom);
-    }
-  }, []);
 
   return (
     <Box>
