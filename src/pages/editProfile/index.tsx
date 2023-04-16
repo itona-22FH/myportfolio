@@ -43,6 +43,7 @@ const editProfile = () => {
           color="white"
           width="100%"
           confirmation="アカウント情報を更新"
+          handleConfirmation={() => {}}
         />
       </Container>
     </Box>

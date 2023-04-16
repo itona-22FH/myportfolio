@@ -58,6 +58,7 @@ const newPlan = () => {
           color="white"
           width="100%"
           confirmation="プランを登録"
+          handleConfirmation={() => {}}
         />
       </Container>
     </Box>
