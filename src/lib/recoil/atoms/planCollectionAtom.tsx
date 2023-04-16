@@ -12,7 +12,7 @@ export const planCollectionAtom = atom<Plan[]>({
       //プラン登録者（FirebaseID）
       userID: "userA",
       //プラン名
-      planTitle: "AAAAAA",
+      planTitle: "AAAAAAA",
       //プランサムネイル
       planImage: "https://bit.ly/2Z4KKcF",
       //学べる内容
