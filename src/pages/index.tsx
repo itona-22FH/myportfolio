@@ -1,5 +1,4 @@
-/* eslint-disable react-hooks/rules-of-hooks */
-/* eslint-disable react/jsx-no-undef */
+/* eslint-disable react-hooks/exhaustive-deps */
 import Head from "next/head";
 import { GamePlan } from "../components/GamePlan";
 import { CarouselFade } from "../components/CarouselFade";
@@ -16,24 +15,31 @@ import { SearchIcon } from "@chakra-ui/icons";
 import { planCollectionAtom } from "../lib/recoil/atoms/planCollectionAtom";
 import { useRecoilState, useSetRecoilState } from "recoil";
 import { showGamePlanAtom } from "../lib/recoil/atoms/showGamePlanAtom";
-import React from "react";
+import React, { useEffect } from "react";
+// import { planManagementCollectionAtom } from "../lib/recoil/atoms/planManagementCollectionAtom";
+// import { profileCollectionAtom } from "../lib/recoil/atoms/profileCollectionAtom";
 
 const Home = () => {
   //全てのプラン情報を管理するRECOILのSTATEへのSET関数を宣言
   const setShowGamePlanArray = useSetRecoilState(showGamePlanAtom);
-
+  
   //FIREBASEからすべてのプラン情報を取得
   const [planCollections, setPlanCollections] =
-    useRecoilState(planCollectionAtom);
+  useRecoilState(planCollectionAtom);
+  
   // const [profileCollections, setProfileCollections] = useRecoilState(profileCollectionAtom);
   // const [planPlanManagementCollections, setPlanManagementCollections] = useRecoilState(planManagementCollectionAtom);
+  
+  useEffect(() => {
+    //すべてのプラン情報をSTATEにセット
+    setShowGamePlanArray(planCollections);
+    
+    //localStorageにState連携
+    // setPlanCollections((prev) => prev);
+    // setProfileCollections((prev) => prev);
+    // setPlanManagementCollections((prev) => prev);
+  }, [])
 
-  // setPlanCollections((prev) => prev);
-  // setProfileCollections((prev) => prev);
-  // setPlanManagementCollections((prev) => prev);
-
-  //すべてのプラン情報をSTATEにセット
-  setShowGamePlanArray(planCollections);
 
   return (
     <Box>
