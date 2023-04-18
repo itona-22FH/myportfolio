@@ -42,7 +42,7 @@ const plan = () => {
     });
 
     //プラン削除
-  const deleteConfirmation = (id: string | string[]) => {
+  const deletePlanHandle = (id: string | string[]) => {
     const filterPlanCollections = planCollections.filter((plan) => {
       if (id !== plan.planID) {
         return plan;
@@ -125,7 +125,7 @@ const plan = () => {
                         color="white"
                         width="100%"
                         confirmation="削除"
-                        handleConfirmation={() => deleteConfirmation(id)}
+                        handleConfirmation={() => deletePlanHandle(id)}
                       />
                     )}
                   </Box>
@@ -178,7 +178,6 @@ const plan = () => {
                   </Box>
                 </Flex>
               </GridItem>
-
               <GridItem></GridItem>
             </Grid>
           </Container>
