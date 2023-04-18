@@ -24,10 +24,12 @@ const newPlan = () => {
     }
   };
 
-  const inputPlanCategory = (e) => {
-    const{name, value} = e.target
-    console.log(name, value)
-  }
+  const inputPlanCategory = (e: {
+    target: { name: string; value: string | number };
+  }) => {
+    const { name, value } = e.target;
+    console.log(name, value);
+  };
 
   return (
     <Box pt="10px" pb="10px">
@@ -72,9 +74,13 @@ const newPlan = () => {
             onChange={inputPlanCategory}
             name="タイトル"
           >
-            <option value="エーペックスレジェンズ">エーペックスレジェンズ</option>
+            <option value="エーペックスレジェンズ">
+              エーペックスレジェンズ
+            </option>
             <option value="ストリートファイター">ストリートファイター</option>
-            <option value="リーグ・オブ・レジェンド">リーグ・オブ・レジェンド</option>
+            <option value="リーグ・オブ・レジェンド">
+              リーグ・オブ・レジェンド
+            </option>
             <option value="FIFA">FIFA</option>
           </Select>
 
