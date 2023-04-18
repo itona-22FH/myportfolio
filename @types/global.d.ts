@@ -29,12 +29,17 @@ type FormInputProps = {
   type: string;
   label: string;
   placeholder: string;
+  formName: string;
+  onChangeHandle: any;
 };
 
 type NewRegisterTextBox = {
   htmlFor: string;
   placeholder: string;
+  textBoxName: string;
+  onChangeHandle: any;
 };
+
 type ContractBtnProps = {
   text: string;
   colorScheme: string;
@@ -72,6 +77,8 @@ type Plan = {
   planImage: string;
   study: string;
   guidance: string;
+  titleCategory:string;
+  genreCategory:string;
   price: string;
   userAvatar: string;
   userName: string;
