@@ -94,7 +94,7 @@ const myPage = () => {
                   colorScheme="purple"
                   color="white"
                   width="400px"
-                  href="/newPlan"
+                  href={`/newPlan/${testUserId}`}
                 />
               </Box>
             </Flex>
