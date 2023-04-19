@@ -69,7 +69,7 @@ export const planCollectionAtom = atom<Plan[]>({
       userID: "userD",
       planTitle: "リーグオブレジェンド",
       planImage: "https://bit.ly/2Z4KKcF",
-      study: "リーグ・オブ・レジェンについて学べます",
+      study: "リーグ・オブ・レジェンドについて学べます",
       guidance: "コーチング動画を渡します",
       titleCategory:" リーグ・オブ・レジェンド",
       genreCategory:"MOBA",
