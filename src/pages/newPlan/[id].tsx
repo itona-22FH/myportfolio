@@ -16,19 +16,10 @@ const newPlan = () => {
   const [newPlanData, setNewPlanData] = useRecoilState(newPlanRegisterAtom);
 
   const inputPlanInformation = (e: {
-    target: { name: any; value: string | number };
-  }) => {
-    const { name, value } = e.target;
-    if (name in newPlanData) {
-      console.log(name, value);
-    }
-  };
-
-  const inputPlanCategory = (e: {
     target: { name: string; value: string | number };
   }) => {
     const { name, value } = e.target;
-    console.log(name, value);
+      setNewPlanData((prev) => ({ ...prev, [name]: value }));
   };
 
   return (
@@ -56,8 +47,8 @@ const newPlan = () => {
             borderColor="purple.300"
             pt="10px"
             pb="10px"
-            onChange={inputPlanCategory}
-            name="ジャンル"
+            onChange={inputPlanInformation}
+            name="genreCategory"
           >
             <option value="FPS・TPS">FPS・TPS</option>
             <option value="MOBA">MOBA</option>
@@ -71,8 +62,8 @@ const newPlan = () => {
             borderColor="purple.300"
             pt="10px"
             pb="10px"
-            onChange={inputPlanCategory}
-            name="タイトル"
+            onChange={inputPlanInformation}
+            name="titleCategory"
           >
             <option value="エーペックスレジェンズ">
               エーペックスレジェンズ
