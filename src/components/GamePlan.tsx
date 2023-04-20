@@ -1,12 +1,12 @@
 import React from "react";
 import { Text, Image, Link, Box, Avatar, Flex } from "@chakra-ui/react";
-import { useRecoilValue } from "recoil";
-import { showGamePlanAtom } from "../lib/recoil/atoms/showGamePlanAtom";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { showPlanAtom } from "../lib/recoil/atoms/showPlanAtom";
 import { useRouter } from "next/router";
 import { ReviewStatus } from "./ReviewStatus";
 
 export const GamePlan = () => {
-  const showGamePlan = useRecoilValue(showGamePlanAtom);
+  const [showPlan, setShowPlan] = useRecoilState(showPlanAtom);
 
   const router = useRouter();
   const { pathname } = router;
@@ -14,7 +14,7 @@ export const GamePlan = () => {
   return (
     <>
       {/* showGamePlanAtomにセットされた配列を表示 */}
-      {showGamePlan.map(
+      {showPlan.map(
         ({
           planID,
           planTitle,
