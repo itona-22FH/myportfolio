@@ -14,7 +14,7 @@ import {
   Link,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useEffect } from "react";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { AccountControlButton } from "../../components/AccountControlButton";
 import { planCollectionAtom } from "../../lib/recoil/atoms/planCollectionAtom";
@@ -42,22 +42,26 @@ const profile = () => {
   });
 
   // 取得したIDと一致するプランのみをSTATEにセット「登録中のプラン」タブに表示
-  if(profileData) {
-    const  planData = planCollections.filter((plan) => {
-      if(profileData.userID === plan.userID)(
-        {
-          planID: plan.planID,
-          planTitle: plan.planTitle,
-          planImage: plan.planImage,
-          userName: profileData.userName,
-          price: plan.price,
-          userAvatar: profileData.userAvatar,
-          reviewCount: profileData.reviewCount,
-          reviewScore: profileData.reviewScore,
-        } as ShowPlan)
+  useEffect(() => {
+    if(profileData){
+      planCollections.map((plan) => {
+        if (profileData.userID === plan.userID) {
+          const planData = {
+            planID: plan.planID,
+            planTitle: plan.planTitle,
+            planImage: plan.planImage,
+            userName: profileData.userName,
+            price: plan.price,
+            userAvatar: profileData.userAvatar,
+            reviewCount: profileData.reviewCount,
+            reviewScore: profileData.reviewScore,
+          };
+          setShowPlan((prev) => [...prev, planData]);
+          console.log(showPlan)
+        }
       })
-      setShowPlan((planData));
-      }
+    }
+  }, [id])
 
   return (
     <>
@@ -143,7 +147,7 @@ const profile = () => {
                       maxW="1000px"
                       borderRadius="10px"
                     >
-                      <GamePlan/>
+                      <GamePlan />
                     </Flex>
                   </TabPanel>
                 </TabPanels>

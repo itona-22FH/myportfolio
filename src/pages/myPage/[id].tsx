@@ -11,7 +11,7 @@ import {
   VStack,
   StackDivider,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect } from "react";
 import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { AccountControlButton } from "../../components/AccountControlButton";
 import { planCollectionAtom } from "../../lib/recoil/atoms/planCollectionAtom";
@@ -38,22 +38,25 @@ const myPage = () => {
   });
 
   // ログイン中のユーザーIDと一致するプランのみでフィルターをかけ配列を生成
-  if(myProfileData) {
-    const planData = planCollections.filter((plan) => {
-      if(id === plan.userID)(
-        {
-          planID: plan.planID,
-          planTitle: plan.planTitle,
-          planImage: plan.planImage,
-          userName: myProfileData.userName,
-          price: plan.price,
-          userAvatar: myProfileData.userAvatar,
-          reviewCount: myProfileData.reviewCount,
-          reviewScore: myProfileData.reviewScore,
-        }as ShowPlan)
+  useEffect(() => {
+    if(myProfileData){
+      planCollections.map((plan) => {
+        if (myProfileData.userID === plan.userID) {
+          const planData = {
+            planID: plan.planID,
+            planTitle: plan.planTitle,
+            planImage: plan.planImage,
+            userName: myProfileData.userName,
+            price: plan.price,
+            userAvatar: myProfileData.userAvatar,
+            reviewCount: myProfileData.reviewCount,
+            reviewScore: myProfileData.reviewScore,
+          };
+          setShowPlan((prev) => [...prev, planData]);
+        }
       })
-      setShowPlan(planData);
-      }
+    }
+  }, [id])
 
   return (
     <>
