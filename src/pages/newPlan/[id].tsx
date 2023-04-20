@@ -1,26 +1,45 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-hooks/rules-of-hooks */
 import { Box, Container, FormControl, Select } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { ConfirmationBtn } from "../../components/ConfirmationBtn";
 import { FormInput } from "../../components/FormInput";
 import { HeadTitle } from "../../components/HeadTitle";
 import { NewRegisterTextBox } from "../../components/NewRegisterTextBox";
 import newPlanRegisterAtom from "../../lib/recoil/atoms/newPlanRegisterAtom";
+import { planCollectionAtom } from "../../lib/recoil/atoms/planCollectionAtom";
+import { profileCollectionAtom } from "../../lib/recoil/atoms/profileCollectionAtom";
+import { v4 as uuidv4 } from "uuid";
 
 const newPlan = () => {
+  const [planCollections, setPlanCollections] =
+    useRecoilState(planCollectionAtom);
+
+  const [newPlanData, setNewPlanData] = useRecoilState(newPlanRegisterAtom);
   const router = useRouter();
   const { id } = router.query;
 
-  const [newPlanData, setNewPlanData] = useRecoilState(newPlanRegisterAtom);
+  useEffect(() => {
+    if (!router.isReady) return;
+    setNewPlanData((prev) => ({ ...prev, userID: id, planID: uuidv4() }));
+    console.log(newPlanData);
+  }, [id]);
 
   const inputPlanInformation = (e: {
     target: { name: string; value: string | number };
   }) => {
     const { name, value } = e.target;
-      setNewPlanData((prev) => ({ ...prev, [name]: value }));
+    setNewPlanData((prev) => ({ ...prev, [name]: value }));
+    console.log(newPlanData);
   };
+
+  const addNewPlanHandle = () => {
+    setPlanCollections((prev) => [...prev, newPlanData]);
+    console.log(planCollections);
+  };
+  console.log(planCollections);
 
   return (
     <Box pt="10px" pb="10px">
@@ -101,7 +120,8 @@ const newPlan = () => {
           color="white"
           width="100%"
           confirmation="プランを登録"
-          handleConfirmation={() => {}}
+          handleConfirmation={addNewPlanHandle}
+          confirmationLink="/"
         />
       </Container>
     </Box>
