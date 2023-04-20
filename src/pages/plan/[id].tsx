@@ -24,11 +24,13 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { ConfirmationDrawer } from "../../components/ConfirmationDrawer";
 import { testLoginUserAtom } from "../../lib/recoil/atoms/testLoginUserAtom";
 import { UserInformation } from "../../components/UserInformation";
+import { profileCollectionAtom } from "../../lib/recoil/atoms/profileCollectionAtom";
 
 const plan = () => {
   const [planCollections, setPlanCollections] =
     useRecoilState(planCollectionAtom);
   const testUserId = useRecoilValue(testLoginUserAtom);
+  const profileCollections = useRecoilValue(profileCollectionAtom)
 
   //URLからPLANのIDを取得
   const router = useRouter();
@@ -40,6 +42,14 @@ const plan = () => {
         return plan;
       }
     });
+
+      const profileData = profileCollections.find((profile) => {
+        if(planData){
+          if(planData.userID === profile.userID){
+            return profile;
+          }
+        }
+      });
 
     //プラン削除
   const deletePlanHandle = (id: string | string[]) => {
@@ -53,7 +63,7 @@ const plan = () => {
 
   return (
     <>
-      {planData && id ? (
+      {planData && profileData && id ? (
         <Box pt="10px">
           <Container maxW="1100px">
             <Grid
@@ -126,6 +136,7 @@ const plan = () => {
                         width="100%"
                         confirmation="削除"
                         handleConfirmation={() => deletePlanHandle(id)}
+                        confirmationLink="/"
                       />
                     )}
                   </Box>
@@ -149,10 +160,10 @@ const plan = () => {
                   <UserInformation
                     userID={planData.userID}
                     testUserId={testUserId}
-                    userName={planData.userName}
-                    userAvatar={planData.userAvatar}
-                    reviewCount={planData.reviewCount}
-                    reviewScore={planData.reviewScore}
+                    userName={profileData.userName}
+                    userAvatar={profileData.userAvatar}
+                    reviewCount={profileData.reviewCount}
+                    reviewScore={profileData.reviewScore}
                   />
                   {/* 本人以外の時表示 */}
                   <Box w="100%" p="5px">
