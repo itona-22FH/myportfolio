@@ -64,6 +64,8 @@ export const Header = () => {
                 color="purple"
                 width="130px"
                 confirmation="ログアウト"
+                handleConfirmation={() => {}}
+                confirmationLink="/"
               />
               {pathname !== "/myPage/[id]" && (
                 <AccountControlButton
