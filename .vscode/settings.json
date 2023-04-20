@@ -12,9 +12,11 @@
     "elit",
     "FIFA",
     "MOBA",
+    "myportfolio",
     "PLANDATA",
     "PROFILEDATA",
-    "Segun"
+    "Segun",
+    "uuidv"
   ],
   "typescript.tsdk": "node_modules/typescript/lib"
 }
