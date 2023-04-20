@@ -12,12 +12,11 @@ import {
   StackDivider,
 } from "@chakra-ui/react";
 import React from "react";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { AccountControlButton } from "../../components/AccountControlButton";
 import { planCollectionAtom } from "../../lib/recoil/atoms/planCollectionAtom";
 import { profileCollectionAtom } from "../../lib/recoil/atoms/profileCollectionAtom";
-import { showGamePlanAtom } from "../../lib/recoil/atoms/showGamePlanAtom";
-import { testLoginUserAtom } from "../../lib/recoil/atoms/testLoginUserAtom";
+import { showPlanAtom } from "../../lib/recoil/atoms/showPlanAtom";
 import { GamePlan } from "../../components/GamePlan";
 import { TextBox } from "../../components/TextBox";
 import { useRouter } from "next/router";
@@ -26,20 +25,8 @@ import { UserInformation } from "../../components/UserInformation";
 const myPage = () => {
   //FIREBASEからすべてのプロフィール情報を取得
   const profileCollections = useRecoilValue(profileCollectionAtom);
-  //テスト用ログインユーザーID
-  const testUserId = useRecoilValue(testLoginUserAtom);
-
-  const setShowGamePlan = useSetRecoilState(showGamePlanAtom);
+  const [showPlan, setShowPlan] = useRecoilState(showPlanAtom);
   const planCollections = useRecoilValue(planCollectionAtom);
-
-  // ログイン中のユーザーIDと一致するプランのみでフィルターをかけ配列を生成
-  setShowGamePlan(
-    planCollections.filter((plan) => {
-      if (testUserId === plan.userID) {
-        return plan;
-      }
-    })
-  );
 
   const router = useRouter();
   const { id } = router.query;
@@ -49,6 +36,24 @@ const myPage = () => {
       return profile;
     }
   });
+
+  // ログイン中のユーザーIDと一致するプランのみでフィルターをかけ配列を生成
+  if(myProfileData) {
+    const planData = planCollections.filter((plan) => {
+      if(id === plan.userID)(
+        {
+          planID: plan.planID,
+          planTitle: plan.planTitle,
+          planImage: plan.planImage,
+          userName: myProfileData.userName,
+          price: plan.price,
+          userAvatar: myProfileData.userAvatar,
+          reviewCount: myProfileData.reviewCount,
+          reviewScore: myProfileData.reviewScore,
+        }as ShowPlan)
+      })
+      setShowPlan(planData);
+      }
 
   return (
     <>
@@ -94,7 +99,7 @@ const myPage = () => {
                   colorScheme="purple"
                   color="white"
                   width="400px"
-                  href={`/newPlan/${testUserId}`}
+                  href={`/newPlan/${id}`}
                 />
               </Box>
             </Flex>
@@ -139,11 +144,11 @@ const myPage = () => {
                       maxW="1000px"
                       borderRadius="10px"
                     >
-                      <GamePlan />
+                      <GamePlan/>
                     </Flex>
                   </TabPanel>
                   <TabPanel>
-                    <GamePlan />
+                    <GamePlan/>
                   </TabPanel>
                 </TabPanels>
               </Tabs>

@@ -15,19 +15,19 @@ import {
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React from "react";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { AccountControlButton } from "../../components/AccountControlButton";
 import { planCollectionAtom } from "../../lib/recoil/atoms/planCollectionAtom";
 import { profileCollectionAtom } from "../../lib/recoil/atoms/profileCollectionAtom";
-import { showGamePlanAtom } from "../../lib/recoil/atoms/showGamePlanAtom";
 import { GamePlan } from "../../components/GamePlan";
 import { TextBox } from "../../components/TextBox";
 import { UserInformation } from "../../components/UserInformation";
+import { showPlanAtom } from "../../lib/recoil/atoms/showPlanAtom";
 
 const profile = () => {
   //FIREBASEからすべてのプロフィール情報を取得
   const profileCollections = useRecoilValue(profileCollectionAtom);
-  const setShowGamePlan = useSetRecoilState(showGamePlanAtom);
+  const [showPlan, setShowPlan] = useRecoilState(showPlanAtom);
   const planCollections = useRecoilValue(planCollectionAtom);
 
   //URLからUSERのIDを取得
@@ -41,14 +41,23 @@ const profile = () => {
     }
   });
 
-  //取得したIDと一致するプランのみをSTATEにセット「登録中のプラン」タブに表示
-  setShowGamePlan(
-    planCollections.filter((plan) => {
-      if (id === plan.userID) {
-        return plan;
+  // 取得したIDと一致するプランのみをSTATEにセット「登録中のプラン」タブに表示
+  if(profileData) {
+    const  planData = planCollections.filter((plan) => {
+      if(profileData.userID === plan.userID)(
+        {
+          planID: plan.planID,
+          planTitle: plan.planTitle,
+          planImage: plan.planImage,
+          userName: profileData.userName,
+          price: plan.price,
+          userAvatar: profileData.userAvatar,
+          reviewCount: profileData.reviewCount,
+          reviewScore: profileData.reviewScore,
+        } as ShowPlan)
+      })
+      setShowPlan((planData));
       }
-    })
-  );
 
   return (
     <>
@@ -134,7 +143,7 @@ const profile = () => {
                       maxW="1000px"
                       borderRadius="10px"
                     >
-                      <GamePlan />
+                      <GamePlan/>
                     </Flex>
                   </TabPanel>
                 </TabPanels>

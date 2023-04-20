@@ -14,32 +14,50 @@ import {
 import { SearchIcon } from "@chakra-ui/icons";
 import { planCollectionAtom } from "../lib/recoil/atoms/planCollectionAtom";
 import { useRecoilState, useSetRecoilState } from "recoil";
-import { showGamePlanAtom } from "../lib/recoil/atoms/showGamePlanAtom";
+import { showPlanAtom } from "../lib/recoil/atoms/showPlanAtom";
 import React, { useEffect } from "react";
+import { profileCollectionAtom } from "../lib/recoil/atoms/profileCollectionAtom";
 // import { planManagementCollectionAtom } from "../lib/recoil/atoms/planManagementCollectionAtom";
-// import { profileCollectionAtom } from "../lib/recoil/atoms/profileCollectionAtom";
 
 const Home = () => {
   //全てのプラン情報を管理するRECOILのSTATEへのSET関数を宣言
-  const setShowGamePlanArray = useSetRecoilState(showGamePlanAtom);
-  
+  const [showPlan, setShowPlan] =
+    useRecoilState(showPlanAtom);
+
   //FIREBASEからすべてのプラン情報を取得
   const [planCollections, setPlanCollections] =
-  useRecoilState(planCollectionAtom);
-  
-  // const [profileCollections, setProfileCollections] = useRecoilState(profileCollectionAtom);
+    useRecoilState(planCollectionAtom);
+  const [profileCollections, setProfileCollections] = useRecoilState(
+    profileCollectionAtom
+  );
+
   // const [planPlanManagementCollections, setPlanManagementCollections] = useRecoilState(planManagementCollectionAtom);
-  
+
   useEffect(() => {
     //すべてのプラン情報をSTATEにセット
-    setShowGamePlanArray(planCollections);
-    
+    profileCollections.map((profile) => {
+      planCollections.map((plan) => {
+        if (plan.userID === profile.userID) {
+          const showPlanData = {
+            planID: plan.planID,
+            planTitle: plan.planTitle,
+            planImage: plan.planImage,
+            userName: profile.userName,
+            price: plan.price,
+            userAvatar: profile.userAvatar,
+            reviewCount: profile.reviewCount,
+            reviewScore: profile.reviewScore,
+          };
+          setShowPlan((prev) => [...prev, showPlanData]);
+          console.log(showPlanData)
+        }
+      });
+    });
     //localStorageにState連携
     // setPlanCollections((prev) => prev);
     // setProfileCollections((prev) => prev);
     // setPlanManagementCollections((prev) => prev);
-  }, [])
-
+  }, []);
 
   return (
     <Box>
@@ -97,7 +115,7 @@ const Home = () => {
             maxW="1000px"
             borderRadius="10"
           >
-            <GamePlan />
+            <GamePlan/>
           </Flex>
         </GridItem>
       </Grid>
