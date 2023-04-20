@@ -13,6 +13,7 @@ type ConfirmationBtnProps = {
   width: string;
   confirmation: string;
   handleConfirmation: any;
+  confirmationLink: string;
 };
 
 type TextBox = {
@@ -56,6 +57,17 @@ type CategorySearchProps = {
   category: string;
 };
 
+type ShowPlan = {
+  planID: string;
+  planTitle: string;
+  planImage: string;
+  userName: string;
+  price: string;
+  userAvatar: string;
+  reviewCount: number;
+  reviewScore: number;
+};
+
 type User = {
   userID: string;
   userName: string;
@@ -72,18 +84,14 @@ type User = {
 
 type Plan = {
   planID: string;
-  userID: string;
+  userID: string | string[] | undefined;
   planTitle: string;
   planImage: string;
   study: string;
   guidance: string;
-  titleCategory:string;
-  genreCategory:string;
+  titleCategory: string;
+  genreCategory: string;
   price: string;
-  userAvatar: string;
-  userName: string;
-  reviewCount: number;
-  reviewScore: number;
 };
 
 type PlanM = {
@@ -104,7 +112,7 @@ type ReviewStatusProps = {
 };
 
 type UserInformationProps = {
-  userID: string;
+  userID: string | string[] | undefined;
   testUserId: string;
   userName: string;
   userAvatar: string;
