@@ -32,14 +32,11 @@ const newPlan = () => {
   }) => {
     const { name, value } = e.target;
     setNewPlanData((prev) => ({ ...prev, [name]: value }));
-    console.log(newPlanData);
   };
 
   const addNewPlanHandle = () => {
     setPlanCollections((prev) => [...prev, newPlanData]);
-    console.log(planCollections);
   };
-  console.log(planCollections);
 
   return (
     <Box pt="10px" pb="10px">
