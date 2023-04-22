@@ -21,8 +21,7 @@ import { profileCollectionAtom } from "../lib/recoil/atoms/profileCollectionAtom
 
 const Home = () => {
   //全てのプラン情報を管理するRECOILのSTATEへのSET関数を宣言
-  const [showPlan, setShowPlan] =
-    useRecoilState(showPlanAtom);
+  const setShowPlan = useSetRecoilState(showPlanAtom);
 
   //FIREBASEからすべてのプラン情報を取得
   const [planCollections, setPlanCollections] =
@@ -34,6 +33,7 @@ const Home = () => {
   // const [planPlanManagementCollections, setPlanManagementCollections] = useRecoilState(planManagementCollectionAtom);
 
   useEffect(() => {
+    const newPlan: ShowPlan[] = [];
     //すべてのプラン情報をSTATEにセット
     profileCollections.map((profile) => {
       planCollections.map((plan) => {
@@ -48,15 +48,16 @@ const Home = () => {
             reviewCount: profile.reviewCount,
             reviewScore: profile.reviewScore,
           };
-          setShowPlan((prev) => [...prev, showPlanData]);
-          console.log(showPlanData)
+
+          newPlan.push(showPlanData);
         }
       });
     });
-    //localStorageにState連携
-    // setPlanCollections((prev) => prev);
-    // setProfileCollections((prev) => prev);
-    // setPlanManagementCollections((prev) => prev);
+    setShowPlan(newPlan);
+    //   //localStorageにState連携
+    //   // setPlanCollections((prev) => prev);
+    //   // setProfileCollections((prev) => prev);
+    //   // setPlanManagementCollections((prev) => prev);
   }, []);
 
   return (
@@ -115,7 +116,7 @@ const Home = () => {
             maxW="1000px"
             borderRadius="10"
           >
-            <GamePlan/>
+            <GamePlan />
           </Flex>
         </GridItem>
       </Grid>
