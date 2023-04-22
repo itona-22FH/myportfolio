@@ -31,7 +31,7 @@ export const ConfirmationBtn = ({
         color={color}
         w={width}
         onClick={onOpen}
-        >
+      >
         {text}
       </Button>
 
@@ -40,7 +40,7 @@ export const ConfirmationBtn = ({
         onClose={onClose}
         closeOnOverlayClick={false}
         size="3xl"
-        >
+      >
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>本当に{confirmation}してよろしいですか？</ModalHeader>
@@ -48,11 +48,11 @@ export const ConfirmationBtn = ({
           <ModalBody pb={6}></ModalBody>
 
           <ModalFooter>
-          <Link href={confirmationLink}>
-            <Button colorScheme="blue" mr={3} onClick={handleConfirmation}>
-              {confirmation}する
-            </Button>
-          </Link>
+            <Link href={confirmationLink}>
+              <Button colorScheme="blue" mr={3} onClick={handleConfirmation}>
+                {confirmation}する
+              </Button>
+            </Link>
             <Button onClick={onClose} colorScheme="red">
               {confirmation}しない
             </Button>

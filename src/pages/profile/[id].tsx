@@ -15,7 +15,7 @@ import {
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { AccountControlButton } from "../../components/AccountControlButton";
 import { planCollectionAtom } from "../../lib/recoil/atoms/planCollectionAtom";
 import { profileCollectionAtom } from "../../lib/recoil/atoms/profileCollectionAtom";
@@ -43,7 +43,7 @@ const profile = () => {
 
   // 取得したIDと一致するプランのみをSTATEにセット「登録中のプラン」タブに表示
   useEffect(() => {
-    if(profileData){
+    if (profileData) {
       planCollections.map((plan) => {
         if (profileData.userID === plan.userID) {
           const planData = {
@@ -57,11 +57,11 @@ const profile = () => {
             reviewScore: profileData.reviewScore,
           };
           setShowPlan((prev) => [...prev, planData]);
-          console.log(showPlan)
+          console.log(showPlan);
         }
-      })
+      });
     }
-  }, [id])
+  }, [id]);
 
   return (
     <>
@@ -77,7 +77,6 @@ const profile = () => {
             >
               <UserInformation
                 userID={"_"}
-                testUserId={"_"}
                 userName={profileData.userName}
                 userAvatar={profileData.userAvatar}
                 reviewCount={profileData.reviewCount}
