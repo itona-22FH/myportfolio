@@ -10,9 +10,10 @@ import {
   TabPanel,
   VStack,
   StackDivider,
+  Link,
 } from "@chakra-ui/react";
 import React, { useEffect } from "react";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { AccountControlButton } from "../../components/AccountControlButton";
 import { planCollectionAtom } from "../../lib/recoil/atoms/planCollectionAtom";
 import { profileCollectionAtom } from "../../lib/recoil/atoms/profileCollectionAtom";
@@ -25,7 +26,7 @@ import { UserInformation } from "../../components/UserInformation";
 const myPage = () => {
   //FIREBASEからすべてのプロフィール情報を取得
   const profileCollections = useRecoilValue(profileCollectionAtom);
-  const [showPlan, setShowPlan] = useRecoilState(showPlanAtom);
+  const setShowPlan = useSetRecoilState(showPlanAtom);
   const planCollections = useRecoilValue(planCollectionAtom);
 
   const router = useRouter();
@@ -39,7 +40,7 @@ const myPage = () => {
 
   // ログイン中のユーザーIDと一致するプランのみでフィルターをかけ配列を生成
   useEffect(() => {
-    if(myProfileData){
+    if (myProfileData) {
       planCollections.map((plan) => {
         if (myProfileData.userID === plan.userID) {
           const planData = {
@@ -54,9 +55,9 @@ const myPage = () => {
           };
           setShowPlan((prev) => [...prev, planData]);
         }
-      })
+      });
     }
-  }, [id])
+  }, [id]);
 
   return (
     <>
@@ -72,7 +73,6 @@ const myPage = () => {
             >
               <UserInformation
                 userID={"_"}
-                testUserId={"_"}
                 userName={myProfileData.userName}
                 userAvatar={myProfileData.userAvatar}
                 reviewCount={myProfileData.reviewCount}
@@ -147,11 +147,11 @@ const myPage = () => {
                       maxW="1000px"
                       borderRadius="10px"
                     >
-                      <GamePlan/>
+                      <GamePlan />
                     </Flex>
                   </TabPanel>
                   <TabPanel>
-                    <GamePlan/>
+                    <Box>契約中のプランを表示</Box>
                   </TabPanel>
                 </TabPanels>
               </Tabs>
@@ -161,6 +161,7 @@ const myPage = () => {
       ) : (
         <>
           <Box> ユーザー情報を取得できませんでした。</Box>
+          <Link href="/">トップへもどる</Link>
         </>
       )}
     </>
