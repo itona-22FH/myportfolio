@@ -1,11 +1,12 @@
 import { Avatar, Link, Text } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React from "react";
+import { useRecoilValue } from "recoil";
+import { testLoginUserAtom } from "../lib/recoil/atoms/testLoginUserAtom";
 import { ReviewStatus } from "./ReviewStatus";
 
 export const UserInformation = ({
   userID,
-  testUserId,
   userName,
   userAvatar,
   reviewCount,
@@ -14,13 +15,16 @@ export const UserInformation = ({
   const router = useRouter();
   const { pathname } = router;
 
+  const loginUserId = useRecoilValue(testLoginUserAtom);
+
   return (
     <>
+      {/* プランページで表示する場合はリンク機能をもたせる、プロフィールまたは、マイページの場合はリンクなし */}
       {pathname.includes("plan") ? (
         <Link
           href={
-            testUserId === userID
-              ? `/myPage/${testUserId}`
+            loginUserId === userID
+              ? `/myPage/${loginUserId}`
               : `/profile/${userID}`
           }
           borderRadius="100px"
@@ -35,8 +39,8 @@ export const UserInformation = ({
       {pathname.includes("plan") ? (
         <Link
           href={
-            testUserId === userID
-              ? `/myPage/${testUserId}`
+            loginUserId === userID
+              ? `/myPage/${loginUserId}`
               : `/profile/${userID}`
           }
           mt="10px"
