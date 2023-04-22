@@ -3,21 +3,19 @@
 import { Box, Container, FormControl, Select } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { ConfirmationBtn } from "../../components/ConfirmationBtn";
 import { FormInput } from "../../components/FormInput";
 import { HeadTitle } from "../../components/HeadTitle";
 import { NewRegisterTextBox } from "../../components/NewRegisterTextBox";
 import newPlanRegisterAtom from "../../lib/recoil/atoms/newPlanRegisterAtom";
 import { planCollectionAtom } from "../../lib/recoil/atoms/planCollectionAtom";
-import { profileCollectionAtom } from "../../lib/recoil/atoms/profileCollectionAtom";
 import { v4 as uuidv4 } from "uuid";
 
 const newPlan = () => {
-  const [planCollections, setPlanCollections] =
-    useRecoilState(planCollectionAtom);
-
+  const setPlanCollections = useSetRecoilState(planCollectionAtom);
   const [newPlanData, setNewPlanData] = useRecoilState(newPlanRegisterAtom);
+
   const router = useRouter();
   const { id } = router.query;
 
