@@ -113,7 +113,6 @@ type ReviewStatusProps = {
 
 type UserInformationProps = {
   userID: string | string[] | undefined;
-  testUserId: string;
   userName: string;
   userAvatar: string;
   reviewCount: number;
