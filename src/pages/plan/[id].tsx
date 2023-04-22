@@ -22,36 +22,34 @@ import { useRouter } from "next/router";
 import { planCollectionAtom } from "../../lib/recoil/atoms/planCollectionAtom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { ConfirmationDrawer } from "../../components/ConfirmationDrawer";
-import { testLoginUserAtom } from "../../lib/recoil/atoms/testLoginUserAtom";
 import { UserInformation } from "../../components/UserInformation";
 import { profileCollectionAtom } from "../../lib/recoil/atoms/profileCollectionAtom";
 
 const plan = () => {
   const [planCollections, setPlanCollections] =
     useRecoilState(planCollectionAtom);
-  const testUserId = useRecoilValue(testLoginUserAtom);
-  const profileCollections = useRecoilValue(profileCollectionAtom)
+  const profileCollections = useRecoilValue(profileCollectionAtom);
 
   //URLからPLANのIDを取得
   const router = useRouter();
   const { id } = router.query;
 
   //取得したIDと一致するプランのみをPLANDATAに代入
-    const planData = planCollections.find((plan) => {
-      if (id === plan.planID) {
-        return plan;
+  const planData = planCollections.find((plan) => {
+    if (id === plan.planID) {
+      return plan;
+    }
+  });
+
+  const profileData = profileCollections.find((profile) => {
+    if (planData) {
+      if (planData.userID === profile.userID) {
+        return profile;
       }
-    });
+    }
+  });
 
-      const profileData = profileCollections.find((profile) => {
-        if(planData){
-          if(planData.userID === profile.userID){
-            return profile;
-          }
-        }
-      });
-
-    //プラン削除
+  //プラン削除
   const deletePlanHandle = (id: string | string[]) => {
     const filterPlanCollections = planCollections.filter((plan) => {
       if (id !== plan.planID) {
@@ -124,11 +122,11 @@ const plan = () => {
                 </VStack>
                 <Flex justifyContent="space-around" flexFlow="column">
                   <Box w="100%" p="10px">
-                    {testUserId !== planData.userID && (
+                    {id !== planData.userID && (
                       <ConfirmationDrawer planData={planData} />
                     )}
                     {/* 登録者本人の時表示 */}
-                    {testUserId === planData.userID && (
+                    {id === planData.userID && (
                       <ConfirmationBtn
                         text="プランを削除する"
                         colorScheme="red"
@@ -159,7 +157,6 @@ const plan = () => {
                 >
                   <UserInformation
                     userID={planData.userID}
-                    testUserId={testUserId}
                     userName={profileData.userName}
                     userAvatar={profileData.userAvatar}
                     reviewCount={profileData.reviewCount}
@@ -167,7 +164,7 @@ const plan = () => {
                   />
                   {/* 本人以外の時表示 */}
                   <Box w="100%" p="5px">
-                    {testUserId !== planData.userID && (
+                    {id !== planData.userID && (
                       <>
                         <AccountControlButton
                           text="質問をする"
