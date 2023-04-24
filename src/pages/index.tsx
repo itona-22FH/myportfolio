@@ -48,7 +48,6 @@ const Home = () => {
             reviewCount: profile.reviewCount,
             reviewScore: profile.reviewScore,
           };
-
           newPlan.push(showPlanData);
         }
       });

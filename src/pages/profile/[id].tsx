@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react/jsx-no-undef */
 import {
@@ -57,7 +58,6 @@ const profile = () => {
             reviewScore: profileData.reviewScore,
           };
           setShowPlan((prev) => [...prev, planData]);
-          console.log(showPlan);
         }
       });
     }
