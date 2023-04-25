@@ -1,12 +1,12 @@
 import React from "react";
 import { Text, Image, Link, Box, Avatar, Flex } from "@chakra-ui/react";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
 import { showPlanAtom } from "../lib/recoil/atoms/showPlanAtom";
 import { useRouter } from "next/router";
 import { ReviewStatus } from "./ReviewStatus";
 
 export const GamePlan = () => {
-  const [showPlan, setShowPlan] = useRecoilState(showPlanAtom);
+  const showPlan = useRecoilValue(showPlanAtom);
 
   const router = useRouter();
   const { pathname } = router;
@@ -55,7 +55,7 @@ export const GamePlan = () => {
                 {pathname === "/" && (
                   <>
                     <Flex alignItems="center" mt="4" mb="4">
-                      <Avatar name="Dan Abrahmov" src={userAvatar} />
+                      <Avatar name={userName} src={userAvatar} />
                       <Text ml="3" lineHeight="1" verticalAlign="center">
                         {userName}
                       </Text>
@@ -68,7 +68,7 @@ export const GamePlan = () => {
                 )}
 
                 <Box mt="3" color="red">
-                  {price}
+                  {Number(price).toLocaleString()}
                   <Box as="span" color="black" fontSize="sm">
                     円
                   </Box>

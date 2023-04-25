@@ -24,7 +24,7 @@ export const planCollectionAtom = atom<Plan[]>({
       //ゲームジャンル
       genreCategory:"FPS・TPS",
       //料金
-      price: "2,000",
+      price: "2000",
       //アバター画像
     },
     {
@@ -36,7 +36,7 @@ export const planCollectionAtom = atom<Plan[]>({
       guidance: "Discordを使います",
       titleCategory:" FIFA",
       genreCategory:"スポーツ",
-      price: "1,500",
+      price: "1500",
     },
     {
       planID: "CplanID1",
@@ -47,7 +47,7 @@ export const planCollectionAtom = atom<Plan[]>({
       guidance: "ZOOMを使います",
       titleCategory:"ストリートファイター",
       genreCategory:"格闘",
-      price: "2,000",
+      price: "2000",
     },
     {
       planID: "DplanID1",
@@ -58,7 +58,7 @@ export const planCollectionAtom = atom<Plan[]>({
       guidance: "コーチング動画を渡します",
       titleCategory:" リーグ・オブ・レジェンド",
       genreCategory:"MOBA",
-      price: "1,000",
+      price: "1000",
     },
   ],
   effects_UNSTABLE: [persistAtom],
