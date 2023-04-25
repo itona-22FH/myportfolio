@@ -81,6 +81,7 @@ const newAccount = () => {
           width="100%"
           confirmation="新規登録"
           handleConfirmation={() => {}}
+          confirmationLink={"/"}
         />
       </Container>
     </Box>
