@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-hooks/rules-of-hooks */
 import {
   Box,
@@ -10,14 +11,14 @@ import {
   TabPanel,
   VStack,
   StackDivider,
+  Link,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect } from "react";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { AccountControlButton } from "../../components/AccountControlButton";
 import { planCollectionAtom } from "../../lib/recoil/atoms/planCollectionAtom";
 import { profileCollectionAtom } from "../../lib/recoil/atoms/profileCollectionAtom";
-import { showGamePlanAtom } from "../../lib/recoil/atoms/showGamePlanAtom";
-import { testLoginUserAtom } from "../../lib/recoil/atoms/testLoginUserAtom";
+import { showPlanAtom } from "../../lib/recoil/atoms/showPlanAtom";
 import { GamePlan } from "../../components/GamePlan";
 import { TextBox } from "../../components/TextBox";
 import { useRouter } from "next/router";
@@ -26,20 +27,8 @@ import { UserInformation } from "../../components/UserInformation";
 const myPage = () => {
   //FIREBASEからすべてのプロフィール情報を取得
   const profileCollections = useRecoilValue(profileCollectionAtom);
-  //テスト用ログインユーザーID
-  const testUserId = useRecoilValue(testLoginUserAtom);
-
-  const setShowGamePlan = useSetRecoilState(showGamePlanAtom);
+  const setShowPlan = useSetRecoilState(showPlanAtom);
   const planCollections = useRecoilValue(planCollectionAtom);
-
-  // ログイン中のユーザーIDと一致するプランのみでフィルターをかけ配列を生成
-  setShowGamePlan(
-    planCollections.filter((plan) => {
-      if (testUserId === plan.userID) {
-        return plan;
-      }
-    })
-  );
 
   const router = useRouter();
   const { id } = router.query;
@@ -49,6 +38,27 @@ const myPage = () => {
       return profile;
     }
   });
+
+  // ログイン中のユーザーIDと一致するプランのみでフィルターをかけ配列を生成
+  useEffect(() => {
+    if (myProfileData) {
+      planCollections.map((plan) => {
+        if (myProfileData.userID === plan.userID) {
+          const planData = {
+            planID: plan.planID,
+            planTitle: plan.planTitle,
+            planImage: plan.planImage,
+            userName: myProfileData.userName,
+            price: plan.price,
+            userAvatar: myProfileData.userAvatar,
+            reviewCount: myProfileData.reviewCount,
+            reviewScore: myProfileData.reviewScore,
+          };
+          setShowPlan((prev) => [...prev, planData]);
+        }
+      });
+    }
+  }, [id]);
 
   return (
     <>
@@ -64,7 +74,6 @@ const myPage = () => {
             >
               <UserInformation
                 userID={"_"}
-                testUserId={"_"}
                 userName={myProfileData.userName}
                 userAvatar={myProfileData.userAvatar}
                 reviewCount={myProfileData.reviewCount}
@@ -94,7 +103,7 @@ const myPage = () => {
                   colorScheme="purple"
                   color="white"
                   width="400px"
-                  href="/newPlan"
+                  href={`/newPlan/${id}`}
                 />
               </Box>
             </Flex>
@@ -143,7 +152,7 @@ const myPage = () => {
                     </Flex>
                   </TabPanel>
                   <TabPanel>
-                    <GamePlan />
+                    <Box>契約中のプランを表示</Box>
                   </TabPanel>
                 </TabPanels>
               </Tabs>
@@ -153,6 +162,7 @@ const myPage = () => {
       ) : (
         <>
           <Box> ユーザー情報を取得できませんでした。</Box>
+          <Link href="/">トップへもどる</Link>
         </>
       )}
     </>

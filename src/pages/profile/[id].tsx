@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react/jsx-no-undef */
 import {
@@ -11,22 +12,23 @@ import {
   TabPanel,
   VStack,
   StackDivider,
+  Link,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import React from "react";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import React, { useEffect } from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { AccountControlButton } from "../../components/AccountControlButton";
 import { planCollectionAtom } from "../../lib/recoil/atoms/planCollectionAtom";
 import { profileCollectionAtom } from "../../lib/recoil/atoms/profileCollectionAtom";
-import { showGamePlanAtom } from "../../lib/recoil/atoms/showGamePlanAtom";
 import { GamePlan } from "../../components/GamePlan";
 import { TextBox } from "../../components/TextBox";
 import { UserInformation } from "../../components/UserInformation";
+import { showPlanAtom } from "../../lib/recoil/atoms/showPlanAtom";
 
 const profile = () => {
   //FIREBASEからすべてのプロフィール情報を取得
   const profileCollections = useRecoilValue(profileCollectionAtom);
-  const setShowGamePlan = useSetRecoilState(showGamePlanAtom);
+  const [showPlan, setShowPlan] = useRecoilState(showPlanAtom);
   const planCollections = useRecoilValue(planCollectionAtom);
 
   //URLからUSERのIDを取得
@@ -40,14 +42,26 @@ const profile = () => {
     }
   });
 
-  //取得したIDと一致するプランのみをSTATEにセット「登録中のプラン」タブに表示
-  setShowGamePlan(
-    planCollections.filter((plan) => {
-      if (id === plan.userID) {
-        return plan;
-      }
-    })
-  );
+  // 取得したIDと一致するプランのみをSTATEにセット「登録中のプラン」タブに表示
+  useEffect(() => {
+    if (profileData) {
+      planCollections.map((plan) => {
+        if (profileData.userID === plan.userID) {
+          const planData = {
+            planID: plan.planID,
+            planTitle: plan.planTitle,
+            planImage: plan.planImage,
+            userName: profileData.userName,
+            price: plan.price,
+            userAvatar: profileData.userAvatar,
+            reviewCount: profileData.reviewCount,
+            reviewScore: profileData.reviewScore,
+          };
+          setShowPlan((prev) => [...prev, planData]);
+        }
+      });
+    }
+  }, [id]);
 
   return (
     <>
@@ -63,7 +77,6 @@ const profile = () => {
             >
               <UserInformation
                 userID={"_"}
-                testUserId={"_"}
                 userName={profileData.userName}
                 userAvatar={profileData.userAvatar}
                 reviewCount={profileData.reviewCount}
@@ -142,7 +155,10 @@ const profile = () => {
           </Container>
         </Box>
       ) : (
-        <Box>プロフィール情報を取得できませんでした。</Box>
+        <>
+          <Box>プロフィール情報を取得できませんでした。</Box>
+          <Link href="/">トップへもどる</Link>
+        </>
       )}
     </>
   );

@@ -4,6 +4,8 @@ import React from "react";
 export const NewRegisterTextBox = ({
   htmlFor,
   placeholder,
+  textBoxName,
+  onChangeHandle,
 }: NewRegisterTextBox) => {
   return (
     <Box pb="10px" pt="10px">
@@ -16,6 +18,8 @@ export const NewRegisterTextBox = ({
         h="300"
         borderColor="purple.300"
         p="3px"
+        name={textBoxName}
+        onChange={onChangeHandle}
       ></Textarea>
     </Box>
   );

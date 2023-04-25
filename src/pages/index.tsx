@@ -1,5 +1,4 @@
-/* eslint-disable react-hooks/rules-of-hooks */
-/* eslint-disable react/jsx-no-undef */
+/* eslint-disable react-hooks/exhaustive-deps */
 import Head from "next/head";
 import { GamePlan } from "../components/GamePlan";
 import { CarouselFade } from "../components/CarouselFade";
@@ -14,19 +13,51 @@ import {
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 import { planCollectionAtom } from "../lib/recoil/atoms/planCollectionAtom";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import { showGamePlanAtom } from "../lib/recoil/atoms/showGamePlanAtom";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import { showPlanAtom } from "../lib/recoil/atoms/showPlanAtom";
 import React, { useEffect } from "react";
+import { profileCollectionAtom } from "../lib/recoil/atoms/profileCollectionAtom";
+// import { planManagementCollectionAtom } from "../lib/recoil/atoms/planManagementCollectionAtom";
 
 const Home = () => {
   //全てのプラン情報を管理するRECOILのSTATEへのSET関数を宣言
-  const setShowGamePlanArray = useSetRecoilState(showGamePlanAtom);
+  const setShowPlan = useSetRecoilState(showPlanAtom);
 
   //FIREBASEからすべてのプラン情報を取得
-  const planCollections = useRecoilValue(planCollectionAtom);
+  const [planCollections, setPlanCollections] =
+    useRecoilState(planCollectionAtom);
+  const [profileCollections, setProfileCollections] = useRecoilState(
+    profileCollectionAtom
+  );
 
-  //すべてのプラン情報をSTATEにセット
-  setShowGamePlanArray(planCollections);
+  // const [planPlanManagementCollections, setPlanManagementCollections] = useRecoilState(planManagementCollectionAtom);
+
+  useEffect(() => {
+    const newPlan: ShowPlan[] = [];
+    //すべてのプラン情報をSTATEにセット
+    profileCollections.map((profile) => {
+      planCollections.map((plan) => {
+        if (plan.userID === profile.userID) {
+          const showPlanData = {
+            planID: plan.planID,
+            planTitle: plan.planTitle,
+            planImage: plan.planImage,
+            userName: profile.userName,
+            price: plan.price,
+            userAvatar: profile.userAvatar,
+            reviewCount: profile.reviewCount,
+            reviewScore: profile.reviewScore,
+          };
+          newPlan.push(showPlanData);
+        }
+      });
+    });
+    setShowPlan(newPlan);
+    //   //localStorageにState連携
+    //   // setPlanCollections((prev) => prev);
+    //   // setProfileCollections((prev) => prev);
+    //   // setPlanManagementCollections((prev) => prev);
+  }, []);
 
   return (
     <Box>

@@ -11,6 +11,7 @@ import {
   StackDivider,
   VStack,
   Text,
+  Link,
 } from "@chakra-ui/react";
 import React from "react";
 import { AccountControlButton } from "../../components/AccountControlButton";
@@ -19,14 +20,15 @@ import { HeadTitle } from "../../components/HeadTitle";
 import { TextBox } from "../../components/TextBox";
 import { useRouter } from "next/router";
 import { planCollectionAtom } from "../../lib/recoil/atoms/planCollectionAtom";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { ConfirmationDrawer } from "../../components/ConfirmationDrawer";
-import { testLoginUserAtom } from "../../lib/recoil/atoms/testLoginUserAtom";
 import { UserInformation } from "../../components/UserInformation";
+import { profileCollectionAtom } from "../../lib/recoil/atoms/profileCollectionAtom";
 
 const plan = () => {
-  const planCollections = useRecoilValue(planCollectionAtom);
-  const testUserId = useRecoilValue(testLoginUserAtom);
+  const [planCollections, setPlanCollections] =
+    useRecoilState(planCollectionAtom);
+  const profileCollections = useRecoilValue(profileCollectionAtom);
 
   //URLからPLANのIDを取得
   const router = useRouter();
@@ -39,9 +41,27 @@ const plan = () => {
     }
   });
 
+  const profileData = profileCollections.find((profile) => {
+    if (planData) {
+      if (planData.userID === profile.userID) {
+        return profile;
+      }
+    }
+  });
+
+  //プラン削除
+  const deletePlanHandle = (id: string | string[]) => {
+    const filterPlanCollections = planCollections.filter((plan) => {
+      if (id !== plan.planID) {
+        return plan;
+      }
+    });
+    setPlanCollections(filterPlanCollections);
+  };
+
   return (
     <>
-      {planData ? (
+      {planData && profileData && id ? (
         <Box pt="10px">
           <Container maxW="1100px">
             <Grid
@@ -102,17 +122,19 @@ const plan = () => {
                 </VStack>
                 <Flex justifyContent="space-around" flexFlow="column">
                   <Box w="100%" p="10px">
-                    {testUserId !== planData.userID && (
+                    {id !== planData.userID && (
                       <ConfirmationDrawer planData={planData} />
                     )}
                     {/* 登録者本人の時表示 */}
-                    {testUserId === planData.userID && (
+                    {id === planData.userID && (
                       <ConfirmationBtn
                         text="プランを削除する"
                         colorScheme="red"
                         color="white"
                         width="100%"
                         confirmation="削除"
+                        handleConfirmation={() => deletePlanHandle(id)}
+                        confirmationLink="/"
                       />
                     )}
                   </Box>
@@ -135,15 +157,14 @@ const plan = () => {
                 >
                   <UserInformation
                     userID={planData.userID}
-                    testUserId={testUserId}
-                    userName={planData.userName}
-                    userAvatar={planData.userAvatar}
-                    reviewCount={planData.reviewCount}
-                    reviewScore={planData.reviewScore}
+                    userName={profileData.userName}
+                    userAvatar={profileData.userAvatar}
+                    reviewCount={profileData.reviewCount}
+                    reviewScore={profileData.reviewScore}
                   />
                   {/* 本人以外の時表示 */}
                   <Box w="100%" p="5px">
-                    {testUserId !== planData.userID && (
+                    {id !== planData.userID && (
                       <>
                         <AccountControlButton
                           text="質問をする"
@@ -165,7 +186,6 @@ const plan = () => {
                   </Box>
                 </Flex>
               </GridItem>
-
               <GridItem></GridItem>
             </Grid>
           </Container>
@@ -173,6 +193,7 @@ const plan = () => {
       ) : (
         <>
           <Box>プラン情報の取得に失敗しました。</Box>
+          <Link href="/">トップへもどる</Link>
         </>
       )}
     </>

@@ -12,6 +12,8 @@ type ConfirmationBtnProps = {
   color: string;
   width: string;
   confirmation: string;
+  handleConfirmation: any;
+  confirmationLink: string;
 };
 
 type TextBox = {
@@ -28,12 +30,17 @@ type FormInputProps = {
   type: string;
   label: string;
   placeholder: string;
+  formName: string;
+  onChangeHandle: any;
 };
 
 type NewRegisterTextBox = {
   htmlFor: string;
   placeholder: string;
+  textBoxName: string;
+  onChangeHandle: any;
 };
+
 type ContractBtnProps = {
   text: string;
   colorScheme: string;
@@ -48,6 +55,17 @@ type HeadTitleProps = {
 
 type CategorySearchProps = {
   category: string;
+};
+
+type ShowPlan = {
+  planID: string;
+  planTitle: string;
+  planImage: string;
+  userName: string;
+  price: string;
+  userAvatar: string;
+  reviewCount: number;
+  reviewScore: number;
 };
 
 type User = {
@@ -66,16 +84,14 @@ type User = {
 
 type Plan = {
   planID: string;
-  userID: string;
+  userID: string | string[] | undefined;
   planTitle: string;
   planImage: string;
   study: string;
   guidance: string;
+  titleCategory: string;
+  genreCategory: string;
   price: string;
-  userAvatar: string;
-  userName: string;
-  reviewCount: number;
-  reviewScore: number;
 };
 
 type PlanM = {
@@ -96,8 +112,7 @@ type ReviewStatusProps = {
 };
 
 type UserInformationProps = {
-  userID: string;
-  testUserId: string;
+  userID: string | string[] | undefined;
   userName: string;
   userAvatar: string;
   reviewCount: number;

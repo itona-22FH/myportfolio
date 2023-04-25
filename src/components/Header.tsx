@@ -9,7 +9,7 @@ import { ConfirmationBtn } from "./ConfirmationBtn";
 import { LoginModal } from "./LoginModal";
 
 export const Header = () => {
-  const testUserId = useRecoilValue(testLoginUserAtom);
+  const loginUserId = useRecoilValue(testLoginUserAtom);
 
   const router = useRouter();
   const { id } = router.query;
@@ -42,7 +42,7 @@ export const Header = () => {
 
         <Stack direction="row" spacing={4} mr="10px">
           {/* ログアウト状態の時表示 */}
-          {testUserId === "" && (
+          {loginUserId === "" && (
             <>
               <LoginModal />
               <AccountControlButton
@@ -56,7 +56,7 @@ export const Header = () => {
           )}
 
           {/* ログイン状態の時表示 */}
-          {testUserId !== "" && (
+          {loginUserId !== "" && (
             <>
               <ConfirmationBtn
                 text="ログアウト"
@@ -64,6 +64,8 @@ export const Header = () => {
                 color="purple"
                 width="130px"
                 confirmation="ログアウト"
+                handleConfirmation={() => {}}
+                confirmationLink="/"
               />
               {pathname !== "/myPage/[id]" && (
                 <AccountControlButton
@@ -71,7 +73,7 @@ export const Header = () => {
                   colorScheme="purple"
                   color="white"
                   width="130px"
-                  href={`/myPage/${testUserId}`}
+                  href={`/myPage/${loginUserId}`}
                 />
               )}
             </>

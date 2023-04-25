@@ -11,45 +11,67 @@ const newAccount = () => {
       <Container maxW="1100px" bg="whiteAlpha.800" p="5px" borderRadius="10px">
         <HeadTitle title="新規登録" />
         <FormControl pt="20px">
-          <FormInput label="ユーザー名" type="text" placeholder="userName" />
+          <FormInput
+            label="ユーザー名"
+            type="text"
+            placeholder="userName"
+            formName={""}
+            onChangeHandle={undefined}
+          />
           <FormInput
             label="プロフィール画像"
             type="file"
             placeholder="画像を選択してください"
+            formName={""}
+            onChangeHandle={undefined}
           />
           <FormInput
             label="メールアドレス"
             type="email"
             placeholder="********@email.com"
+            formName={""}
+            onChangeHandle={undefined}
           />
           <FormInput
             label="パスワード"
             type="password"
             placeholder="password"
+            formName={""}
+            onChangeHandle={undefined}
           />
           <FormInput
             label="確認用パスワード"
             type="password"
             placeholder="CheckPassword"
+            formName={""}
+            onChangeHandle={undefined}
           />
           <FormInput
             label="Twitterアカウント"
             type="url"
             placeholder="https://twitter.com/..."
+            formName={""}
+            onChangeHandle={undefined}
           />
           <FormInput
             label="Youtubeアカウント"
             type="url"
             placeholder="https://www.youtube.com.channel/..."
+            formName={""}
+            onChangeHandle={undefined}
           />
           <NewRegisterTextBox
             htmlFor="自己紹介"
             placeholder="こんにちは、〇〇クラン所属のHelloUserです！！"
+            textBoxName={""}
+            onChangeHandle={undefined}
           />
           <NewRegisterTextBox
             htmlFor="経歴・実績"
             placeholder="〇〇大会優勝
             〇〇大会BEST3"
+            textBoxName={""}
+            onChangeHandle={undefined}
           />
         </FormControl>
         <ConfirmationBtn
@@ -58,6 +80,7 @@ const newAccount = () => {
           color="white"
           width="100%"
           confirmation="新規登録"
+          handleConfirmation={() => {}}
         />
       </Container>
     </Box>
