@@ -22,7 +22,6 @@ const newPlan = () => {
   useEffect(() => {
     if (!router.isReady) return;
     setNewPlanData((prev) => ({ ...prev, userID: id, planID: uuidv4() }));
-    console.log(newPlanData);
   }, [id]);
 
   const inputPlanInformation = (e: {

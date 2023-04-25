@@ -17,12 +17,14 @@ import { useRecoilState, useSetRecoilState } from "recoil";
 import { showPlanAtom } from "../lib/recoil/atoms/showPlanAtom";
 import React, { useEffect } from "react";
 import { profileCollectionAtom } from "../lib/recoil/atoms/profileCollectionAtom";
+import newAccountRegisterAtom from "../lib/recoil/atoms/newAccountRegisterAtom";
 // import { planManagementCollectionAtom } from "../lib/recoil/atoms/planManagementCollectionAtom";
 
 const Home = () => {
   //全てのプラン情報を管理するRECOILのSTATEへのSET関数を宣言
   const setShowPlan = useSetRecoilState(showPlanAtom);
-
+  const [newUserData, setNewUserData] = useRecoilState(newAccountRegisterAtom);
+console.log(newUserData)
   //FIREBASEからすべてのプラン情報を取得
   const [planCollections, setPlanCollections] =
     useRecoilState(planCollectionAtom);
@@ -54,8 +56,8 @@ const Home = () => {
     });
     setShowPlan(newPlan);
     //   //localStorageにState連携
-    //   // setPlanCollections((prev) => prev);
-    //   // setProfileCollections((prev) => prev);
+      // setPlanCollections((prev) => prev);
+      // setProfileCollections((prev) => prev);
     //   // setPlanManagementCollections((prev) => prev);
   }, []);
 
