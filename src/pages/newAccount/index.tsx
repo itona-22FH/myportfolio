@@ -77,7 +77,6 @@ const newAccount = () => {
               target: { value: React.SetStateAction<string> };
             }) => {
               setCheckPassword(e.target.value);
-              console.log(checkPassword);
             }}
           />
           <FormInput
