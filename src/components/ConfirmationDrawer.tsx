@@ -18,7 +18,10 @@ import { ConfirmationBtn } from "./ConfirmationBtn";
 import ContractBtn from "./ContractBtn";
 import { TextBox } from "./TextBox";
 
-export const ConfirmationDrawer = ({ planData }: ConfirmationDrawerProps) => {
+export const ConfirmationDrawer = ({
+  planData,
+  profileData,
+}: ConfirmationDrawerProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
@@ -50,7 +53,7 @@ export const ConfirmationDrawer = ({ planData }: ConfirmationDrawerProps) => {
               />
               <TextBox
                 title="メンター名"
-                text={planData.userName}
+                text={profileData.userName}
                 fontSize="20px"
               />
               <Flex
@@ -75,6 +78,8 @@ export const ConfirmationDrawer = ({ planData }: ConfirmationDrawerProps) => {
               color="white"
               width="100%"
               confirmation="契約"
+              handleConfirmation={undefined}
+              confirmationLink={""}
             />
           </Box>
         </DrawerContent>

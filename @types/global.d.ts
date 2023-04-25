@@ -104,6 +104,7 @@ type PlanM = {
 
 type ConfirmationDrawerProps = {
   planData: Plan;
+  profileData: User;
 };
 
 type ReviewStatusProps = {

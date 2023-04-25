@@ -123,7 +123,7 @@ const plan = () => {
                 <Flex justifyContent="space-around" flexFlow="column">
                   <Box w="100%" p="10px">
                     {id !== planData.userID && (
-                      <ConfirmationDrawer planData={planData} />
+                      <ConfirmationDrawer planData={planData} profileData={profileData}/>
                     )}
                     {/* 登録者本人の時表示 */}
                     {id === planData.userID && (
