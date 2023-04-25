@@ -4,6 +4,7 @@ import { ConfirmationBtn } from "../../components/ConfirmationBtn";
 import { FormInput } from "../../components/FormInput";
 import { HeadTitle } from "../../components/HeadTitle";
 import { NewRegisterTextBox } from "../../components/NewRegisterTextBox";
+import { v4 as uuidv4 } from "uuid";
 
 const newAccount = () => {
   return (
@@ -15,62 +16,62 @@ const newAccount = () => {
             label="ユーザー名"
             type="text"
             placeholder="userName"
-            formName={""}
+            formName="userName"
             onChangeHandle={undefined}
           />
           <FormInput
             label="プロフィール画像"
             type="file"
             placeholder="画像を選択してください"
-            formName={""}
+            formName="userAvatar"
             onChangeHandle={undefined}
           />
           <FormInput
             label="メールアドレス"
             type="email"
             placeholder="********@email.com"
-            formName={""}
+            formName="email"
             onChangeHandle={undefined}
           />
           <FormInput
             label="パスワード"
             type="password"
             placeholder="password"
-            formName={""}
+            formName="password"
             onChangeHandle={undefined}
           />
           <FormInput
             label="確認用パスワード"
             type="password"
             placeholder="CheckPassword"
-            formName={""}
+            formName="checkPassword"
             onChangeHandle={undefined}
           />
           <FormInput
             label="Twitterアカウント"
             type="url"
             placeholder="https://twitter.com/..."
-            formName={""}
+            formName="twitterAccount"
             onChangeHandle={undefined}
           />
           <FormInput
             label="Youtubeアカウント"
             type="url"
             placeholder="https://www.youtube.com.channel/..."
-            formName={""}
+            formName="youtubeAccount"
             onChangeHandle={undefined}
           />
           <NewRegisterTextBox
             htmlFor="自己紹介"
             placeholder="こんにちは、〇〇クラン所属のHelloUserです！！"
-            textBoxName={""}
+            textBoxName="selfIntroduction"
             onChangeHandle={undefined}
           />
           <NewRegisterTextBox
             htmlFor="経歴・実績"
             placeholder="〇〇大会優勝
             〇〇大会BEST3"
-            textBoxName={""}
+            textBoxName="achievement"
             onChangeHandle={undefined}
           />
         </FormControl>
