@@ -32,6 +32,7 @@ type FormInputProps = {
   placeholder: string;
   formName: string;
   onChangeHandle: any;
+  formValue: string;
 };
 
 type NewRegisterTextBox = {
@@ -39,6 +40,7 @@ type NewRegisterTextBox = {
   placeholder: string;
   textBoxName: string;
   onChangeHandle: any;
+  textBoxValue: string;
 };
 
 type ContractBtnProps = {
@@ -69,7 +71,7 @@ type ShowPlan = {
 };
 
 type User = {
-  userID: string;
+  userID: string | undefined;
   userName: string;
   userAvatar: string;
   email: string;
