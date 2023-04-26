@@ -46,6 +46,7 @@ const newPlan = () => {
             placeholder="プラン名を入力してください"
             formName="planTitle"
             onChangeHandle={inputPlanInformation}
+            formValue={newPlanData.planTitle}
           />
           <FormInput
             label="プランサムネイル"
@@ -53,6 +54,7 @@ const newPlan = () => {
             placeholder="画像を選択してください"
             formName="planImage"
             onChangeHandle={inputPlanInformation}
+            formValue={""}
           />
           <Select
             placeholder="ジャンル"
@@ -94,18 +96,21 @@ const newPlan = () => {
             placeholder="planPrice"
             formName="price"
             onChangeHandle={inputPlanInformation}
+            formValue={newPlanData.price}
           />
           <NewRegisterTextBox
             htmlFor="学べる内容"
             placeholder="勝つために必要なこと全て！！！エイム力UP、敵を圧倒する立ち回り、得意キャラをさらに極める！！私がすべて教えます！！！"
             textBoxName="study"
             onChangeHandle={inputPlanInformation}
+            textBoxValue={newPlanData.study}
           />
           <NewRegisterTextBox
             htmlFor="指導方法"
             placeholder="動画１本１０００円！（１試合15分想定）"
             textBoxName="guidance"
             onChangeHandle={inputPlanInformation}
+            textBoxValue={newPlanData.guidance}
           />
         </FormControl>
         <ConfirmationBtn

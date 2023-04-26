@@ -31,7 +31,7 @@ const newAccount = () => {
     if (newUserData.password === checkPassword) {
       setProfileCollections((prev) => [...prev, newUserData]);
     } else {
-      console.log("エラー");
+      console.error("エラー");
     }
   };
 
@@ -46,6 +46,7 @@ const newAccount = () => {
             placeholder="userName"
             formName="userName"
             onChangeHandle={inputUserInformation}
+            formValue={newUserData.userName}
           />
           <FormInput
             label="プロフィール画像"
@@ -53,6 +54,7 @@ const newAccount = () => {
             placeholder="画像を選択してください"
             formName="userAvatar"
             onChangeHandle={inputUserInformation}
+            formValue={newUserData.userAvatar}
           />
           <FormInput
             label="メールアドレス"
@@ -60,6 +62,7 @@ const newAccount = () => {
             placeholder="********@email.com"
             formName="email"
             onChangeHandle={inputUserInformation}
+            formValue={newUserData.email}
           />
           <FormInput
             label="パスワード"
@@ -67,6 +70,7 @@ const newAccount = () => {
             placeholder="password"
             formName="password"
             onChangeHandle={inputUserInformation}
+            formValue={newUserData.password}
           />
           <FormInput
             label="確認用パスワード"
@@ -78,6 +82,7 @@ const newAccount = () => {
             }) => {
               setCheckPassword(e.target.value);
             }}
+            formValue={checkPassword}
           />
           <FormInput
             label="Twitterアカウント"
@@ -85,6 +90,7 @@ const newAccount = () => {
             placeholder="https://twitter.com/..."
             formName="twitterAccount"
             onChangeHandle={inputUserInformation}
+            formValue={newUserData.twitterAccount}
           />
           <FormInput
             label="Youtubeアカウント"
@@ -92,12 +98,14 @@ const newAccount = () => {
             placeholder="https://www.youtube.com.channel/..."
             formName="youtubeAccount"
             onChangeHandle={inputUserInformation}
+            formValue={newUserData.youtubeAccount}
           />
           <NewRegisterTextBox
             htmlFor="自己紹介"
             placeholder="こんにちは、〇〇クラン所属のHelloUserです！！"
             textBoxName="selfIntroduction"
             onChangeHandle={inputUserInformation}
+            textBoxValue={newUserData.selfIntroduction}
           />
           <NewRegisterTextBox
             htmlFor="経歴・実績"
@@ -105,6 +113,7 @@ const newAccount = () => {
             〇〇大会BEST3"
             textBoxName="achievement"
             onChangeHandle={inputUserInformation}
+            textBoxValue={newUserData.achievement}
           />
         </FormControl>
         <ConfirmationBtn
