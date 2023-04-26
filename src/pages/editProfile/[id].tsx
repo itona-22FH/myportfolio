@@ -17,23 +17,23 @@ const editProfile = () => {
   const [profileCollections, setProfileCollections] = useRecoilState(
     profileCollectionAtom
   );
-  const [editProfileData, setEditProfileData] = useState<User>();
 
-  const myProfileData = profileCollections.find((profile) => {
-    if (id === profile.userID) {
-      return profile;
-    }
-  });
+    const myProfileData = profileCollections.find((profile) => {
+      if (id === profile.userID) {
+        return profile;
+      }
+    });
 
-  useEffect(() => {
-    setEditProfileData(myProfileData);
-  }, [id]);
+  const [editProfileData, setEditProfileData] = useState<User>(myProfileData);
 
   const inputEditInformation = (e: {
     target: { name: string; value: string | undefined };
   }) => {
-    const { name, value } = e.target;
-    setEditProfileData((prev) => ({ ...prev, [name]: value }));
+    if(myProfileData) {
+
+      const { name, value } = e.target;
+      setEditProfileData((prev) => ({ ...prev, [name]: value }));
+    }
   };
 
   const updateProfileHandle = () => {
