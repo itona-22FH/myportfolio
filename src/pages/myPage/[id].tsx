@@ -94,7 +94,7 @@ const myPage = () => {
                   colorScheme="purple"
                   color="white"
                   width="400px"
-                  href="/editProfile"
+                  href={`/editProfile/${id}`}
                 />
               </Box>
               <Box>
