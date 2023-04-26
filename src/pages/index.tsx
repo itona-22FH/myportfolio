@@ -17,7 +17,6 @@ import { useRecoilState, useSetRecoilState } from "recoil";
 import { showPlanAtom } from "../lib/recoil/atoms/showPlanAtom";
 import React, { useEffect } from "react";
 import { profileCollectionAtom } from "../lib/recoil/atoms/profileCollectionAtom";
-import newAccountRegisterAtom from "../lib/recoil/atoms/newAccountRegisterAtom";
 // import { planManagementCollectionAtom } from "../lib/recoil/atoms/planManagementCollectionAtom";
 
 const Home = () => {

@@ -1,8 +1,8 @@
 import React from "react";
 import { atom } from "recoil";
 
-const newPlanRegisterAtom = atom<Plan>({
-  key: "newPlanRegisterAtom",
+const planInformationAtom = atom<Plan>({
+  key: "planInformationAtom",
   default: {
     planID: "",
     userID: "",
@@ -16,4 +16,4 @@ const newPlanRegisterAtom = atom<Plan>({
   },
 });
 
-export default newPlanRegisterAtom;
+export default planInformationAtom;

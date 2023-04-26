@@ -1,8 +1,8 @@
 import React from "react";
 import { atom } from "recoil";
 
-const editProfileAtom = atom<User>({
-  key: "editProfileAtom",
+const userInformationAtom = atom<User>({
+  key: "userInformationAtom",
   default: {
     userID: "",
     userName: "",
@@ -18,4 +18,4 @@ const editProfileAtom = atom<User>({
   },
 });
 
-export default editProfileAtom;
+export default userInformationAtom;

@@ -8,13 +8,13 @@ import { ConfirmationBtn } from "../../components/ConfirmationBtn";
 import { FormInput } from "../../components/FormInput";
 import { HeadTitle } from "../../components/HeadTitle";
 import { NewRegisterTextBox } from "../../components/NewRegisterTextBox";
-import newPlanRegisterAtom from "../../lib/recoil/atoms/newPlanRegisterAtom";
+import planInformationAtom from "../../lib/recoil/atoms/planInformationAtom";
 import { planCollectionAtom } from "../../lib/recoil/atoms/planCollectionAtom";
 import { v4 as uuidv4 } from "uuid";
 
 const newPlan = () => {
   const setPlanCollections = useSetRecoilState(planCollectionAtom);
-  const [newPlanData, setNewPlanData] = useRecoilState(newPlanRegisterAtom);
+  const [newPlanData, setNewPlanData] = useRecoilState(planInformationAtom);
 
   const router = useRouter();
   const { id } = router.query;

@@ -8,11 +8,11 @@ import { HeadTitle } from "../../components/HeadTitle";
 import { NewRegisterTextBox } from "../../components/NewRegisterTextBox";
 import { v4 as uuidv4 } from "uuid";
 import { useRecoilState, useSetRecoilState } from "recoil";
-import newAccountRegisterAtom from "../../lib/recoil/atoms/newAccountRegisterAtom";
+import userInformationAtom from "../../lib/recoil/atoms/userInformationAtom";
 import { profileCollectionAtom } from "../../lib/recoil/atoms/profileCollectionAtom";
 
 const newAccount = () => {
-  const [newUserData, setNewUserData] = useRecoilState(newAccountRegisterAtom);
+  const [newUserData, setNewUserData] = useRecoilState(userInformationAtom);
   const [checkPassword, setCheckPassword] = useState("");
   const setProfileCollections = useSetRecoilState(profileCollectionAtom);
 
