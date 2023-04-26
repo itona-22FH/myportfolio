@@ -8,6 +8,7 @@ import { ConfirmationBtn } from "../../components/ConfirmationBtn";
 import { FormInput } from "../../components/FormInput";
 import { HeadTitle } from "../../components/HeadTitle";
 import { NewRegisterTextBox } from "../../components/NewRegisterTextBox";
+import editProfileAtom from "../../lib/recoil/atoms/EditProfileAtom";
 import { profileCollectionAtom } from "../../lib/recoil/atoms/profileCollectionAtom";
 
 const editProfile = () => {
@@ -17,34 +18,33 @@ const editProfile = () => {
   const [profileCollections, setProfileCollections] = useRecoilState(
     profileCollectionAtom
   );
+  const [editProfileData, setEditProfileData] = useRecoilState(editProfileAtom);
 
-    const myProfileData = profileCollections.find((profile) => {
-      if (id === profile.userID) {
-        return profile;
-      }
-    });
+  const myProfileData = profileCollections.find((profile) => {
+    if (id === profile.userID) {
+      return profile;
+    }
+  });
 
-  const [editProfileData, setEditProfileData] = useState<User>(myProfileData);
+  useEffect(() => {
+    if (myProfileData) setEditProfileData(myProfileData);
+  }, [id]);
 
   const inputEditInformation = (e: {
     target: { name: string; value: string | undefined };
   }) => {
-    if(myProfileData) {
-
       const { name, value } = e.target;
       setEditProfileData((prev) => ({ ...prev, [name]: value }));
-    }
   };
 
   const updateProfileHandle = () => {
     const updateProfileCollections: User[] = [];
-    if(editProfileData)
-    profileCollections.map((profile) => {
-      id === profile.userID
-        ? updateProfileCollections.push(editProfileData)
-        : updateProfileCollections.push(profile);
-    });
-    setProfileCollections(updateProfileCollections)
+      profileCollections.map((profile) => {
+        id === profile.userID
+          ? updateProfileCollections.push(editProfileData)
+          : updateProfileCollections.push(profile);
+      });
+    setProfileCollections(updateProfileCollections);
   };
 
   return (
