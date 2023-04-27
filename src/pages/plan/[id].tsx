@@ -24,6 +24,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { ConfirmationDrawer } from "../../components/ConfirmationDrawer";
 import { UserInformation } from "../../components/UserInformation";
 import { profileCollectionAtom } from "../../lib/recoil/atoms/profileCollectionAtom";
+import { ReviewModal } from "../../components/ReviewModal";
 
 const plan = () => {
   const [planCollections, setPlanCollections] =
@@ -116,14 +117,20 @@ const plan = () => {
                       プラン料金
                     </Heading>
                     <Text ml="30px" fontSize="40px">
-                      <span style={{ color: "red" }}>{Number(planData.price).toLocaleString()}</span>円
+                      <span style={{ color: "red" }}>
+                        {Number(planData.price).toLocaleString()}
+                      </span>
+                      円
                     </Text>
                   </Flex>
                 </VStack>
                 <Flex justifyContent="space-around" flexFlow="column">
                   <Box w="100%" p="10px">
                     {id !== planData.userID && (
-                      <ConfirmationDrawer planData={planData} profileData={profileData}/>
+                      <ConfirmationDrawer
+                        planData={planData}
+                        profileData={profileData}
+                      />
                     )}
                     {/* 登録者本人の時表示 */}
                     {id === planData.userID && (
@@ -174,12 +181,12 @@ const plan = () => {
                           href="/"
                         />
                         <Box m="10px"></Box>
-                        <AccountControlButton
+                        <ReviewModal
                           text="レビューを投稿する"
                           colorScheme="purple"
                           color="white"
                           width="100%"
-                          href="/"
+                          userId={planData.userID}
                         />
                       </>
                     )}

@@ -24,6 +24,7 @@ import { GamePlan } from "../../components/GamePlan";
 import { TextBox } from "../../components/TextBox";
 import { UserInformation } from "../../components/UserInformation";
 import { showPlanAtom } from "../../lib/recoil/atoms/showPlanAtom";
+import { ReviewModal } from "../../components/ReviewModal";
 
 const profile = () => {
   //FIREBASEからすべてのプロフィール情報を取得
@@ -98,12 +99,12 @@ const profile = () => {
                 width="400px"
                 href="/"
               />
-              <AccountControlButton
+              <ReviewModal
                 text="レビューを投稿する"
                 colorScheme="purple"
                 color="white"
                 width="400px"
-                href="/"
+                userId={profileData.userID}
               />
             </Flex>
 
