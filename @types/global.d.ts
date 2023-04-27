@@ -121,3 +121,13 @@ type UserInformationProps = {
   reviewCount: number;
   reviewScore: number;
 };
+
+type ReviewModalProps = {
+  text: string;
+  colorScheme: string;
+  color: string;
+  width: string;
+  userId: string | string[] | undefined;
+};
+
+declare module "react-awesome-stars-rating";
