@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-undef */
 /* eslint-disable react-hooks/rules-of-hooks */
 import {
   Button,
@@ -6,10 +7,6 @@ import {
   ModalContent,
   ModalHeader,
   ModalCloseButton,
-  ModalBody,
-  FormControl,
-  FormLabel,
-  Input,
   ModalFooter,
   useDisclosure,
 } from "@chakra-ui/react";
@@ -17,6 +14,7 @@ import React, { useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { profileCollectionAtom } from "../lib/recoil/atoms/profileCollectionAtom";
 import { reviewStarAtom } from "../lib/recoil/atoms/reviewStarAtom";
+import userInformationAtom from "../lib/recoil/atoms/userInformationAtom";
 import { StarRating } from "./StarRating";
 
 export const ReviewModal = ({
@@ -29,8 +27,12 @@ export const ReviewModal = ({
   const { isOpen, onOpen, onClose } = useDisclosure();
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
-  const profileCollections = useRecoilValue(profileCollectionAtom);
-  const [star, setStar] = useRecoilState(reviewStarAtom);
+  const [profileCollections, setProfileCollections] = useRecoilState(
+    profileCollectionAtom
+  );
+  const star = useRecoilValue(reviewStarAtom);
+  const [updateUserReviewData, setUpdateUserReviewData] =
+    useRecoilState(userInformationAtom);
 
   const userData = profileCollections.find((profile) => {
     if (profile.userID === userId) {
@@ -38,36 +40,50 @@ export const ReviewModal = ({
     }
   });
 
+  useEffect(() => {
+    if (userData) setUpdateUserReviewData(userData);
+  }, []);
+
   const addReview = () => {
-    };
+    setUpdateUserReviewData((prev) => ({
+      ...prev,
+      reviewCount: prev.reviewCount + 1,
+      reviewScore: prev.reviewScore + star,
+    }));
+    const updateProfileCollections: User[] = [];
+    profileCollections.map((profile) => {
+      userId === profile.userID
+        ? updateProfileCollections.push(updateUserReviewData)
+        : updateProfileCollections.push(profile);
+    });
+    setProfileCollections(updateProfileCollections);
+  };
 
   return (
     <>
       <Button
-      colorScheme={colorScheme}
-      variant="solid"
-      color={color}
-      w={width}
-      onClick={onOpen}
+        colorScheme={colorScheme}
+        variant="solid"
+        color={color}
+        w={width}
+        onClick={onOpen}
       >
         {text}
       </Button>
 
       {/* ログインボタンが押された時に表示するモーダル */}
       <Modal
-      initialFocusRef={initialRef}
-      finalFocusRef={finalRef}
-      isOpen={isOpen}
-      onClose={onClose}
-      size="xl"
+        initialFocusRef={initialRef}
+        finalFocusRef={finalRef}
+        isOpen={isOpen}
+        onClose={onClose}
+        size="xl"
       >
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>メンターの指導はどうでしたか？</ModalHeader>
           <ModalCloseButton />
-
           <StarRating />
-
           <ModalFooter>
             <Button colorScheme="blue" mr="10px" onClick={addReview}>
               投稿する
