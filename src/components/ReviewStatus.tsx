@@ -5,26 +5,17 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
 export const ReviewStatus = ({ review }: ReviewStatusProps) => {
-  const [reviewCount, setReviewCount] = useState<number>(0);
+  const reviewCount = review.length;
 
-  const router = useRouter();
-  const { id } = router.query;
-  
-  useEffect(() => {
-  if (!router.isReady) return;
-  setReviewCount(review.length);
-}, [id])
+  const reviewScoreArray: number[] = [];
 
-const reviewScoreArray: number[] = [];
-
-review.forEach((reviewScore: number) => {
-  reviewScoreArray.push(...Object.values(reviewScore));
-});
-const totalReviewScore = reviewScoreArray.reduce(
-  (accumulator: number, currentValue: number) => accumulator + currentValue,
-  0
-);
-
+  review.forEach((reviewScore: number) => {
+    reviewScoreArray.push(...Object.values(reviewScore));
+  });
+  const totalReviewScore = reviewScoreArray.reduce(
+    (accumulator: number, currentValue: number) => accumulator + currentValue,
+    0
+  );
 
   // const [reviewScore, setReviewScore] = useState(0);
 
