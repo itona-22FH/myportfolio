@@ -66,8 +66,8 @@ type ShowPlan = {
   userName: string;
   price: string;
   userAvatar: string;
-  reviewCount: number;
-  reviewScore: number;
+  review: any;
+
 };
 
 type User = {
@@ -80,8 +80,7 @@ type User = {
   youtubeAccount: string;
   selfIntroduction: string;
   achievement: string;
-  reviewCount: number;
-  reviewScore: number;
+  review: any;
 };
 
 type Plan = {
@@ -110,16 +109,14 @@ type ConfirmationDrawerProps = {
 };
 
 type ReviewStatusProps = {
-  reviewScore: number;
-  reviewCount: number;
+review: number[];
 };
 
 type UserInformationProps = {
   userID: string | string[] | undefined;
   userName: string;
   userAvatar: string;
-  reviewCount: number;
-  reviewScore: number;
+  review: any;
 };
 
 type ReviewModalProps = {
