@@ -51,8 +51,7 @@ const myPage = () => {
             userName: myProfileData.userName,
             price: plan.price,
             userAvatar: myProfileData.userAvatar,
-            reviewCount: myProfileData.reviewCount,
-            reviewScore: myProfileData.reviewScore,
+            review: myProfileData.review,
           };
           setShowPlan((prev) => [...prev, planData]);
         }
@@ -76,8 +75,8 @@ const myPage = () => {
                 userID={"_"}
                 userName={myProfileData.userName}
                 userAvatar={myProfileData.userAvatar}
-                reviewCount={myProfileData.reviewCount}
-                reviewScore={myProfileData.reviewScore}
+                review={myProfileData.review}
+
               />
             </Flex>
 

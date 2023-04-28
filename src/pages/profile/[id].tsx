@@ -55,8 +55,8 @@ const profile = () => {
             userName: profileData.userName,
             price: plan.price,
             userAvatar: profileData.userAvatar,
-            reviewCount: profileData.reviewCount,
-            reviewScore: profileData.reviewScore,
+            review: profileData.review,
+ 
           };
           setShowPlan((prev) => [...prev, planData]);
         }
@@ -80,8 +80,8 @@ const profile = () => {
                 userID={"_"}
                 userName={profileData.userName}
                 userAvatar={profileData.userAvatar}
-                reviewCount={profileData.reviewCount}
-                reviewScore={profileData.reviewScore}
+                review={profileData.review}
+
               />
             </Flex>
 

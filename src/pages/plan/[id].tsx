@@ -62,7 +62,7 @@ const plan = () => {
 
   return (
     <>
-      {planData && profileData && id ? (
+      {planData && profileData  && id ? (
         <Box pt="10px">
           <Container maxW="1100px">
             <Grid
@@ -166,8 +166,7 @@ const plan = () => {
                     userID={planData.userID}
                     userName={profileData.userName}
                     userAvatar={profileData.userAvatar}
-                    reviewCount={profileData.reviewCount}
-                    reviewScore={profileData.reviewScore}
+                    review={profileData.review}
                   />
                   {/* 本人以外の時表示 */}
                   <Box w="100%" p="5px">

@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 import { planCollectionAtom } from "../lib/recoil/atoms/planCollectionAtom";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { showPlanAtom } from "../lib/recoil/atoms/showPlanAtom";
 import React, { useEffect } from "react";
 import { profileCollectionAtom } from "../lib/recoil/atoms/profileCollectionAtom";
@@ -44,8 +44,8 @@ const Home = () => {
             userName: profile.userName,
             price: plan.price,
             userAvatar: profile.userAvatar,
-            reviewCount: profile.reviewCount,
-            reviewScore: profile.reviewScore,
+            review: profile.review,
+
           };
           newPlan.push(showPlanData);
         }
@@ -53,8 +53,8 @@ const Home = () => {
     });
     setShowPlan(newPlan);
     //   //localStorageにState連携
-    // setPlanCollections((prev) => prev);
-    // setProfileCollections((prev) => prev);
+    setPlanCollections((prev) => prev);
+    setProfileCollections((prev) => prev);
     //   // setPlanManagementCollections((prev) => prev);
   }, []);
 
@@ -101,7 +101,7 @@ const Home = () => {
             <CategorySearch category="MOBA" />
             <CategorySearch category="格闘" />
             <CategorySearch category="スポーツ" />
-            <CategorySearch category="エーペックスレジェンズ" />
+            <CategorySearch category="エーペックスレジェンズ"/>
           </VStack>
         </GridItem>
 

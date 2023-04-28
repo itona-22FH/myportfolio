@@ -22,8 +22,7 @@ export const GamePlan = () => {
           userName,
           price,
           userAvatar,
-          reviewCount,
-          reviewScore,
+          review,
         }) => (
           <Link
             key={planID}
@@ -61,8 +60,7 @@ export const GamePlan = () => {
                       </Text>
                     </Flex>
                     <ReviewStatus
-                      reviewCount={reviewCount}
-                      reviewScore={reviewScore}
+                      review={review}
                     />
                   </>
                 )}

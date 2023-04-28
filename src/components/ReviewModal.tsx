@@ -10,6 +10,7 @@ import {
   ModalCloseButton,
   ModalFooter,
   useDisclosure,
+  Link,
 } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
@@ -45,20 +46,20 @@ export const ReviewModal = ({
     if (userData) setUpdateUserReviewData(userData);
   }, []);
 
-  const addReview = () => {
-    setUpdateUserReviewData((prev) => ({
-      ...prev,
-      reviewCount: prev.reviewCount + 1,
-      reviewScore: prev.reviewScore + star,
-    }));
-    const updateProfileCollections: User[] = [];
-    profileCollections.map((profile) => {
-      userId === profile.userID
-        ? updateProfileCollections.push(updateUserReviewData)
-        : updateProfileCollections.push(profile);
-    });
-    setProfileCollections(updateProfileCollections);
-  };
+  // const addReview = () => {
+  //   setUpdateUserReviewData((prev) => ({
+  //     ...prev,
+  //     reviewCount: prev.reviewCount + 1,
+  //     reviewScore: prev.reviewScore + star,
+  //   }));
+  //   const updateProfileCollections: User[] = [];
+  //   profileCollections.map((profile) => {
+  //     userId === profile.userID
+  //       ? updateProfileCollections.push(updateUserReviewData)
+  //       : updateProfileCollections.push(profile);
+  //   });
+  //   setProfileCollections(updateProfileCollections);
+  // };
 
   return (
     <>
@@ -86,9 +87,11 @@ export const ReviewModal = ({
           <ModalCloseButton />
           <StarRating />
           <ModalFooter>
-            <Button colorScheme="blue" mr="10px" onClick={addReview}>
+            {/* <Link href="/"> */}
+            {/* <Button colorScheme="blue" mr="10px" onClick={addReview}>
               投稿する
-            </Button>
+            </Button> */}
+            {/* </Link> */}
             <Button onClick={onClose} colorScheme="red">
               キャンセル
             </Button>
