@@ -4,6 +4,7 @@ import { useRecoilValue } from "recoil";
 import { showPlanAtom } from "../lib/recoil/atoms/showPlanAtom";
 import { useRouter } from "next/router";
 import { ReviewStatus } from "./ReviewStatus";
+import { Badge } from "@chakra-ui/react";
 
 export const GamePlan = () => {
   const showPlan = useRecoilValue(showPlanAtom);
@@ -23,6 +24,8 @@ export const GamePlan = () => {
           price,
           userAvatar,
           review,
+          titleCategory,
+          genreCategory,
         }) => (
           <Link
             key={planID}
@@ -51,6 +54,8 @@ export const GamePlan = () => {
                 >
                   {planTitle}
                 </Box>
+                <Badge bg="purple.200" mr="5px">{genreCategory}</Badge>
+                <Badge bg="purple.200">{titleCategory}</Badge>
                 {pathname === "/" && (
                   <>
                     <Flex alignItems="center" mt="4" mb="4">
@@ -59,9 +64,7 @@ export const GamePlan = () => {
                         {userName}
                       </Text>
                     </Flex>
-                    <ReviewStatus
-                      review={review}
-                    />
+                    <ReviewStatus review={review} />
                   </>
                 )}
 

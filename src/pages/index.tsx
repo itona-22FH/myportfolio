@@ -45,7 +45,8 @@ const Home = () => {
             price: plan.price,
             userAvatar: profile.userAvatar,
             review: profile.review,
-
+            genreCategory: plan.genreCategory,
+            titleCategory: plan.titleCategory,
           };
           newPlan.push(showPlanData);
         }
@@ -101,7 +102,7 @@ const Home = () => {
             <CategorySearch category="MOBA" />
             <CategorySearch category="格闘" />
             <CategorySearch category="スポーツ" />
-            <CategorySearch category="エーペックスレジェンズ"/>
+            <CategorySearch category="エーペックスレジェンズ" />
           </VStack>
         </GridItem>
 

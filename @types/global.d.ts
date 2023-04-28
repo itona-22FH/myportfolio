@@ -67,7 +67,8 @@ type ShowPlan = {
   price: string;
   userAvatar: string;
   review: any;
-
+  genreCategory:string,
+  titleCategory:string,
 };
 
 type User = {

@@ -35,6 +35,8 @@ export const CategorySearch = ({ category }: CategorySearchProps) => {
             price: plan.price,
             userAvatar: profile.userAvatar,
             review: profile.review,
+            genreCategory: plan.genreCategory,
+            titleCategory: plan.titleCategory
           };
           newPlan.push(planData);
         }

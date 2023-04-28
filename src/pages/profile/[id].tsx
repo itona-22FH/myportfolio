@@ -56,7 +56,8 @@ const profile = () => {
             price: plan.price,
             userAvatar: profileData.userAvatar,
             review: profileData.review,
- 
+            genreCategory: plan.genreCategory,
+            titleCategory:plan.titleCategory
           };
           setShowPlan((prev) => [...prev, planData]);
         }

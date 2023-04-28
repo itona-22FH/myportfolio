@@ -52,6 +52,8 @@ const myPage = () => {
             price: plan.price,
             userAvatar: myProfileData.userAvatar,
             review: myProfileData.review,
+            genreCategory: plan.genreCategory,
+            titleCategory:plan.titleCategory
           };
           setShowPlan((prev) => [...prev, planData]);
         }
