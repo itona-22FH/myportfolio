@@ -22,6 +22,8 @@ export const CategorySearch = ({ category }: CategorySearchProps) => {
         plan.titleCategory === e.target.innerText
       ) {
         return plan;
+      } else if (e.target.innerText === "全てのプラン") {
+        return planCollections;
       }
     });
     sortPlan.map((plan) => {
@@ -36,7 +38,7 @@ export const CategorySearch = ({ category }: CategorySearchProps) => {
             userAvatar: profile.userAvatar,
             review: profile.review,
             genreCategory: plan.genreCategory,
-            titleCategory: plan.titleCategory
+            titleCategory: plan.titleCategory,
           };
           newPlan.push(planData);
         }
