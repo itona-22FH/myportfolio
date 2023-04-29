@@ -28,22 +28,24 @@ import { ReviewModal } from "../../components/ReviewModal";
 import { testLoginUserAtom } from "../../lib/recoil/atoms/testLoginUserAtom";
 
 const plan = () => {
+  //planCollectionsのSTATEを取得
   const [planCollections, setPlanCollections] =
     useRecoilState(planCollectionAtom);
   const profileCollections = useRecoilValue(profileCollectionAtom);
   const loginUser = useRecoilValue(testLoginUserAtom)
 
-  //URLからPLANのIDを取得
+  //URLからプランのIDを取得
   const router = useRouter();
   const { id } = router.query;
 
-  //取得したIDと一致するプランのみをPLANDATAに代入
+  //取得したIDと一致するプランのみをplanDataに代入
   const planData = planCollections.find((plan) => {
     if (id === plan.planID) {
       return plan;
     }
   });
 
+  //planDataの持つuserIdと一致するプロフィール情報を取得
   const profileData = profileCollections.find((profile) => {
     if (planData) {
       if (planData.userID === profile.userID) {

@@ -13,7 +13,9 @@ export const StarRating = () => {
 
   return (
     <>
-      <ReactStarsRating onChange={onChange} value={star} isHalf={false}/>
+    {/* レビュー投稿用の星を表示*/}
+      <ReactStarsRating onChange={onChange} value={star}/>
     </>
   );
+
 };

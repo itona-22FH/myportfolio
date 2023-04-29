@@ -54,8 +54,8 @@ const Home = () => {
     });
     setShowPlan(newPlan);
     //   //localStorageにState連携
-    setPlanCollections((prev) => prev);
-    setProfileCollections((prev) => prev);
+    // setPlanCollections((prev) => prev);
+    // setProfileCollections((prev) => prev);
     //   // setPlanManagementCollections((prev) => prev);
   }, []);
 

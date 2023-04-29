@@ -27,12 +27,18 @@ import { UserInformation } from "../../components/UserInformation";
 const myPage = () => {
   //FIREBASEからすべてのプロフィール情報を取得
   const profileCollections = useRecoilValue(profileCollectionAtom);
+
+  //表示するプランの保持のためのSTATEを定義
   const setShowPlan = useSetRecoilState(showPlanAtom);
+
+  //プラン情報の取得
   const planCollections = useRecoilValue(planCollectionAtom);
 
+  //URLからユーザーのIDを取得
   const router = useRouter();
   const { id } = router.query;
 
+  //プロフィールコレクションから自分のプロフィールデータのみを取得
   const myProfileData = profileCollections.find((profile) => {
     if (id === profile.userID) {
       return profile;
@@ -55,6 +61,7 @@ const myPage = () => {
             genreCategory: plan.genreCategory,
             titleCategory:plan.titleCategory
           };
+          //showPlanにFilterをかけた配列をセット
           setShowPlan((prev) => [...prev, planData]);
         }
       });

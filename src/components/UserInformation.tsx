@@ -9,7 +9,7 @@ export const UserInformation = ({
   userID,
   userName,
   userAvatar,
-  review
+  review,
 }: UserInformationProps) => {
   const router = useRouter();
   const { pathname } = router;
@@ -18,35 +18,47 @@ export const UserInformation = ({
 
   return (
     <>
-      {/* プランページで表示する場合はリンク機能をもたせる、プロフィールまたは、マイページの場合はリンクなし */}
+      {/*プランページにいる？ */}
       {pathname.includes("plan") ? (
-        <Link
-          href={
-            loginUserId === userID
-              ? `/myPage/${loginUserId}`
-              : `/profile/${userID}`
-          }
-          borderRadius="100px"
-        >
-          <Avatar size="2xl" name={userName} src={userAvatar} />
-        </Link>
+        <>
+          {/* プランページ表示の場合はリンク機能追加
+              ログイン中のユーザーのアバターの場合はマイページ
+              異なる場合は、プロフィールページへ遷移
+          */}
+          <Link
+            href={
+              loginUserId === userID
+                ? `/myPage/${loginUserId}`
+                : `/profile/${userID}`
+            }
+            borderRadius="100px"
+          >
+            <Avatar size="2xl" name={userName} src={userAvatar} />
+          </Link>
+        </>
       ) : (
         <>
           <Avatar size="2xl" name={userName} src={userAvatar} />
         </>
       )}
       {pathname.includes("plan") ? (
-        <Link
-          href={
-            loginUserId === userID
-              ? `/myPage/${loginUserId}`
-              : `/profile/${userID}`
-          }
-          mt="10px"
-          fontSize="35px"
-        >
-          {userName}
-        </Link>
+        <>
+          {/* プランページ表示の場合はリンク機能追加
+              ログイン中のユーザーのユーザー名の場合はマイページ
+              異なる場合は、プロフィールページへ遷移
+          */}
+          <Link
+            href={
+              loginUserId === userID
+                ? `/myPage/${loginUserId}`
+                : `/profile/${userID}`
+            }
+            mt="10px"
+            fontSize="35px"
+          >
+            {userName}
+          </Link>
+        </>
       ) : (
         <>
           <Text mt="10px" fontSize="35px">

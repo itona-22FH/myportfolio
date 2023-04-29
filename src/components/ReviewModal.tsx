@@ -34,12 +34,13 @@ export const ReviewModal = ({
   const [profileCollections, setProfileCollections] = useRecoilState(
     profileCollectionAtom
   );
+  //レビュースコアを取得
   const star = useRecoilValue(reviewStarAtom);
-  const [updateUserReviewData, setUpdateUserReviewData] =
-    useRecoilState(userInformationAtom);
 
-    const loginUser = useRecoilValue(testLoginUserAtom)
+  //レビューをするユーザーIDを取得
+  const loginUser = useRecoilValue(testLoginUserAtom);
 
+  //レビューされるユーザーのデータを取得
   const userData = profileCollections.find((profile) => {
     if (profile.userID === userId) {
       return profile;
@@ -47,18 +48,20 @@ export const ReviewModal = ({
   });
 
   const addReview = () => {
-      userData?.review.forEach((review: any) => {
-        if(loginUser in review){
-          Object.assign(review,{[loginUser]: star})
-        } else if(!(loginUser in review)){
-          userData.review.push({loginUser: star});
-        }
-      })
-    const updateProfileCollections: User[] = [];
+    userData?.review.forEach((review: any) => {
+      if (loginUser in review) {
+        //過去に同じユーザーにレビューした記録がある時
+        Object.assign(review, { [loginUser]: star }); //スコアの上書き
+      } else if (!(loginUser in review)) {
+        //過去に同じユーザーにレビューしたことがない時
+        userData.review.push({ loginUser: star }); //新たにレビュー情報の追加
+      }
+    });
+    const updateProfileCollections: User[] = []; //profileCollections更新のための配列定義
     profileCollections.map((profile) => {
-      userId === profile.userID && userData
-        ? updateProfileCollections.push(userData)
-        : updateProfileCollections.push(profile);
+      userId === profile.userID && userData //レビュー対象のユーザー？
+        ? updateProfileCollections.push(userData) //レビュー情報を更新したデータを追加
+        : updateProfileCollections.push(profile); //現在のデータをそのまま追加
     });
     setProfileCollections(updateProfileCollections);
   };
@@ -90,9 +93,9 @@ export const ReviewModal = ({
           <StarRating />
           <ModalFooter>
             <Link>
-            <Button colorScheme="blue" mr="10px" onClick={addReview}>
-              投稿する
-            </Button>
+              <Button colorScheme="blue" mr="10px" onClick={addReview}>
+                投稿する
+              </Button>
             </Link>
             <Button onClick={onClose} colorScheme="red">
               キャンセル

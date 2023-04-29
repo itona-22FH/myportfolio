@@ -12,20 +12,26 @@ import userInformationAtom from "../../lib/recoil/atoms/userInformationAtom";
 import { profileCollectionAtom } from "../../lib/recoil/atoms/profileCollectionAtom";
 
 const editProfile = () => {
+  //URLからユーザーのIDを取得
   const router = useRouter();
   const { id } = router.query;
 
+  //profileCollectionsのSTATEの定義
   const [profileCollections, setProfileCollections] = useRecoilState(
     profileCollectionAtom
   );
+
+  //編集情報の保持のためのSTATEを定義
   const [editUserData, setEditUserData] = useRecoilState(userInformationAtom);
 
+  //自分のプロフィールデータをコレクションから取得
   const myProfileData = profileCollections.find((profile) => {
     if (id === profile.userID) {
       return profile;
     }
   });
 
+  //取得した自分のプロフィールデータを編集用のSTATEにセット
   useEffect(() => {
     if (myProfileData) setEditUserData(myProfileData);
   }, [id]);
@@ -33,7 +39,9 @@ const editProfile = () => {
   const inputEditInformation = (e: {
     target: { name: string; value: string | undefined };
   }) => {
+    //inputタグのtargetのnameとvalueを取得
     const { name, value } = e.target;
+    //editUserDataが持つ同一のKEY名の値を上書き
     setEditUserData((prev) => ({ ...prev, [name]: value }));
   };
 

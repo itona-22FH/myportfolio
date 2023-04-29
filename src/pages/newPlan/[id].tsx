@@ -13,24 +13,34 @@ import { planCollectionAtom } from "../../lib/recoil/atoms/planCollectionAtom";
 import { v4 as uuidv4 } from "uuid";
 
 const newPlan = () => {
+  //プランコレクションのSET関数定義
   const setPlanCollections = useSetRecoilState(planCollectionAtom);
+
+  //新プラン情報保持のためのStateを定義
   const [newPlanData, setNewPlanData] = useRecoilState(planInformationAtom);
 
+  //URLからUSERのIDを取得
   const router = useRouter();
   const { id } = router.query;
 
+  //初回レンダリング時とid取得時にsetNewPlanData関数を発火
   useEffect(() => {
+    if (!router.isReady) return;
+    //planIDプロパティとuserIDプロパティにそれぞれIDをセット
     setNewPlanData((prev) => ({ ...prev, userID: id, planID: uuidv4() }));
   }, [id]);
 
   const inputPlanInformation = (e: {
     target: { name: string; value: string | number };
   }) => {
+    //inputタグのtargetのnameとvalueを取得
     const { name, value } = e.target;
+    //newPlanDataが持つ同一のKEY名の値を上書き
     setNewPlanData((prev) => ({ ...prev, [name]: value }));
   };
 
   const addNewPlanHandle = () => {
+    //プラン情報を保持したnewPlanDataをPlanCollectionsに加える
     setPlanCollections((prev) => [...prev, newPlanData]);
   };
 

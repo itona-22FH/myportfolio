@@ -12,25 +12,33 @@ import userInformationAtom from "../../lib/recoil/atoms/userInformationAtom";
 import { profileCollectionAtom } from "../../lib/recoil/atoms/profileCollectionAtom";
 
 const newAccount = () => {
+  //新規アカウントの情報を保持するためのSTATEを定義
   const [newUserData, setNewUserData] = useRecoilState(userInformationAtom);
+  //パスワードチェックのためのSTATEを定義
   const [checkPassword, setCheckPassword] = useState("");
+  //profileCollections更新のためのSET関数を定義
   const setProfileCollections = useSetRecoilState(profileCollectionAtom);
 
   useEffect(() => {
+    //初回レンダリング時にuserIDをuuidによって生成
     setNewUserData((prev) => ({ ...prev, userID: uuidv4() }));
   }, []);
 
   const inputUserInformation = (e: {
     target: { name: string; value: string | number };
   }) => {
+    //inputタグのtargetのnameとvalueを取得
     const { name, value } = e.target;
+    //newUserDataが持つ同一のKEY名の値を上書き
     setNewUserData((prev) => ({ ...prev, [name]: value }));
   };
 
   const addNewAccountHandle = (e: { preventDefault: () => void }) => {
-    if (newUserData.password === checkPassword) {
+    if (newUserData.password === checkPassword) { // パスワード一致？
+      //profileCollectionsに新規アカウントを追加
       setProfileCollections((prev) => [...prev, newUserData]);
-    } else {
+    } else { //パスワード不一致
+      //エラー出力
       console.error("エラー");
     }
   };
@@ -123,7 +131,7 @@ const newAccount = () => {
           width="100%"
           confirmation="新規登録"
           handleConfirmation={addNewAccountHandle}
-          confirmationLink={"/newAccount"}
+          confirmationLink={"/"}
         />
       </Container>
     </Box>
