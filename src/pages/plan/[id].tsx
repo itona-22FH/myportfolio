@@ -67,14 +67,14 @@ const plan = () => {
   return (
     <>
       {planData && profileData  && id ? (
-        <Box pt="10px">
+        <Box pt="10px" pb="10px">
           <Container maxW="1100px">
             <Grid
               templateAreas={`
                       "nav main"
                       "nav empty"
                     `}
-              gridTemplateRows={"350px 1fr 1px"}
+              gridTemplateRows={"450px 1fr"}
               gridTemplateColumns={"1fr 350px"}
               gap="10px"
               fontWeight="bold"
@@ -158,7 +158,7 @@ const plan = () => {
                 bg="whiteAlpha.800"
                 borderRadius="10"
                 p="0"
-              >
+                              >
                 <Flex
                   justifyContent="center"
                   alignItems="center"
