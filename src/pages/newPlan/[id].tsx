@@ -97,6 +97,13 @@ const newPlan = () => {
               リーグ・オブ・レジェンド
             </option>
             <option value="FIFA">FIFA</option>
+            <option value="ポケモン">ポケモン</option>
+            <option value="COD">COD</option>
+            <option value="鉄拳">鉄拳</option>
+            <option value="NBA">NBA</option>
+            <option value="バトルフィールド">バトルフィールド</option>
+            <option value="フォートナイト">フォートナイト</option>
+            <option value="オーバーウォッチ２">オーバーウォッチ２</option>
           </Select>
 
           <FormInput
