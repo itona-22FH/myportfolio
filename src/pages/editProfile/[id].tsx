@@ -112,7 +112,7 @@ const editProfile = () => {
             width="100%"
             confirmation="アカウント情報を更新"
             handleConfirmation={updateProfileHandle}
-            confirmationLink={`/editProfile/${id}`}
+            confirmationLink={`/myPage/${id}`}
           />
         </Container>
       </Box>
