@@ -46,7 +46,7 @@ export const CategorySearch = ({ category }: CategorySearchProps) => {
   };
   return (
     <>
-      <Button h="40px" onClick={sortPlanHandle}>
+      <Button h="40px" onClick={sortPlanHandle} bg="purple.200">
         {category}
       </Button>
     </>
