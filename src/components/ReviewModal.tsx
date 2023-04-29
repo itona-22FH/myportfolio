@@ -12,10 +12,12 @@ import {
   useDisclosure,
   Link,
 } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { profileCollectionAtom } from "../lib/recoil/atoms/profileCollectionAtom";
 import { reviewStarAtom } from "../lib/recoil/atoms/reviewStarAtom";
+import { testLoginUserAtom } from "../lib/recoil/atoms/testLoginUserAtom";
 import userInformationAtom from "../lib/recoil/atoms/userInformationAtom";
 import { StarRating } from "./StarRating";
 
@@ -36,30 +38,30 @@ export const ReviewModal = ({
   const [updateUserReviewData, setUpdateUserReviewData] =
     useRecoilState(userInformationAtom);
 
+    const loginUser = useRecoilValue(testLoginUserAtom)
+
   const userData = profileCollections.find((profile) => {
     if (profile.userID === userId) {
       return profile;
     }
   });
 
-  useEffect(() => {
-    if (userData) setUpdateUserReviewData(userData);
-  }, []);
-
-  // const addReview = () => {
-  //   setUpdateUserReviewData((prev) => ({
-  //     ...prev,
-  //     reviewCount: prev.reviewCount + 1,
-  //     reviewScore: prev.reviewScore + star,
-  //   }));
-  //   const updateProfileCollections: User[] = [];
-  //   profileCollections.map((profile) => {
-  //     userId === profile.userID
-  //       ? updateProfileCollections.push(updateUserReviewData)
-  //       : updateProfileCollections.push(profile);
-  //   });
-  //   setProfileCollections(updateProfileCollections);
-  // };
+  const addReview = () => {
+      userData?.review.forEach((review: any) => {
+        if(loginUser in review){
+          Object.assign(review,{[loginUser]: star})
+        } else if(!(loginUser in review)){
+          userData.review.push({loginUser: star});
+        }
+      })
+    const updateProfileCollections: User[] = [];
+    profileCollections.map((profile) => {
+      userId === profile.userID && userData
+        ? updateProfileCollections.push(userData)
+        : updateProfileCollections.push(profile);
+    });
+    setProfileCollections(updateProfileCollections);
+  };
 
   return (
     <>
@@ -87,11 +89,11 @@ export const ReviewModal = ({
           <ModalCloseButton />
           <StarRating />
           <ModalFooter>
-            {/* <Link href="/"> */}
-            {/* <Button colorScheme="blue" mr="10px" onClick={addReview}>
+            <Link>
+            <Button colorScheme="blue" mr="10px" onClick={addReview}>
               投稿する
-            </Button> */}
-            {/* </Link> */}
+            </Button>
+            </Link>
             <Button onClick={onClose} colorScheme="red">
               キャンセル
             </Button>
