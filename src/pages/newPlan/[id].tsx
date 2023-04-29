@@ -20,7 +20,6 @@ const newPlan = () => {
   const { id } = router.query;
 
   useEffect(() => {
-    if (!router.isReady) return;
     setNewPlanData((prev) => ({ ...prev, userID: id, planID: uuidv4() }));
   }, [id]);
 
