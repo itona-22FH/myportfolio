@@ -12,14 +12,13 @@ import {
   useDisclosure,
   Link,
 } from "@chakra-ui/react";
-import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { profileCollectionAtom } from "../lib/recoil/atoms/profileCollectionAtom";
 import { reviewStarAtom } from "../lib/recoil/atoms/reviewStarAtom";
 import { testLoginUserAtom } from "../lib/recoil/atoms/testLoginUserAtom";
-import userInformationAtom from "../lib/recoil/atoms/userInformationAtom";
 import { StarRating } from "./StarRating";
+import accountInformationAtom from "../lib/recoil/atoms/accountInformationAtom";
 
 export const ReviewModal = ({
   text,
@@ -40,6 +39,9 @@ export const ReviewModal = ({
   //レビューをするユーザーIDを取得
   const loginUser = useRecoilValue(testLoginUserAtom);
 
+  const [updateReviewData, setUpdateReviewData] = useRecoilState(
+    accountInformationAtom
+  );
   //レビューされるユーザーのデータを取得
   const userData = profileCollections.find((profile) => {
     if (profile.userID === userId) {
@@ -47,20 +49,21 @@ export const ReviewModal = ({
     }
   });
 
+  useEffect(() => {
+    if (userData) setUpdateReviewData(userData);
+  }, []);
+
   const addReview = () => {
-    userData?.review.forEach((review: any) => {
-      if (loginUser in review) {
-        //過去に同じユーザーにレビューした記録がある時
-        Object.assign(review, { [loginUser]: star }); //スコアの上書き
-      } else if (!(loginUser in review)) {
-        //過去に同じユーザーにレビューしたことがない時
-        userData.review.push({ loginUser: star }); //新たにレビュー情報の追加
-      }
-    });
+    console.log(updateReviewData);
+    setUpdateReviewData((prev) => ({
+      ...prev,
+      review: [...prev.review, {[loginUser]: star}],
+    }));
+    console.log(updateReviewData);
     const updateProfileCollections: User[] = []; //profileCollections更新のための配列定義
     profileCollections.map((profile) => {
       userId === profile.userID && userData //レビュー対象のユーザー？
-        ? updateProfileCollections.push(userData) //レビュー情報を更新したデータを追加
+        ? updateProfileCollections.push(updateReviewData) //レビュー情報を更新したデータを追加
         : updateProfileCollections.push(profile); //現在のデータをそのまま追加
     });
     setProfileCollections(updateProfileCollections);
