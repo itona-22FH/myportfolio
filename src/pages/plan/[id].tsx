@@ -25,11 +25,13 @@ import { ConfirmationDrawer } from "../../components/ConfirmationDrawer";
 import { UserInformation } from "../../components/UserInformation";
 import { profileCollectionAtom } from "../../lib/recoil/atoms/profileCollectionAtom";
 import { ReviewModal } from "../../components/ReviewModal";
+import { testLoginUserAtom } from "../../lib/recoil/atoms/testLoginUserAtom";
 
 const plan = () => {
   const [planCollections, setPlanCollections] =
     useRecoilState(planCollectionAtom);
   const profileCollections = useRecoilValue(profileCollectionAtom);
+  const loginUser = useRecoilValue(testLoginUserAtom)
 
   //URLからPLANのIDを取得
   const router = useRouter();
@@ -126,14 +128,14 @@ const plan = () => {
                 </VStack>
                 <Flex justifyContent="space-around" flexFlow="column">
                   <Box w="100%" p="10px">
-                    {id !== planData.userID && (
+                    {loginUser !== planData.userID && (
                       <ConfirmationDrawer
                         planData={planData}
                         profileData={profileData}
                       />
                     )}
                     {/* 登録者本人の時表示 */}
-                    {id === planData.userID && (
+                    {loginUser === planData.userID && (
                       <ConfirmationBtn
                         text="プランを削除する"
                         colorScheme="red"
@@ -170,7 +172,7 @@ const plan = () => {
                   />
                   {/* 本人以外の時表示 */}
                   <Box w="100%" p="5px">
-                    {id !== planData.userID && (
+                    {loginUser !== planData.userID && (
                       <>
                         <AccountControlButton
                           text="質問をする"
