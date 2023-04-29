@@ -26,7 +26,7 @@ export const profileCollectionAtom = atom<User[]>({
       //実績・経歴
       achievement: "優勝経験有り",
       //レビュー数
-      review: [{userC: 3},{userB: 1}, {userD: 5}],
+      review: [{"userC": 3},{"userB": 1}, {"userD": 5}],
 
     },
     {
