@@ -9,8 +9,7 @@ export const UserInformation = ({
   userID,
   userName,
   userAvatar,
-  reviewCount,
-  reviewScore,
+  review
 }: UserInformationProps) => {
   const router = useRouter();
   const { pathname } = router;
@@ -55,7 +54,7 @@ export const UserInformation = ({
           </Text>
         </>
       )}
-      <ReviewStatus reviewCount={reviewCount} reviewScore={reviewScore} />
+      <ReviewStatus review={review} />
     </>
   );
 };
