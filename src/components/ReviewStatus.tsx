@@ -1,9 +1,7 @@
 /* eslint-disable react/jsx-no-undef */
 /* eslint-disable react-hooks/exhaustive-deps */
-import { StarIcon } from "@chakra-ui/icons";
 import { Box } from "@chakra-ui/react";
-import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import ReactStarsRating from "react-awesome-stars-rating";
 
 export const ReviewStatus = ({ review }: ReviewStatusProps) => {

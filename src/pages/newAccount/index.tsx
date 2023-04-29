@@ -8,12 +8,12 @@ import { HeadTitle } from "../../components/HeadTitle";
 import { NewRegisterTextBox } from "../../components/NewRegisterTextBox";
 import { v4 as uuidv4 } from "uuid";
 import { useRecoilState, useSetRecoilState } from "recoil";
-import userInformationAtom from "../../lib/recoil/atoms/userInformationAtom";
+import accountInformationAtom from "../../lib/recoil/atoms/accountInformationAtom";
 import { profileCollectionAtom } from "../../lib/recoil/atoms/profileCollectionAtom";
 
 const newAccount = () => {
   //新規アカウントの情報を保持するためのSTATEを定義
-  const [newUserData, setNewUserData] = useRecoilState(userInformationAtom);
+  const [newUserData, setNewUserData] = useRecoilState(accountInformationAtom);
   //パスワードチェックのためのSTATEを定義
   const [checkPassword, setCheckPassword] = useState("");
   //profileCollections更新のためのSET関数を定義
@@ -34,10 +34,12 @@ const newAccount = () => {
   };
 
   const addNewAccountHandle = (e: { preventDefault: () => void }) => {
-    if (newUserData.password === checkPassword) { // パスワード一致？
+    if (newUserData.password === checkPassword) {
+      // パスワード一致？
       //profileCollectionsに新規アカウントを追加
       setProfileCollections((prev) => [...prev, newUserData]);
-    } else { //パスワード不一致
+    } else {
+      //パスワード不一致
       //エラー出力
       console.error("エラー");
     }
