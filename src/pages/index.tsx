@@ -86,13 +86,13 @@ const Home = () => {
           borderRadius="10"
           ml="10"
           p="2"
-          
+
         >
           <VStack
             divider={<StackDivider borderColor="purple.300" />}
             spacing={4}
             align="stretch"
-            
+
           >
             <Box h="40px">
               <span style={{ marginLeft: 10 }}>
@@ -100,6 +100,7 @@ const Home = () => {
                 <span>ソート</span>
               </span>
             </Box>
+            <CategorySearch category="全てのプラン" />
             <CategorySearch category="FPS・TPS" />
             <CategorySearch category="MOBA" />
             <CategorySearch category="格闘" />
