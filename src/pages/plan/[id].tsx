@@ -74,7 +74,7 @@ const plan = () => {
                       "nav main"
                       "nav empty"
                     `}
-              gridTemplateRows={"450px 1fr"}
+              gridTemplateRows={"350px 1fr"}
               gridTemplateColumns={"1fr 350px"}
               gap="10px"
               fontWeight="bold"
