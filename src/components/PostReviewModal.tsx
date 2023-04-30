@@ -37,7 +37,6 @@ export const PostReviewModal = ({
 
   //レビュースコアを取得
   const [star, setStar] = useRecoilState(reviewStarAtom);
-  console.log(star);
 
   //レビューをするユーザーIDを取得
   const loginUser = useRecoilValue(testLoginUserAtom);
@@ -76,13 +75,15 @@ export const PostReviewModal = ({
       isFirstRender.current = false;
       return;
     }
-    const updateProfileCollections: User[] = []; //profileCollections更新のための配列定義
     profileCollections.map((profile) => {
       userId === profile.userID && userData //レビュー対象のユーザー？
-        ? updateProfileCollections.push(updateReviewData) //レビュー情報を更新したデータを追加
-        : updateProfileCollections.push(profile); //現在のデータをそのまま追加
+        ? setProfileCollections((prev) =>
+            prev.map((obj) =>
+              obj.userID === profile.userID ? updateReviewData : obj
+            )
+          ) //レビューデータ更新したデータ
+        : setProfileCollections((prev) => prev); //現在のデータをそのまま追加
     });
-    setProfileCollections(updateProfileCollections);
     setStar(0);
   }, [updateReviewData]);
 
