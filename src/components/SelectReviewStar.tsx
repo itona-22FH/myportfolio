@@ -4,7 +4,7 @@ import { useRecoilState } from "recoil";
 import { reviewStarAtom } from "../lib/recoil/atoms/reviewStarAtom";
 import ReactStars from "react-stars";
 
-export const PostReviewStar = () => {
+export const SelectReviewStar = () => {
   const [star, setStar] = useRecoilState(reviewStarAtom);
 
   const ratingChanged = (star: number) => {
