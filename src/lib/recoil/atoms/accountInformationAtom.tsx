@@ -14,7 +14,7 @@ const accountInformationAtom = atom<User>({
     youtubeAccount: "",
     selfIntroduction: "",
     achievement: "",
-    review: [],
+    review: {},
   },
 });
 
