@@ -30,9 +30,7 @@ const Home = () => {
   );
 
   // const [planPlanManagementCollections, setPlanManagementCollections] = useRecoilState(planManagementCollectionAtom);
-
   useEffect(() => {
-    const newPlan: ShowPlan[] = [];
     //すべてのプラン情報をSTATEにセット
     profileCollections.map((profile) => {
       planCollections.map((plan) => {
@@ -48,11 +46,11 @@ const Home = () => {
             genreCategory: plan.genreCategory,
             titleCategory: plan.titleCategory,
           };
-          newPlan.push(showPlanData);
+          // newPlan.push(showPlanData);
+          setShowPlan((prev) => [...prev, showPlanData]);
         }
       });
     });
-    setShowPlan(newPlan);
     //   //localStorageにState連携
     // setPlanCollections((prev) => prev);
     // setProfileCollections((prev) => prev);
@@ -86,13 +84,11 @@ const Home = () => {
           borderRadius="10"
           ml="10"
           p="2"
-
         >
           <VStack
             divider={<StackDivider borderColor="purple.300" />}
             spacing={4}
             align="stretch"
-
           >
             <Box h="40px">
               <span style={{ marginLeft: 10 }}>
