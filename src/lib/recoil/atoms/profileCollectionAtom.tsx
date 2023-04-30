@@ -26,7 +26,7 @@ export const profileCollectionAtom = atom<User[]>({
       //実績・経歴
       achievement: "優勝経験有り",
       //レビュー数
-      review: [{ userC: 3 }, { userB: 1 }, { userD: 5 }],
+      review: { userC: 3, userB: 1, userD: 5 },
     },
     {
       userID: "userB",
@@ -38,7 +38,7 @@ export const profileCollectionAtom = atom<User[]>({
       youtubeAccount: "mike@youtube.com",
       selfIntroduction: "マイクです。よろしくお願いします",
       achievement: "BEST3経験有り",
-      review: [{ userC: 3 }, { userA: 1 }, { userD: 2 }],
+      review: { userC: 3, userA: 1, userD: 2 },
     },
     {
       userID: "userC",
@@ -50,7 +50,7 @@ export const profileCollectionAtom = atom<User[]>({
       youtubeAccount: "michael@youtube.com",
       selfIntroduction: "マイケルです。よろしくお願いします",
       achievement: "BEST16経験有り",
-      review: [{ userA: 1 }, { userB: 5 }, { userD: 1 }],
+      review: { userA: 1, userB: 5, userD: 1 },
     },
     {
       userID: "userD",
@@ -62,7 +62,7 @@ export const profileCollectionAtom = atom<User[]>({
       youtubeAccount: "john@youtube.com",
       selfIntroduction: "ジョンです。よろしくお願いします",
       achievement: "コーチング経験多数有り",
-      review: [{ userC: 2 }, { userB: 4 }, { userA: 5 }],
+      review: { userC: 2, userB: 4, userA: 5 },
     },
   ],
   effects_UNSTABLE: [persistAtom],
