@@ -1,5 +1,4 @@
 import React from "react";
-import ReactStarsRating from "react-awesome-stars-rating";
 import { useRecoilState } from "recoil";
 import { reviewStarAtom } from "../lib/recoil/atoms/reviewStarAtom";
 import ReactStars from "react-stars";
@@ -8,12 +7,10 @@ export const SelectReviewStar = () => {
   const [star, setStar] = useRecoilState(reviewStarAtom);
 
   const ratingChanged = (star: number) => {
-    setStar(star)
+    setStar(star);
   };
 
-  {
-    /* レビュー投稿用の星を表示*/
-  }
+  // レビュー投稿用の星を表示
   return (
     <>
       <ReactStars

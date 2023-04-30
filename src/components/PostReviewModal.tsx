@@ -11,7 +11,6 @@ import {
   ModalFooter,
   useDisclosure,
   Link,
-  Box,
   Flex,
 } from "@chakra-ui/react";
 import React, { useEffect, useRef } from "react";
@@ -38,15 +37,19 @@ export const PostReviewModal = ({
 
   //レビュースコアを取得
   const [star, setStar] = useRecoilState(reviewStarAtom);
-  console.log(star)
-
+  console.log(star);
 
   //レビューをするユーザーIDを取得
   const loginUser = useRecoilValue(testLoginUserAtom);
 
+  //レビュー情報更新のためのデータ格納STATE
   const [updateReviewData, setUpdateReviewData] = useRecoilState(
     accountInformationAtom
   );
+
+  //useEffect制御のための変数
+  const isFirstRender = useRef(true);
+
   //レビューされるユーザーのデータを取得
   const userData = profileCollections.find((profile) => {
     if (profile.userID === userId) {
@@ -54,35 +57,34 @@ export const PostReviewModal = ({
     }
   });
 
+  //初回更新対象のユーザーデータをセット
   useEffect(() => {
     if (userData) setUpdateReviewData(userData);
   }, []);
-  
+
+  //投稿ボタン押下時、対象のレビューデータを更新
   const postReview = () => {
-    console.log(star)
     setUpdateReviewData((prev) => ({
       ...prev,
       review: { ...prev.review, [loginUser]: star },
     }));
   };
 
-  const isFirstRender = useRef(true);
   useEffect(() => {
+    //初回レンダリング時は処理を走らせないように制御
     if (isFirstRender.current) {
       isFirstRender.current = false;
       return;
     }
-
-  const updateProfileCollections: User[] = []; //profileCollections更新のための配列定義
-  profileCollections.map((profile) => {
-    userId === profile.userID && userData //レビュー対象のユーザー？
-      ? updateProfileCollections.push(updateReviewData) //レビュー情報を更新したデータを追加
-      : updateProfileCollections.push(profile); //現在のデータをそのまま追加
-  });
-  setProfileCollections(updateProfileCollections);
-  setStar(0);
-}, [updateReviewData])
-
+    const updateProfileCollections: User[] = []; //profileCollections更新のための配列定義
+    profileCollections.map((profile) => {
+      userId === profile.userID && userData //レビュー対象のユーザー？
+        ? updateProfileCollections.push(updateReviewData) //レビュー情報を更新したデータを追加
+        : updateProfileCollections.push(profile); //現在のデータをそのまま追加
+    });
+    setProfileCollections(updateProfileCollections);
+    setStar(0);
+  }, [updateReviewData]);
 
   return (
     <>

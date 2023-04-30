@@ -1,6 +1,4 @@
-import React from "react";
 import { atom } from "recoil";
-
 
 //新規プランの初期値
 const planInformationAtom = atom<Plan>({

@@ -1,8 +1,7 @@
 /* eslint-disable react/jsx-no-undef */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Box } from "@chakra-ui/react";
-import React, { useState } from "react";
-import ReactStarsRating from "react-awesome-stars-rating";
+import React from "react";
 import ReactStars from "react-stars";
 
 export const ReviewStatus = ({ review }: ReviewStatusProps) => {

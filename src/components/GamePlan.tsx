@@ -7,8 +7,10 @@ import { ReviewStatus } from "./ReviewStatus";
 import { Badge } from "@chakra-ui/react";
 
 export const GamePlan = () => {
+  //表示するプランを取得
   const showPlan = useRecoilValue(showPlanAtom);
 
+  //URLからpathnameを取得
   const router = useRouter();
   const { pathname } = router;
 
@@ -56,7 +58,7 @@ export const GamePlan = () => {
                 </Box>
                 <Badge bg="purple.200" mr="5px">{genreCategory}</Badge>
                 <Badge bg="purple.200">{titleCategory}</Badge>
-                {pathname === "/" && (
+                {pathname === "/" && ( //トップページ表示中？
                   <>
                     <Flex alignItems="center" mt="4" mb="4">
                       <Avatar name={userName} src={userAvatar} />

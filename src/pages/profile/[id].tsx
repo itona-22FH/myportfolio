@@ -16,7 +16,7 @@ import {
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { AccountControlButton } from "../../components/AccountControlButton";
 import { planCollectionAtom } from "../../lib/recoil/atoms/planCollectionAtom";
 import { profileCollectionAtom } from "../../lib/recoil/atoms/profileCollectionAtom";
@@ -29,7 +29,7 @@ import { PostReviewModal } from "../../components/PostReviewModal";
 const profile = () => {
   //FIREBASEからすべてのプロフィール情報を取得
   const profileCollections = useRecoilValue(profileCollectionAtom);
-  const [showPlan, setShowPlan] = useRecoilState(showPlanAtom);
+  const setShowPlan = useSetRecoilState(showPlanAtom);
   const planCollections = useRecoilValue(planCollectionAtom);
 
   //URLからUSERのIDを取得

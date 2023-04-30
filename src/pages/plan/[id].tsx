@@ -31,7 +31,11 @@ const plan = () => {
   //planCollectionsのSTATEを取得
   const [planCollections, setPlanCollections] =
     useRecoilState(planCollectionAtom);
+
+  //プロフィールコレクションを取得
   const profileCollections = useRecoilValue(profileCollectionAtom);
+
+  //ログイン中のユーザーのID取得
   const loginUser = useRecoilValue(testLoginUserAtom);
 
   //URLからプランのIDを取得
