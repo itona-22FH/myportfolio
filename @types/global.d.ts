@@ -120,7 +120,7 @@ type UserInformationProps = {
   review: any;
 };
 
-type ReviewModalProps = {
+type PostReviewModalProps = {
   text: string;
   colorScheme: string;
   color: string;
