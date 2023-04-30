@@ -58,7 +58,7 @@ export const ReviewModal = ({
   const addReview = () => {
     setUpdateReviewData((prev) => ({
       ...prev,
-      review: {...prev.review, [loginUser]: star}
+      review: { ...prev.review, [loginUser]: star },
     }));
     const updateProfileCollections: User[] = []; //profileCollections更新のための配列定義
     profileCollections.map((profile) => {
@@ -67,7 +67,7 @@ export const ReviewModal = ({
         : updateProfileCollections.push(profile); //現在のデータをそのまま追加
     });
     setProfileCollections(updateProfileCollections);
-    setStar(0)
+    setStar(0);
   };
 
   return (
@@ -95,10 +95,10 @@ export const ReviewModal = ({
           <ModalHeader>メンターの指導はどうでしたか？</ModalHeader>
           <ModalCloseButton />
           <Flex alignItems="center" justifyContent="center">
-          <PostReviewStar />
+            <PostReviewStar />
           </Flex>
           <ModalFooter>
-            <Link >
+            <Link>
               <Button colorScheme="blue" mr="10px" onClick={addReview}>
                 投稿する
               </Button>
