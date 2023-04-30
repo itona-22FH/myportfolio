@@ -24,7 +24,7 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { ConfirmationDrawer } from "../../components/ConfirmationDrawer";
 import { UserInformation } from "../../components/UserInformation";
 import { profileCollectionAtom } from "../../lib/recoil/atoms/profileCollectionAtom";
-import { ReviewModal } from "../../components/ReviewModal";
+import { PostReviewModal } from "../../components/PostReviewModal";
 import { testLoginUserAtom } from "../../lib/recoil/atoms/testLoginUserAtom";
 
 const plan = () => {
@@ -32,7 +32,7 @@ const plan = () => {
   const [planCollections, setPlanCollections] =
     useRecoilState(planCollectionAtom);
   const profileCollections = useRecoilValue(profileCollectionAtom);
-  const loginUser = useRecoilValue(testLoginUserAtom)
+  const loginUser = useRecoilValue(testLoginUserAtom);
 
   //URLからプランのIDを取得
   const router = useRouter();
@@ -66,7 +66,7 @@ const plan = () => {
 
   return (
     <>
-      {planData && profileData  && id ? (
+      {planData && profileData && id ? (
         <Box pt="10px" pb="10px">
           <Container maxW="1100px">
             <Grid
@@ -158,7 +158,7 @@ const plan = () => {
                 bg="whiteAlpha.800"
                 borderRadius="10"
                 p="0"
-                              >
+              >
                 <Flex
                   justifyContent="center"
                   alignItems="center"
@@ -184,7 +184,7 @@ const plan = () => {
                           href="/"
                         />
                         <Box m="10px"></Box>
-                        <ReviewModal
+                        <PostReviewModal
                           text="レビューを投稿する"
                           colorScheme="purple"
                           color="white"

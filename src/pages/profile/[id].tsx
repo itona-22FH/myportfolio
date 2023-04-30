@@ -24,7 +24,7 @@ import { GamePlan } from "../../components/GamePlan";
 import { TextBox } from "../../components/TextBox";
 import { UserInformation } from "../../components/UserInformation";
 import { showPlanAtom } from "../../lib/recoil/atoms/showPlanAtom";
-import { ReviewModal } from "../../components/ReviewModal";
+import { PostReviewModal } from "../../components/PostReviewModal";
 
 const profile = () => {
   //FIREBASEからすべてのプロフィール情報を取得
@@ -57,7 +57,7 @@ const profile = () => {
             userAvatar: profileData.userAvatar,
             review: profileData.review,
             genreCategory: plan.genreCategory,
-            titleCategory:plan.titleCategory
+            titleCategory: plan.titleCategory,
           };
           setShowPlan((prev) => [...prev, planData]);
         }
@@ -82,7 +82,6 @@ const profile = () => {
                 userName={profileData.userName}
                 userAvatar={profileData.userAvatar}
                 review={profileData.review}
-
               />
             </Flex>
 
@@ -100,7 +99,7 @@ const profile = () => {
                 width="400px"
                 href="/"
               />
-              <ReviewModal
+              <PostReviewModal
                 text="レビューを投稿する"
                 colorScheme="purple"
                 color="white"
