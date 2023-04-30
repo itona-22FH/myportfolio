@@ -11,13 +11,15 @@ import {
   ModalFooter,
   useDisclosure,
   Link,
+  Box,
+  Flex,
 } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { profileCollectionAtom } from "../lib/recoil/atoms/profileCollectionAtom";
 import { reviewStarAtom } from "../lib/recoil/atoms/reviewStarAtom";
 import { testLoginUserAtom } from "../lib/recoil/atoms/testLoginUserAtom";
-import { StarRating } from "./StarRating";
+import { PostReviewStar } from "./PostReviewStar";
 import accountInformationAtom from "../lib/recoil/atoms/accountInformationAtom";
 
 export const ReviewModal = ({
@@ -34,7 +36,7 @@ export const ReviewModal = ({
     profileCollectionAtom
   );
   //レビュースコアを取得
-  const star = useRecoilValue(reviewStarAtom);
+  const [star, setStar] = useRecoilState(reviewStarAtom);
 
   //レビューをするユーザーIDを取得
   const loginUser = useRecoilValue(testLoginUserAtom);
@@ -54,12 +56,10 @@ export const ReviewModal = ({
   }, []);
 
   const addReview = () => {
-    console.log(updateReviewData);
     setUpdateReviewData((prev) => ({
       ...prev,
-      review: [...prev.review, {[loginUser]: star}],
+      review: {...prev.review, [loginUser]: star}
     }));
-    console.log(updateReviewData);
     const updateProfileCollections: User[] = []; //profileCollections更新のための配列定義
     profileCollections.map((profile) => {
       userId === profile.userID && userData //レビュー対象のユーザー？
@@ -67,6 +67,7 @@ export const ReviewModal = ({
         : updateProfileCollections.push(profile); //現在のデータをそのまま追加
     });
     setProfileCollections(updateProfileCollections);
+    setStar(0)
   };
 
   return (
@@ -93,9 +94,11 @@ export const ReviewModal = ({
         <ModalContent>
           <ModalHeader>メンターの指導はどうでしたか？</ModalHeader>
           <ModalCloseButton />
-          <StarRating />
+          <Flex alignItems="center" justifyContent="center">
+          <PostReviewStar />
+          </Flex>
           <ModalFooter>
-            <Link>
+            <Link >
               <Button colorScheme="blue" mr="10px" onClick={addReview}>
                 投稿する
               </Button>
