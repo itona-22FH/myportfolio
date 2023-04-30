@@ -77,6 +77,9 @@ const profile = () => {
               p="10px"
               direction="column"
             >
+            <Flex pb="10px" justifyContent="center" fontSize="50px">
+              <Box color="rebeccapurple">プロフィールページ</Box>
+            </Flex>
               <UserInformation
                 userID={"_"}
                 userName={profileData.userName}

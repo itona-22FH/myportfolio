@@ -59,7 +59,7 @@ const myPage = () => {
             userAvatar: myProfileData.userAvatar,
             review: myProfileData.review,
             genreCategory: plan.genreCategory,
-            titleCategory:plan.titleCategory
+            titleCategory: plan.titleCategory,
           };
           //showPlanにFilterをかけた配列をセット
           setShowPlan((prev) => [...prev, planData]);
@@ -80,12 +80,14 @@ const myPage = () => {
               p="10px"
               direction="column"
             >
+              <Flex pb="10px" justifyContent="center" fontSize="50px">
+                <Box color="rebeccapurple">マイページ</Box>
+              </Flex>
               <UserInformation
                 userID={"_"}
                 userName={myProfileData.userName}
                 userAvatar={myProfileData.userAvatar}
                 review={myProfileData.review}
-
               />
             </Flex>
 
