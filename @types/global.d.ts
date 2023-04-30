@@ -67,8 +67,8 @@ type ShowPlan = {
   price: string;
   userAvatar: string;
   review: any;
-  genreCategory:string,
-  titleCategory:string,
+  genreCategory: string;
+  titleCategory: string;
 };
 
 type User = {
@@ -110,7 +110,7 @@ type ConfirmationDrawerProps = {
 };
 
 type ReviewStatusProps = {
-review: number[];
+  review: number[];
 };
 
 type UserInformationProps = {
