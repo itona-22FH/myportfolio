@@ -13,12 +13,11 @@ import {
   StackDivider,
   Link,
 } from "@chakra-ui/react";
-import React, { useEffect } from "react";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import React, { useEffect, useState } from "react";
+import { useRecoilValue } from "recoil";
 import { AccountControlButton } from "../../components/AccountControlButton";
 import { planCollectionAtom } from "../../lib/recoil/atoms/planCollectionAtom";
 import { profileCollectionAtom } from "../../lib/recoil/atoms/profileCollectionAtom";
-import { showPlanAtom } from "../../lib/recoil/atoms/showPlanAtom";
 import { GamePlan } from "../../components/GamePlan";
 import { TextBox } from "../../components/TextBox";
 import { useRouter } from "next/router";
@@ -29,7 +28,7 @@ const myPage = () => {
   const profileCollections = useRecoilValue(profileCollectionAtom);
 
   //表示するプランの保持のためのSTATEを定義
-  const setShowPlan = useSetRecoilState(showPlanAtom);
+  const [showPlan, setShowPlan] = useState<ShowPlan[]>([]);
 
   //プラン情報の取得
   const planCollections = useRecoilValue(planCollectionAtom);
@@ -40,7 +39,7 @@ const myPage = () => {
 
   //プロフィールコレクションから自分のプロフィールデータのみを取得
   const myProfileData = profileCollections.find((profile) => {
-    if (id === profile.userID) {
+    if (id === profile.userId) {
       return profile;
     }
   });
@@ -49,9 +48,9 @@ const myPage = () => {
   useEffect(() => {
     if (myProfileData) {
       planCollections.map((plan) => {
-        if (myProfileData.userID === plan.userID) {
+        if (myProfileData.userId === plan.userId) {
           const planData = {
-            planID: plan.planID,
+            planId: plan.planId,
             planTitle: plan.planTitle,
             planImage: plan.planImage,
             userName: myProfileData.userName,
@@ -84,7 +83,7 @@ const myPage = () => {
                 <Box color="rebeccapurple">マイページ</Box>
               </Flex>
               <UserInformation
-                userID={"_"}
+                userId={"_"}
                 userName={myProfileData.userName}
                 userAvatar={myProfileData.userAvatar}
                 review={myProfileData.review}
@@ -158,7 +157,7 @@ const myPage = () => {
                       maxW="1000px"
                       borderRadius="10px"
                     >
-                      <GamePlan />
+                      <GamePlan showPlan={showPlan}/>
                     </Flex>
                   </TabPanel>
                   <TabPanel>
