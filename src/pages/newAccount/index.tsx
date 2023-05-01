@@ -1,6 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-hooks/rules-of-hooks */
-import { Box, FormControl, Container } from "@chakra-ui/react";
+import {
+  Box,
+  FormControl,
+  Container,
+  Input,
+  FormLabel,
+} from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { ConfirmationBtn } from "../../components/ConfirmationBtn";
 import { FormInput } from "../../components/FormInput";
@@ -13,7 +19,7 @@ import { profileCollectionAtom } from "../../lib/recoil/atoms/profileCollectionA
 const newAccount = () => {
   //新規アカウントの情報を保持するためのSTATEを定義
   const [newUserData, setNewUserData] = useState({
-    userID: "",
+    userId: "",
     userName: "",
     userAvatar: "",
     email: "",
@@ -43,7 +49,11 @@ const newAccount = () => {
     setNewUserData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const addNewAccountHandle = (e: { preventDefault: () => void }) => {
+  const inputCheckPassword = (e: { target: { value: string } }) => {
+    setCheckPassword(e.target.value);
+  };
+
+  const addNewAccountHandle = () => {
     if (newUserData.password === checkPassword) {
       // パスワード一致？
       //profileCollectionsに新規アカウントを追加
@@ -92,18 +102,21 @@ const newAccount = () => {
             onChangeHandle={inputUserInformation}
             formValue={newUserData.password}
           />
-          <FormInput
-            label="確認用パスワード"
-            type="password"
-            placeholder="CheckPassword"
-            formName="checkPassword"
-            onChangeHandle={(e: {
-              target: { value: React.SetStateAction<string> };
-            }) => {
-              setCheckPassword(e.target.value);
-            }}
-            formValue={checkPassword}
-          />
+          <Box pb="10px" pt="10px">
+            <FormLabel htmlFor="確認用パスワード" fontWeight="bold">
+              確認用パスワード
+            </FormLabel>
+            <Input
+              id="確認用パスワード"
+              type="password"
+              placeholder="確認用パスワード"
+              borderColor="purple.300"
+              p="4px"
+              name="checkPassword"
+              onChange={inputCheckPassword}
+              value={checkPassword}
+            />
+          </Box>
           <FormInput
             label="Twitterアカウント"
             type="url"

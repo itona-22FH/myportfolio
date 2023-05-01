@@ -1,15 +1,10 @@
 import React from "react";
 import { Text, Image, Link, Box, Avatar, Flex } from "@chakra-ui/react";
-import { useRecoilValue } from "recoil";
-import { showPlanAtom } from "../lib/recoil/atoms/showPlanAtom";
 import { useRouter } from "next/router";
 import { ReviewStatus } from "./ReviewStatus";
 import { Badge } from "@chakra-ui/react";
 
-export const GamePlan = () => {
-  //表示するプランを取得
-  const showPlan = useRecoilValue(showPlanAtom);
-
+export const GamePlan = ({ showPlan }: GamePlanProps) => {
   //URLからpathnameを取得
   const router = useRouter();
   const { pathname } = router;
@@ -19,7 +14,7 @@ export const GamePlan = () => {
       {/* showGamePlanAtomにセットされた配列を表示 */}
       {showPlan.map(
         ({
-          planID,
+          planId,
           planTitle,
           planImage,
           userName,
@@ -30,8 +25,8 @@ export const GamePlan = () => {
           genreCategory,
         }) => (
           <Link
-            key={planID}
-            href={`/plan/${planID}`}
+            key={planId as string}
+            href={`/plan/${planId}`}
             style={{ textDecoration: "none" }}
           >
             <Box

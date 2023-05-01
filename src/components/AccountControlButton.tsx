@@ -15,7 +15,7 @@ export const AccountControlButton = ({
   const profileCollections = useRecoilValue(profileCollectionAtom);
 
   const userData = profileCollections.find((profile) => {
-    if (loginUser === profile.userID) {
+    if (loginUser === profile.userId) {
       return profile;
     }
   });

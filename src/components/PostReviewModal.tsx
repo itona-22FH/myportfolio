@@ -41,7 +41,7 @@ export const PostReviewModal = ({
 
   //レビュー情報更新のためのデータ格納STATE
   const [updateReviewData, setUpdateReviewData] = useState<User>({
-    userID: "",
+    userId: "",
     userName: "",
     userAvatar: "",
     email: "",
@@ -50,7 +50,7 @@ export const PostReviewModal = ({
     youtubeAccount: "",
     selfIntroduction: "",
     achievement: "",
-    review: [],
+    review: {},
   });
 
   //useEffect制御のための変数
@@ -58,7 +58,7 @@ export const PostReviewModal = ({
 
   //レビューされるユーザーのデータを取得
   const userData = profileCollections.find((profile) => {
-    if (profile.userID === userId) {
+    if (profile.userId === userId) {
       return profile;
     }
   });
@@ -83,17 +83,16 @@ export const PostReviewModal = ({
       return;
     }
     profileCollections.map((profile) => {
-      userId === profile.userID && userData //レビュー対象のユーザー？
+      userId === profile.userId && userData //レビュー対象のユーザー？
         ? setProfileCollections((prev) =>
             prev.map((obj) =>
-              obj.userID === profile.userID ? updateReviewData : obj
+              obj.userId === profile.userId ? updateReviewData : obj
             )
           ) //レビューデータ更新したデータ
         : setProfileCollections((prev) => prev); //現在のデータをそのまま追加
     });
     setStar(0);
   }, [updateReviewData]);
-
 
   const ratingChanged = (star: number) => {
     setStar(star);
@@ -124,14 +123,14 @@ export const PostReviewModal = ({
           <ModalHeader>メンターの指導はどうでしたか？</ModalHeader>
           <ModalCloseButton />
           <Flex alignItems="center" justifyContent="center">
-          <ReactStars
-        count={5}
-        onChange={ratingChanged}
-        size={30}
-        color2={"#ffa500"}
-        color1={"#808080"}
-        value={star}
-      />
+            <ReactStars
+              count={5}
+              onChange={ratingChanged}
+              size={30}
+              color2={"#ffa500"}
+              color1={"#808080"}
+              value={star}
+            />
           </Flex>
           <ModalFooter>
             <Link>
