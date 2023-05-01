@@ -6,7 +6,7 @@ import { testLoginUserAtom } from "../lib/recoil/atoms/testLoginUserAtom";
 import { ReviewStatus } from "./ReviewStatus";
 
 export const UserInformation = ({
-  userID,
+  userId,
   userName,
   userAvatar,
   review,
@@ -27,9 +27,9 @@ export const UserInformation = ({
           */}
           <Link
             href={
-              loginUserId === userID
+              loginUserId === userId
                 ? `/myPage/${loginUserId}`
-                : `/profile/${userID}`
+                : `/profile/${userId}`
             }
             borderRadius="100px"
           >
@@ -49,9 +49,9 @@ export const UserInformation = ({
           */}
           <Link
             href={
-              loginUserId === userID
+              loginUserId === userId
                 ? `/myPage/${loginUserId}`
-                : `/profile/${userID}`
+                : `/profile/${userId}`
             }
             mt="10px"
             fontSize="35px"
