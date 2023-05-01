@@ -13,8 +13,8 @@ import {
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 import { planCollectionAtom } from "../lib/recoil/atoms/planCollectionAtom";
-import { useRecoilState, useRecoilValue } from "recoil";
-import React, { useEffect, useState } from "react";
+import { useRecoilValue } from "recoil";
+import React, { useState } from "react";
 import { profileCollectionAtom } from "../lib/recoil/atoms/profileCollectionAtom";
 
 const Home = () => {
@@ -22,34 +22,10 @@ const Home = () => {
   const [showPlan, setShowPlan] = useState<ShowPlan[]>([]);
 
   //FIREBASEからすべてのプラン情報を取得
-  const [planCollections, setPlanCollections] = useRecoilState(planCollectionAtom);
+  const planCollections = useRecoilValue(planCollectionAtom);
 
   //プロフィールデータを取得
-  const [profileCollections, setProfileCollections] = useRecoilState(profileCollectionAtom);
-
-  useEffect(() => {
-    setShowPlan([]);
-    //すべてのプラン情報をSTATEにセット
-    planCollections.map((plan) => {
-      profileCollections.map((profile) => {
-        if (plan.userId === profile.userId) {
-          const showPlanData = {
-            planId: plan.planId,
-            planTitle: plan.planTitle,
-            planImage: plan.planImage,
-            userName: profile.userName,
-            price: plan.price,
-            userAvatar: profile.userAvatar,
-            review: profile.review,
-            genreCategory: plan.genreCategory,
-            titleCategory: plan.titleCategory,
-          };
-          // newPlan.push(showPlanData);
-          setShowPlan((prev) => [...prev, showPlanData]);
-        }
-      });
-    });
-  }, []);
+  const profileCollections = useRecoilValue(profileCollectionAtom);
 
   const sortPlanHandle = (e: { target: { textContent: string } }) => {
     setShowPlan([]);
