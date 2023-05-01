@@ -13,7 +13,7 @@ import {
   Text,
   Link,
 } from "@chakra-ui/react";
-import React, { useEffect } from "react";
+import React from "react";
 import { AccountControlButton } from "../../components/AccountControlButton";
 import { ConfirmationBtn } from "../../components/ConfirmationBtn";
 import { HeadTitle } from "../../components/HeadTitle";
@@ -33,8 +33,10 @@ const plan = () => {
     useRecoilState(planCollectionAtom);
 
   //プロフィールコレクションを取得
-  const profileCollections = useRecoilValue(profileCollectionAtom);
-
+  const [profileCollections, setProfileCollections] = useRecoilState(
+    profileCollectionAtom
+  );
+  console.log(profileCollections);
   //ログイン中のユーザーのID取得
   const loginUser = useRecoilValue(testLoginUserAtom);
 
@@ -65,6 +67,8 @@ const plan = () => {
     });
     setPlanCollections(filterPlanCollections);
   };
+
+
 
   return (
     <>
@@ -191,7 +195,8 @@ const plan = () => {
                           colorScheme="purple"
                           color="white"
                           width="100%"
-                          userId={planData.userId}
+                          userId={profileData.userId as string}
+
                         />
                       </>
                     )}
