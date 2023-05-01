@@ -8,7 +8,7 @@ export const profileCollectionAtom = atom<User[]>({
   default: [
     {
       //ユーザーID（FirebaseID）
-      userID: "userA",
+      userId: "userA",
       //ユーザー名
       userName: "スティーブ",
       //アバター画像
@@ -29,7 +29,7 @@ export const profileCollectionAtom = atom<User[]>({
       review: { userC: 3, userB: 1, userD: 5 },
     },
     {
-      userID: "userB",
+      userId: "userB",
       userName: "マイク",
       userAvatar: "https://bit.ly/code-beast",
       email: "mike@email",
@@ -41,7 +41,7 @@ export const profileCollectionAtom = atom<User[]>({
       review: { userC: 3, userA: 1, userD: 2 },
     },
     {
-      userID: "userC",
+      userId: "userC",
       userName: "マイケル",
       userAvatar: "https://bit.ly/ryan-florence",
       email: "michael@email",
@@ -53,7 +53,7 @@ export const profileCollectionAtom = atom<User[]>({
       review: { userA: 1, userB: 5, userD: 1 },
     },
     {
-      userID: "userD",
+      userId: "userD",
       userName: "ジョン",
       userAvatar: "https://bit.ly/kent-c-dodds",
       email: "john@email",
