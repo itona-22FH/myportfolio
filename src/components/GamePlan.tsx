@@ -15,9 +15,9 @@ export const GamePlan = ({ showPlan }: GamePlanProps) => {
   const profileCollections = useRecoilValue(profileCollectionAtom);
   const planCollections = useRecoilValue(planCollectionAtom);
 
-  const showPlanArray = profileCollections.flatMap((profile) =>
-    planCollections
-      .map((plan) =>
+  const showPlanArray = planCollections.flatMap((plan) =>
+    profileCollections
+      .map((profile) =>
         plan.userId === profile.userId
           ? {
               planId: plan.planId,
