@@ -15,10 +15,14 @@ const newPlan = () => {
   //プランコレクションのSET関数定義
   const setPlanCollections = useSetRecoilState(planCollectionAtom);
 
+  //URLからUSERのIDを取得
+  const router = useRouter();
+  const { id } = router.query;
+
   //新プラン情報保持のためのStateを定義
   const [newPlanData, setNewPlanData] = useState<Plan>({
-    planID: "",
-    userID: "",
+    planId: "",
+    userId: "",
     planTitle: "",
     planImage: "https://bit.ly/2Z4KKcF",
     study: "",
@@ -28,15 +32,11 @@ const newPlan = () => {
     price: "",
   });
 
-  //URLからUSERのIDを取得
-  const router = useRouter();
-  const { id } = router.query;
-
   //初回レンダリング時とid取得時にsetNewPlanData関数を発火
   useEffect(() => {
     if (!router.isReady) return;
     //planIDプロパティとuserIDプロパティにそれぞれIDをセット
-    setNewPlanData((prev) => ({ ...prev, userID: id, planID: uuidv4() }));
+    setNewPlanData((prev) => ({ ...prev, userId: id, planId: uuidv4() }));
   }, [id]);
 
   const inputPlanInformation = (e: {

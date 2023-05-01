@@ -66,7 +66,10 @@ export const ConfirmationDrawer = ({
                   プラン料金
                 </Heading>
                 <Text ml="30px" fontSize="40px">
-                  <span style={{ color: "red" }}>{Number(planData.price).toLocaleString()}</span>円
+                  <span style={{ color: "red" }}>
+                    {Number(planData.price).toLocaleString()}
+                  </span>
+                  円
                 </Text>
               </Flex>
             </VStack>
@@ -78,7 +81,7 @@ export const ConfirmationDrawer = ({
               color="white"
               width="100%"
               confirmation="契約"
-              handleConfirmation={undefined}
+              handleConfirmation={() => {}}
               confirmationLink={""}
             />
           </Box>

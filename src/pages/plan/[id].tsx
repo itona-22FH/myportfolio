@@ -13,7 +13,7 @@ import {
   Text,
   Link,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect } from "react";
 import { AccountControlButton } from "../../components/AccountControlButton";
 import { ConfirmationBtn } from "../../components/ConfirmationBtn";
 import { HeadTitle } from "../../components/HeadTitle";
@@ -44,24 +44,22 @@ const plan = () => {
 
   //取得したIDと一致するプランのみをplanDataに代入
   const planData = planCollections.find((plan) => {
-    if (id === plan.planID) {
+    if (id === plan.planId) {
       return plan;
     }
   });
 
   //planDataの持つuserIdと一致するプロフィール情報を取得
   const profileData = profileCollections.find((profile) => {
-    if (planData) {
-      if (planData.userID === profile.userID) {
-        return profile;
-      }
+    if (planData?.userId === profile.userId) {
+      return profile;
     }
   });
 
   //プラン削除
-  const deletePlanHandle = (id: string | string[]) => {
+  const deletePlanHandle = () => {
     const filterPlanCollections = planCollections.filter((plan) => {
-      if (id !== plan.planID) {
+      if (loginUser !== plan.planId) {
         return plan;
       }
     });
@@ -70,7 +68,7 @@ const plan = () => {
 
   return (
     <>
-      {planData && profileData && id ? (
+      {planData && profileData ? (
         <Box pt="10px" pb="10px">
           <Container maxW="1100px">
             <Grid
@@ -134,21 +132,21 @@ const plan = () => {
                 </VStack>
                 <Flex justifyContent="space-around" flexFlow="column">
                   <Box w="100%" p="10px">
-                    {loginUser !== planData.userID && (
+                    {loginUser !== planData.userId && (
                       <ConfirmationDrawer
                         planData={planData}
                         profileData={profileData}
                       />
                     )}
                     {/* 登録者本人の時表示 */}
-                    {loginUser === planData.userID && (
+                    {loginUser === planData.userId && (
                       <ConfirmationBtn
                         text="プランを削除する"
                         colorScheme="red"
                         color="white"
                         width="100%"
                         confirmation="削除"
-                        handleConfirmation={() => deletePlanHandle(id)}
+                        handleConfirmation={deletePlanHandle}
                         confirmationLink="/"
                       />
                     )}
@@ -171,14 +169,14 @@ const plan = () => {
                   flexFlow="column"
                 >
                   <UserInformation
-                    userID={planData.userID}
+                    userId={planData.userId}
                     userName={profileData.userName}
                     userAvatar={profileData.userAvatar}
                     review={profileData.review}
                   />
                   {/* 本人以外の時表示 */}
                   <Box w="100%" p="5px">
-                    {loginUser !== planData.userID && (
+                    {loginUser !== planData.userId && (
                       <>
                         <AccountControlButton
                           text="質問をする"
@@ -193,7 +191,7 @@ const plan = () => {
                           colorScheme="purple"
                           color="white"
                           width="100%"
-                          userId={planData.userID}
+                          userId={planData.userId}
                         />
                       </>
                     )}
