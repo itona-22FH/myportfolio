@@ -13,13 +13,11 @@ import {
   Link,
   Flex,
 } from "@chakra-ui/react";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import ReactStars from "react-stars";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { profileCollectionAtom } from "../lib/recoil/atoms/profileCollectionAtom";
-import { reviewStarAtom } from "../lib/recoil/atoms/reviewStarAtom";
 import { testLoginUserAtom } from "../lib/recoil/atoms/testLoginUserAtom";
-import { SelectReviewStar } from "./SelectReviewStar";
-import accountInformationAtom from "../lib/recoil/atoms/accountInformationAtom";
 
 export const PostReviewModal = ({
   text,
@@ -36,15 +34,24 @@ export const PostReviewModal = ({
   );
 
   //レビュースコアを取得
-  const [star, setStar] = useRecoilState(reviewStarAtom);
+  const [star, setStar] = useState(0);
 
   //レビューをするユーザーIDを取得
   const loginUser = useRecoilValue(testLoginUserAtom);
 
   //レビュー情報更新のためのデータ格納STATE
-  const [updateReviewData, setUpdateReviewData] = useRecoilState(
-    accountInformationAtom
-  );
+  const [updateReviewData, setUpdateReviewData] = useState<User>({
+    userID: "",
+    userName: "",
+    userAvatar: "",
+    email: "",
+    password: "",
+    twitterAccount: "",
+    youtubeAccount: "",
+    selfIntroduction: "",
+    achievement: "",
+    review: [],
+  });
 
   //useEffect制御のための変数
   const isFirstRender = useRef(true);
@@ -87,6 +94,11 @@ export const PostReviewModal = ({
     setStar(0);
   }, [updateReviewData]);
 
+
+  const ratingChanged = (star: number) => {
+    setStar(star);
+  };
+
   return (
     <>
       <Button
@@ -112,7 +124,14 @@ export const PostReviewModal = ({
           <ModalHeader>メンターの指導はどうでしたか？</ModalHeader>
           <ModalCloseButton />
           <Flex alignItems="center" justifyContent="center">
-            <SelectReviewStar />
+          <ReactStars
+        count={5}
+        onChange={ratingChanged}
+        size={30}
+        color2={"#ffa500"}
+        color1={"#808080"}
+        value={star}
+      />
           </Flex>
           <ModalFooter>
             <Link>

@@ -8,7 +8,6 @@ import { ConfirmationBtn } from "../../components/ConfirmationBtn";
 import { FormInput } from "../../components/FormInput";
 import { HeadTitle } from "../../components/HeadTitle";
 import { NewRegisterTextBox } from "../../components/NewRegisterTextBox";
-import accountInformationAtom from "../../lib/recoil/atoms/accountInformationAtom";
 import { profileCollectionAtom } from "../../lib/recoil/atoms/profileCollectionAtom";
 
 const editProfile = () => {
@@ -22,7 +21,18 @@ const editProfile = () => {
   );
 
   //編集情報の保持のためのSTATEを定義
-  const [editUserData, setEditUserData] = useRecoilState(accountInformationAtom);
+  const [editUserData, setEditUserData] = useState<User>({
+    userID: "",
+    userName: "",
+    userAvatar: "",
+    email: "",
+    password: "",
+    twitterAccount: "",
+    youtubeAccount: "",
+    selfIntroduction: "",
+    achievement: "",
+    review: [],
+  });
 
   //自分のプロフィールデータをコレクションから取得
   const myProfileData = profileCollections.find((profile) => {

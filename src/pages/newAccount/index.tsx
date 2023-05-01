@@ -7,13 +7,23 @@ import { FormInput } from "../../components/FormInput";
 import { HeadTitle } from "../../components/HeadTitle";
 import { NewRegisterTextBox } from "../../components/NewRegisterTextBox";
 import { v4 as uuidv4 } from "uuid";
-import { useRecoilState, useSetRecoilState } from "recoil";
-import accountInformationAtom from "../../lib/recoil/atoms/accountInformationAtom";
+import { useSetRecoilState } from "recoil";
 import { profileCollectionAtom } from "../../lib/recoil/atoms/profileCollectionAtom";
 
 const newAccount = () => {
   //新規アカウントの情報を保持するためのSTATEを定義
-  const [newUserData, setNewUserData] = useRecoilState(accountInformationAtom);
+  const [newUserData, setNewUserData] = useState({
+    userID: "",
+    userName: "",
+    userAvatar: "",
+    email: "",
+    password: "",
+    twitterAccount: "",
+    youtubeAccount: "",
+    selfIntroduction: "",
+    achievement: "",
+    review: [],
+  });
   //パスワードチェックのためのSTATEを定義
   const [checkPassword, setCheckPassword] = useState("");
   //profileCollections更新のためのSET関数を定義

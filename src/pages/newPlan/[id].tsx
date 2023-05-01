@@ -2,13 +2,12 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { Box, Container, FormControl, Select } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import React, { useEffect, useState } from "react";
+import { useSetRecoilState } from "recoil";
 import { ConfirmationBtn } from "../../components/ConfirmationBtn";
 import { FormInput } from "../../components/FormInput";
 import { HeadTitle } from "../../components/HeadTitle";
 import { NewRegisterTextBox } from "../../components/NewRegisterTextBox";
-import planInformationAtom from "../../lib/recoil/atoms/planInformationAtom";
 import { planCollectionAtom } from "../../lib/recoil/atoms/planCollectionAtom";
 import { v4 as uuidv4 } from "uuid";
 
@@ -17,7 +16,17 @@ const newPlan = () => {
   const setPlanCollections = useSetRecoilState(planCollectionAtom);
 
   //新プラン情報保持のためのStateを定義
-  const [newPlanData, setNewPlanData] = useRecoilState(planInformationAtom);
+  const [newPlanData, setNewPlanData] = useState<Plan>({
+    planID: "",
+    userID: "",
+    planTitle: "",
+    planImage: "https://bit.ly/2Z4KKcF",
+    study: "",
+    guidance: "",
+    titleCategory: "",
+    genreCategory: "",
+    price: "",
+  });
 
   //URLからUSERのIDを取得
   const router = useRouter();
