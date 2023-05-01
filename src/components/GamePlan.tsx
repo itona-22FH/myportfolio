@@ -56,7 +56,9 @@ export const GamePlan = () => {
                 >
                   {planTitle}
                 </Box>
-                <Badge bg="purple.200" mr="5px">{genreCategory}</Badge>
+                <Badge bg="purple.200" mr="5px">
+                  {genreCategory}
+                </Badge>
                 <Badge bg="purple.200">{titleCategory}</Badge>
                 {pathname === "/" && ( //トップページ表示中？
                   <>
