@@ -29,21 +29,25 @@ export const PostReviewModal = ({
   const { isOpen, onOpen, onClose } = useDisclosure();
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
-const [profileCollections, setProfileCollections] = useRecoilState(profileCollectionAtom)
-const loginUser = useRecoilValue(testLoginUserAtom)
+  const [profileCollections, setProfileCollections] = useRecoilState(
+    profileCollectionAtom
+  );
+  const loginUser = useRecoilValue(testLoginUserAtom);
 
   //レビュースコアを取得
   const [star, setStar] = useState(0);
 
   const postReview = () => {
     profileCollections.map((profile) => {
-      userId === profile.userId  //レビュー対象のユーザー？
-      ? setProfileCollections((prev) =>
-          prev.map((obj) =>
-            obj.userId === profile.userId ?{ ...obj, review: { ...obj.review, [loginUser]: star } }: obj
-          )
-        ) //レビューデータ更新したデータ
-      : setProfileCollections((prev) => prev); //現在のデータをそのまま追加
+      userId === profile.userId //レビュー対象のユーザー？
+        ? setProfileCollections((prev) =>
+            prev.map((obj) =>
+              obj.userId === profile.userId
+                ? { ...obj, review: { ...obj.review, [loginUser]: star } }
+                : obj
+            )
+          ) //レビューデータ更新したデータ
+        : setProfileCollections((prev) => prev); //現在のデータをそのまま追加
     });
     setStar(0);
   };
