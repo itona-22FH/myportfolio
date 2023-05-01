@@ -3,16 +3,42 @@ import { Text, Image, Link, Box, Avatar, Flex } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { ReviewStatus } from "./ReviewStatus";
 import { Badge } from "@chakra-ui/react";
+import { profileCollectionAtom } from "../lib/recoil/atoms/profileCollectionAtom";
+import { useRecoilValue } from "recoil";
+import { planCollectionAtom } from "../lib/recoil/atoms/planCollectionAtom";
 
 export const GamePlan = ({ showPlan }: GamePlanProps) => {
   //URLからpathnameを取得
   const router = useRouter();
   const { pathname } = router;
 
+  const profileCollections = useRecoilValue(profileCollectionAtom);
+  const planCollections = useRecoilValue(planCollectionAtom);
+
+  const showPlanArray = profileCollections.flatMap((profile) =>
+    planCollections
+      .map((plan) =>
+        plan.userId === profile.userId
+          ? {
+              planId: plan.planId,
+              planTitle: plan.planTitle,
+              planImage: plan.planImage,
+              userName: profile.userName,
+              price: plan.price,
+              userAvatar: profile.userAvatar,
+              review: profile.review,
+              genreCategory: plan.genreCategory,
+              titleCategory: plan.titleCategory,
+            }
+          : undefined
+      )
+      .filter((obj): obj is ShowPlan => typeof obj !== "undefined")
+  );
+
   return (
     <>
       {/* showGamePlanAtomにセットされた配列を表示 */}
-      {showPlan.map(
+      {(showPlan.length ? showPlan : showPlanArray).map(
         ({
           planId,
           planTitle,
