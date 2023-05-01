@@ -13,7 +13,7 @@ import {
   Link,
   Flex,
 } from "@chakra-ui/react";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import ReactStars from "react-stars";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { profileCollectionAtom } from "../lib/recoil/atoms/profileCollectionAtom";
@@ -29,70 +29,24 @@ export const PostReviewModal = ({
   const { isOpen, onOpen, onClose } = useDisclosure();
   const initialRef = React.useRef(null);
   const finalRef = React.useRef(null);
-  const [profileCollections, setProfileCollections] = useRecoilState(
-    profileCollectionAtom
-  );
+const [profileCollections, setProfileCollections] = useRecoilState(profileCollectionAtom)
+const loginUser = useRecoilValue(testLoginUserAtom)
 
   //レビュースコアを取得
   const [star, setStar] = useState(0);
 
-  //レビューをするユーザーIDを取得
-  const loginUser = useRecoilValue(testLoginUserAtom);
-
-  //レビュー情報更新のためのデータ格納STATE
-  const [updateReviewData, setUpdateReviewData] = useState<User>({
-    userId: "",
-    userName: "",
-    userAvatar: "",
-    email: "",
-    password: "",
-    twitterAccount: "",
-    youtubeAccount: "",
-    selfIntroduction: "",
-    achievement: "",
-    review: {},
-  });
-
-  //useEffect制御のための変数
-  const isFirstRender = useRef(true);
-
-  //レビューされるユーザーのデータを取得
-  const userData = profileCollections.find((profile) => {
-    if (profile.userId === userId) {
-      return profile;
-    }
-  });
-
-  //初回更新対象のユーザーデータをセット
-  useEffect(() => {
-    if (userData) setUpdateReviewData(userData);
-  }, []);
-
-  //投稿ボタン押下時、対象のレビューデータを更新
   const postReview = () => {
-    setUpdateReviewData((prev) => ({
-      ...prev,
-      review: { ...prev.review, [loginUser]: star },
-    }));
-  };
-
-  useEffect(() => {
-    //初回レンダリング時は処理を走らせないように制御
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      return;
-    }
     profileCollections.map((profile) => {
-      userId === profile.userId && userData //レビュー対象のユーザー？
-        ? setProfileCollections((prev) =>
-            prev.map((obj) =>
-              obj.userId === profile.userId ? updateReviewData : obj
-            )
-          ) //レビューデータ更新したデータ
-        : setProfileCollections((prev) => prev); //現在のデータをそのまま追加
+      userId === profile.userId  //レビュー対象のユーザー？
+      ? setProfileCollections((prev) =>
+          prev.map((obj) =>
+            obj.userId === profile.userId ?{ ...obj, review: { ...obj.review, [loginUser]: star } }: obj
+          )
+        ) //レビューデータ更新したデータ
+      : setProfileCollections((prev) => prev); //現在のデータをそのまま追加
     });
     setStar(0);
-  }, [updateReviewData]);
+  };
 
   const ratingChanged = (star: number) => {
     setStar(star);
