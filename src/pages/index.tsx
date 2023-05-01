@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 import { planCollectionAtom } from "../lib/recoil/atoms/planCollectionAtom";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { showPlanAtom } from "../lib/recoil/atoms/showPlanAtom";
 import React, { useEffect } from "react";
 import { profileCollectionAtom } from "../lib/recoil/atoms/profileCollectionAtom";
@@ -23,13 +23,10 @@ const Home = () => {
   const setShowPlan = useSetRecoilState(showPlanAtom);
 
   //FIREBASEからすべてのプラン情報を取得
-  const [planCollections, setPlanCollections] =
-    useRecoilState(planCollectionAtom);
+  const planCollections = useRecoilValue(planCollectionAtom);
 
   //プロフィールデータを取得
-  const [profileCollections, setProfileCollections] = useRecoilState(
-    profileCollectionAtom
-  );
+  const profileCollections = useRecoilValue(profileCollectionAtom);
 
   useEffect(() => {
     //すべてのプラン情報をSTATEにセット
@@ -52,10 +49,6 @@ const Home = () => {
         }
       });
     });
-    //   //localStorageにState連携
-    // setPlanCollections((prev) => prev);
-    // setProfileCollections((prev) => prev);
-    //   // setPlanManagementCollections((prev) => prev);
   }, []);
 
   return (
