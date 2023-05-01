@@ -22,7 +22,7 @@ const editProfile = () => {
 
   //編集情報の保持のためのSTATEを定義
   const [editUserData, setEditUserData] = useState<User>({
-    userID: "",
+    userId: "",
     userName: "",
     userAvatar: "",
     email: "",
@@ -31,12 +31,12 @@ const editProfile = () => {
     youtubeAccount: "",
     selfIntroduction: "",
     achievement: "",
-    review: [],
+    review: {},
   });
 
   //自分のプロフィールデータをコレクションから取得
   const myProfileData = profileCollections.find((profile) => {
-    if (id === profile.userID) {
+    if (id === profile.userId) {
       return profile;
     }
   });
@@ -47,7 +47,7 @@ const editProfile = () => {
   }, [id]);
 
   const inputEditInformation = (e: {
-    target: { name: string; value: string | undefined };
+    target: { name: string; value: string | number };
   }) => {
     //inputタグのtargetのnameとvalueを取得
     const { name, value } = e.target;
@@ -58,7 +58,7 @@ const editProfile = () => {
   const updateProfileHandle = () => {
     const updateProfileCollections: User[] = [];
     profileCollections.map((profile) => {
-      id === profile.userID
+      id === profile.userId
         ? updateProfileCollections.push(editUserData)
         : updateProfileCollections.push(profile);
     });
@@ -79,7 +79,7 @@ const editProfile = () => {
             <FormInput
               label="ユーザー名"
               type="text"
-              placeholder="userName"
+              placeholder="ユーザー名を入力してください"
               formName="userName"
               onChangeHandle={inputEditInformation}
               formValue={editUserData.userName}
