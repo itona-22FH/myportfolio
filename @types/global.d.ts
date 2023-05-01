@@ -61,11 +61,11 @@ type HeadTitleProps = {
 
 type CategorySearchProps = {
   category: string;
-  onClickHandle: (e: { target: { textContent: string } }) => void;
+  onClickHandle: MouseEventHandler<T> | undefined;
 };
 
 type ShowPlan = {
-  planId: Plan["planId"];
+  planId: string | string[] | undefined;
   planTitle: Plan["planTitle"];
   planImage: Plan["planImage"];
   userName: User["userName"];
