@@ -149,7 +149,7 @@ const profile = () => {
                       maxW="1000px"
                       borderRadius="10px"
                     >
-                      <GamePlan showPlan={showPlan}/>
+                      <GamePlan showPlan={showPlan} />
                     </Flex>
                   </TabPanel>
                 </TabPanels>
