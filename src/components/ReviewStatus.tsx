@@ -9,7 +9,9 @@ export const ReviewStatus = ({ review }: ReviewStatusProps) => {
   const reviewCount = Object.keys(review).length;
 
   //rすべて合計した値を代入
-  const sumReviewScore = Object.values(review).reduce(
+  const totalReviewScore = Object.values<number>(review);
+
+  const sumReviewScore = totalReviewScore.reduce(
     (accumulator: number, currentValue: number) => accumulator + currentValue,
     0
   );
