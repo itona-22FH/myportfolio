@@ -15,7 +15,7 @@ const editProfile = () => {
   const router = useRouter();
   const { id } = router.query;
 
-  //profileCollectionsのSTATEの定義
+  //プロフィールコレクションのSTATEの定義
   const [profileCollections, setProfileCollections] = useRecoilState(
     profileCollectionAtom
   );
@@ -58,9 +58,9 @@ const editProfile = () => {
   const updateProfileHandle = () => {
     const updateProfileCollections: User[] = [];
     profileCollections.map((profile) => {
-      id === profile.userId
-        ? updateProfileCollections.push(editUserData)
-        : updateProfileCollections.push(profile);
+      id === profile.userId//対象のユーザー？
+        ? updateProfileCollections.push(editUserData)//編集したデータを返す
+        : updateProfileCollections.push(profile);//そのまま返す
     });
     setProfileCollections(updateProfileCollections);
   };

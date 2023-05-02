@@ -32,7 +32,10 @@ const newAccount = () => {
   });
   //パスワードチェックのためのSTATEを定義
   const [checkPassword, setCheckPassword] = useState("");
-  //profileCollections更新のためのSET関数を定義
+
+
+
+  //プロフィールコレクション更新のためのSET関数を定義
   const setProfileCollections = useSetRecoilState(profileCollectionAtom);
 
   useEffect(() => {
@@ -50,13 +53,14 @@ const newAccount = () => {
   };
 
   const inputCheckPassword = (e: { target: { value: string } }) => {
+    //確認用パスワードの入力
     setCheckPassword(e.target.value);
   };
 
   const addNewAccountHandle = () => {
     if (newUserData.password === checkPassword) {
       // パスワード一致？
-      //profileCollectionsに新規アカウントを追加
+      //プロフィールコレクションに新規アカウントを追加
       setProfileCollections((prev) => [...prev, newUserData]);
     } else {
       //パスワード不一致
