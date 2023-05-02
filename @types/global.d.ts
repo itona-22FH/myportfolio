@@ -126,7 +126,7 @@ type PostReviewModalProps = {
 };
 
 type GamePlanProps = {
-  showPlan: ShowPlan[];
+  showPlan: ShowPlan[] | undefined;
 };
 
 declare module "react-awesome-stars-rating";
