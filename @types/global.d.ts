@@ -12,7 +12,7 @@ type ConfirmationBtnProps = {
   color: string;
   width: string;
   confirmation: string;
-  handleConfirmation: any;
+  handleConfirmation: () => void;
   confirmationLink: string;
 };
 
@@ -31,14 +31,20 @@ type FormInputProps = {
   label: string;
   placeholder: string;
   formName: string;
-  onChangeHandle: any;
+  onChangeHandle: (e: {
+    target: { name: string; value: string | number };
+  }) => void;
+  formValue: string;
 };
 
 type NewRegisterTextBox = {
   htmlFor: string;
   placeholder: string;
   textBoxName: string;
-  onChangeHandle: any;
+  onChangeHandle: (e: {
+    target: { name: string; value: string | number };
+  }) => void;
+  textBoxValue: string;
 };
 
 type ContractBtnProps = {
@@ -55,21 +61,23 @@ type HeadTitleProps = {
 
 type CategorySearchProps = {
   category: string;
+  onClickHandle: MouseEventHandler<T> | undefined;
 };
 
 type ShowPlan = {
-  planID: string;
-  planTitle: string;
-  planImage: string;
-  userName: string;
-  price: string;
-  userAvatar: string;
-  reviewCount: number;
-  reviewScore: number;
+  planId: Plan["planId"];
+  planTitle: Plan["planTitle"];
+  planImage: Plan["planImage"];
+  userName: User["userName"];
+  price: Plan["price"];
+  userAvatar: User["userAvatar"];
+  review: User["review"];
+  genreCategory: Plan["genreCategory"];
+  titleCategory: Plan["titleCategory"];
 };
 
 type User = {
-  userID: string;
+  userId: string | string[] | undefined;
   userName: string;
   userAvatar: string;
   email: string;
@@ -78,13 +86,12 @@ type User = {
   youtubeAccount: string;
   selfIntroduction: string;
   achievement: string;
-  reviewCount: number;
-  reviewScore: number;
+  review: {};
 };
 
 type Plan = {
-  planID: string;
-  userID: string | string[] | undefined;
+  planId: string | string[] | undefined;
+  userId: string | string[] | undefined;
   planTitle: string;
   planImage: string;
   study: string;
@@ -94,28 +101,32 @@ type Plan = {
   price: string;
 };
 
-type PlanM = {
-  userID: string;
-  plan1: string;
-  plan2: string;
-  plan3: string;
-  plan4: string;
-};
-
 type ConfirmationDrawerProps = {
   planData: Plan;
   profileData: User;
 };
 
 type ReviewStatusProps = {
-  reviewScore: number;
-  reviewCount: number;
+  review: User["review"];
 };
 
 type UserInformationProps = {
-  userID: string | string[] | undefined;
-  userName: string;
-  userAvatar: string;
-  reviewCount: number;
-  reviewScore: number;
+  userId: Plan["userId"] | User["userId"];
+  userName: User["userName"];
+  userAvatar: User["userAvatar"];
+  review: User["review"];
 };
+
+type PostReviewModalProps = {
+  text: string;
+  colorScheme: string;
+  color: string;
+  width: string;
+  userId: Plan["userId"] | User["userId"];
+};
+
+type GamePlanProps = {
+  showPlan: ShowPlan[] | undefined;
+};
+
+declare module "react-awesome-stars-rating";

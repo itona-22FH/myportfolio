@@ -2,37 +2,54 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { Box, Container, FormControl, Select } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import React, { useEffect, useState } from "react";
+import { useSetRecoilState } from "recoil";
 import { ConfirmationBtn } from "../../components/ConfirmationBtn";
 import { FormInput } from "../../components/FormInput";
 import { HeadTitle } from "../../components/HeadTitle";
 import { NewRegisterTextBox } from "../../components/NewRegisterTextBox";
-import newPlanRegisterAtom from "../../lib/recoil/atoms/newPlanRegisterAtom";
 import { planCollectionAtom } from "../../lib/recoil/atoms/planCollectionAtom";
 import { v4 as uuidv4 } from "uuid";
 
 const newPlan = () => {
+  //プランコレクションのSET関数定義
   const setPlanCollections = useSetRecoilState(planCollectionAtom);
-  const [newPlanData, setNewPlanData] = useRecoilState(newPlanRegisterAtom);
 
+  //URLからUSERのIDを取得
   const router = useRouter();
   const { id } = router.query;
 
+  //新プラン情報保持のためのStateを定義
+  const [newPlanData, setNewPlanData] = useState<Plan>({
+    planId: "",
+    userId: "",
+    planTitle: "",
+    planImage: "https://bit.ly/2Z4KKcF",
+    study: "",
+    guidance: "",
+    titleCategory: "",
+    genreCategory: "",
+    price: "",
+  });
+
+  //初回レンダリング時とid取得時にsetNewPlanData関数を発火
   useEffect(() => {
     if (!router.isReady) return;
-    setNewPlanData((prev) => ({ ...prev, userID: id, planID: uuidv4() }));
-    console.log(newPlanData);
+    //planIDプロパティとuserIDプロパティにそれぞれIDをセット
+    setNewPlanData((prev) => ({ ...prev, userId: id, planId: uuidv4() }));
   }, [id]);
 
   const inputPlanInformation = (e: {
     target: { name: string; value: string | number };
   }) => {
+    //inputタグのtargetのnameとvalueを取得
     const { name, value } = e.target;
+    //newPlanDataが持つ同一のKEY名の値を上書き
     setNewPlanData((prev) => ({ ...prev, [name]: value }));
   };
 
   const addNewPlanHandle = () => {
+    //プラン情報を保持したnewPlanDataをPlanCollectionsに加える
     setPlanCollections((prev) => [...prev, newPlanData]);
   };
 
@@ -47,6 +64,7 @@ const newPlan = () => {
             placeholder="プラン名を入力してください"
             formName="planTitle"
             onChangeHandle={inputPlanInformation}
+            formValue={newPlanData.planTitle}
           />
           <FormInput
             label="プランサムネイル"
@@ -54,6 +72,7 @@ const newPlan = () => {
             placeholder="画像を選択してください"
             formName="planImage"
             onChangeHandle={inputPlanInformation}
+            formValue={""}
           />
           <Select
             placeholder="ジャンル"
@@ -87,6 +106,13 @@ const newPlan = () => {
               リーグ・オブ・レジェンド
             </option>
             <option value="FIFA">FIFA</option>
+            <option value="ポケモン">ポケモン</option>
+            <option value="COD">COD</option>
+            <option value="鉄拳">鉄拳</option>
+            <option value="NBA">NBA</option>
+            <option value="バトルフィールド">バトルフィールド</option>
+            <option value="フォートナイト">フォートナイト</option>
+            <option value="オーバーウォッチ２">オーバーウォッチ２</option>
           </Select>
 
           <FormInput
@@ -95,18 +121,21 @@ const newPlan = () => {
             placeholder="planPrice"
             formName="price"
             onChangeHandle={inputPlanInformation}
+            formValue={newPlanData.price}
           />
           <NewRegisterTextBox
             htmlFor="学べる内容"
             placeholder="勝つために必要なこと全て！！！エイム力UP、敵を圧倒する立ち回り、得意キャラをさらに極める！！私がすべて教えます！！！"
             textBoxName="study"
             onChangeHandle={inputPlanInformation}
+            textBoxValue={newPlanData.study}
           />
           <NewRegisterTextBox
             htmlFor="指導方法"
             placeholder="動画１本１０００円！（１試合15分想定）"
             textBoxName="guidance"
             onChangeHandle={inputPlanInformation}
+            textBoxValue={newPlanData.guidance}
           />
         </FormControl>
         <ConfirmationBtn

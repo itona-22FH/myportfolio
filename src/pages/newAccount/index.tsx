@@ -1,12 +1,74 @@
-import { Box, FormControl, Container } from "@chakra-ui/react";
-import React from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react-hooks/rules-of-hooks */
+import {
+  Box,
+  FormControl,
+  Container,
+  Input,
+  FormLabel,
+} from "@chakra-ui/react";
+import React, { useEffect, useState } from "react";
 import { ConfirmationBtn } from "../../components/ConfirmationBtn";
 import { FormInput } from "../../components/FormInput";
 import { HeadTitle } from "../../components/HeadTitle";
 import { NewRegisterTextBox } from "../../components/NewRegisterTextBox";
 import { v4 as uuidv4 } from "uuid";
+import { useSetRecoilState } from "recoil";
+import { profileCollectionAtom } from "../../lib/recoil/atoms/profileCollectionAtom";
 
 const newAccount = () => {
+  //新規アカウントの情報を保持するためのSTATEを定義
+  const [newUserData, setNewUserData] = useState({
+    userId: "",
+    userName: "",
+    userAvatar: "",
+    email: "",
+    password: "",
+    twitterAccount: "",
+    youtubeAccount: "",
+    selfIntroduction: "",
+    achievement: "",
+    review: [],
+  });
+  //パスワードチェックのためのSTATEを定義
+  const [checkPassword, setCheckPassword] = useState("");
+
+
+
+  //プロフィールコレクション更新のためのSET関数を定義
+  const setProfileCollections = useSetRecoilState(profileCollectionAtom);
+
+  useEffect(() => {
+    //初回レンダリング時にuserIDをuuidによって生成
+    setNewUserData((prev) => ({ ...prev, userId: uuidv4() }));
+  }, []);
+
+  const inputUserInformation = (e: {
+    target: { name: string; value: string | number };
+  }) => {
+    //inputタグのtargetのnameとvalueを取得
+    const { name, value } = e.target;
+    //newUserDataが持つ同一のKEY名の値を上書き
+    setNewUserData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const inputCheckPassword = (e: { target: { value: string } }) => {
+    //確認用パスワードの入力
+    setCheckPassword(e.target.value);
+  };
+
+  const addNewAccountHandle = () => {
+    if (newUserData.password === checkPassword) {
+      // パスワード一致？
+      //プロフィールコレクションに新規アカウントを追加
+      setProfileCollections((prev) => [...prev, newUserData]);
+    } else {
+      //パスワード不一致
+      //エラー出力
+      console.error("エラー");
+    }
+  };
+
   return (
     <Box pt="10px" pb="10px">
       <Container maxW="1100px" bg="whiteAlpha.800" p="5px" borderRadius="10px">
@@ -17,62 +79,78 @@ const newAccount = () => {
             type="text"
             placeholder="userName"
             formName="userName"
-            onChangeHandle={undefined}
+            onChangeHandle={inputUserInformation}
+            formValue={newUserData.userName}
           />
           <FormInput
             label="プロフィール画像"
             type="file"
             placeholder="画像を選択してください"
             formName="userAvatar"
-            onChangeHandle={undefined}
+            onChangeHandle={inputUserInformation}
+            formValue={newUserData.userAvatar}
           />
           <FormInput
             label="メールアドレス"
             type="email"
             placeholder="********@email.com"
             formName="email"
-            onChangeHandle={undefined}
+            onChangeHandle={inputUserInformation}
+            formValue={newUserData.email}
           />
           <FormInput
             label="パスワード"
             type="password"
             placeholder="password"
             formName="password"
-            onChangeHandle={undefined}
+            onChangeHandle={inputUserInformation}
+            formValue={newUserData.password}
           />
-          <FormInput
-            label="確認用パスワード"
-            type="password"
-            placeholder="CheckPassword"
-            formName="checkPassword"
-            onChangeHandle={undefined}
-          />
+          <Box pb="10px" pt="10px">
+            <FormLabel htmlFor="確認用パスワード" fontWeight="bold">
+              確認用パスワード
+            </FormLabel>
+            <Input
+              id="確認用パスワード"
+              type="password"
+              placeholder="確認用パスワード"
+              borderColor="purple.300"
+              p="4px"
+              name="checkPassword"
+              onChange={inputCheckPassword}
+              value={checkPassword}
+            />
+          </Box>
           <FormInput
             label="Twitterアカウント"
             type="url"
             placeholder="https://twitter.com/..."
             formName="twitterAccount"
-            onChangeHandle={undefined}
+            onChangeHandle={inputUserInformation}
+            formValue={newUserData.twitterAccount}
           />
           <FormInput
             label="Youtubeアカウント"
             type="url"
             placeholder="https://www.youtube.com.channel/..."
             formName="youtubeAccount"
-            onChangeHandle={undefined}
+            onChangeHandle={inputUserInformation}
+            formValue={newUserData.youtubeAccount}
           />
           <NewRegisterTextBox
             htmlFor="自己紹介"
             placeholder="こんにちは、〇〇クラン所属のHelloUserです！！"
             textBoxName="selfIntroduction"
-            onChangeHandle={undefined}
+            onChangeHandle={inputUserInformation}
+            textBoxValue={newUserData.selfIntroduction}
           />
           <NewRegisterTextBox
             htmlFor="経歴・実績"
             placeholder="〇〇大会優勝
             〇〇大会BEST3"
             textBoxName="achievement"
-            onChangeHandle={undefined}
+            onChangeHandle={inputUserInformation}
+            textBoxValue={newUserData.achievement}
           />
         </FormControl>
         <ConfirmationBtn
@@ -81,7 +159,7 @@ const newAccount = () => {
           color="white"
           width="100%"
           confirmation="新規登録"
-          handleConfirmation={() => {}}
+          handleConfirmation={addNewAccountHandle}
           confirmationLink={"/"}
         />
       </Container>

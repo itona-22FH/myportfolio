@@ -1,12 +1,15 @@
-import { Box, Link } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 import React from "react";
 
-export const CategorySearch = ({ category }: CategorySearchProps) => {
+export const CategorySearch = ({
+  category,
+  onClickHandle,
+}: CategorySearchProps) => {
   return (
     <>
-      <Link>
-        <Box h="40px">{category}</Box>
-      </Link>
+      <Button h="40px" onClick={onClickHandle} bg="purple.200">
+        {category}
+      </Button>
     </>
   );
 };

@@ -15,20 +15,19 @@ import {
   Link,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
+import React, { useMemo } from "react";
+import { useRecoilValue } from "recoil";
 import { AccountControlButton } from "../../components/AccountControlButton";
 import { planCollectionAtom } from "../../lib/recoil/atoms/planCollectionAtom";
 import { profileCollectionAtom } from "../../lib/recoil/atoms/profileCollectionAtom";
 import { GamePlan } from "../../components/GamePlan";
 import { TextBox } from "../../components/TextBox";
 import { UserInformation } from "../../components/UserInformation";
-import { showPlanAtom } from "../../lib/recoil/atoms/showPlanAtom";
+import { PostReviewModal } from "../../components/PostReviewModal";
 
 const profile = () => {
   //FIREBASEからすべてのプロフィール情報を取得
   const profileCollections = useRecoilValue(profileCollectionAtom);
-  const [showPlan, setShowPlan] = useRecoilState(showPlanAtom);
   const planCollections = useRecoilValue(planCollectionAtom);
 
   //URLからUSERのIDを取得
@@ -37,31 +36,31 @@ const profile = () => {
 
   //取得したIDと一致するPROFILEをPROFILEDATAに代入
   const profileData = profileCollections.find((profile) => {
-    if (id === profile.userID) {
+    if (id === profile.userId) {
       return profile;
     }
   });
 
-  // 取得したIDと一致するプランのみをSTATEにセット「登録中のプラン」タブに表示
-  useEffect(() => {
-    if (profileData) {
-      planCollections.map((plan) => {
-        if (profileData.userID === plan.userID) {
-          const planData = {
-            planID: plan.planID,
-            planTitle: plan.planTitle,
-            planImage: plan.planImage,
-            userName: profileData.userName,
-            price: plan.price,
-            userAvatar: profileData.userAvatar,
-            reviewCount: profileData.reviewCount,
-            reviewScore: profileData.reviewScore,
-          };
-          setShowPlan((prev) => [...prev, planData]);
-        }
-      });
-    }
-  }, [id]);
+  // ログイン中のユーザーIDと一致するプランのみでフィルターをかけ配列を生成
+  const showPlan = useMemo<ShowPlan[] | undefined>(
+    () =>
+      profileData
+        ? planCollections
+            .filter((plan) => profileData.userId === plan.userId)
+            .map((plan) => ({
+              planId: plan.planId,
+              planTitle: plan.planTitle,
+              planImage: plan.planImage,
+              userName: profileData.userName,
+              price: plan.price,
+              userAvatar: profileData.userAvatar,
+              review: profileData.review,
+              genreCategory: plan.genreCategory,
+              titleCategory: plan.titleCategory,
+            }))
+        : undefined,
+    [profileData]
+  );
 
   return (
     <>
@@ -75,12 +74,14 @@ const profile = () => {
               p="10px"
               direction="column"
             >
+              <Flex pb="10px" justifyContent="center" fontSize="50px">
+                <Box color="rebeccapurple">プロフィールページ</Box>
+              </Flex>
               <UserInformation
-                userID={"_"}
+                userId={"_"}
                 userName={profileData.userName}
                 userAvatar={profileData.userAvatar}
-                reviewCount={profileData.reviewCount}
-                reviewScore={profileData.reviewScore}
+                review={profileData.review}
               />
             </Flex>
 
@@ -98,12 +99,12 @@ const profile = () => {
                 width="400px"
                 href="/"
               />
-              <AccountControlButton
+              <PostReviewModal
                 text="レビューを投稿する"
                 colorScheme="purple"
                 color="white"
                 width="400px"
-                href="/"
+                userId={profileData.userId}
               />
             </Flex>
 
@@ -146,7 +147,7 @@ const profile = () => {
                       maxW="1000px"
                       borderRadius="10px"
                     >
-                      <GamePlan />
+                      <GamePlan showPlan={showPlan} />
                     </Flex>
                   </TabPanel>
                 </TabPanels>

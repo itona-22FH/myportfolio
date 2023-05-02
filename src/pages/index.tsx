@@ -13,51 +13,52 @@ import {
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 import { planCollectionAtom } from "../lib/recoil/atoms/planCollectionAtom";
-import { useRecoilState, useSetRecoilState } from "recoil";
-import { showPlanAtom } from "../lib/recoil/atoms/showPlanAtom";
-import React, { useEffect } from "react";
+import { useRecoilValue } from "recoil";
+import React, { useState } from "react";
 import { profileCollectionAtom } from "../lib/recoil/atoms/profileCollectionAtom";
-// import { planManagementCollectionAtom } from "../lib/recoil/atoms/planManagementCollectionAtom";
 
 const Home = () => {
   //全てのプラン情報を管理するRECOILのSTATEへのSET関数を宣言
-  const setShowPlan = useSetRecoilState(showPlanAtom);
+  const [showPlan, setShowPlan] = useState<ShowPlan[]>([]);
 
   //FIREBASEからすべてのプラン情報を取得
-  const [planCollections, setPlanCollections] =
-    useRecoilState(planCollectionAtom);
-  const [profileCollections, setProfileCollections] = useRecoilState(
-    profileCollectionAtom
-  );
+  const planCollections = useRecoilValue(planCollectionAtom);
 
-  // const [planPlanManagementCollections, setPlanManagementCollections] = useRecoilState(planManagementCollectionAtom);
+  //プロフィールデータを取得
+  const profileCollections = useRecoilValue(profileCollectionAtom);
 
-  useEffect(() => {
-    const newPlan: ShowPlan[] = [];
-    //すべてのプラン情報をSTATEにセット
-    profileCollections.map((profile) => {
-      planCollections.map((plan) => {
-        if (plan.userID === profile.userID) {
-          const showPlanData = {
-            planID: plan.planID,
+  const sortPlanHandle = (e: { target: { textContent: string } }) => {
+    setShowPlan([]);
+    //一致するジャンル・タイトルのプランでフィルター
+    const sortPlan = planCollections.filter((plan) => {
+      if (
+        plan.genreCategory === e.target.textContent ||
+        plan.titleCategory === e.target.textContent
+      ) {
+        return plan;
+      } else if (e.target.textContent === "全てのプラン") {
+        return planCollections;
+      }
+    });
+    sortPlan.map((plan) => {
+      profileCollections.map((profile) => {
+        if (plan.userId === profile.userId) {
+          const planData = {
+            planId: plan.planId,
             planTitle: plan.planTitle,
             planImage: plan.planImage,
             userName: profile.userName,
             price: plan.price,
             userAvatar: profile.userAvatar,
-            reviewCount: profile.reviewCount,
-            reviewScore: profile.reviewScore,
+            review: profile.review,
+            genreCategory: plan.genreCategory,
+            titleCategory: plan.titleCategory,
           };
-          newPlan.push(showPlanData);
+          setShowPlan((prev) => [...prev, planData]);
         }
       });
     });
-    setShowPlan(newPlan);
-    //   //localStorageにState連携
-    //   // setPlanCollections((prev) => prev);
-    //   // setProfileCollections((prev) => prev);
-    //   // setPlanManagementCollections((prev) => prev);
-  }, []);
+  };
 
   return (
     <Box>
@@ -95,14 +96,27 @@ const Home = () => {
             <Box h="40px">
               <span style={{ marginLeft: 10 }}>
                 <SearchIcon />
-                <span>カテゴリ</span>
+                <span>ソート</span>
               </span>
             </Box>
-            <CategorySearch category="FPS・TPS" />
-            <CategorySearch category="MOBA" />
-            <CategorySearch category="格闘" />
-            <CategorySearch category="スポーツ" />
-            <CategorySearch category="エーペックスレジェンズ" />
+            <CategorySearch
+              category="全てのプラン"
+              onClickHandle={sortPlanHandle}
+            />
+            <CategorySearch
+              category="FPS・TPS"
+              onClickHandle={sortPlanHandle}
+            />
+            <CategorySearch category="MOBA" onClickHandle={sortPlanHandle} />
+            <CategorySearch category="格闘" onClickHandle={sortPlanHandle} />
+            <CategorySearch
+              category="スポーツ"
+              onClickHandle={sortPlanHandle}
+            />
+            <CategorySearch
+              category="エーペックスレジェンズ"
+              onClickHandle={sortPlanHandle}
+            />
           </VStack>
         </GridItem>
 
@@ -115,7 +129,7 @@ const Home = () => {
             maxW="1000px"
             borderRadius="10"
           >
-            <GamePlan />
+            <GamePlan showPlan={showPlan} />
           </Flex>
         </GridItem>
       </Grid>

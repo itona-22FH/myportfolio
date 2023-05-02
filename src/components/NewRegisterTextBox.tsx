@@ -6,6 +6,7 @@ export const NewRegisterTextBox = ({
   placeholder,
   textBoxName,
   onChangeHandle,
+  textBoxValue,
 }: NewRegisterTextBox) => {
   return (
     <Box pb="10px" pt="10px">
@@ -20,6 +21,7 @@ export const NewRegisterTextBox = ({
         p="3px"
         name={textBoxName}
         onChange={onChangeHandle}
+        value={textBoxValue}
       ></Textarea>
     </Box>
   );

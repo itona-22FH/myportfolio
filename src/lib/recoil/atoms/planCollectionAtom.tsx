@@ -8,9 +8,9 @@ export const planCollectionAtom = atom<Plan[]>({
   default: [
     {
       //プランID（Firebase）
-      planID: "AplanID1",
+      planId: "AplanId1",
       //プラン登録者（FirebaseID）
-      userID: "userA",
+      userId: "userA",
       //プラン名
       planTitle: "APEX",
       //プランサムネイル
@@ -20,45 +20,45 @@ export const planCollectionAtom = atom<Plan[]>({
       //指導方法
       guidance: "画面共有ツールを使用します",
       //ゲームタイトル
-      titleCategory:"エーペックスレジェンズ",
+      titleCategory: "エーペックスレジェンズ",
       //ゲームジャンル
-      genreCategory:"FPS・TPS",
+      genreCategory: "FPS・TPS",
       //料金
-      price: "2,000",
+      price: "2000",
       //アバター画像
     },
     {
-      planID: "BplanID1",
-      userID: "userB",
+      planId: "BplanId1",
+      userId: "userB",
       planTitle: "FIFA",
       planImage: "https://bit.ly/2Z4KKcF",
       study: "FIFAについて学べます",
       guidance: "Discordを使います",
-      titleCategory:" FIFA",
-      genreCategory:"スポーツ",
-      price: "1,500",
+      titleCategory: " FIFA",
+      genreCategory: "スポーツ",
+      price: "1500",
     },
     {
-      planID: "CplanID1",
-      userID: "userC",
+      planId: "CplanId1",
+      userId: "userC",
       planTitle: "ストリートファイター",
       planImage: "https://bit.ly/2Z4KKcF",
       study: "ストリートファイターについて学べます",
       guidance: "ZOOMを使います",
-      titleCategory:"ストリートファイター",
-      genreCategory:"格闘",
-      price: "2,000",
+      titleCategory: "ストリートファイター",
+      genreCategory: "格闘",
+      price: "2000",
     },
     {
-      planID: "DplanID1",
-      userID: "userD",
+      planId: "DplanId1",
+      userId: "userD",
       planTitle: "リーグオブレジェンド",
       planImage: "https://bit.ly/2Z4KKcF",
       study: "リーグ・オブ・レジェンドについて学べます",
       guidance: "コーチング動画を渡します",
-      titleCategory:" リーグ・オブ・レジェンド",
-      genreCategory:"MOBA",
-      price: "1,000",
+      titleCategory: " リーグ・オブ・レジェンド",
+      genreCategory: "MOBA",
+      price: "1000",
     },
   ],
   effects_UNSTABLE: [persistAtom],

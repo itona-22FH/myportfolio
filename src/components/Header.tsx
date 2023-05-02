@@ -39,7 +39,6 @@ export const Header = () => {
         ) : (
           <Box />
         )}
-
         <Stack direction="row" spacing={4} mr="10px">
           {/* ログアウト状態の時表示 */}
           {loginUserId === "" && (

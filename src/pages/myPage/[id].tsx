@@ -13,12 +13,11 @@ import {
   StackDivider,
   Link,
 } from "@chakra-ui/react";
-import React, { useEffect } from "react";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import React, { useMemo } from "react";
+import { useRecoilValue } from "recoil";
 import { AccountControlButton } from "../../components/AccountControlButton";
 import { planCollectionAtom } from "../../lib/recoil/atoms/planCollectionAtom";
 import { profileCollectionAtom } from "../../lib/recoil/atoms/profileCollectionAtom";
-import { showPlanAtom } from "../../lib/recoil/atoms/showPlanAtom";
 import { GamePlan } from "../../components/GamePlan";
 import { TextBox } from "../../components/TextBox";
 import { useRouter } from "next/router";
@@ -27,38 +26,41 @@ import { UserInformation } from "../../components/UserInformation";
 const myPage = () => {
   //FIREBASEからすべてのプロフィール情報を取得
   const profileCollections = useRecoilValue(profileCollectionAtom);
-  const setShowPlan = useSetRecoilState(showPlanAtom);
+
+  //プラン情報の取得
   const planCollections = useRecoilValue(planCollectionAtom);
 
+  //URLからユーザーのIDを取得
   const router = useRouter();
   const { id } = router.query;
 
+  //プロフィールコレクションから自分のプロフィールデータのみを取得
   const myProfileData = profileCollections.find((profile) => {
-    if (id === profile.userID) {
+    if (id === profile.userId) {
       return profile;
     }
   });
 
   // ログイン中のユーザーIDと一致するプランのみでフィルターをかけ配列を生成
-  useEffect(() => {
-    if (myProfileData) {
-      planCollections.map((plan) => {
-        if (myProfileData.userID === plan.userID) {
-          const planData = {
-            planID: plan.planID,
-            planTitle: plan.planTitle,
-            planImage: plan.planImage,
-            userName: myProfileData.userName,
-            price: plan.price,
-            userAvatar: myProfileData.userAvatar,
-            reviewCount: myProfileData.reviewCount,
-            reviewScore: myProfileData.reviewScore,
-          };
-          setShowPlan((prev) => [...prev, planData]);
-        }
-      });
-    }
-  }, [id]);
+  const showPlan = useMemo<ShowPlan[] | undefined>(
+    () =>
+      myProfileData
+        ? planCollections
+            .filter((plan) => myProfileData.userId === plan.userId)
+            .map((plan) => ({
+              planId: plan.planId,
+              planTitle: plan.planTitle,
+              planImage: plan.planImage,
+              userName: myProfileData.userName,
+              price: plan.price,
+              userAvatar: myProfileData.userAvatar,
+              review: myProfileData.review,
+              genreCategory: plan.genreCategory,
+              titleCategory: plan.titleCategory,
+            }))
+        : undefined,
+    [myProfileData]
+  );
 
   return (
     <>
@@ -72,12 +74,14 @@ const myPage = () => {
               p="10px"
               direction="column"
             >
+              <Flex pb="10px" justifyContent="center" fontSize="50px">
+                <Box color="rebeccapurple">マイページ</Box>
+              </Flex>
               <UserInformation
-                userID={"_"}
+                userId={"_"}
                 userName={myProfileData.userName}
                 userAvatar={myProfileData.userAvatar}
-                reviewCount={myProfileData.reviewCount}
-                reviewScore={myProfileData.reviewScore}
+                review={myProfileData.review}
               />
             </Flex>
 
@@ -94,7 +98,7 @@ const myPage = () => {
                   colorScheme="purple"
                   color="white"
                   width="400px"
-                  href="/editProfile"
+                  href={`/editProfile/${id}`}
                 />
               </Box>
               <Box>
@@ -148,7 +152,7 @@ const myPage = () => {
                       maxW="1000px"
                       borderRadius="10px"
                     >
-                      <GamePlan />
+                      <GamePlan showPlan={showPlan} />
                     </Flex>
                   </TabPanel>
                   <TabPanel>

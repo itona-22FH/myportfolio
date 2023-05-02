@@ -24,35 +24,42 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { ConfirmationDrawer } from "../../components/ConfirmationDrawer";
 import { UserInformation } from "../../components/UserInformation";
 import { profileCollectionAtom } from "../../lib/recoil/atoms/profileCollectionAtom";
+import { PostReviewModal } from "../../components/PostReviewModal";
+import { testLoginUserAtom } from "../../lib/recoil/atoms/testLoginUserAtom";
 
 const plan = () => {
+  //planCollectionsのSTATEを取得
   const [planCollections, setPlanCollections] =
     useRecoilState(planCollectionAtom);
+
+  //プロフィールコレクションを取得
   const profileCollections = useRecoilValue(profileCollectionAtom);
 
-  //URLからPLANのIDを取得
+  //ログイン中のユーザーのID取得
+  const loginUser = useRecoilValue(testLoginUserAtom);
+
+  //URLからプランのIDを取得
   const router = useRouter();
   const { id } = router.query;
 
-  //取得したIDと一致するプランのみをPLANDATAに代入
+  //取得したIDと一致するプランのみをplanDataに代入
   const planData = planCollections.find((plan) => {
-    if (id === plan.planID) {
+    if (id === plan.planId) {
       return plan;
     }
   });
 
+  //planDataの持つuserIdと一致するプロフィール情報を取得
   const profileData = profileCollections.find((profile) => {
-    if (planData) {
-      if (planData.userID === profile.userID) {
-        return profile;
-      }
+    if (planData?.userId === profile.userId) {
+      return profile;
     }
   });
 
   //プラン削除
-  const deletePlanHandle = (id: string | string[]) => {
+  const deletePlanHandle = () => {
     const filterPlanCollections = planCollections.filter((plan) => {
-      if (id !== plan.planID) {
+      if (loginUser !== plan.planId) {
         return plan;
       }
     });
@@ -61,15 +68,15 @@ const plan = () => {
 
   return (
     <>
-      {planData && profileData && id ? (
-        <Box pt="10px">
+      {planData && profileData ? (
+        <Box pt="10px" pb="10px">
           <Container maxW="1100px">
             <Grid
               templateAreas={`
                       "nav main"
                       "nav empty"
                     `}
-              gridTemplateRows={"350px 1fr 1px"}
+              gridTemplateRows={"350px 1fr"}
               gridTemplateColumns={"1fr 350px"}
               gap="10px"
               fontWeight="bold"
@@ -116,24 +123,30 @@ const plan = () => {
                       プラン料金
                     </Heading>
                     <Text ml="30px" fontSize="40px">
-                      <span style={{ color: "red" }}>{planData.price}</span>円
+                      <span style={{ color: "red" }}>
+                        {Number(planData.price).toLocaleString()}
+                      </span>
+                      円
                     </Text>
                   </Flex>
                 </VStack>
                 <Flex justifyContent="space-around" flexFlow="column">
                   <Box w="100%" p="10px">
-                    {id !== planData.userID && (
-                      <ConfirmationDrawer planData={planData} profileData={profileData}/>
+                    {loginUser !== planData.userId && (
+                      <ConfirmationDrawer
+                        planData={planData}
+                        profileData={profileData}
+                      />
                     )}
                     {/* 登録者本人の時表示 */}
-                    {id === planData.userID && (
+                    {loginUser === planData.userId && (
                       <ConfirmationBtn
                         text="プランを削除する"
                         colorScheme="red"
                         color="white"
                         width="100%"
                         confirmation="削除"
-                        handleConfirmation={() => deletePlanHandle(id)}
+                        handleConfirmation={deletePlanHandle}
                         confirmationLink="/"
                       />
                     )}
@@ -156,15 +169,14 @@ const plan = () => {
                   flexFlow="column"
                 >
                   <UserInformation
-                    userID={planData.userID}
+                    userId={planData.userId}
                     userName={profileData.userName}
                     userAvatar={profileData.userAvatar}
-                    reviewCount={profileData.reviewCount}
-                    reviewScore={profileData.reviewScore}
+                    review={profileData.review}
                   />
                   {/* 本人以外の時表示 */}
                   <Box w="100%" p="5px">
-                    {id !== planData.userID && (
+                    {loginUser !== planData.userId && (
                       <>
                         <AccountControlButton
                           text="質問をする"
@@ -174,12 +186,12 @@ const plan = () => {
                           href="/"
                         />
                         <Box m="10px"></Box>
-                        <AccountControlButton
+                        <PostReviewModal
                           text="レビューを投稿する"
                           colorScheme="purple"
                           color="white"
                           width="100%"
-                          href="/"
+                          userId={profileData.userId as string}
                         />
                       </>
                     )}

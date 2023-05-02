@@ -7,6 +7,7 @@ export const FormInput = ({
   placeholder,
   formName,
   onChangeHandle,
+  formValue,
 }: FormInputProps) => {
   return (
     <Box pb="10px" pt="10px">
@@ -21,6 +22,7 @@ export const FormInput = ({
         p="4px"
         name={formName}
         onChange={onChangeHandle}
+        value={formValue}
       />
     </Box>
   );

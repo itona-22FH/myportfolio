@@ -13,6 +13,7 @@
     "@chakra-ui/react": "^2.4.9",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
+    "@types/react-stars": "^2.2.1",
     "@types/uuid": "^9.0.1",
     "framer-motion": "^8.5.5",
     "next": "13.1.6",
@@ -20,6 +21,7 @@
     "react-dom": "18.2.0",
     "react-icons": "^4.7.1",
     "react-slick": "^0.29.0",
+    "react-stars": "^2.2.5",
     "recoil": "^0.7.6",
     "recoil-persist": "^4.2.0",
     "uuid": "^9.0.0"
