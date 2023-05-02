@@ -15,7 +15,7 @@ import {
   Link,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useMemo } from "react";
 import { useRecoilValue } from "recoil";
 import { AccountControlButton } from "../../components/AccountControlButton";
 import { planCollectionAtom } from "../../lib/recoil/atoms/planCollectionAtom";
@@ -28,7 +28,6 @@ import { PostReviewModal } from "../../components/PostReviewModal";
 const profile = () => {
   //FIREBASEからすべてのプロフィール情報を取得
   const profileCollections = useRecoilValue(profileCollectionAtom);
-  const [showPlan, setShowPlan] = useState<ShowPlan[]>([]);
   const planCollections = useRecoilValue(planCollectionAtom);
 
   //URLからUSERのIDを取得
@@ -42,27 +41,26 @@ const profile = () => {
     }
   });
 
-  // 取得したIDと一致するプランのみをSTATEにセット「登録中のプラン」タブに表示
-  useEffect(() => {
-    if (profileData) {
-      planCollections.map((plan) => {
-        if (profileData.userId === plan.userId) {
-          const planData = {
-            planId: plan.planId,
-            planTitle: plan.planTitle,
-            planImage: plan.planImage,
-            userName: profileData.userName,
-            price: plan.price,
-            userAvatar: profileData.userAvatar,
-            review: profileData.review,
-            genreCategory: plan.genreCategory,
-            titleCategory: plan.titleCategory,
-          };
-          setShowPlan((prev) => [...prev, planData]);
-        }
-      });
-    }
-  }, [id]);
+  // ログイン中のユーザーIDと一致するプランのみでフィルターをかけ配列を生成
+  const showPlan = useMemo<ShowPlan[] | undefined>(
+    () =>
+      profileData
+        ? planCollections
+            .filter((plan) => profileData.userId === plan.userId)
+            .map((plan) => ({
+              planId: plan.planId,
+              planTitle: plan.planTitle,
+              planImage: plan.planImage,
+              userName: profileData.userName,
+              price: plan.price,
+              userAvatar: profileData.userAvatar,
+              review: profileData.review,
+              genreCategory: plan.genreCategory,
+              titleCategory: plan.titleCategory,
+            }))
+        : undefined,
+    [profileData]
+  );
 
   return (
     <>

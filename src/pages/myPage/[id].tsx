@@ -13,7 +13,7 @@ import {
   StackDivider,
   Link,
 } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import React, { useMemo } from "react";
 import { useRecoilValue } from "recoil";
 import { AccountControlButton } from "../../components/AccountControlButton";
 import { planCollectionAtom } from "../../lib/recoil/atoms/planCollectionAtom";
@@ -26,9 +26,6 @@ import { UserInformation } from "../../components/UserInformation";
 const myPage = () => {
   //FIREBASEからすべてのプロフィール情報を取得
   const profileCollections = useRecoilValue(profileCollectionAtom);
-
-  //表示するプランの保持のためのSTATEを定義
-  const [showPlan, setShowPlan] = useState<ShowPlan[]>([]);
 
   //プラン情報の取得
   const planCollections = useRecoilValue(planCollectionAtom);
@@ -45,27 +42,25 @@ const myPage = () => {
   });
 
   // ログイン中のユーザーIDと一致するプランのみでフィルターをかけ配列を生成
-  useEffect(() => {
-    if (myProfileData) {
-      planCollections.map((plan) => {
-        if (myProfileData.userId === plan.userId) {
-          const planData = {
-            planId: plan.planId,
-            planTitle: plan.planTitle,
-            planImage: plan.planImage,
-            userName: myProfileData.userName,
-            price: plan.price,
-            userAvatar: myProfileData.userAvatar,
-            review: myProfileData.review,
-            genreCategory: plan.genreCategory,
-            titleCategory: plan.titleCategory,
-          };
-          //showPlanにFilterをかけた配列をセット
-          setShowPlan((prev) => [...prev, planData]);
-        }
-      });
-    }
-  }, [id]);
+  const showPlan = useMemo<ShowPlan[] | undefined>(
+    () =>
+      myProfileData
+        ? planCollections
+            .filter((plan) => myProfileData.userId === plan.userId)
+            .map((plan) => ({
+              planId: plan.planId,
+              planTitle: plan.planTitle,
+              planImage: plan.planImage,
+              userName: myProfileData.userName,
+              price: plan.price,
+              userAvatar: myProfileData.userAvatar,
+              review: myProfileData.review,
+              genreCategory: plan.genreCategory,
+              titleCategory: plan.titleCategory,
+            }))
+        : undefined,
+    [myProfileData]
+  );
 
   return (
     <>
@@ -157,7 +152,7 @@ const myPage = () => {
                       maxW="1000px"
                       borderRadius="10px"
                     >
-                      <GamePlan showPlan={showPlan}/>
+                      <GamePlan showPlan={showPlan} />
                     </Flex>
                   </TabPanel>
                   <TabPanel>
