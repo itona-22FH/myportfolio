@@ -65,7 +65,7 @@ type CategorySearchProps = {
 };
 
 type ShowPlan = {
-  planId: string | string[] | undefined;
+  planId: Plan["planId"];
   planTitle: Plan["planTitle"];
   planImage: Plan["planImage"];
   userName: User["userName"];
