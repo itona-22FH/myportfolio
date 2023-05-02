@@ -30,8 +30,6 @@ export const PostReviewModal = ({
   //モーダル関数
   const { isOpen, onOpen, onClose } = useDisclosure();
   
-  const initialRef = React.useRef(null);
-  const finalRef = React.useRef(null);
 
   //プロフィールデータ取得
   const [profileCollections, setProfileCollections] = useRecoilState(
@@ -81,8 +79,6 @@ export const PostReviewModal = ({
 
       {/* ログインボタンが押された時に表示するモーダル */}
       <Modal
-        initialFocusRef={initialRef}
-        finalFocusRef={finalRef}
         isOpen={isOpen}
         onClose={onClose}
         size="xl"

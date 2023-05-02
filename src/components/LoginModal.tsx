@@ -16,8 +16,6 @@ import React from "react";
 
 export const LoginModal = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const initialRef = React.useRef(null);
-  const finalRef = React.useRef(null);
   return (
     <>
       <Button
@@ -31,8 +29,6 @@ export const LoginModal = () => {
 
       {/* ログインボタンが押された時に表示するモーダル */}
       <Modal
-        initialFocusRef={initialRef}
-        finalFocusRef={finalRef}
         isOpen={isOpen}
         onClose={onClose}
         size="3xl"
@@ -46,7 +42,6 @@ export const LoginModal = () => {
               <FormLabel>メールアドレス</FormLabel>
               <Input
                 type="email"
-                ref={initialRef}
                 placeholder="*******@email.com"
                 name="email"
               />
