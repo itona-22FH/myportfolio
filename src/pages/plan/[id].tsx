@@ -33,10 +33,8 @@ const plan = () => {
     useRecoilState(planCollectionAtom);
 
   //プロフィールコレクションを取得
-  const [profileCollections, setProfileCollections] = useRecoilState(
-    profileCollectionAtom
-  );
-  console.log(profileCollections);
+  const profileCollections = useRecoilValue(profileCollectionAtom);
+
   //ログイン中のユーザーのID取得
   const loginUser = useRecoilValue(testLoginUserAtom);
 
@@ -67,8 +65,6 @@ const plan = () => {
     });
     setPlanCollections(filterPlanCollections);
   };
-
-
 
   return (
     <>
@@ -196,7 +192,6 @@ const plan = () => {
                           color="white"
                           width="100%"
                           userId={profileData.userId as string}
-
                         />
                       </>
                     )}
