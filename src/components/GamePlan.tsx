@@ -59,16 +59,16 @@ export const GamePlan = ({ showPlan }: GamePlanProps) => {
             key={planId as string}
             href={`/plan/${planId}`}
             style={{ textDecoration: "none" }}
+            ml="10px"
+            mt="10px"
+            mb="10px"
           >
-            <Box
+          <Box
               maxW="xs"
               borderWidth="1px"
               borderRadius="lg"
               borderColor="purple.300"
               overflow="hidden"
-              ml="10px"
-              mt="10px"
-              mb="10px"
             >
               <Image src={planImage} alt="PlanImage" />
 
