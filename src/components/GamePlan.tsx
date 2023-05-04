@@ -1,19 +1,24 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Text, Image, Link, Box, Avatar, Flex } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { ReviewStatus } from "./ReviewStatus";
 import { Badge } from "@chakra-ui/react";
 import { profileCollectionAtom } from "../lib/recoil/atoms/profileCollectionAtom";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { planCollectionAtom } from "../lib/recoil/atoms/planCollectionAtom";
+import { collection, getDocs } from "firebase/firestore";
+import db from "../lib/firebase/firebaseConfig";
 
 export const GamePlan = ({ showPlan }: GamePlanProps) => {
   //URLからpathnameを取得
   const router = useRouter();
   const { pathname } = router;
 
-  const profileCollections = useRecoilValue(profileCollectionAtom);
+  //FIREBASEからすべてのプラン情報を取得
   const planCollections = useRecoilValue(planCollectionAtom);
+
+  //プロフィールデータを取得
+  const profileCollections = useRecoilValue(profileCollectionAtom);
 
   const showAllPlan = planCollections.flatMap((plan) =>
     profileCollections
