@@ -24,6 +24,7 @@ import { GamePlan } from "../../components/GamePlan";
 import { TextBox } from "../../components/TextBox";
 import { UserInformation } from "../../components/UserInformation";
 import { PostReviewModal } from "../../components/PostReviewModal";
+import { testLoginUserAtom } from "../../lib/recoil/atoms/testLoginUserAtom";
 
 const profile = () => {
   //FIREBASEからすべてのプロフィール情報を取得
@@ -33,6 +34,8 @@ const profile = () => {
   //URLからUSERのIDを取得
   const router = useRouter();
   const { id } = router.query;
+
+  const loginUser = useRecoilValue(testLoginUserAtom)
 
   //取得したIDと一致するPROFILEをPROFILEDATAに代入
   const profileData = profileCollections.find((profile) => {
@@ -84,32 +87,34 @@ const profile = () => {
                 review={profileData.review}
               />
             </Flex>
+{loginUser !== "" && (
 
-            <Flex
-              justifyContent="space-around"
-              bg="whiteAlpha.800"
-              mt="10px"
-              p="10px"
-              borderRadius="10px"
-            >
+  <Flex
+  justifyContent="space-around"
+  bg="whiteAlpha.800"
+  mt="10px"
+  p="10px"
+  borderRadius="10px"
+  >
               <AccountControlButton
                 text="質問をする"
                 colorScheme="purple"
                 color="white"
                 width="400px"
                 href="/"
-              />
+                />
               <PostReviewModal
                 text="レビューを投稿する"
                 colorScheme="purple"
                 color="white"
                 width="400px"
                 userId={profileData.userId}
-              />
+                />
             </Flex>
+)}
 
             <Box
-              h="100%"
+            h="100%"
               bg="whiteAlpha.800"
               mt="10px"
               borderRadius="10px"
