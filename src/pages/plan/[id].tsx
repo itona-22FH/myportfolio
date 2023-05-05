@@ -26,6 +26,8 @@ import { UserInformation } from "../../components/UserInformation";
 import { profileCollectionAtom } from "../../lib/recoil/atoms/profileCollectionAtom";
 import { PostReviewModal } from "../../components/PostReviewModal";
 import { testLoginUserAtom } from "../../lib/recoil/atoms/testLoginUserAtom";
+import { deleteDoc, doc } from "firebase/firestore";
+import db from "../../lib/firebase/firebaseConfig";
 
 const plan = () => {
   //planCollectionsのSTATEを取得
@@ -57,13 +59,8 @@ const plan = () => {
   });
 
   //プラン削除
-  const deletePlanHandle = () => {
-    const filterPlanCollections = planCollections.filter((plan) => {
-      if (loginUser !== plan.planId) {
-        return plan;
-      }
-    });
-    setPlanCollections(filterPlanCollections);
+  const deletePlanHandle = async () => {
+    await deleteDoc(doc(db, "planCollection", planData?.planId as string));
   };
 
   return (
