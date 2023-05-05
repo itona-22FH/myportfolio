@@ -8,11 +8,14 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { planCollectionAtom } from "../lib/recoil/atoms/planCollectionAtom";
 import { collection, getDocs } from "firebase/firestore";
 import db from "../lib/firebase/firebaseConfig";
+import { testLoginUserAtom } from "../lib/recoil/atoms/testLoginUserAtom";
 
 export const GamePlan = ({ showPlan }: GamePlanProps) => {
   //URLからpathnameを取得
   const router = useRouter();
   const { pathname } = router;
+
+  const loginUser = useRecoilValue(testLoginUserAtom)
 
   //FIREBASEからすべてのプラン情報を取得
   const planCollections = useRecoilValue(planCollectionAtom);
@@ -57,7 +60,7 @@ export const GamePlan = ({ showPlan }: GamePlanProps) => {
         }) => (
           <Link
             key={planId as string}
-            href={`/plan/${planId}`}
+            href={loginUser === "" ? "/newAccount" :`/plan/${planId}`}
             style={{ textDecoration: "none" }}
             ml="10px"
             mt="10px"
