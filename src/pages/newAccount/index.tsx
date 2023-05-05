@@ -40,7 +40,7 @@ const newAccount = () => {
 
   useEffect(() => {
     //初回レンダリング時にuserIDをuuidによって生成
-    setNewUserData((prev) => ({ ...prev, userId: uuidv4() }));
+    setNewUserData((prev) => (prev));
   }, []);
 
   const inputUserInformation = (e: {
