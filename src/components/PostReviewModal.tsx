@@ -97,7 +97,7 @@ export const PostReviewModal = ({
             />
           </Flex>
           <ModalFooter>
-            <Link>
+            <Link href="/">
               <Button colorScheme="blue" mr="10px" onClick={postReview}>
                 投稿する
               </Button>
