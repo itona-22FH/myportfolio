@@ -10,6 +10,8 @@ import { HeadTitle } from "../../components/HeadTitle";
 import { NewRegisterTextBox } from "../../components/NewRegisterTextBox";
 import { planCollectionAtom } from "../../lib/recoil/atoms/planCollectionAtom";
 import { v4 as uuidv4 } from "uuid";
+import { addDoc, collection } from "firebase/firestore";
+import db from "../../lib/firebase/firebaseConfig";
 
 const newPlan = () => {
   //プランコレクションのSET関数定義
@@ -20,8 +22,7 @@ const newPlan = () => {
   const { id } = router.query;
 
   //新プラン情報保持のためのStateを定義
-  const [newPlanData, setNewPlanData] = useState<Plan>({
-    planId: "",
+  const [newPlanData, setNewPlanData] = useState<NewPlan>({
     userId: "",
     planTitle: "",
     planImage: "https://bit.ly/2Z4KKcF",
@@ -36,7 +37,7 @@ const newPlan = () => {
   useEffect(() => {
     if (!router.isReady) return;
     //planIDプロパティとuserIDプロパティにそれぞれIDをセット
-    setNewPlanData((prev) => ({ ...prev, userId: id, planId: uuidv4() }));
+    setNewPlanData((prev) => ({ ...prev, userId: id }));
   }, [id]);
 
   const inputPlanInformation = (e: {
@@ -48,10 +49,21 @@ const newPlan = () => {
     setNewPlanData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const addNewPlanHandle = () => {
+  const addNewPlanHandle = async () => {
     //プラン情報を保持したnewPlanDataをPlanCollectionsに加える
-    setPlanCollections((prev) => [...prev, newPlanData]);
+    const docRef = await addDoc(collection(db, "planCollection"), {
+      userId:newPlanData.userId,
+      planTitle: newPlanData.planTitle,
+      planImage: newPlanData.planImage,
+      price: newPlanData.price,
+      study: newPlanData.study,
+      guidance: newPlanData.guidance,
+      titleCategory:newPlanData.titleCategory,
+      genreCategory:newPlanData.genreCategory,
+    });
   };
+
+
 
   return (
     <Box pt="10px" pb="10px">
