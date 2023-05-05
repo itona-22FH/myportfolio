@@ -89,8 +89,28 @@ type User = {
   review: {};
 };
 
+type EditUser = {
+  userName: string;
+  userAvatar: string;
+  twitterAccount: string;
+  youtubeAccount: string;
+  selfIntroduction: string;
+  achievement: string;
+};
+
 type Plan = {
   planId: string | string[] | undefined;
+  userId: string | string[] | undefined;
+  planTitle: string;
+  planImage: string;
+  study: string;
+  guidance: string;
+  titleCategory: string;
+  genreCategory: string;
+  price: string;
+};
+
+type NewPlan = {
   userId: string | string[] | undefined;
   planTitle: string;
   planImage: string;
