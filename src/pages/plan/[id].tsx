@@ -132,7 +132,7 @@ const plan = () => {
                 </VStack>
                 <Flex justifyContent="space-around" flexFlow="column">
                   <Box w="100%" p="10px">
-                    {loginUser !== planData.userId && (
+                    {loginUser !== planData.userId && loginUser !== "" && (
                       <ConfirmationDrawer
                         planData={planData}
                         profileData={profileData}
@@ -176,7 +176,7 @@ const plan = () => {
                   />
                   {/* 本人以外の時表示 */}
                   <Box w="100%" p="5px">
-                    {loginUser !== planData.userId && (
+                    {loginUser !== planData.userId && loginUser !== "" && (
                       <>
                         <AccountControlButton
                           text="質問をする"
