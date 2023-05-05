@@ -2,5 +2,5 @@ import { atom } from "recoil";
 
 export const testLoginUserAtom = atom({
   key: "testLoginUserAtom",
-  default: "XkX5swOfB3p272djWTO7",
+  default: "0sPv5iHaIk5Ul64B0O62",
 });
