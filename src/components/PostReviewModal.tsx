@@ -13,9 +13,11 @@ import {
   Link,
   Flex,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import { doc, updateDoc } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
 import ReactStars from "react-stars";
 import { useRecoilState, useRecoilValue } from "recoil";
+import db from "../lib/firebase/firebaseConfig";
 import { profileCollectionAtom } from "../lib/recoil/atoms/profileCollectionAtom";
 import { testLoginUserAtom } from "../lib/recoil/atoms/testLoginUserAtom";
 
@@ -26,38 +28,39 @@ export const PostReviewModal = ({
   width,
   userId,
 }: PostReviewModalProps) => {
-
   //モーダル関数
   const { isOpen, onOpen, onClose } = useDisclosure();
-  
 
   //プロフィールデータ取得
   const [profileCollections, setProfileCollections] = useRecoilState(
     profileCollectionAtom
   );
 
+
+  const profileRef = doc(db, "profileCollection", userId as string);
+
   //ログイン中のユーザー
-  const loginUser = useRecoilValue(testLoginUserAtom);
+  const loginUser  = useRecoilValue(testLoginUserAtom);
 
   //レビュースコアを取得
   const [star, setStar] = useState(0);
 
-  const postReview = () => {
-    profileCollections.map((profile) => {
-      userId === profile.userId //レビュー対象のユーザー？
-        ? setProfileCollections(
-            (
-              prev //レビューデータを更新
-            ) =>
-              prev.map(
-                (obj) =>
-                  obj.userId === profile.userId //対象のユーザー？
-                    ? { ...obj, review: { ...obj.review, [loginUser]: star } } //レビューデータ更新
-                    : obj //そのまま返す
-              )
-          )
-        : setProfileCollections((prev) => prev); //そのまま返す
+  const postReview = async () => {
+     const reviewUser =  profileCollections.find((profile) => {
+      if(userId === profile.userId){
+       return  profile;
+      }
     });
+    if(reviewUser){
+      const updateReview = {
+        ...reviewUser,
+        review: { ...reviewUser?.review, [loginUser]: star },
+      };
+      console.log(updateReview)
+      await updateDoc(profileRef, {
+        review: updateReview.review,
+      });
+    }
     setStar(0);
   };
   //星の選択
@@ -78,11 +81,7 @@ export const PostReviewModal = ({
       </Button>
 
       {/* ログインボタンが押された時に表示するモーダル */}
-      <Modal
-        isOpen={isOpen}
-        onClose={onClose}
-        size="xl"
-      >
+      <Modal isOpen={isOpen} onClose={onClose} size="xl">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>メンターの指導はどうでしたか？</ModalHeader>
