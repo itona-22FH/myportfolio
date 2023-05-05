@@ -1,42 +1,38 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-hooks/rules-of-hooks */
 import { Box, Container, FormControl } from "@chakra-ui/react";
-import { useRouter } from "next/router";
+import { doc, updateDoc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
+import {useRecoilValue } from "recoil";
 import { ConfirmationBtn } from "../../components/ConfirmationBtn";
 import { FormInput } from "../../components/FormInput";
 import { HeadTitle } from "../../components/HeadTitle";
 import { NewRegisterTextBox } from "../../components/NewRegisterTextBox";
+import db from "../../lib/firebase/firebaseConfig";
 import { profileCollectionAtom } from "../../lib/recoil/atoms/profileCollectionAtom";
+import { testLoginUserAtom } from "../../lib/recoil/atoms/testLoginUserAtom";
 
 const editProfile = () => {
-  //URLからユーザーのIDを取得
-  const router = useRouter();
-  const { id } = router.query;
-
   //プロフィールコレクションのSTATEの定義
-  const [profileCollections, setProfileCollections] = useRecoilState(
-    profileCollectionAtom
-  );
+  const profileCollections = useRecoilValue(profileCollectionAtom);
+
+  const loginUser = useRecoilValue(testLoginUserAtom);
 
   //編集情報の保持のためのSTATEを定義
-  const [editUserData, setEditUserData] = useState<User>({
-    userId: "",
+  const [editUserData, setEditUserData] = useState<EditUser>({
     userName: "",
     userAvatar: "",
-    email: "",
-    password: "",
     twitterAccount: "",
     youtubeAccount: "",
     selfIntroduction: "",
     achievement: "",
-    review: {},
   });
+
+  const profileRef = doc(db, "profileCollection", loginUser);
 
   //自分のプロフィールデータをコレクションから取得
   const myProfileData = profileCollections.find((profile) => {
-    if (id === profile.userId) {
+    if (loginUser === profile.userId) {
       return profile;
     }
   });
@@ -44,7 +40,7 @@ const editProfile = () => {
   //取得した自分のプロフィールデータを編集用のSTATEにセット
   useEffect(() => {
     if (myProfileData) setEditUserData(myProfileData);
-  }, [id]);
+  }, [loginUser]);
 
   const inputEditInformation = (e: {
     target: { name: string; value: string | number };
@@ -55,14 +51,15 @@ const editProfile = () => {
     setEditUserData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const updateProfileHandle = () => {
-    const updateProfileCollections: User[] = [];
-    profileCollections.map((profile) => {
-      id === profile.userId//対象のユーザー？
-        ? updateProfileCollections.push(editUserData)//編集したデータを返す
-        : updateProfileCollections.push(profile);//そのまま返す
+  const updateProfileHandle = async () => {
+    await updateDoc(profileRef, {
+      userName: editUserData.userName,
+      userAvatar: editUserData.userAvatar,
+      twitterAccount: editUserData.twitterAccount,
+      youtubeAccount: editUserData.youtubeAccount,
+      selfIntroduction: editUserData.selfIntroduction,
+      achievement: editUserData.achievement,
     });
-    setProfileCollections(updateProfileCollections);
   };
 
   return (
@@ -130,7 +127,7 @@ const editProfile = () => {
             width="100%"
             confirmation="アカウント情報を更新"
             handleConfirmation={updateProfileHandle}
-            confirmationLink={`/myPage/${id}`}
+            confirmationLink={`/myPage/${loginUser}`}
           />
         </Container>
       </Box>
