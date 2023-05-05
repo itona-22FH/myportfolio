@@ -24,8 +24,7 @@
     "react-slick": "^0.29.0",
     "react-stars": "^2.2.5",
     "recoil": "^0.7.6",
-    "recoil-persist": "^4.2.0",
-    "uuid": "^9.0.0"
+    "recoil-persist": "^4.2.0"
   },
   "devDependencies": {
     "@types/node": "18.11.18",
