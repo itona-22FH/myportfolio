@@ -22,6 +22,7 @@ import { GamePlan } from "../../components/GamePlan";
 import { TextBox } from "../../components/TextBox";
 import { useRouter } from "next/router";
 import { UserInformation } from "../../components/UserInformation";
+import { testLoginUserAtom } from "../../lib/recoil/atoms/testLoginUserAtom";
 
 const myPage = () => {
   //FIREBASEからすべてのプロフィール情報を取得
@@ -40,6 +41,8 @@ const myPage = () => {
       return profile;
     }
   });
+
+  const loginUser = useRecoilValue(testLoginUserAtom)
 
   // ログイン中のユーザーIDと一致するプランのみでフィルターをかけ配列を生成
   const showPlan = useMemo<ShowPlan[] | undefined>(
@@ -64,7 +67,7 @@ const myPage = () => {
 
   return (
     <>
-      {myProfileData ? (
+      {myProfileData && loginUser === id ?(
         <Box fontWeight="bold" pt="10px" pb="10px">
           <Container maxW="1100px">
             <Flex
