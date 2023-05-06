@@ -27,7 +27,7 @@ import { profileCollectionAtom } from "../../lib/recoil/atoms/profileCollectionA
 import { PostReviewModal } from "../../components/PostReviewModal";
 import { testLoginUserAtom } from "../../lib/recoil/atoms/testLoginUserAtom";
 import { deleteDoc, doc } from "firebase/firestore";
-import db from "../../lib/firebase/firebaseConfig";
+import { db } from "../../lib/firebase/firebaseConfig";
 
 const plan = () => {
   //planCollectionsのSTATEを取得
