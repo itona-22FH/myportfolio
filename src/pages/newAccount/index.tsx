@@ -7,47 +7,31 @@ import {
   Input,
   FormLabel,
 } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { ConfirmationBtn } from "../../components/ConfirmationBtn";
 import { FormInput } from "../../components/FormInput";
 import { HeadTitle } from "../../components/HeadTitle";
 import { NewRegisterTextBox } from "../../components/NewRegisterTextBox";
-import { v4 as uuidv4 } from "uuid";
-import { useSetRecoilState } from "recoil";
-import { profileCollectionAtom } from "../../lib/recoil/atoms/profileCollectionAtom";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  onAuthStateChanged,
-} from "firebase/auth";
-import { auth } from "../../lib/firebase/firebaseConfig";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth, db } from "../../lib/firebase/firebaseConfig";
+import { doc, setDoc } from "firebase/firestore";
 
 const newAccount = () => {
   //新規アカウントの情報を保持するためのSTATEを定義
   const [newUserData, setNewUserData] = useState({
-    userId: "",
     userName: "",
     userAvatar: "",
     twitterAccount: "",
     youtubeAccount: "",
     selfIntroduction: "",
     achievement: "",
-    review: [],
+    review: {},
   });
 
   //パスワードチェックのためのSTATEを定義
   const [checkPassword, setCheckPassword] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [email, setEmail] = useState<string>("");
-
-  //プロフィールコレクション更新のためのSET関数を定義
-  const setProfileCollections = useSetRecoilState(profileCollectionAtom);
-
-  useEffect(() => {
-    //初回レンダリング時にuserIDをuuidによって生成
-    setNewUserData((prev) => prev);
-  }, []);
 
   const inputUserInformation = (e: {
     target: { name: string; value: string | number };
@@ -63,28 +47,24 @@ const newAccount = () => {
     setCheckPassword(e.target.value);
   };
 
-  // const addNewAccountHandle = () => {
-  //   if (password === checkPassword) {
-  //     // パスワード一致？
-  //     //プロフィールコレクションに新規アカウントを追加
-  //     setProfileCollections((prev) => [...prev, newUserData]);
-  //   } else {
-  //     //パスワード不一致
-  //     //エラー出力
-  //     console.error("エラー");
-  //   }
-  // };
-
-  const registerNewUser = (e: { preventDefault: () => void }) => {
+  const registerNewUser = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
-    createUserWithEmailAndPassword(auth, email, password)
-		.then((userCredential) => {
-            //登録が成功した時の処理
-            console.log(userCredential)
-		})
-		.catch((error) => {
-			console.log(error.code);
-		});
+    await createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        //登録が成功した時の処理
+        setDoc(doc(db, "profileCollection", userCredential.user.uid), {
+          userName: newUserData.userName,
+          userAvatar: newUserData.userAvatar,
+          twitterAccount: newUserData.twitterAccount,
+          youtubeAccount: newUserData.youtubeAccount,
+          selfIntroduction: newUserData.selfIntroduction,
+          achievement: newUserData.achievement,
+          review: {},
+        });
+      })
+      .catch((error) => {
+        console.error(error.code);
+      });
   };
 
   return (
@@ -180,7 +160,7 @@ const newAccount = () => {
           width="100%"
           confirmation="新規登録"
           handleConfirmation={registerNewUser}
-          confirmationLink="/newAccount"
+          confirmationLink="/"
         />
       </Container>
     </Box>
