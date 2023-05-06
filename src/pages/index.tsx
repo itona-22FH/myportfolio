@@ -72,7 +72,6 @@ const Home = () => {
       querySnapshot.forEach((doc) => {
         planData.push(Object.assign({ planId: doc.id, ...doc.data() }));
       });
-      console.log("プラン", planData);
       setPlanCollections(planData);
     });
     const planQuery = query(collection(db, "profileCollection"));
@@ -81,7 +80,6 @@ const Home = () => {
       querySnapshot.forEach((doc) => {
         profileData.push(Object.assign({ userId: doc.id, ...doc.data() }));
       });
-      console.log("プロフィール", profileData);
       setProfileCollections(profileData);
     });
     return () => {
