@@ -28,11 +28,7 @@ export const LoginModal = () => {
       </Button>
 
       {/* ログインボタンが押された時に表示するモーダル */}
-      <Modal
-        isOpen={isOpen}
-        onClose={onClose}
-        size="3xl"
-      >
+      <Modal isOpen={isOpen} onClose={onClose} size="3xl">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>アカウント情報を入力してください</ModalHeader>
