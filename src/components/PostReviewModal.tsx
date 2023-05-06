@@ -14,10 +14,10 @@ import {
   Flex,
 } from "@chakra-ui/react";
 import { doc, updateDoc } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ReactStars from "react-stars";
 import { useRecoilState, useRecoilValue } from "recoil";
-import db from "../lib/firebase/firebaseConfig";
+import { db } from "../lib/firebase/firebaseConfig";
 import { profileCollectionAtom } from "../lib/recoil/atoms/profileCollectionAtom";
 import { testLoginUserAtom } from "../lib/recoil/atoms/testLoginUserAtom";
 
@@ -36,27 +36,25 @@ export const PostReviewModal = ({
     profileCollectionAtom
   );
 
-
   const profileRef = doc(db, "profileCollection", userId as string);
 
   //ログイン中のユーザー
-  const loginUser  = useRecoilValue(testLoginUserAtom);
+  const loginUserId = useRecoilValue(testLoginUserAtom);
 
   //レビュースコアを取得
   const [star, setStar] = useState(0);
 
   const postReview = async () => {
-     const reviewUser =  profileCollections.find((profile) => {
-      if(userId === profile.userId){
-       return  profile;
+    const reviewUser = profileCollections.find((profile) => {
+      if (userId === profile.userId) {
+        return profile;
       }
     });
-    if(reviewUser){
+    if (reviewUser) {
       const updateReview = {
         ...reviewUser,
-        review: { ...reviewUser?.review, [loginUser]: star },
+        review: { ...reviewUser?.review, [loginUserId]: star },
       };
-      console.log(updateReview)
       await updateDoc(profileRef, {
         review: updateReview.review,
       });
