@@ -49,22 +49,26 @@ const newAccount = () => {
 
   const registerNewUser = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
+  if(password === checkPassword){
     await createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        //登録が成功した時の処理
-        setDoc(doc(db, "profileCollection", userCredential.user.uid), {
-          userName: newUserData.userName,
-          userAvatar: newUserData.userAvatar,
-          twitterAccount: newUserData.twitterAccount,
-          youtubeAccount: newUserData.youtubeAccount,
-          selfIntroduction: newUserData.selfIntroduction,
-          achievement: newUserData.achievement,
-          review: {},
-        });
-      })
-      .catch((error) => {
-        console.error(error.code);
+    .then((userCredential) => {
+      //登録が成功した時の処理
+      setDoc(doc(db, "profileCollection", userCredential.user.uid), {
+        userName: newUserData.userName,
+        userAvatar: newUserData.userAvatar,
+        twitterAccount: newUserData.twitterAccount,
+        youtubeAccount: newUserData.youtubeAccount,
+        selfIntroduction: newUserData.selfIntroduction,
+        achievement: newUserData.achievement,
+        review: {},
       });
+    })
+    .catch((error) => {
+      console.error(error.code);
+    });
+  }else{
+    alert("パスワードが違います。")
+  }
   };
 
   return (
