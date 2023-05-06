@@ -21,6 +21,7 @@ import {
   signInWithEmailAndPassword,
   onAuthStateChanged,
 } from "firebase/auth";
+import { auth } from "../../lib/firebase/firebaseConfig";
 
 const newAccount = () => {
   //新規アカウントの情報を保持するためのSTATEを定義
@@ -74,14 +75,16 @@ const newAccount = () => {
   //   }
   // };
 
-  const registerNewUser = async (e: { preventDefault: () => void }) => {
+  const registerNewUser = (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    try {
-      await createUserWithEmailAndPassword(getAuth(), email, password);
-
-    } catch (error) {
-      console.log(error);
-    }
+    createUserWithEmailAndPassword(auth, email, password)
+		.then((userCredential) => {
+            //登録が成功した時の処理
+            console.log(userCredential)
+		})
+		.catch((error) => {
+			console.log(error.code);
+		});
   };
 
   return (
