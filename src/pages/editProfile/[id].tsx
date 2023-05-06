@@ -23,7 +23,7 @@ const editProfile = () => {
   const { id } = router.query;
 
   //編集情報の保持のためのSTATEを定義
-  const [editUserData, setEditUserData] = useState<EditUser>({
+  const [editUserData, setEditUserData] = useState({
     userName: "",
     userAvatar: "",
     twitterAccount: "",
