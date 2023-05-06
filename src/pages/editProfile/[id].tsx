@@ -9,7 +9,7 @@ import { ConfirmationBtn } from "../../components/ConfirmationBtn";
 import { FormInput } from "../../components/FormInput";
 import { HeadTitle } from "../../components/HeadTitle";
 import { NewRegisterTextBox } from "../../components/NewRegisterTextBox";
-import db from "../../lib/firebase/firebaseConfig";
+import {db} from "../../lib/firebase/firebaseConfig";
 import { profileCollectionAtom } from "../../lib/recoil/atoms/profileCollectionAtom";
 import { testLoginUserAtom } from "../../lib/recoil/atoms/testLoginUserAtom";
 

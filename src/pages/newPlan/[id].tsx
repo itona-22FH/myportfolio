@@ -8,7 +8,7 @@ import { FormInput } from "../../components/FormInput";
 import { HeadTitle } from "../../components/HeadTitle";
 import { NewRegisterTextBox } from "../../components/NewRegisterTextBox";
 import { addDoc, collection } from "firebase/firestore";
-import db from "../../lib/firebase/firebaseConfig";
+import {db} from "../../lib/firebase/firebaseConfig";
 import { testLoginUserAtom } from "../../lib/recoil/atoms/testLoginUserAtom";
 import { useRecoilValue } from "recoil";
 
