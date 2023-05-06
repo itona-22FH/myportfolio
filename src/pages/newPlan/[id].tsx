@@ -99,7 +99,6 @@ const newPlan = () => {
       <option value="格闘">格闘</option>
       <option value="スポーツ">スポーツ</option>
       </Select>
-      
       <Select
       placeholder="タイトル"
       w="300px"
@@ -125,7 +124,6 @@ const newPlan = () => {
       <option value="フォートナイト">フォートナイト</option>
       <option value="オーバーウォッチ２">オーバーウォッチ２</option>
       </Select>
-      
       <FormInput
       label="プラン料金"
       type="number"
@@ -163,6 +161,4 @@ const newPlan = () => {
       )
       );
     };
-    
     export default newPlan;
-    
