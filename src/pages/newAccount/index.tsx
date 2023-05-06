@@ -15,6 +15,12 @@ import { NewRegisterTextBox } from "../../components/NewRegisterTextBox";
 import { v4 as uuidv4 } from "uuid";
 import { useSetRecoilState } from "recoil";
 import { profileCollectionAtom } from "../../lib/recoil/atoms/profileCollectionAtom";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+} from "firebase/auth";
 
 const newAccount = () => {
   //新規アカウントの情報を保持するためのSTATEを定義
@@ -22,25 +28,24 @@ const newAccount = () => {
     userId: "",
     userName: "",
     userAvatar: "",
-    email: "",
-    password: "",
     twitterAccount: "",
     youtubeAccount: "",
     selfIntroduction: "",
     achievement: "",
     review: [],
   });
+
   //パスワードチェックのためのSTATEを定義
-  const [checkPassword, setCheckPassword] = useState("");
-
-
+  const [checkPassword, setCheckPassword] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
 
   //プロフィールコレクション更新のためのSET関数を定義
   const setProfileCollections = useSetRecoilState(profileCollectionAtom);
 
   useEffect(() => {
     //初回レンダリング時にuserIDをuuidによって生成
-    setNewUserData((prev) => (prev));
+    setNewUserData((prev) => prev);
   }, []);
 
   const inputUserInformation = (e: {
@@ -57,15 +62,25 @@ const newAccount = () => {
     setCheckPassword(e.target.value);
   };
 
-  const addNewAccountHandle = () => {
-    if (newUserData.password === checkPassword) {
-      // パスワード一致？
-      //プロフィールコレクションに新規アカウントを追加
-      setProfileCollections((prev) => [...prev, newUserData]);
-    } else {
-      //パスワード不一致
-      //エラー出力
-      console.error("エラー");
+  // const addNewAccountHandle = () => {
+  //   if (password === checkPassword) {
+  //     // パスワード一致？
+  //     //プロフィールコレクションに新規アカウントを追加
+  //     setProfileCollections((prev) => [...prev, newUserData]);
+  //   } else {
+  //     //パスワード不一致
+  //     //エラー出力
+  //     console.error("エラー");
+  //   }
+  // };
+
+  const registerNewUser = async (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+    try {
+      await createUserWithEmailAndPassword(getAuth(), email, password);
+
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -95,16 +110,18 @@ const newAccount = () => {
             type="email"
             placeholder="********@email.com"
             formName="email"
-            onChangeHandle={inputUserInformation}
-            formValue={newUserData.email}
+            onChangeHandle={(e) => {
+              setEmail(e.target.value as string);
+            }}
+            formValue={email}
           />
           <FormInput
             label="パスワード"
             type="password"
             placeholder="password"
             formName="password"
-            onChangeHandle={inputUserInformation}
-            formValue={newUserData.password}
+            onChangeHandle={(e) => setPassword(e.target.value as string)}
+            formValue={password}
           />
           <Box pb="10px" pt="10px">
             <FormLabel htmlFor="確認用パスワード" fontWeight="bold">
@@ -159,8 +176,8 @@ const newAccount = () => {
           color="white"
           width="100%"
           confirmation="新規登録"
-          handleConfirmation={addNewAccountHandle}
-          confirmationLink={"/"}
+          handleConfirmation={registerNewUser}
+          confirmationLink="/newAccount"
         />
       </Container>
     </Box>
