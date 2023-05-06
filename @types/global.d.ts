@@ -12,7 +12,7 @@ type ConfirmationBtnProps = {
   color: string;
   width: string;
   confirmation: string;
-  handleConfirmation: () => void;
+  handleConfirmation: (e) => void;
   confirmationLink: string;
 };
 
