@@ -2,18 +2,37 @@
 import { Box, Button, Flex, Link, Stack } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { AccountControlButton } from "./AccountControlButton";
 import { testLoginUserAtom } from "../lib/recoil/atoms/testLoginUserAtom";
 import { ConfirmationBtn } from "./ConfirmationBtn";
 import { LoginModal } from "./LoginModal";
+import { auth } from "../lib/firebase/firebaseConfig";
+import { signOut } from "firebase/auth";
+import { onAuthStateChanged } from "firebase/auth";
 
 export const Header = () => {
-  const loginUserId = useRecoilValue(testLoginUserAtom);
+  const [loginUserId, setLoginUserId] = useRecoilState(testLoginUserAtom);
 
   const router = useRouter();
   const { id } = router.query;
   const { pathname } = router;
+
+  const handleLogout = async () => {
+    await signOut(auth)
+      .then(() => {
+        setLoginUserId("");
+      })
+      .catch((error) => {
+        console.error(error.code);
+      });
+  };
+
+  //ログイン状態の監視
+  const observerLoginUser = (user: any) => {
+    user ? setLoginUserId(user.uid) : setLoginUserId("");
+  };
+  onAuthStateChanged(auth, observerLoginUser);
 
   return (
     <Box w="100%" h="80px" bg="purple.300">
@@ -63,7 +82,7 @@ export const Header = () => {
                 color="purple"
                 width="130px"
                 confirmation="ログアウト"
-                handleConfirmation={() => {}}
+                handleConfirmation={handleLogout}
                 confirmationLink="/"
               />
               {pathname !== "/myPage/[id]" && (
