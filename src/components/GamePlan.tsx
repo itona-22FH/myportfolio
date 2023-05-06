@@ -1,13 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Text, Image, Link, Box, Avatar, Flex } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { ReviewStatus } from "./ReviewStatus";
 import { Badge } from "@chakra-ui/react";
 import { profileCollectionAtom } from "../lib/recoil/atoms/profileCollectionAtom";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
 import { planCollectionAtom } from "../lib/recoil/atoms/planCollectionAtom";
-import { collection, getDocs } from "firebase/firestore";
-import db from "../lib/firebase/firebaseConfig";
 import { testLoginUserAtom } from "../lib/recoil/atoms/testLoginUserAtom";
 
 export const GamePlan = ({ showPlan }: GamePlanProps) => {
