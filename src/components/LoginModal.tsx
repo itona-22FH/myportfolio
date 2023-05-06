@@ -12,10 +12,28 @@ import {
   ModalFooter,
   useDisclosure,
 } from "@chakra-ui/react";
-import React from "react";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import React, { useState } from "react";
+import { useSetRecoilState } from "recoil";
+import { auth } from "../lib/firebase/firebaseConfig";
+import { testLoginUserAtom } from "../lib/recoil/atoms/testLoginUserAtom";
 
 export const LoginModal = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const setLoginUserId = useSetRecoilState(testLoginUserAtom);
+
+  const handleLogin = async () => {
+    await signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        setLoginUserId(userCredential.user.uid);
+      })
+      .catch((error) => {
+        console.error(error.code);
+      });
+  };
+
   return (
     <>
       <Button
@@ -40,17 +58,23 @@ export const LoginModal = () => {
                 type="email"
                 placeholder="*******@email.com"
                 name="email"
+                onChange={(e) => setEmail(e.target.value)}
               />
             </FormControl>
 
             <FormControl mt="4px">
               <FormLabel>パスワード</FormLabel>
-              <Input type="password" placeholder="password" name="password" />
+              <Input
+                type="password"
+                placeholder="password"
+                name="password"
+                onChange={(e) => setPassword(e.target.value)}
+              />
             </FormControl>
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="blue" mr="10px">
+            <Button colorScheme="blue" mr="10px" onClick={handleLogin}>
               ログイン
             </Button>
             <Button onClick={onClose} colorScheme="red">
