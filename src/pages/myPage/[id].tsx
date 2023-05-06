@@ -35,21 +35,22 @@ const myPage = () => {
   const router = useRouter();
   const { id } = router.query;
 
+  const loginUser = useRecoilValue(testLoginUserAtom)
+
+
   //プロフィールコレクションから自分のプロフィールデータのみを取得
   const myProfileData = profileCollections.find((profile) => {
-    if (id === profile.userId) {
+    if (loginUser === profile.userId) {
       return profile;
     }
   });
-
-  const loginUser = useRecoilValue(testLoginUserAtom)
 
   // ログイン中のユーザーIDと一致するプランのみでフィルターをかけ配列を生成
   const showPlan = useMemo<ShowPlan[] | undefined>(
     () =>
       myProfileData
         ? planCollections
-            .filter((plan) => myProfileData.userId === plan.userId)
+            .filter((plan) => loginUser === plan.userId)
             .map((plan) => ({
               planId: plan.planId,
               planTitle: plan.planTitle,
