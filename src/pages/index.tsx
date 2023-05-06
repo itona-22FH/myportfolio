@@ -13,11 +13,11 @@ import {
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 import { planCollectionAtom } from "../lib/recoil/atoms/planCollectionAtom";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import React, { useEffect, useState } from "react";
 import { profileCollectionAtom } from "../lib/recoil/atoms/profileCollectionAtom";
-import { collection, getDocs, onSnapshot, query } from "firebase/firestore";
-import db from "../lib/firebase/firebaseConfig";
+import { collection, onSnapshot, query } from "firebase/firestore";
+import {db} from "../lib/firebase/firebaseConfig";
 
 const Home = () => {
   //全てのプラン情報を管理するRECOILのSTATEへのSET関数を宣言
