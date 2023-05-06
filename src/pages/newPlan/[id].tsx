@@ -18,10 +18,10 @@ const newPlan = () => {
   const router = useRouter();
   const { id } = router.query;
 
-  const loginUser = useRecoilValue(testLoginUserAtom)
+  const loginUserId = useRecoilValue(testLoginUserAtom)
 
   //新プラン情報保持のためのStateを定義
-  const [newPlanData, setNewPlanData] = useState<NewPlan>({
+  const [newPlanData, setNewPlanData] = useState({
     userId: "",
     planTitle: "",
     planImage: "https://bit.ly/2Z4KKcF",
@@ -36,7 +36,7 @@ const newPlan = () => {
   useEffect(() => {
     if (!router.isReady) return;
     //planIDプロパティとuserIDプロパティにそれぞれIDをセット
-    setNewPlanData((prev) => ({ ...prev, userId: id }));
+    setNewPlanData((prev) => ({ ...prev, userId: loginUserId }));
   }, [id]);
 
   const inputPlanInformation = (e: {
@@ -63,7 +63,7 @@ const newPlan = () => {
   };
 
   return (
-    loginUser === id && (
+    loginUserId === id && (
 
       <Box pt="10px" pb="10px">
       <Container maxW="1100px" bg="whiteAlpha.800" p="5px" borderRadius="10px">
