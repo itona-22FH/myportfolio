@@ -16,7 +16,7 @@ export const ReviewStatus = ({ review }: ReviewStatusProps) => {
     0
   );
 
-  // //レビュースコアの平均値を算出
+  //レビュースコアの平均値を算出
   const averageReviewScore =
     Math.floor((sumReviewScore / reviewCount) * 10) / 10;
 
