@@ -1,4 +1,3 @@
-import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import {
   Button,
   Modal,
@@ -7,18 +6,15 @@ import {
   ModalHeader,
   ModalCloseButton,
   ModalBody,
-  FormControl,
-  FormLabel,
-  Input,
   ModalFooter,
   useDisclosure,
-  Flex,
 } from "@chakra-ui/react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
 import { useSetRecoilState } from "recoil";
 import { auth } from "../lib/firebase/firebaseConfig";
 import { testLoginUserAtom } from "../lib/recoil/atoms/testLoginUserAtom";
+import { FormInput } from "./FormInput";
 import { FormPassword } from "./FormPassword";
 
 export const LoginModal = () => {
@@ -42,11 +38,10 @@ export const LoginModal = () => {
     setPassword(e.target.value);
   };
 
-  const inputEmail = (e: { target: { value: string } }) => {
+  const inputEmail = (e: { target: { value: string | number } }) => {
     //確認用パスワードの入力
-    setEmail(e.target.value);
+    setEmail(e.target.value as string);
   };
-
 
   return (
     <>
@@ -66,18 +61,20 @@ export const LoginModal = () => {
           <ModalHeader>アカウント情報を入力してください</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb="6px">
-            <FormControl>
-              <FormLabel fontWeight="bold">メールアドレス</FormLabel>
-              <Input
-                type="email"
-                placeholder="*******@email.com"
-                name="email"
-                onChange={inputEmail}
-                borderColor="purple.300"
-              />
-            </FormControl>
+            <FormInput
+              label="メールアドレス"
+              type="email"
+              placeholder="********@email.com"
+              formName="email"
+              onChangeHandle={inputEmail}
+              formValue={email}
+            />
 
-            <FormPassword formValue={password} onChangeHandle={inputPassword} formLabel={"パスワード"}/>
+            <FormPassword
+              formValue={password}
+              onChangeHandle={inputPassword}
+              formLabel={"パスワード"}
+            />
           </ModalBody>
 
           <ModalFooter>
