@@ -4,9 +4,6 @@ import {
   Box,
   FormControl,
   Container,
-  Input,
-  FormLabel,
-  Flex,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { ConfirmationBtn } from "../../components/ConfirmationBtn";
@@ -16,7 +13,6 @@ import { NewRegisterTextBox } from "../../components/NewRegisterTextBox";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../../lib/firebase/firebaseConfig";
 import { doc, setDoc } from "firebase/firestore";
-import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import { FormPassword } from "../../components/FormPassword";
 
 const newAccount = () => {
