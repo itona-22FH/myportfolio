@@ -6,6 +6,7 @@ import {
   Container,
   Input,
   FormLabel,
+  Flex,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { ConfirmationBtn } from "../../components/ConfirmationBtn";
@@ -15,6 +16,7 @@ import { NewRegisterTextBox } from "../../components/NewRegisterTextBox";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../../lib/firebase/firebaseConfig";
 import { doc, setDoc } from "firebase/firestore";
+import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
 const newAccount = () => {
   //新規アカウントの情報を保持するためのSTATEを定義
@@ -32,6 +34,7 @@ const newAccount = () => {
   const [checkPassword, setCheckPassword] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [email, setEmail] = useState<string>("");
+  const [isRevealPassword, setIsRevealPassword] = useState(false);
 
   const inputUserInformation = (e: {
     target: { name: string; value: string | number };
@@ -47,28 +50,37 @@ const newAccount = () => {
     setCheckPassword(e.target.value);
   };
 
-  const registerNewUser = async (e: { preventDefault: () => void; }) => {
+  const inputPassword = (e: { target: { value: string } }) => {
+    //確認用パスワードの入力
+    setPassword(e.target.value);
+  };
+
+  const registerNewUser = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
-  if(password === checkPassword){
-    await createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      //登録が成功した時の処理
-      setDoc(doc(db, "profileCollection", userCredential.user.uid), {
-        userName: newUserData.userName,
-        userAvatar: newUserData.userAvatar,
-        twitterAccount: newUserData.twitterAccount,
-        youtubeAccount: newUserData.youtubeAccount,
-        selfIntroduction: newUserData.selfIntroduction,
-        achievement: newUserData.achievement,
-        review: {},
-      });
-    })
-    .catch((error) => {
-      console.error(error.code);
-    });
-  }else{
-    alert("パスワードが違います。")
-  }
+    if (password === checkPassword) {
+      await createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          //登録が成功した時の処理
+          setDoc(doc(db, "profileCollection", userCredential.user.uid), {
+            userName: newUserData.userName,
+            userAvatar: newUserData.userAvatar,
+            twitterAccount: newUserData.twitterAccount,
+            youtubeAccount: newUserData.youtubeAccount,
+            selfIntroduction: newUserData.selfIntroduction,
+            achievement: newUserData.achievement,
+            review: {},
+          });
+        })
+        .catch((error) => {
+          console.error(error.code);
+        });
+    } else {
+      alert("パスワードが違います。");
+    }
+  };
+
+  const togglePassword = () => {
+    setIsRevealPassword((prevState) => !prevState);
   };
 
   return (
@@ -102,21 +114,33 @@ const newAccount = () => {
             }}
             formValue={email}
           />
-          <FormInput
-            label="パスワード"
-            type="password"
-            placeholder="password"
-            formName="password"
-            onChangeHandle={(e) => setPassword(e.target.value as string)}
-            formValue={password}
-          />
+          <Box pb="10px" pt="10px">
+            <Flex>
+              <FormLabel htmlFor="パスワード" fontWeight="bold">
+                パスワード
+              </FormLabel>
+              <span onClick={togglePassword}>
+                {isRevealPassword ? <ViewIcon /> : <ViewOffIcon />}
+              </span>
+            </Flex>
+            <Input
+              id="パスワード"
+              type={isRevealPassword ? "text" : "password"}
+              placeholder="パスワード"
+              borderColor="purple.300"
+              p="4px"
+              name="password"
+              onChange={inputPassword}
+              value={password}
+            />
+          </Box>
           <Box pb="10px" pt="10px">
             <FormLabel htmlFor="確認用パスワード" fontWeight="bold">
               確認用パスワード
             </FormLabel>
             <Input
               id="確認用パスワード"
-              type="password"
+              type={isRevealPassword ? "text" : "password"}
               placeholder="確認用パスワード"
               borderColor="purple.300"
               p="4px"
