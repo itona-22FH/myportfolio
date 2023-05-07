@@ -32,17 +32,15 @@ export const PostReviewModal = ({
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   //プロフィールデータ取得
-  const [profileCollections, setProfileCollections] = useRecoilState(
-    profileCollectionAtom
-  );
+  const profileCollections = useRecoilValue(profileCollectionAtom);
+
+  //レビュースコアを取得
+  const [star, setStar] = useState(0);
 
   const profileRef = doc(db, "profileCollection", userId as string);
 
   //ログイン中のユーザー
   const loginUserId = useRecoilValue(testLoginUserAtom);
-
-  //レビュースコアを取得
-  const [star, setStar] = useState(0);
 
   const postReview = async () => {
     const reviewUser = profileCollections.find((profile) => {
