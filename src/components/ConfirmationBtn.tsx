@@ -48,8 +48,8 @@ export const ConfirmationBtn = ({
           <ModalBody pb={6}></ModalBody>
 
           <ModalFooter>
-            <Link href={confirmationLink}>
-              <Button colorScheme="blue" mr={3} onClick={handleConfirmation}>
+            <Link href={confirmationLink} mr={3}>
+              <Button colorScheme="blue" onClick={handleConfirmation}>
                 {confirmation}する
               </Button>
             </Link>
