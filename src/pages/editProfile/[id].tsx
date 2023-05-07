@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-hooks/rules-of-hooks */
 import { Box, Container, FormControl, Link } from "@chakra-ui/react";
-import { doc, updateDoc } from "firebase/firestore";
+import { collection, doc, updateDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
@@ -32,7 +32,6 @@ const editProfile = () => {
     achievement: "",
   });
 
-  const profileRef = doc(db, "profileCollection", loginUser);
 
   //自分のプロフィールデータをコレクションから取得
   const myProfileData = profileCollections.find((profile) => {
@@ -56,7 +55,7 @@ const editProfile = () => {
   };
 
   const updateProfileHandle = async () => {
-    await updateDoc(profileRef, {
+    await updateDoc(doc(collection(db, "profileCollection"), loginUser), {
       userName: editUserData.userName,
       userAvatar: editUserData.userAvatar,
       twitterAccount: editUserData.twitterAccount,
