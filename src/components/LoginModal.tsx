@@ -41,6 +41,10 @@ export const LoginModal = () => {
     //確認用パスワードの入力
     setPassword(e.target.value);
   };
+  const inputEmail = (e: { target: { value: string } }) => {
+    //確認用パスワードの入力
+    setEmail(e.target.value);
+  };
 
   const togglePassword = () => {
     setIsRevealPassword((prevState) => !prevState);
@@ -70,7 +74,7 @@ export const LoginModal = () => {
                 type="email"
                 placeholder="*******@email.com"
                 name="email"
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={inputEmail}
               />
             </FormControl>
 
