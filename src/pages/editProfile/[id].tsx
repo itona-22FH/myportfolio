@@ -32,7 +32,6 @@ const editProfile = () => {
     achievement: "",
   });
 
-
   //自分のプロフィールデータをコレクションから取得
   const myProfileData = profileCollections.find((profile) => {
     if (loginUser === profile.userId) {
