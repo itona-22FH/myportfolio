@@ -1,3 +1,4 @@
+import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import {
   Button,
   Modal,
@@ -11,6 +12,7 @@ import {
   Input,
   ModalFooter,
   useDisclosure,
+  Flex,
 } from "@chakra-ui/react";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
@@ -23,6 +25,7 @@ export const LoginModal = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const setLoginUserId = useSetRecoilState(testLoginUserAtom);
+  const [isRevealPassword, setIsRevealPassword] = useState(false);
 
   const handleLogin = async () => {
     await signInWithEmailAndPassword(auth, email, password)
@@ -32,6 +35,15 @@ export const LoginModal = () => {
       .catch((error) => {
         console.error(error.code);
       });
+  };
+
+  const inputPassword = (e: { target: { value: string } }) => {
+    //確認用パスワードの入力
+    setPassword(e.target.value);
+  };
+
+  const togglePassword = () => {
+    setIsRevealPassword((prevState) => !prevState);
   };
 
   return (
@@ -63,12 +75,23 @@ export const LoginModal = () => {
             </FormControl>
 
             <FormControl mt="4px">
-              <FormLabel>パスワード</FormLabel>
+              <Flex>
+                <FormLabel htmlFor="パスワード" fontWeight="bold">
+                  パスワード
+                </FormLabel>
+                <span onClick={togglePassword}>
+                  {isRevealPassword ? <ViewIcon /> : <ViewOffIcon />}
+                </span>
+              </Flex>
               <Input
-                type="password"
-                placeholder="password"
+                id="パスワード"
+                type={isRevealPassword ? "text" : "password"}
+                placeholder="パスワード"
+                borderColor="purple.300"
+                p="4px"
                 name="password"
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={inputPassword}
+                value={password}
               />
             </FormControl>
           </ModalBody>
