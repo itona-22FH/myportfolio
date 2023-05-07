@@ -37,6 +37,12 @@ type FormInputProps = {
   formValue: string;
 };
 
+type FormPasswordProps = {
+  onChangeHandle: (e: { target: { value: string } }) => void;
+  formValue: string;
+  formLabel: string;
+};
+
 type NewRegisterTextBox = {
   htmlFor: string;
   placeholder: string;

@@ -19,13 +19,13 @@ import React, { useState } from "react";
 import { useSetRecoilState } from "recoil";
 import { auth } from "../lib/firebase/firebaseConfig";
 import { testLoginUserAtom } from "../lib/recoil/atoms/testLoginUserAtom";
+import { FormPassword } from "./FormPassword";
 
 export const LoginModal = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const setLoginUserId = useSetRecoilState(testLoginUserAtom);
-  const [isRevealPassword, setIsRevealPassword] = useState(false);
 
   const handleLogin = async () => {
     await signInWithEmailAndPassword(auth, email, password)
@@ -41,14 +41,12 @@ export const LoginModal = () => {
     //確認用パスワードの入力
     setPassword(e.target.value);
   };
+
   const inputEmail = (e: { target: { value: string } }) => {
     //確認用パスワードの入力
     setEmail(e.target.value);
   };
 
-  const togglePassword = () => {
-    setIsRevealPassword((prevState) => !prevState);
-  };
 
   return (
     <>
@@ -69,35 +67,17 @@ export const LoginModal = () => {
           <ModalCloseButton />
           <ModalBody pb="6px">
             <FormControl>
-              <FormLabel>メールアドレス</FormLabel>
+              <FormLabel fontWeight="bold">メールアドレス</FormLabel>
               <Input
                 type="email"
                 placeholder="*******@email.com"
                 name="email"
                 onChange={inputEmail}
+                borderColor="purple.300"
               />
             </FormControl>
 
-            <FormControl mt="4px">
-              <Flex>
-                <FormLabel htmlFor="パスワード" fontWeight="bold">
-                  パスワード
-                </FormLabel>
-                <span onClick={togglePassword}>
-                  {isRevealPassword ? <ViewIcon /> : <ViewOffIcon />}
-                </span>
-              </Flex>
-              <Input
-                id="パスワード"
-                type={isRevealPassword ? "text" : "password"}
-                placeholder="パスワード"
-                borderColor="purple.300"
-                p="4px"
-                name="password"
-                onChange={inputPassword}
-                value={password}
-              />
-            </FormControl>
+            <FormPassword formValue={password} onChangeHandle={inputPassword} formLabel={"パスワード"}/>
           </ModalBody>
 
           <ModalFooter>

@@ -17,6 +17,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../../lib/firebase/firebaseConfig";
 import { doc, setDoc } from "firebase/firestore";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
+import { FormPassword } from "../../components/FormPassword";
 
 const newAccount = () => {
   //新規アカウントの情報を保持するためのSTATEを定義
@@ -34,7 +35,6 @@ const newAccount = () => {
   const [checkPassword, setCheckPassword] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [email, setEmail] = useState<string>("");
-  const [isRevealPassword, setIsRevealPassword] = useState(false);
 
   const inputUserInformation = (e: {
     target: { name: string; value: string | number };
@@ -53,6 +53,11 @@ const newAccount = () => {
   const inputPassword = (e: { target: { value: string } }) => {
     //確認用パスワードの入力
     setPassword(e.target.value);
+  };
+
+  const inputEmail = (e: { target: { value: string | number } }) => {
+    //確認用パスワードの入力
+    setEmail(e.target.value as string);
   };
 
   const registerNewUser = async (e: { preventDefault: () => void }) => {
@@ -77,10 +82,6 @@ const newAccount = () => {
     } else {
       alert("パスワードが違います。");
     }
-  };
-
-  const togglePassword = () => {
-    setIsRevealPassword((prevState) => !prevState);
   };
 
   return (
@@ -109,46 +110,19 @@ const newAccount = () => {
             type="email"
             placeholder="********@email.com"
             formName="email"
-            onChangeHandle={(e) => {
-              setEmail(e.target.value as string);
-            }}
+            onChangeHandle={inputEmail}
             formValue={email}
           />
-          <Box pb="10px" pt="10px">
-            <Flex>
-              <FormLabel htmlFor="パスワード" fontWeight="bold">
-                パスワード
-              </FormLabel>
-              <span onClick={togglePassword}>
-                {isRevealPassword ? <ViewIcon /> : <ViewOffIcon />}
-              </span>
-            </Flex>
-            <Input
-              id="パスワード"
-              type={isRevealPassword ? "text" : "password"}
-              placeholder="パスワード"
-              borderColor="purple.300"
-              p="4px"
-              name="password"
-              onChange={inputPassword}
-              value={password}
-            />
-          </Box>
-          <Box pb="10px" pt="10px">
-            <FormLabel htmlFor="確認用パスワード" fontWeight="bold">
-              確認用パスワード
-            </FormLabel>
-            <Input
-              id="確認用パスワード"
-              type={isRevealPassword ? "text" : "password"}
-              placeholder="確認用パスワード"
-              borderColor="purple.300"
-              p="4px"
-              name="checkPassword"
-              onChange={inputCheckPassword}
-              value={checkPassword}
-            />
-          </Box>
+          <FormPassword
+            formValue={password}
+            onChangeHandle={inputPassword}
+            formLabel={"パスワード"}
+          />
+          <FormPassword
+            formValue={checkPassword}
+            onChangeHandle={inputCheckPassword}
+            formLabel={"確認用パスワード"}
+          />
           <FormInput
             label="Twitterアカウント"
             type="url"
