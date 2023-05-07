@@ -23,7 +23,7 @@ export const FormPassword = ({
       </Flex>
       <Input
         type={isRevealPassword ? "text" : "password"}
-        placeholder="パスワード"
+        placeholder={formLabel}
         p="4px"
         name="password"
         onChange={onChangeHandle}
