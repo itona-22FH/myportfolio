@@ -38,9 +38,10 @@ type FormInputProps = {
 };
 
 type FormPasswordProps = {
-  onChangeHandle: (e: { target: { value: string } }) => void;
+  onChangeHandle: (e: { target: { name: string; value: string } }) => void;
   formValue: string;
   formLabel: string;
+  formName: string;
 };
 
 type NewRegisterTextBox = {
