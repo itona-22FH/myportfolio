@@ -35,8 +35,7 @@ const myPage = () => {
   const router = useRouter();
   const { id } = router.query;
 
-  const loginUser = useRecoilValue(testLoginUserAtom)
-
+  const loginUser = useRecoilValue(testLoginUserAtom);
 
   //プロフィールコレクションから自分のプロフィールデータのみを取得
   const myProfileData = profileCollections.find((profile) => {
@@ -68,7 +67,7 @@ const myPage = () => {
 
   return (
     <>
-      {myProfileData && loginUser === id ?(
+      {myProfileData && loginUser === id ? (
         <Box fontWeight="bold" pt="10px" pb="10px">
           <Container maxW="1100px">
             <Flex

@@ -2,7 +2,7 @@
 import { Box, Button, Flex, Link, Stack } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import { AccountControlButton } from "./AccountControlButton";
 import { testLoginUserAtom } from "../lib/recoil/atoms/testLoginUserAtom";
 import { ConfirmationBtn } from "./ConfirmationBtn";

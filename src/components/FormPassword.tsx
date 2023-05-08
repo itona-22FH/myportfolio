@@ -3,10 +3,10 @@ import { Flex, FormControl, FormLabel, Input } from "@chakra-ui/react";
 import React, { useState } from "react";
 
 export const FormPassword = ({
-    formValue,
-    onChangeHandle,
-    formLabel,
-    formName,
+  formValue,
+  onChangeHandle,
+  formLabel,
+  formName,
 }: FormPasswordProps) => {
   const [isRevealPassword, setIsRevealPassword] = useState(false);
 

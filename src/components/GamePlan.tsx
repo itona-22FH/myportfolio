@@ -13,7 +13,7 @@ export const GamePlan = ({ showPlan }: GamePlanProps) => {
   const router = useRouter();
   const { pathname } = router;
 
-  const loginUser = useRecoilValue(testLoginUserAtom)
+  const loginUser = useRecoilValue(testLoginUserAtom);
 
   //FIREBASEからすべてのプラン情報を取得
   const planCollections = useRecoilValue(planCollectionAtom);
@@ -44,7 +44,7 @@ export const GamePlan = ({ showPlan }: GamePlanProps) => {
   return (
     <>
       {/* showGamePlanAtomにセットされた配列を表示 */}
-      {(!showPlan?.length && pathname === "/" ? showAllPlan : showPlan )?.map(
+      {(!showPlan?.length && pathname === "/" ? showAllPlan : showPlan)?.map(
         ({
           planId,
           planTitle,
@@ -58,13 +58,13 @@ export const GamePlan = ({ showPlan }: GamePlanProps) => {
         }) => (
           <Link
             key={planId as string}
-            href={loginUser === "" ? "/newAccount" :`/plan/${planId}`}
+            href={loginUser === "" ? "/newAccount" : `/plan/${planId}`}
             style={{ textDecoration: "none" }}
             ml="10px"
             mt="10px"
             mb="10px"
           >
-          <Box
+            <Box
               maxW="xs"
               borderWidth="1px"
               borderRadius="lg"

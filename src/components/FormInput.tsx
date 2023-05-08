@@ -11,9 +11,7 @@ export const FormInput = ({
 }: FormInputProps) => {
   return (
     <FormControl pb="10px" pt="10px">
-      <FormLabel fontWeight="bold">
-        {label}
-      </FormLabel>
+      <FormLabel fontWeight="bold">{label}</FormLabel>
       <Input
         type={type}
         placeholder={placeholder}

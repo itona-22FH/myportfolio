@@ -10,14 +10,13 @@ import {
   ModalCloseButton,
   ModalFooter,
   useDisclosure,
-  Link,
   Flex,
 } from "@chakra-ui/react";
 import { doc, updateDoc } from "firebase/firestore";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import ReactStars from "react-stars";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
 import { db } from "../lib/firebase/firebaseConfig";
 import { profileCollectionAtom } from "../lib/recoil/atoms/profileCollectionAtom";
 import { testLoginUserAtom } from "../lib/recoil/atoms/testLoginUserAtom";

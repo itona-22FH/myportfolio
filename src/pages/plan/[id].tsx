@@ -20,7 +20,7 @@ import { HeadTitle } from "../../components/HeadTitle";
 import { TextBox } from "../../components/TextBox";
 import { useRouter } from "next/router";
 import { planCollectionAtom } from "../../lib/recoil/atoms/planCollectionAtom";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
 import { ConfirmationDrawer } from "../../components/ConfirmationDrawer";
 import { UserInformation } from "../../components/UserInformation";
 import { profileCollectionAtom } from "../../lib/recoil/atoms/profileCollectionAtom";
@@ -31,8 +31,7 @@ import { db } from "../../lib/firebase/firebaseConfig";
 
 const plan = () => {
   //planCollectionsのSTATEを取得
-  const [planCollections, setPlanCollections] =
-    useRecoilState(planCollectionAtom);
+  const planCollections = useRecoilValue(planCollectionAtom);
 
   //プロフィールコレクションを取得
   const profileCollections = useRecoilValue(profileCollectionAtom);

@@ -46,9 +46,9 @@ export const ConfirmationBtn = ({
           <ModalCloseButton />
           <ModalBody pb={6}></ModalBody>
           <ModalFooter>
-              <Button colorScheme="blue" onClick={handleConfirmation} mr={3}>
-                {confirmation}する
-              </Button>
+            <Button colorScheme="blue" onClick={handleConfirmation} mr={3}>
+              {confirmation}する
+            </Button>
             <Button onClick={onClose} colorScheme="red">
               {confirmation}しない
             </Button>
