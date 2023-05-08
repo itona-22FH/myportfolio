@@ -48,6 +48,7 @@ export const PostReviewModal = ({
         return profile;
       }
     });
+
     if (reviewUser) {
       const updateReview = {
         ...reviewUser,
@@ -57,8 +58,10 @@ export const PostReviewModal = ({
         review: updateReview.review,
       });
     }
+
     setStar(0);
   };
+
   //星の選択
   const ratingChanged = (star: number) => {
     setStar(star);
