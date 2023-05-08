@@ -44,7 +44,7 @@ export const GamePlan = ({ showPlan }: GamePlanProps) => {
   return (
     <>
       {/* showGamePlanAtomにセットされた配列を表示 */}
-      {(showPlan?.length ? showPlan : showAllPlan).map(
+      {(!showPlan?.length && pathname === "/" ? showAllPlan : showPlan )?.map(
         ({
           planId,
           planTitle,
