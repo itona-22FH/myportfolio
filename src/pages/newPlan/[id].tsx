@@ -64,7 +64,6 @@ const newPlan = () => {
 
   return (
     loginUserId === id && (
-
       <Box pt="10px" pb="10px">
       <Container maxW="1100px" bg="whiteAlpha.800" p="5px" borderRadius="10px">
       <HeadTitle title="新規プラン登録" />
