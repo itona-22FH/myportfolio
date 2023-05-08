@@ -13,7 +13,6 @@ type ConfirmationBtnProps = {
   width: string;
   confirmation: string;
   handleConfirmation: (e) => void;
-  confirmationLink: string;
 };
 
 type TextBox = {
