@@ -6,6 +6,7 @@ export const FormPassword = ({
     formValue,
     onChangeHandle,
     formLabel,
+    formName,
 }: FormPasswordProps) => {
   const [isRevealPassword, setIsRevealPassword] = useState(false);
 
@@ -25,7 +26,7 @@ export const FormPassword = ({
         type={isRevealPassword ? "text" : "password"}
         placeholder={formLabel}
         p="4px"
-        name="password"
+        name={formName}
         onChange={onChangeHandle}
         value={formValue}
         borderColor="purple.300"
