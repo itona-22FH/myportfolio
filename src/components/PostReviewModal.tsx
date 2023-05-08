@@ -14,6 +14,7 @@ import {
   Flex,
 } from "@chakra-ui/react";
 import { doc, updateDoc } from "firebase/firestore";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 import ReactStars from "react-stars";
 import { useRecoilState, useRecoilValue } from "recoil";
@@ -28,6 +29,7 @@ export const PostReviewModal = ({
   width,
   userId,
 }: PostReviewModalProps) => {
+  const router = useRouter();
   //モーダル関数
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -47,6 +49,7 @@ export const PostReviewModal = ({
       if (userId === profile.userId) {
         return profile;
       }
+      router.push("/");
     });
 
     if (reviewUser) {
@@ -96,11 +99,9 @@ export const PostReviewModal = ({
             />
           </Flex>
           <ModalFooter>
-            <Link href="/">
-              <Button colorScheme="blue" mr="10px" onClick={postReview}>
-                投稿する
-              </Button>
-            </Link>
+            <Button colorScheme="blue" mr="10px" onClick={postReview}>
+              投稿する
+            </Button>
             <Button onClick={onClose} colorScheme="red">
               キャンセル
             </Button>

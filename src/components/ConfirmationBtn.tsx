@@ -19,7 +19,6 @@ export const ConfirmationBtn = ({
   width,
   confirmation,
   handleConfirmation,
-  confirmationLink,
 }: ConfirmationBtnProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -46,13 +45,10 @@ export const ConfirmationBtn = ({
           <ModalHeader>本当に{confirmation}してよろしいですか？</ModalHeader>
           <ModalCloseButton />
           <ModalBody pb={6}></ModalBody>
-
           <ModalFooter>
-            <Link href={confirmationLink} mr={3}>
-              <Button colorScheme="blue" onClick={handleConfirmation}>
+              <Button colorScheme="blue" onClick={handleConfirmation} mr={3}>
                 {confirmation}する
               </Button>
-            </Link>
             <Button onClick={onClose} colorScheme="red">
               {confirmation}しない
             </Button>

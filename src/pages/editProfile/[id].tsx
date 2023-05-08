@@ -62,6 +62,7 @@ const editProfile = () => {
       selfIntroduction: editUserData.selfIntroduction,
       achievement: editUserData.achievement,
     });
+    router.push("/");
   };
 
   return editUserData && loginUser === id ? (
@@ -123,7 +124,6 @@ const editProfile = () => {
           width="100%"
           confirmation="アカウント情報を更新"
           handleConfirmation={updateProfileHandle}
-          confirmationLink="/"
         />
       </Container>
     </Box>

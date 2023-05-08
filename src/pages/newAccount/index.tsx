@@ -144,7 +144,6 @@ const newAccount = () => {
           width="100%"
           confirmation="新規登録"
           handleConfirmation={registerNewUser}
-          confirmationLink="/"
         />
       </Container>
     </Box>

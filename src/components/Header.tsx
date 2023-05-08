@@ -22,6 +22,7 @@ export const Header = () => {
     try {
       await signOut(auth);
       setLoginUserId("");
+      router.push("/");
     } catch (error) {
       console.error(error);
     }
@@ -82,7 +83,6 @@ export const Header = () => {
                 width="130px"
                 confirmation="ログアウト"
                 handleConfirmation={handleLogout}
-                confirmationLink="/"
               />
               {pathname !== "/myPage/[id]" && (
                 <AccountControlButton

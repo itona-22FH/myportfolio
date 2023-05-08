@@ -61,6 +61,7 @@ const plan = () => {
   //プラン削除
   const deletePlanHandle = async () => {
     await deleteDoc(doc(db, "planCollection", planData?.planId as string));
+    router.push("/");
   };
 
   return (
@@ -144,7 +145,6 @@ const plan = () => {
                         width="100%"
                         confirmation="削除"
                         handleConfirmation={deletePlanHandle}
-                        confirmationLink="/"
                       />
                     )}
                   </Box>
