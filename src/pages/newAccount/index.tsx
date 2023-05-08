@@ -1,10 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-hooks/rules-of-hooks */
-import {
-  Box,
-  FormControl,
-  Container,
-} from "@chakra-ui/react";
+import { Box, FormControl, Container } from "@chakra-ui/react";
 import React, { useState } from "react";
 import { ConfirmationBtn } from "../../components/ConfirmationBtn";
 import { FormInput } from "../../components/FormInput";
@@ -18,6 +14,9 @@ import { FormPassword } from "../../components/FormPassword";
 const newAccount = () => {
   //新規アカウントの情報を保持するためのSTATEを定義
   const [newUserData, setNewUserData] = useState({
+    email: "",
+    password: "",
+    checkPassword: "",
     userName: "",
     userAvatar: "",
     twitterAccount: "",
@@ -26,11 +25,6 @@ const newAccount = () => {
     achievement: "",
     review: {},
   });
-
-  //パスワードチェックのためのSTATEを定義
-  const [checkPassword, setCheckPassword] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
 
   const inputUserInformation = (e: {
     target: { name: string; value: string | number };
@@ -41,42 +35,28 @@ const newAccount = () => {
     setNewUserData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const inputCheckPassword = (e: { target: { value: string } }) => {
-    //確認用パスワードの入力
-    setCheckPassword(e.target.value);
-  };
-
-  const inputPassword = (e: { target: { value: string } }) => {
-    //確認用パスワードの入力
-    setPassword(e.target.value);
-  };
-
-  const inputEmail = (e: { target: { value: string | number } }) => {
-    //確認用パスワードの入力
-    setEmail(e.target.value as string);
-  };
-
   const registerNewUser = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
-    if (password === checkPassword) {
-      await createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          //登録が成功した時の処理
-          setDoc(doc(db, "profileCollection", userCredential.user.uid), {
-            userName: newUserData.userName,
-            userAvatar: newUserData.userAvatar,
-            twitterAccount: newUserData.twitterAccount,
-            youtubeAccount: newUserData.youtubeAccount,
-            selfIntroduction: newUserData.selfIntroduction,
-            achievement: newUserData.achievement,
-            review: {},
-          });
-        })
-        .catch((error) => {
-          console.error(error.code);
+    if (newUserData.password === newUserData.checkPassword) {
+      try {
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          newUserData.email,
+          newUserData.password
+        );
+        //登録が成功した時の処理
+        setDoc(doc(db, "profileCollection", userCredential.user.uid), {
+          userName: newUserData.userName,
+          userAvatar: newUserData.userAvatar,
+          twitterAccount: newUserData.twitterAccount,
+          youtubeAccount: newUserData.youtubeAccount,
+          selfIntroduction: newUserData.selfIntroduction,
+          achievement: newUserData.achievement,
+          review: {},
         });
-    } else {
-      alert("パスワードが違います。");
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
 
@@ -106,18 +86,20 @@ const newAccount = () => {
             type="email"
             placeholder="********@email.com"
             formName="email"
-            onChangeHandle={inputEmail}
-            formValue={email}
+            onChangeHandle={inputUserInformation}
+            formValue={newUserData.email}
           />
           <FormPassword
-            formValue={password}
-            onChangeHandle={inputPassword}
-            formLabel={"パスワード"}
+            onChangeHandle={inputUserInformation}
+            formValue={newUserData.password}
+            formLabel="パスワード"
+            formName="password"
           />
           <FormPassword
-            formValue={checkPassword}
-            onChangeHandle={inputCheckPassword}
-            formLabel={"確認用パスワード"}
+            onChangeHandle={inputUserInformation}
+            formValue={newUserData.checkPassword}
+            formLabel="確認用パスワード"
+            formName="checkPassword"
           />
           <FormInput
             label="Twitterアカウント"

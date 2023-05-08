@@ -19,28 +19,31 @@ import { FormPassword } from "./FormPassword";
 
 export const LoginModal = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
+  const [loginData, setLoginData] = useState({
+    email: "",
+    password: "",
+  });
   const setLoginUserId = useSetRecoilState(testLoginUserAtom);
 
   const handleLogin = async () => {
-    await signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        setLoginUserId(userCredential.user.uid);
-      })
-      .catch((error) => {
-        console.error(error.code);
-      });
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        loginData.email,
+        loginData.password
+      );
+      setLoginUserId(userCredential.user.uid);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  const inputPassword = (e: { target: { value: string } }) => {
+  const inputLoginData = (e: {
+    target: { name: string; value: string | number };
+  }) => {
     //確認用パスワードの入力
-    setPassword(e.target.value);
-  };
-
-  const inputEmail = (e: { target: { value: string | number } }) => {
-    //確認用パスワードの入力
-    setEmail(e.target.value as string);
+    const { name, value } = e.target;
+    setLoginData((prev) => ({ ...prev, [name]: value }));
   };
 
   return (
@@ -66,14 +69,15 @@ export const LoginModal = () => {
               type="email"
               placeholder="********@email.com"
               formName="email"
-              onChangeHandle={inputEmail}
-              formValue={email}
+              onChangeHandle={inputLoginData}
+              formValue={loginData.email}
             />
 
             <FormPassword
-              formValue={password}
-              onChangeHandle={inputPassword}
-              formLabel={"パスワード"}
+              onChangeHandle={inputLoginData}
+              formValue={loginData.password}
+              formLabel="パスワード"
+              formName="password"
             />
           </ModalBody>
 

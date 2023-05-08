@@ -19,13 +19,12 @@ export const Header = () => {
   const { pathname } = router;
 
   const handleLogout = async () => {
-    await signOut(auth)
-      .then(() => {
-        setLoginUserId("");
-      })
-      .catch((error) => {
-        console.error(error.code);
-      });
+    try {
+      await signOut(auth);
+      setLoginUserId("");
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   //ログイン状態の監視
