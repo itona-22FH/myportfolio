@@ -10,8 +10,11 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../../lib/firebase/firebaseConfig";
 import { doc, setDoc } from "firebase/firestore";
 import { FormPassword } from "../../components/FormPassword";
+import { useRouter } from "next/router";
 
 const newAccount = () => {
+  const router = useRouter();
+
   //新規アカウントの情報を保持するためのSTATEを定義
   const [newUserData, setNewUserData] = useState({
     email: "",
@@ -54,6 +57,7 @@ const newAccount = () => {
           achievement: newUserData.achievement,
           review: {},
         });
+        router.push("/");
       } catch (error) {
         console.error(error);
       }
