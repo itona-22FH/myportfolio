@@ -10,12 +10,14 @@ import {
   ModalCloseButton,
   ModalFooter,
   useDisclosure,
-  Link,
   Flex,
 } from "@chakra-ui/react";
+import { doc, updateDoc } from "firebase/firestore";
+import { useRouter } from "next/router";
 import React, { useState } from "react";
 import ReactStars from "react-stars";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
+import { db } from "../lib/firebase/firebaseConfig";
 import { profileCollectionAtom } from "../lib/recoil/atoms/profileCollectionAtom";
 import { testLoginUserAtom } from "../lib/recoil/atoms/testLoginUserAtom";
 
@@ -26,40 +28,42 @@ export const PostReviewModal = ({
   width,
   userId,
 }: PostReviewModalProps) => {
-
+  const router = useRouter();
   //モーダル関数
   const { isOpen, onOpen, onClose } = useDisclosure();
-  
 
   //プロフィールデータ取得
-  const [profileCollections, setProfileCollections] = useRecoilState(
-    profileCollectionAtom
-  );
-
-  //ログイン中のユーザー
-  const loginUser = useRecoilValue(testLoginUserAtom);
+  const profileCollections = useRecoilValue(profileCollectionAtom);
 
   //レビュースコアを取得
   const [star, setStar] = useState(0);
 
-  const postReview = () => {
-    profileCollections.map((profile) => {
-      userId === profile.userId //レビュー対象のユーザー？
-        ? setProfileCollections(
-            (
-              prev //レビューデータを更新
-            ) =>
-              prev.map(
-                (obj) =>
-                  obj.userId === profile.userId //対象のユーザー？
-                    ? { ...obj, review: { ...obj.review, [loginUser]: star } } //レビューデータ更新
-                    : obj //そのまま返す
-              )
-          )
-        : setProfileCollections((prev) => prev); //そのまま返す
+  const profileRef = doc(db, "profileCollection", userId as string);
+
+  //ログイン中のユーザー
+  const loginUserId = useRecoilValue(testLoginUserAtom);
+
+  const postReview = async () => {
+    const reviewUser = profileCollections.find((profile) => {
+      if (userId === profile.userId) {
+        return profile;
+      }
+      router.push("/");
     });
+
+    if (reviewUser) {
+      const updateReview = {
+        ...reviewUser,
+        review: { ...reviewUser?.review, [loginUserId]: star },
+      };
+      await updateDoc(profileRef, {
+        review: updateReview.review,
+      });
+    }
+
     setStar(0);
   };
+
   //星の選択
   const ratingChanged = (star: number) => {
     setStar(star);
@@ -78,11 +82,7 @@ export const PostReviewModal = ({
       </Button>
 
       {/* ログインボタンが押された時に表示するモーダル */}
-      <Modal
-        isOpen={isOpen}
-        onClose={onClose}
-        size="xl"
-      >
+      <Modal isOpen={isOpen} onClose={onClose} size="xl">
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>メンターの指導はどうでしたか？</ModalHeader>
@@ -98,11 +98,9 @@ export const PostReviewModal = ({
             />
           </Flex>
           <ModalFooter>
-            <Link>
-              <Button colorScheme="blue" mr="10px" onClick={postReview}>
-                投稿する
-              </Button>
-            </Link>
+            <Button colorScheme="blue" mr="10px" onClick={postReview}>
+              投稿する
+            </Button>
             <Button onClick={onClose} colorScheme="red">
               キャンセル
             </Button>

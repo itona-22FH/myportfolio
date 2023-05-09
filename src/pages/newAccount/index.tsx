@@ -1,47 +1,33 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-hooks/rules-of-hooks */
-import {
-  Box,
-  FormControl,
-  Container,
-  Input,
-  FormLabel,
-} from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
+import { Box, FormControl, Container } from "@chakra-ui/react";
+import React, { useState } from "react";
 import { ConfirmationBtn } from "../../components/ConfirmationBtn";
 import { FormInput } from "../../components/FormInput";
 import { HeadTitle } from "../../components/HeadTitle";
 import { NewRegisterTextBox } from "../../components/NewRegisterTextBox";
-import { v4 as uuidv4 } from "uuid";
-import { useSetRecoilState } from "recoil";
-import { profileCollectionAtom } from "../../lib/recoil/atoms/profileCollectionAtom";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth, db } from "../../lib/firebase/firebaseConfig";
+import { doc, setDoc } from "firebase/firestore";
+import { FormPassword } from "../../components/FormPassword";
+import { useRouter } from "next/router";
 
 const newAccount = () => {
+  const router = useRouter();
+
   //新規アカウントの情報を保持するためのSTATEを定義
   const [newUserData, setNewUserData] = useState({
-    userId: "",
-    userName: "",
-    userAvatar: "",
     email: "",
     password: "",
+    checkPassword: "",
+    userName: "",
+    userAvatar: "",
     twitterAccount: "",
     youtubeAccount: "",
     selfIntroduction: "",
     achievement: "",
-    review: [],
+    review: {},
   });
-  //パスワードチェックのためのSTATEを定義
-  const [checkPassword, setCheckPassword] = useState("");
-
-
-
-  //プロフィールコレクション更新のためのSET関数を定義
-  const setProfileCollections = useSetRecoilState(profileCollectionAtom);
-
-  useEffect(() => {
-    //初回レンダリング時にuserIDをuuidによって生成
-    setNewUserData((prev) => ({ ...prev, userId: uuidv4() }));
-  }, []);
 
   const inputUserInformation = (e: {
     target: { name: string; value: string | number };
@@ -52,20 +38,29 @@ const newAccount = () => {
     setNewUserData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const inputCheckPassword = (e: { target: { value: string } }) => {
-    //確認用パスワードの入力
-    setCheckPassword(e.target.value);
-  };
-
-  const addNewAccountHandle = () => {
-    if (newUserData.password === checkPassword) {
-      // パスワード一致？
-      //プロフィールコレクションに新規アカウントを追加
-      setProfileCollections((prev) => [...prev, newUserData]);
-    } else {
-      //パスワード不一致
-      //エラー出力
-      console.error("エラー");
+  const registerNewUser = async (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+    if (newUserData.password === newUserData.checkPassword) {
+      try {
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          newUserData.email,
+          newUserData.password
+        );
+        //登録が成功した時の処理
+        setDoc(doc(db, "profileCollection", userCredential.user.uid), {
+          userName: newUserData.userName,
+          userAvatar: newUserData.userAvatar,
+          twitterAccount: newUserData.twitterAccount,
+          youtubeAccount: newUserData.youtubeAccount,
+          selfIntroduction: newUserData.selfIntroduction,
+          achievement: newUserData.achievement,
+          review: {},
+        });
+        router.push("/");
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
 
@@ -98,29 +93,18 @@ const newAccount = () => {
             onChangeHandle={inputUserInformation}
             formValue={newUserData.email}
           />
-          <FormInput
-            label="パスワード"
-            type="password"
-            placeholder="password"
-            formName="password"
+          <FormPassword
             onChangeHandle={inputUserInformation}
             formValue={newUserData.password}
+            formLabel="パスワード"
+            formName="password"
           />
-          <Box pb="10px" pt="10px">
-            <FormLabel htmlFor="確認用パスワード" fontWeight="bold">
-              確認用パスワード
-            </FormLabel>
-            <Input
-              id="確認用パスワード"
-              type="password"
-              placeholder="確認用パスワード"
-              borderColor="purple.300"
-              p="4px"
-              name="checkPassword"
-              onChange={inputCheckPassword}
-              value={checkPassword}
-            />
-          </Box>
+          <FormPassword
+            onChangeHandle={inputUserInformation}
+            formValue={newUserData.checkPassword}
+            formLabel="確認用パスワード"
+            formName="checkPassword"
+          />
           <FormInput
             label="Twitterアカウント"
             type="url"
@@ -159,8 +143,7 @@ const newAccount = () => {
           color="white"
           width="100%"
           confirmation="新規登録"
-          handleConfirmation={addNewAccountHandle}
-          confirmationLink={"/"}
+          handleConfirmation={registerNewUser}
         />
       </Container>
     </Box>

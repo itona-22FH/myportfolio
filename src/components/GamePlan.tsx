@@ -6,14 +6,20 @@ import { Badge } from "@chakra-ui/react";
 import { profileCollectionAtom } from "../lib/recoil/atoms/profileCollectionAtom";
 import { useRecoilValue } from "recoil";
 import { planCollectionAtom } from "../lib/recoil/atoms/planCollectionAtom";
+import { testLoginUserAtom } from "../lib/recoil/atoms/testLoginUserAtom";
 
 export const GamePlan = ({ showPlan }: GamePlanProps) => {
   //URLからpathnameを取得
   const router = useRouter();
   const { pathname } = router;
 
-  const profileCollections = useRecoilValue(profileCollectionAtom);
+  const loginUser = useRecoilValue(testLoginUserAtom);
+
+  //FIREBASEからすべてのプラン情報を取得
   const planCollections = useRecoilValue(planCollectionAtom);
+
+  //プロフィールデータを取得
+  const profileCollections = useRecoilValue(profileCollectionAtom);
 
   const showAllPlan = planCollections.flatMap((plan) =>
     profileCollections
@@ -38,7 +44,7 @@ export const GamePlan = ({ showPlan }: GamePlanProps) => {
   return (
     <>
       {/* showGamePlanAtomにセットされた配列を表示 */}
-      {(showPlan?.length ? showPlan : showAllPlan).map(
+      {(!showPlan?.length && pathname === "/" ? showAllPlan : showPlan)?.map(
         ({
           planId,
           planTitle,
@@ -52,8 +58,11 @@ export const GamePlan = ({ showPlan }: GamePlanProps) => {
         }) => (
           <Link
             key={planId as string}
-            href={`/plan/${planId}`}
+            href={loginUser === "" ? "/newAccount" : `/plan/${planId}`}
             style={{ textDecoration: "none" }}
+            ml="10px"
+            mt="10px"
+            mb="10px"
           >
             <Box
               maxW="xs"
@@ -61,9 +70,6 @@ export const GamePlan = ({ showPlan }: GamePlanProps) => {
               borderRadius="lg"
               borderColor="purple.300"
               overflow="hidden"
-              ml="10px"
-              mt="10px"
-              mb="10px"
             >
               <Image src={planImage} alt="PlanImage" />
 

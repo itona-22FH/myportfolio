@@ -13,52 +13,86 @@ import {
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 import { planCollectionAtom } from "../lib/recoil/atoms/planCollectionAtom";
-import { useRecoilValue } from "recoil";
-import React, { useState } from "react";
+import { useRecoilState } from "recoil";
+import React, { useEffect, useState } from "react";
 import { profileCollectionAtom } from "../lib/recoil/atoms/profileCollectionAtom";
+import { collection, onSnapshot, query } from "firebase/firestore";
+import { db } from "../lib/firebase/firebaseConfig";
 
 const Home = () => {
   //全てのプラン情報を管理するRECOILのSTATEへのSET関数を宣言
   const [showPlan, setShowPlan] = useState<ShowPlan[]>([]);
 
   //FIREBASEからすべてのプラン情報を取得
-  const planCollections = useRecoilValue(planCollectionAtom);
+  const [planCollections, setPlanCollections] =
+    useRecoilState(planCollectionAtom);
 
   //プロフィールデータを取得
-  const profileCollections = useRecoilValue(profileCollectionAtom);
+  const [profileCollections, setProfileCollections] = useRecoilState(
+    profileCollectionAtom
+  );
 
   const sortPlanHandle = (e: { target: { textContent: string } }) => {
     setShowPlan([]);
+
+    const category = e.target.textContent;
+
     //一致するジャンル・タイトルのプランでフィルター
-    const sortPlan = planCollections.filter((plan) => {
-      if (
-        plan.genreCategory === e.target.textContent ||
-        plan.titleCategory === e.target.textContent
-      ) {
-        return plan;
-      } else if (e.target.textContent === "全てのプラン") {
-        return planCollections;
-      }
-    });
-    sortPlan.map((plan) => {
-      profileCollections.map((profile) => {
-        if (plan.userId === profile.userId) {
-          const planData = {
-            planId: plan.planId,
-            planTitle: plan.planTitle,
-            planImage: plan.planImage,
-            userName: profile.userName,
-            price: plan.price,
-            userAvatar: profile.userAvatar,
-            review: profile.review,
-            genreCategory: plan.genreCategory,
-            titleCategory: plan.titleCategory,
-          };
-          setShowPlan((prev) => [...prev, planData]);
-        }
+    const sortPlan =
+      category === "全てのプラン"
+        ? planCollections
+        : planCollections.filter(
+            (plan) =>
+              plan.genreCategory === e.target.textContent ||
+              plan.titleCategory === e.target.textContent
+          );
+
+    const newPlanData = sortPlan
+      .filter((plan) =>
+        profileCollections.find((profile) => plan.userId === profile.userId)
+      )
+      .map((plan) => {
+        const profile = profileCollections.find(
+          (profile) => plan.userId === profile.userId
+        ) as User;
+        return {
+          planId: plan.planId,
+          planTitle: plan.planTitle,
+          planImage: plan.planImage,
+          userName: profile.userName,
+          price: plan.price,
+          userAvatar: profile.userAvatar,
+          review: profile.review,
+          genreCategory: plan.genreCategory,
+          titleCategory: plan.titleCategory,
+        };
       });
-    });
+
+    setShowPlan((prev) => [...prev, ...newPlanData]);
   };
+
+  useEffect(() => {
+    const profileQuery = query(collection(db, "planCollection"));
+    const planUnsubscribe = onSnapshot(profileQuery, (querySnapshot) => {
+      const planData: Plan[] = [];
+      querySnapshot.forEach((doc) => {
+        planData.push(Object.assign({ planId: doc.id, ...doc.data() }));
+      });
+      setPlanCollections(planData);
+    });
+    const planQuery = query(collection(db, "profileCollection"));
+    const profileUnsubscribe = onSnapshot(planQuery, (querySnapshot) => {
+      const profileData: User[] = [];
+      querySnapshot.forEach((doc) => {
+        profileData.push(Object.assign({ userId: doc.id, ...doc.data() }));
+      });
+      setProfileCollections(profileData);
+    });
+    return () => {
+      planUnsubscribe();
+      profileUnsubscribe();
+    };
+  }, []);
 
   return (
     <Box>

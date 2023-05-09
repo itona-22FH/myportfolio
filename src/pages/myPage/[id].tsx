@@ -22,6 +22,7 @@ import { GamePlan } from "../../components/GamePlan";
 import { TextBox } from "../../components/TextBox";
 import { useRouter } from "next/router";
 import { UserInformation } from "../../components/UserInformation";
+import { testLoginUserAtom } from "../../lib/recoil/atoms/testLoginUserAtom";
 
 const myPage = () => {
   //FIREBASEからすべてのプロフィール情報を取得
@@ -34,9 +35,11 @@ const myPage = () => {
   const router = useRouter();
   const { id } = router.query;
 
+  const loginUser = useRecoilValue(testLoginUserAtom);
+
   //プロフィールコレクションから自分のプロフィールデータのみを取得
   const myProfileData = profileCollections.find((profile) => {
-    if (id === profile.userId) {
+    if (loginUser === profile.userId) {
       return profile;
     }
   });
@@ -46,7 +49,7 @@ const myPage = () => {
     () =>
       myProfileData
         ? planCollections
-            .filter((plan) => myProfileData.userId === plan.userId)
+            .filter((plan) => loginUser === plan.userId)
             .map((plan) => ({
               planId: plan.planId,
               planTitle: plan.planTitle,
@@ -64,7 +67,7 @@ const myPage = () => {
 
   return (
     <>
-      {myProfileData ? (
+      {myProfileData && loginUser === id ? (
         <Box fontWeight="bold" pt="10px" pb="10px">
           <Container maxW="1100px">
             <Flex

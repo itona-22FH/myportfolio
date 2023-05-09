@@ -5,10 +5,10 @@ import React from "react";
 import ReactStars from "react-stars";
 
 export const ReviewStatus = ({ review }: ReviewStatusProps) => {
-  //レビュー数のカウント
+  // レビュー数のカウント
   const reviewCount = Object.keys(review).length;
 
-  //rすべて合計した値を代入
+  // rすべて合計した値を代入
   const totalReviewScore = Object.values<number>(review);
 
   const sumReviewScore = totalReviewScore.reduce(

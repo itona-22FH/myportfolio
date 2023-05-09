@@ -20,17 +20,18 @@ import { HeadTitle } from "../../components/HeadTitle";
 import { TextBox } from "../../components/TextBox";
 import { useRouter } from "next/router";
 import { planCollectionAtom } from "../../lib/recoil/atoms/planCollectionAtom";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue } from "recoil";
 import { ConfirmationDrawer } from "../../components/ConfirmationDrawer";
 import { UserInformation } from "../../components/UserInformation";
 import { profileCollectionAtom } from "../../lib/recoil/atoms/profileCollectionAtom";
 import { PostReviewModal } from "../../components/PostReviewModal";
 import { testLoginUserAtom } from "../../lib/recoil/atoms/testLoginUserAtom";
+import { deleteDoc, doc } from "firebase/firestore";
+import { db } from "../../lib/firebase/firebaseConfig";
 
 const plan = () => {
   //planCollectionsのSTATEを取得
-  const [planCollections, setPlanCollections] =
-    useRecoilState(planCollectionAtom);
+  const planCollections = useRecoilValue(planCollectionAtom);
 
   //プロフィールコレクションを取得
   const profileCollections = useRecoilValue(profileCollectionAtom);
@@ -57,13 +58,9 @@ const plan = () => {
   });
 
   //プラン削除
-  const deletePlanHandle = () => {
-    const filterPlanCollections = planCollections.filter((plan) => {
-      if (loginUser !== plan.planId) {
-        return plan;
-      }
-    });
-    setPlanCollections(filterPlanCollections);
+  const deletePlanHandle = async () => {
+    await deleteDoc(doc(db, "planCollection", planData?.planId as string));
+    router.push("/");
   };
 
   return (
@@ -132,7 +129,7 @@ const plan = () => {
                 </VStack>
                 <Flex justifyContent="space-around" flexFlow="column">
                   <Box w="100%" p="10px">
-                    {loginUser !== planData.userId && (
+                    {loginUser !== planData.userId && loginUser !== "" && (
                       <ConfirmationDrawer
                         planData={planData}
                         profileData={profileData}
@@ -147,7 +144,6 @@ const plan = () => {
                         width="100%"
                         confirmation="削除"
                         handleConfirmation={deletePlanHandle}
-                        confirmationLink="/"
                       />
                     )}
                   </Box>
@@ -176,7 +172,7 @@ const plan = () => {
                   />
                   {/* 本人以外の時表示 */}
                   <Box w="100%" p="5px">
-                    {loginUser !== planData.userId && (
+                    {loginUser !== planData.userId && loginUser !== "" && (
                       <>
                         <AccountControlButton
                           text="質問をする"

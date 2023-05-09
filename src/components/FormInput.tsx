@@ -1,4 +1,4 @@
-import { Box, FormLabel, Input } from "@chakra-ui/react";
+import { Box, FormControl, FormLabel, Input } from "@chakra-ui/react";
 import React from "react";
 
 export const FormInput = ({
@@ -10,12 +10,9 @@ export const FormInput = ({
   formValue,
 }: FormInputProps) => {
   return (
-    <Box pb="10px" pt="10px">
-      <FormLabel htmlFor={label} fontWeight="bold">
-        {label}
-      </FormLabel>
+    <FormControl pb="10px" pt="10px">
+      <FormLabel fontWeight="bold">{label}</FormLabel>
       <Input
-        id={label}
         type={type}
         placeholder={placeholder}
         borderColor="purple.300"
@@ -24,6 +21,6 @@ export const FormInput = ({
         onChange={onChangeHandle}
         value={formValue}
       />
-    </Box>
+    </FormControl>
   );
 };

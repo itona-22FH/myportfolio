@@ -12,8 +12,7 @@ type ConfirmationBtnProps = {
   color: string;
   width: string;
   confirmation: string;
-  handleConfirmation: () => void;
-  confirmationLink: string;
+  handleConfirmation: (e) => void;
 };
 
 type TextBox = {
@@ -35,6 +34,13 @@ type FormInputProps = {
     target: { name: string; value: string | number };
   }) => void;
   formValue: string;
+};
+
+type FormPasswordProps = {
+  onChangeHandle: (e: { target: { name: string; value: string } }) => void;
+  formValue: string;
+  formLabel: string;
+  formName: string;
 };
 
 type NewRegisterTextBox = {
