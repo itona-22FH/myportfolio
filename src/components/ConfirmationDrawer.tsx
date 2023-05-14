@@ -13,6 +13,7 @@ import {
   Text,
   Box,
 } from "@chakra-ui/react";
+import { useRouter } from "next/router";
 import React from "react";
 import { ConfirmationBtn } from "./ConfirmationBtn";
 import ContractBtn from "./ContractBtn";
@@ -82,7 +83,6 @@ export const ConfirmationDrawer = ({
               width="100%"
               confirmation="契約"
               handleConfirmation={() => {}}
-              confirmationLink={""}
             />
           </Box>
         </DrawerContent>
