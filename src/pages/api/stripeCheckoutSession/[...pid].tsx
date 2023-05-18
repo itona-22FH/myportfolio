@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import { useRouter } from "next/router";
 
 const stripe = require("stripe")(process.env.NEXT_STRIPE_APIKEY);
 
@@ -6,7 +7,10 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<any>
 ) {
-  if (req.method === "POST") {
+  const {pid} = req.query
+
+  if (req.method === "POST" && pid) {
+
     try {
       const session = await stripe.checkout.sessions.create({
         line_items: [
@@ -14,9 +18,9 @@ export default async function handler(
             price_data: {
               currency: "jpy",
               product_data: {
-                name: "テストプラン"
+                name:pid[0],
               },
-              unit_amount: 2000,
+              unit_amount: pid[1],
             },
             quantity: 1,
           },
@@ -25,6 +29,7 @@ export default async function handler(
         success_url: "http://localhost:3000",
         cancel_url: "http://localhost:3000",
       });
+
       res.redirect(200, session.url);
     } catch (error: any) {
       res.status(400).json({ error: error.message });
