@@ -135,4 +135,8 @@ type GamePlanProps = {
   showPlan: ShowPlan[] | undefined;
 };
 
+type StripeCheckoutModalProps = {
+  planData: Plan;
+};
+
 declare module "react-awesome-stars-rating";
