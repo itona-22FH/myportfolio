@@ -13,6 +13,25 @@ import React from "react";
 
 export const StripeCheckoutModal = ({ planData }: StripeCheckoutModalProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const postStripe = async () => {
+    try {
+      await fetch("http://localhost:3000/api/stripeCheckoutSession", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        mode: "no-cors",
+        body: JSON.stringify({
+          planTitle: planData.planTitle,
+          price: planData.price,
+        }),
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <>
       <Button
@@ -37,14 +56,9 @@ export const StripeCheckoutModal = ({ planData }: StripeCheckoutModalProps) => {
           <ModalCloseButton />
           <ModalBody pb={6}></ModalBody>
           <ModalFooter>
-            <form
-              action={`http://localhost:3000/api/stripeCheckoutSession/${planData.planTitle}/${planData.price}`}
-              method="post"
-            >
-              <Button colorScheme="blue" mr={3} type="submit">
-                契約する
-              </Button>
-            </form>
+            <Button colorScheme="blue" mr={3} onClick={postStripe}>
+              契約する
+            </Button>
             <Button onClick={onClose} colorScheme="red">
               契約しない
             </Button>
