@@ -1,5 +1,4 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import router, { useRouter } from "next/router";
 
 const stripe = require("stripe")(process.env.NEXT_STRIPE_APIKEY);
 
