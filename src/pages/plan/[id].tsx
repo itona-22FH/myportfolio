@@ -67,9 +67,6 @@ const plan = () => {
     <>
       {planData && profileData ? (
         <Box pt="10px" pb="10px">
-          <form action={`http://localhost:3000/api/stripeCheckoutSession/${planData.planTitle}/${planData.price}`} method="post">
-            <button>checkout</button>
-          </form>
           <Container maxW="1100px">
             <Grid
               templateAreas={`
