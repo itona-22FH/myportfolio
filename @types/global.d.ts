@@ -53,14 +53,6 @@ type NewRegisterTextBox = {
   textBoxValue: string;
 };
 
-type ContractBtnProps = {
-  text: string;
-  colorScheme: string;
-  color: string;
-  width: string;
-  onClick: () => void;
-};
-
 type HeadTitleProps = {
   title: string;
 };
