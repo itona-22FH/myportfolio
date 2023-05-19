@@ -1,7 +1,7 @@
 import { Button } from "@chakra-ui/react";
 import React from "react";
 
-const ContractBtn = ({
+export const ContractBtn = ({
   text,
   colorScheme,
   color,
@@ -22,5 +22,3 @@ const ContractBtn = ({
     </>
   );
 };
-
-export default ContractBtn;
