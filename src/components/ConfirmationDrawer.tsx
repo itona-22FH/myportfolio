@@ -14,8 +14,8 @@ import {
   Box,
 } from "@chakra-ui/react";
 import React from "react";
-import { ConfirmationBtn } from "./ConfirmationBtn";
-import ContractBtn from "./ContractBtn";
+import {ContractBtn} from "./ContractBtn";
+import { StripeCheckoutModal } from "./StripeCheckoutModal";
 import { TextBox } from "./TextBox";
 
 export const ConfirmationDrawer = ({
@@ -75,17 +75,11 @@ export const ConfirmationDrawer = ({
             </VStack>
           </DrawerBody>
           <Box p="10px">
-            <ConfirmationBtn
-              text="プランを契約する"
-              colorScheme="purple"
-              color="white"
-              width="100%"
-              confirmation="契約"
-              handleConfirmation={() => {}}
-            />
+            <StripeCheckoutModal planData={planData}/>
           </Box>
         </DrawerContent>
       </Drawer>
     </>
   );
 };
+
