@@ -22,7 +22,7 @@ export const StripeCheckoutModal = ({ planData }: StripeCheckoutModalProps) => {
         w="100%"
         onClick={onOpen}
       >
-        契約する
+        プランを契約する
       </Button>
 
       <Modal
