@@ -6,9 +6,9 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<any>
 ) {
-  const { pid } = req.query;
+  if (req.method === "POST") {
+    const { planTitle, price } = req.body;
 
-  if (req.method === "POST" && pid) {
     try {
       const session = await stripe.checkout.sessions.create({
         line_items: [
@@ -16,9 +16,9 @@ export default async function handler(
             price_data: {
               currency: "jpy",
               product_data: {
-                name: pid[0],
+                name: "aaaa",
               },
-              unit_amount: pid[1],
+              unit_amount: 1000,
             },
             quantity: 1,
           },
@@ -28,8 +28,8 @@ export default async function handler(
         cancel_url: "http://localhost:3000",
       });
 
-      res.status(200).redirect(session.url);
-
+      res.redirect(200, session.url)
+      // res.redirect(200, session.url);
     } catch (error: any) {
       res.status(400).json({ error: error.message });
       res.status(500).json({ error: error.message });
