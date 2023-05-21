@@ -8,7 +8,6 @@ export default async function handler(
 ) {
   if (req.method === "POST") {
     const { planTitle, price } = req.body;
-
     try {
       const session = await stripe.checkout.sessions.create({
         line_items: [
@@ -16,9 +15,9 @@ export default async function handler(
             price_data: {
               currency: "jpy",
               product_data: {
-                name: "aaaa",
+                name: "bbbb",
               },
-              unit_amount: 1000,
+              unit_amount: 3000,
             },
             quantity: 1,
           },
@@ -28,11 +27,10 @@ export default async function handler(
         cancel_url: "http://localhost:3000",
       });
 
-      res.redirect(200, session.url)
-      // res.redirect(200, session.url);
+    return  res.status(200).json({stripeSessionUrl: session.url});
+
     } catch (error: any) {
       res.status(400).json({ error: error.message });
-      res.status(500).json({ error: error.message });
     }
   } else {
     res.status(405).json({ error: "test" });
