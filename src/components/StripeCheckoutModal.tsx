@@ -9,6 +9,7 @@ import {
   ModalFooter,
   useDisclosure,
 } from "@chakra-ui/react";
+import router from "next/router";
 import React from "react";
 
 export const StripeCheckoutModal = ({ planData }: StripeCheckoutModalProps) => {
@@ -16,17 +17,19 @@ export const StripeCheckoutModal = ({ planData }: StripeCheckoutModalProps) => {
 
   const postStripe = async () => {
     try {
-      await fetch("http://localhost:3000/api/stripeCheckoutSession", {
+      const res = await fetch("http://localhost:3000/api/stripeCheckoutSession", {
         method: "POST",
+        mode: "no-cors",
         headers: {
           "Content-Type": "application/json",
         },
-        mode: "no-cors",
         body: JSON.stringify({
           planTitle: planData.planTitle,
-          price: planData.price,
+          planPrice: planData.price,
         }),
       });
+      const { stripeSessionUrl } = await res.json();
+      router.push(stripeSessionUrl);
     } catch (error) {
       console.error(error);
     }
