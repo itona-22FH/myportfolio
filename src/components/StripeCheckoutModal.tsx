@@ -19,7 +19,6 @@ export const StripeCheckoutModal = ({ planData }: StripeCheckoutModalProps) => {
     try {
       const res = await fetch("http://localhost:3000/api/stripeCheckoutSession", {
         method: "POST",
-        mode: "no-cors",
         headers: {
           "Content-Type": "application/json",
         },
