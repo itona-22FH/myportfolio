@@ -6,18 +6,18 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<any>
 ) {
+  const { planTitle, planPrice } = req.body;
   if (req.method === "POST") {
-    const { planTitle, price } = req.body;
     try {
       const session = await stripe.checkout.sessions.create({
         line_items: [
           {
             price_data: {
               currency: "jpy",
+              unit_amount: planPrice,
               product_data: {
-                name: "bbbb",
+                name: planTitle,
               },
-              unit_amount: 3000,
             },
             quantity: 1,
           },
@@ -27,8 +27,7 @@ export default async function handler(
         cancel_url: "http://localhost:3000",
       });
 
-    return  res.status(200).json({stripeSessionUrl: session.url});
-
+      return res.status(200).json({ stripeSessionUrl: session.url });
     } catch (error: any) {
       res.status(400).json({ error: error.message });
     }
