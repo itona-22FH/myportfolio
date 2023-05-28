@@ -169,7 +169,9 @@ const plan = () => {
                     userName={profileData.userName}
                     userAvatar={profileData.userAvatar}
                     review={profileData.review}
-                  />
+                    twitterUrl={profileData.twitterAccount}
+                    youtubeUrl={profileData.youtubeAccount}
+                    />
                   {/* 本人以外の時表示 */}
                   <Box w="100%" p="5px">
                     {loginUser !== planData.userId && loginUser !== "" && (

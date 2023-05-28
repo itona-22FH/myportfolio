@@ -113,6 +113,8 @@ type UserInformationProps = {
   userName: User["userName"];
   userAvatar: User["userAvatar"];
   review: User["review"];
+  twitterUrl:User["twitterAccount"];
+  youtubeUrl:User["youtubeAccount"];
 };
 
 type PostReviewModalProps = {

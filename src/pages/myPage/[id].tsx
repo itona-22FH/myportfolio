@@ -85,6 +85,8 @@ const myPage = () => {
                 userName={myProfileData.userName}
                 userAvatar={myProfileData.userAvatar}
                 review={myProfileData.review}
+                twitterUrl={myProfileData.twitterAccount}
+                youtubeUrl={myProfileData.youtubeAccount}
               />
             </Flex>
 
