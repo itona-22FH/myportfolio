@@ -10,6 +10,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import router from "next/router";
 import React, { useState } from "react";
 import { useSetRecoilState } from "recoil";
 import { auth } from "../lib/firebase/firebaseConfig";
@@ -33,6 +34,7 @@ export const LoginModal = () => {
         loginData.password
       );
       setLoginUserId(userCredential.user.uid);
+      router.push("/")
     } catch (error) {
       console.error(error);
     }
