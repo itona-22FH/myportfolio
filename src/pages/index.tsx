@@ -148,10 +148,10 @@ const Home = () => {
               category="スポーツ"
               onClickHandle={sortPlanHandle}
             />
-            <CategorySearch
+            {/* <CategorySearch
               category="エーペックスレジェンズ"
               onClickHandle={sortPlanHandle}
-            />
+            /> */}
           </VStack>
         </GridItem>
 
