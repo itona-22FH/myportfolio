@@ -50,41 +50,38 @@ export const UserInformation = ({
               ログイン中のユーザーのユーザー名の場合はマイページ
               異なる場合は、プロフィールページへ遷移
           */}
-          <Flex alignItems="center">
-            <Link
-              href={
-                loginUserId === userId
-                  ? `/myPage/${loginUserId}`
-                  : `/profile/${userId}`
-              }
-              fontSize="35px"
-            >
-              {userName}
+
+          <Link
+            href={
+              loginUserId === userId
+                ? `/myPage/${loginUserId}`
+                : `/profile/${userId}`
+            }
+            fontSize="35px"
+          >
+            {userName}
+          </Link>
+          <Flex>
+            <Link href={twitterUrl}>
+              <IoLogoTwitter size="20px" color="#1DA1F2" />
             </Link>
-            <Flex flexDirection="column" ml="10px">
-              <Link href={twitterUrl}>
-                <IoLogoTwitter size="20px" color="#1DA1F2" />
-              </Link>
-              <Box mt="5px"></Box>
-              <Link href={youtubeUrl}>
-                <IoLogoYoutube size="20px" color="#ff0000" />
-              </Link>
-            </Flex>
+            <Box ml="20px"></Box>
+            <Link href={youtubeUrl}>
+              <IoLogoYoutube size="20px" color="#ff0000" />
+            </Link>
           </Flex>
         </>
       ) : (
         <>
-          <Flex alignItems="center">
-            <Text fontSize="35px">{userName}</Text>
-            <Flex flexDirection="column" ml="10px">
-              <Link href={twitterUrl}>
-                <IoLogoTwitter size="20px" color="#1DA1F2" />
-              </Link>
-              <Box mt="5px"></Box>
-              <Link href={youtubeUrl}>
-                <IoLogoYoutube size="20px" color="#ff0000" />
-              </Link>
-            </Flex>
+          <Text fontSize="35px">{userName}</Text>
+          <Flex>
+            <Link href={twitterUrl}>
+              <IoLogoTwitter size="20px" color="#1DA1F2" />
+            </Link>
+            <Box ml="20px"></Box>
+            <Link href={youtubeUrl}>
+              <IoLogoYoutube size="20px" color="#ff0000" />
+            </Link>
           </Flex>
         </>
       )}
