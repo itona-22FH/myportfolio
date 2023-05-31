@@ -23,8 +23,8 @@ export default async function handler(
           },
         ],
         mode: "payment",
-        success_url: "https://gameplanpf.vercel.app/",
-        cancel_url: "https://gameplanpf.vercel.app/",
+        success_url: "/",
+        cancel_url: "/",
       });
 
       return res.status(200).json({ stripeSessionUrl: session.url });
