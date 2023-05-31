@@ -85,6 +85,8 @@ const myPage = () => {
                 userName={myProfileData.userName}
                 userAvatar={myProfileData.userAvatar}
                 review={myProfileData.review}
+                twitterUrl={myProfileData.twitterAccount}
+                youtubeUrl={myProfileData.youtubeAccount}
               />
             </Flex>
 
@@ -126,7 +128,6 @@ const myPage = () => {
                 <TabList>
                   <Tab>プロフィール</Tab>
                   <Tab>登録中のプラン</Tab>
-                  <Tab>契約プラン履歴</Tab>
                 </TabList>
 
                 <TabPanels fontWeight="bold">
@@ -157,9 +158,6 @@ const myPage = () => {
                     >
                       <GamePlan showPlan={showPlan} />
                     </Flex>
-                  </TabPanel>
-                  <TabPanel>
-                    <Box>契約中のプランを表示</Box>
                   </TabPanel>
                 </TabPanels>
               </Tabs>

@@ -1,15 +1,18 @@
-import { Avatar, Link, Text } from "@chakra-ui/react";
+import { Avatar, Box, Flex, Link, Text } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React from "react";
 import { useRecoilValue } from "recoil";
 import { testLoginUserAtom } from "../lib/recoil/atoms/testLoginUserAtom";
 import { ReviewStatus } from "./ReviewStatus";
+import { IoLogoYoutube, IoLogoTwitter } from "react-icons/io";
 
 export const UserInformation = ({
   userId,
   userName,
   userAvatar,
   review,
+  twitterUrl,
+  youtubeUrl,
 }: UserInformationProps) => {
   const router = useRouter();
   const { pathname } = router;
@@ -47,23 +50,39 @@ export const UserInformation = ({
               ログイン中のユーザーのユーザー名の場合はマイページ
               異なる場合は、プロフィールページへ遷移
           */}
+
           <Link
             href={
               loginUserId === userId
                 ? `/myPage/${loginUserId}`
                 : `/profile/${userId}`
             }
-            mt="10px"
             fontSize="35px"
           >
             {userName}
           </Link>
+          <Flex>
+            <Link href={twitterUrl}>
+              <IoLogoTwitter size="20px" color="#1DA1F2" />
+            </Link>
+            <Box ml="20px"></Box>
+            <Link href={youtubeUrl}>
+              <IoLogoYoutube size="20px" color="#ff0000" />
+            </Link>
+          </Flex>
         </>
       ) : (
         <>
-          <Text mt="10px" fontSize="35px">
-            {userName}
-          </Text>
+          <Text fontSize="35px">{userName}</Text>
+          <Flex>
+            <Link href={twitterUrl}>
+              <IoLogoTwitter size="20px" color="#1DA1F2" />
+            </Link>
+            <Box ml="20px"></Box>
+            <Link href={youtubeUrl}>
+              <IoLogoYoutube size="20px" color="#ff0000" />
+            </Link>
+          </Flex>
         </>
       )}
       <ReviewStatus review={review} />

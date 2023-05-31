@@ -12,11 +12,10 @@ import {
   useDisclosure,
   Text,
   Box,
+  Button,
 } from "@chakra-ui/react";
-import { useRouter } from "next/router";
 import React from "react";
-import { ConfirmationBtn } from "./ConfirmationBtn";
-import ContractBtn from "./ContractBtn";
+import { StripeCheckoutModal } from "./StripeCheckoutModal";
 import { TextBox } from "./TextBox";
 
 export const ConfirmationDrawer = ({
@@ -26,13 +25,9 @@ export const ConfirmationDrawer = ({
   const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <>
-      <ContractBtn
-        text="プラン契約に進む"
-        colorScheme="purple"
-        color="white"
-        width="100%"
-        onClick={onOpen}
-      />
+      <Button colorScheme="purple" color="white" width="100%" onClick={onOpen}>
+        プラン契約に進む
+      </Button>
       <Drawer onClose={onClose} isOpen={isOpen} size="full">
         <DrawerOverlay />
         <DrawerContent>
@@ -76,17 +71,11 @@ export const ConfirmationDrawer = ({
             </VStack>
           </DrawerBody>
           <Box p="10px">
-            <ConfirmationBtn
-              text="プランを契約する"
-              colorScheme="purple"
-              color="white"
-              width="100%"
-              confirmation="契約"
-              handleConfirmation={() => {}}
-            />
+            <StripeCheckoutModal planData={planData}/>
           </Box>
         </DrawerContent>
       </Drawer>
     </>
   );
 };
+

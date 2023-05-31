@@ -44,11 +44,10 @@ export const Header = () => {
       >
         {/* トップページ以外のときのみ表示 */}
         {id || pathname !== "/" ? (
-          <Link href="/" style={{ textDecoration: "none" }}>
+          <Link href="/" style={{ textDecoration: "none" }} ml="10px">
             <Button
               colorScheme="linkedin"
               variant="outline"
-              ml="10px"
               color="purple"
               w="130px"
             >

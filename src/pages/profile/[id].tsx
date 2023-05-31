@@ -85,6 +85,8 @@ const profile = () => {
                 userName={profileData.userName}
                 userAvatar={profileData.userAvatar}
                 review={profileData.review}
+                twitterUrl={profileData.twitterAccount}
+                youtubeUrl={profileData.youtubeAccount}
               />
             </Flex>
             {loginUser !== "" && (
