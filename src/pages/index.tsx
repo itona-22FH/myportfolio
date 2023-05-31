@@ -113,6 +113,7 @@ const Home = () => {
         fontWeight="bold"
         gridTemplateColumns={"300px 1fr"}
         mt="3"
+        ml="250px"
       >
         {/* search category */}
         <GridItem
@@ -155,7 +156,7 @@ const Home = () => {
         </GridItem>
 
         {/* show plan */}
-        <GridItem pl="2" area={"main"} ml="1">
+        <GridItem pl="2" area={"main"}>
           <Flex
             align="center"
             wrap="wrap"
