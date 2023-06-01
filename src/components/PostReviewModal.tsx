@@ -48,8 +48,7 @@ export const PostReviewModal = ({
       if (userId === profile.userId) {
         return profile;
       }
-      router.push("/");
-    });
+          });
 
     if (reviewUser) {
       const updateReview = {
@@ -60,8 +59,8 @@ export const PostReviewModal = ({
         review: updateReview.review,
       });
     }
-
     setStar(0);
+    router.push("/");
   };
 
   //星の選択
