@@ -13,6 +13,7 @@ export const UserInformation = ({
   review,
   twitterUrl,
   youtubeUrl,
+  contactEmail,
 }: UserInformationProps) => {
   const router = useRouter();
   const { pathname } = router;
@@ -61,6 +62,7 @@ export const UserInformation = ({
           >
             {userName}
           </Link>
+          <Box mb="5px"><span>連絡先：</span>{contactEmail}</Box>
           <Flex>
             <Link href={twitterUrl}>
               <IoLogoTwitter size="20px" color="#1DA1F2" />
@@ -74,6 +76,7 @@ export const UserInformation = ({
       ) : (
         <>
           <Text fontSize="35px">{userName}</Text>
+          <Box mb="5px"><span>連絡先：</span>{contactEmail}</Box>
           <Flex>
             <Link href={twitterUrl}>
               <IoLogoTwitter size="20px" color="#1DA1F2" />

@@ -87,6 +87,7 @@ const profile = () => {
                 review={profileData.review}
                 twitterUrl={profileData.twitterAccount}
                 youtubeUrl={profileData.youtubeAccount}
+                contactEmail={profileData.contactEmail}
               />
             </Flex>
             {loginUser !== "" && (

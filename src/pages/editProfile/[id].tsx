@@ -28,6 +28,7 @@ const editProfile = () => {
     userAvatar: "",
     twitterAccount: "",
     youtubeAccount: "",
+    contactEmail: "",
     selfIntroduction: "",
     achievement: "",
   });
@@ -59,6 +60,7 @@ const editProfile = () => {
       userAvatar: editUserData.userAvatar,
       twitterAccount: editUserData.twitterAccount,
       youtubeAccount: editUserData.youtubeAccount,
+      contactEmail: editUserData.contactEmail,
       selfIntroduction: editUserData.selfIntroduction,
       achievement: editUserData.achievement,
     });
@@ -85,6 +87,14 @@ const editProfile = () => {
             formName={"userAvatar"}
             onChangeHandle={inputEditInformation}
             formValue={""}
+          />
+          <FormInput
+            label="連絡用メールアドレス"
+            type="email"
+            placeholder="********@email.com"
+            formName="contactEmail"
+            onChangeHandle={inputEditInformation}
+            formValue={editUserData.contactEmail}
           />
           <FormInput
             label="Twitterアカウント"

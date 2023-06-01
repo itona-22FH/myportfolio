@@ -73,8 +73,8 @@ const plan = () => {
                       "nav main"
                       "nav empty"
                     `}
-              gridTemplateRows={"350px 1fr"}
-              gridTemplateColumns={"1fr 350px"}
+              gridTemplateRows={"400px 1fr"}
+              gridTemplateColumns={"1fr 400px"}
               gap="10px"
               fontWeight="bold"
             >
@@ -161,7 +161,7 @@ const plan = () => {
                   justifyContent="center"
                   alignItems="center"
                   wrap="wrap"
-                  h="350px"
+                  h="400px"
                   flexFlow="column"
                 >
                   <UserInformation
@@ -171,6 +171,7 @@ const plan = () => {
                     review={profileData.review}
                     twitterUrl={profileData.twitterAccount}
                     youtubeUrl={profileData.youtubeAccount}
+                    contactEmail={profileData.contactEmail}
                     />
                   {/* 本人以外の時表示 */}
                   <Box w="100%" p="5px">

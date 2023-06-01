@@ -87,6 +87,7 @@ const myPage = () => {
                 review={myProfileData.review}
                 twitterUrl={myProfileData.twitterAccount}
                 youtubeUrl={myProfileData.youtubeAccount}
+                contactEmail={myProfileData.contactEmail}
               />
             </Flex>
 

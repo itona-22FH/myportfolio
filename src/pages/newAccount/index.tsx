@@ -18,6 +18,7 @@ const newAccount = () => {
   //新規アカウントの情報を保持するためのSTATEを定義
   const [newUserData, setNewUserData] = useState({
     email: "",
+    contactEmail: "",
     password: "",
     checkPassword: "",
     userName: "",
@@ -55,6 +56,7 @@ const newAccount = () => {
           youtubeAccount: newUserData.youtubeAccount,
           selfIntroduction: newUserData.selfIntroduction,
           achievement: newUserData.achievement,
+          contactEmail: newUserData.contactEmail,
           review: {},
         });
         router.push("/");
@@ -92,6 +94,14 @@ const newAccount = () => {
             formName="email"
             onChangeHandle={inputUserInformation}
             formValue={newUserData.email}
+          />
+          <FormInput
+            label="連絡用メールアドレス"
+            type="email"
+            placeholder="********@email.com"
+            formName="contactEmail"
+            onChangeHandle={inputUserInformation}
+            formValue={newUserData.contactEmail}
           />
           <FormPassword
             onChangeHandle={inputUserInformation}

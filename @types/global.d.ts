@@ -79,6 +79,7 @@ type User = {
   userName: string;
   userAvatar: string;
   email: string;
+  contactEmail: string;
   password: string;
   twitterAccount: string;
   youtubeAccount: string;
@@ -115,6 +116,7 @@ type UserInformationProps = {
   review: User["review"];
   twitterUrl:User["twitterAccount"];
   youtubeUrl:User["youtubeAccount"];
+  contactEmail: User["contactEmail"]
 };
 
 type PostReviewModalProps = {
